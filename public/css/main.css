@@ -1,0 +1,331 @@
+body{
+    font-family: 'Circular Std';
+    background-color: #f5f3f3;
+}
+
+#nav{
+    position: absolute;
+    width: 100%;
+    left: 0px;
+    top: 0px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.12);
+}
+
+.search_box{
+    width: 100%;
+    height: 50px;
+    border: 2px solid #F37022;
+    box-sizing: border-box;
+    border-radius: 58.6832px;
+    background-image: url('../images/search-2.png');
+    background-repeat: no-repeat;
+    background-position: right center;
+}
+
+.category{
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 30px;
+    display: flex;
+    align-items: center;
+    color: #222222;
+}
+
+#account{
+    font-style: normal;
+    font-weight: 450;
+    font-size: 12px;
+    line-height: 8px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #222222;
+}
+
+#banner, #main-cate{
+    position: relative;
+    margin-top: 10%;
+}
+
+.headings-yus{
+    font-family: 'Circular Std';
+    font-style: normal;
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 39px;
+    display: flex;
+    align-items: center;
+    color: #000000;
+    margin-bottom: 1%;
+    margin-top: 1%;
+}
+
+.cate-yus{
+    border: 20.75px solid #F37022;
+    box-sizing: border-box;
+    border-radius: 50%;
+    margin-bottom: 3%;
+}
+
+.cate-title-yus{
+    font-family: 'Circular Std';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 30px;
+    color: #000000;
+}
+
+#footer{
+    background-color: #F37022;
+    color: #FCFCFC;
+    font-family: 'Circular Std';
+    font-weight: 450;
+    font-style: normal;
+    font-size: 18px;
+    line-height: 30.6px;
+}
+
+.bg-yus{
+    background-color: #F37022;
+}
+
+.card-title{
+    font-style: normal;
+    font-weight: 450;
+    font-size: 16px;
+    line-height: 27px;
+    display: flex;
+    align-items: flex-end;
+    color: #3B3B3B;
+}
+
+.card-curr-price{
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 26px;
+    display: flex;
+    align-items: center;
+    color: #222222;
+}
+
+.card-prev-price{
+    font-style: normal;
+    font-weight: 450;
+    font-size: 14px;
+    line-height: 24px;
+    display: flex;
+    align-items: center;
+    text-decoration-line: line-through;
+    color: #222222;
+    margin-left: 1%;
+}
+
+.card-reviews{
+    font-style: normal;
+    font-weight: 450;
+    font-size: 12px;
+    line-height: 20px;
+    display: flex;
+    align-items: center;
+    color: #7E7E7E;
+}
+
+.card-bag-label{
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 26px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #FFFFFF;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    margin: 0px 8px;
+}
+
+.btn-yus{
+    background-color: #F37022;
+    height: 56px;
+}
+
+.trust-title{
+    font-style: normal;
+    font-weight: 450;
+    font-size: 14px;
+    line-height: 21px;
+    color: #000000;
+}
+
+.trust-label{
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 26px;
+    color: #000000;
+}
+
+#cart{
+    /* position: absolute;
+    top: 0px;
+    right: 0px;
+    z-index: 20;
+    height: 100vh; */
+    background-color: rgba(0, 0, 0, 0.8);
+    position: fixed;
+    z-index: 60;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+}
+
+#cart-content{
+    width: 522px;
+    height: 100%;
+    background: #FFFFFF;
+    position: absolute;
+    top: 0px;
+    right: 0px; 
+}
+
+#cart-header{
+    background-color: #F37022;
+    height: 65px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 30px;
+    display: flex;
+    align-items: center;
+    color: #FFFFFF;
+}
+
+#cart-body{
+    max-height: 550px;
+    overflow: auto;
+}
+
+#cart-body-time-arrived{
+    height: 58px;
+    background: #FDE2D3;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    font-style: normal;
+    font-weight: 450;
+    font-size: 18px;
+    line-height: 31px;  
+    display: flex;
+    align-items: flex-end;
+    color: #222222;
+}
+
+#cart-body-products{
+    height: 175px;
+    background: #FFFFFF;
+    border-bottom: 1px solid #EEEEEE;
+}
+
+#cart-body-product-image{
+    width: 146px;
+}
+
+#cart-body-product-image img{
+    width: 80%;
+    margin: 0px auto;
+}
+
+#cart-body-product-title{
+    width: 154px;
+    font-style: normal;
+    font-weight: 450;
+    font-size: 14px;
+    line-height: 21px;
+    display: flex;
+    align-items: flex-end;
+    color: #3B3B3B;
+}
+
+#cart-body-product-delivery-time{
+    font-style: normal;
+    font-weight: 450;
+    font-size: 12px;
+    line-height: 14px;
+    display: flex;
+    align-items: flex-end;
+    color: #7E7E7E;
+}
+
+#cart-body-product-remove{
+    font-style: normal;
+    font-weight: 450;
+    font-size: 12px;
+    line-height: 19px;
+    display: flex;
+    align-items: center;
+    text-decoration-line: underline;
+    color: #222222;
+}
+
+#cart-body-product-price{
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 30px;
+    display: flex;
+    align-items: center;
+    color: #222222;
+}
+
+#cart-body-product-add{
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14.1558px;
+    line-height: 21px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #222222;
+    border: 1px solid #626262;
+}
+
+#cart-total{
+    font-style: normal;
+    font-weight: 450;
+    font-size: 14px;
+    line-height: 15px;
+    display: flex;
+    align-items: flex-end;
+    color: #222222;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+#cart-checkout{
+    background: #FFFFFF;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+    font-style: normal;
+    font-weight: 450;
+    font-size: 14px;
+    line-height: 27px;
+    color: #000000;
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+}
+
+#cart-checkout .btn-yus{
+    height: 46px;
+}
+
+.btn-yus-conti-shopping{
+    height: 46px;
+    background-color: #FFFFFF;
+    border: 1px solid orange;
+    color: #222222;
+}
