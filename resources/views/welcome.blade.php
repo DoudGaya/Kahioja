@@ -244,10 +244,10 @@
                         productphoto="{{ asset('images/categories/smart-watch.png') }}" 
                         productdescription="Apple Airpod with Charging Case" 
                         productname="Apple Airpod with Charging Case" 
-                        currprice="N140,000" 
+                        currprice="N100,000" 
                         prevprice="N160,000" 
-                        reviews="60,000" 
-                        deliveryfee="600" 
+                        reviews="30,000" 
+                        deliveryfee="200" 
                     />
                 </div>
                 <div>
@@ -255,10 +255,10 @@
                         productphoto="{{ asset('images/categories/headphone.png') }}" 
                         productdescription="Apple Airpod with Charging Case" 
                         productname="Apple Airpod with Charging Case" 
-                        currprice="N140,000" 
-                        prevprice="N160,000" 
-                        reviews="60,000" 
-                        deliveryfee="600" 
+                        currprice="N20,000" 
+                        prevprice="N230,000" 
+                        reviews="260,000" 
+                        deliveryfee="200" 
                     />
                 </div>
                 <div>
@@ -266,10 +266,10 @@
                         productphoto="{{ asset('images/categories/persil.png') }}" 
                         productdescription="Apple Airpod with Charging Case" 
                         productname="Apple Airpod with Charging Case" 
-                        currprice="N140,000" 
+                        currprice="N150,000" 
                         prevprice="N160,000" 
-                        reviews="60,000" 
-                        deliveryfee="600" 
+                        reviews="600,000" 
+                        deliveryfee="400" 
                     />
                 </div>
             </div>
