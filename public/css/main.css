@@ -1,5 +1,15 @@
+@font-face {
+    font-family: "CircularStd Bold";
+    src: url("../fonts/Circular/CircularStd-Bold.otf");
+}
+
+@font-face {
+    font-family: "CircularStd Light";
+    src: url("../fonts/Circular/CircularStd-Light.otf");
+}
+
 body{
-    font-family: 'Circular Std';
+    font-family: "CircularStd Light";
     background-color: #f5f3f3;
 }
 
@@ -50,7 +60,7 @@ body{
 }
 
 .headings-yus{
-    font-family: 'Circular Std';
+    font-family: "CircularStd Bold";
     font-style: normal;
     font-weight: bold;
     font-size: 30px;
@@ -171,11 +181,6 @@ body{
 }
 
 #cart{
-    /* position: absolute;
-    top: 0px;
-    right: 0px;
-    z-index: 20;
-    height: 100vh; */
     background-color: rgba(0, 0, 0, 0.8);
     position: fixed;
     z-index: 60;
@@ -328,4 +333,8 @@ body{
     background-color: #FFFFFF;
     border: 1px solid orange;
     color: #222222;
+}
+
+.pointer{
+    cursor: pointer;
 }

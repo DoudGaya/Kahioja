@@ -6,7 +6,22 @@ module.exports = {
   ],
   darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {},
+    extend: {
+      fontFamily:{
+        'sans': [
+          'CircularStd-Black', 
+          'CircularStd-BlackItalic',
+          'CircularStd-Bold',
+          'CircularStd-BoldItalic',
+          'CircularStd-Book',
+          'CircularStd-BookItalic',
+          'CircularStd-Light Italic',
+          'CircularStd-Light',
+          'CircularStd-Medium',
+          'CircularStd-MediumItalic',
+        ]
+      }
+    },
   },
   variants: {
     extend: {},

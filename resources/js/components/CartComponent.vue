@@ -1,11 +1,11 @@
 <template>
-    <div id="cart" class="shadow">
+    <div v-show="displayCart" id="cart" class="shadow">
         <div id="cart-content">
             <div id="cart-header" class="p-4 flex justify-between">
                 <span>
                     You have (3) items in you cart
                 </span>
-                <span>
+                <span @click="closeCart()" class="cursor-pointer">
                     <img src="images/close-icon.png" alt="Close Icon">
                 </span> 
             </div>
@@ -136,6 +136,20 @@
 <script>
 export default {
     name: 'CartComponent',
+    data(){
+        return{
+            displayCart: true
+        }
+    },
+    methods:{
+        closeCart(){
+            if(this.displayCart == true){
+                this.displayCart = false
+            }else{
+                this.displayCart = true
+            }
+        }
+    },
     mounted() {
         console.log('Cart component mounted.')
     }

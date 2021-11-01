@@ -126,8 +126,8 @@
         <!-- Main Category -->
         <div id="main-cat" class="px-14 my-8 text-center">
             <div class="grid grid-cols-2 gap-6">
-                <div class="bg-white border rounded">
-                    <div class="mb-4 rounded-lg">
+                <div class="">
+                    <div class="mb-4 rounded-lg bg-white">
                         <div class="cate-title-yus my-12 pt-12">Shop Home Appliances</div>
                         <div class="py-8">
                             <img class="mx-auto" src="{{ asset('images/categories/shop-home-appliciances.png') }}" alt="Shop Home Appliances Logo">
