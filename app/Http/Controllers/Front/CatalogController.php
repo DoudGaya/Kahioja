@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Childcategory;
 use App\Models\Comment;
+use App\Models\Generalsetting;
 use App\Models\Currency;
 use App\Models\Order;
 use App\Models\Product;
@@ -232,6 +233,7 @@ class CatalogController extends Controller
     public function product($slug)
     {
         // $this->code_image();
+        $gs = Generalsetting::findOrFail(1);
         $productt = Product::where('slug','=',$slug)->firstOrFail();
         if($productt->status == 0){
           return response()->view('errors.404')->setStatusCode(404); 
@@ -259,7 +261,7 @@ class CatalogController extends Controller
         {
             $vendors = Product::where('status','=',1)->where('user_id','=',0)->take(8)->get();
         }
-        return view('front.product',compact('productt','curr','vendors'));
+        return view('front.product',compact('productt','curr','vendors','gs'));
 
     }
 

@@ -10,7 +10,8 @@
 
 body{
     font-family: "CircularStd Light";
-    background-color: #f5f3f3;
+    /* background-color: #f5f3f3; */
+    background-color: #fff;
 }
 
 #nav{

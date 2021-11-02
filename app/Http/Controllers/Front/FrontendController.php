@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Front;
 use App\Http\Controllers\Controller;
 use App\Models\Counter;
 use App\Models\Product;
+use App\Models\Generalsetting;
 use DB;
 
 use Illuminate\Http\Request;
@@ -103,6 +104,7 @@ class FrontendController extends Controller
 
     public function index(Request $request)
 	{
+        $gs = Generalsetting::findOrFail(1);
         $ps = DB::table('pagesettings')->find(1);
         $selectable = ['id','user_id','name','slug','features','colors','thumbnail','price','previous_price','attributes','size','size_price','discount_date'];
         $discount_products =  Product::where('is_discount','=',1)->where('status','=',1)->orderBy('id','desc')->take(8)->get();
@@ -113,6 +115,6 @@ class FrontendController extends Controller
         $latest_products =  Product::where('latest','=',1)->where('status','=',1)->select($selectable)->orderBy('id','desc')->take(8)->get();
         $trending_products =  Product::where('trending','=',1)->where('status','=',1)->select($selectable)->orderBy('id','desc')->take(8)->get();
         $sale_products =  Product::where('sale','=',1)->where('status','=',1)->select($selectable)->orderBy('id','desc')->take(8)->get();
-        return view('welcome',compact('best_products','top_products','hot_products','sale_products','ps'));
+        return view('welcome',compact('best_products','top_products','hot_products','sale_products','ps','gs'));
 	}
 }

@@ -24,7 +24,7 @@
         @else
             <meta name="keywords" content="Kahioja">
             <meta name="author" content="Kahioja Store">
-            <title>Kahioja Store</title>
+            <title>{{$gs->title}}</title>
         @endif
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
