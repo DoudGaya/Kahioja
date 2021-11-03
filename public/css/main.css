@@ -181,7 +181,7 @@ body{
     color: #000000;
 }
 
-#cart{
+#cart, #login{
     background-color: rgba(0, 0, 0, 0.8);
     position: fixed;
     z-index: 60;
@@ -192,7 +192,7 @@ body{
     overflow: auto;
 }
 
-#cart-content{
+#cart-content, #login-content{
     width: 522px;
     height: 100%;
     background: #FFFFFF;
@@ -201,7 +201,7 @@ body{
     right: 0px; 
 }
 
-#cart-header{
+#cart-header, #login-header{
     background-color: #F37022;
     height: 65px;
     font-style: normal;
@@ -217,6 +217,8 @@ body{
     max-height: 550px;
     overflow: auto;
 }
+
+
 
 #cart-body-time-arrived{
     height: 58px;

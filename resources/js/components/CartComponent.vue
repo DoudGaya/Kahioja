@@ -118,12 +118,12 @@
                     <div>Estimated Product(s) Total)</div>
                     <div class="text-right text-xl">₦140,400</div>
                     <div>
-                        <button class="mx-auto btn-yus-conti-shopping rounded-full w-full text-xl py-2 text-white">
+                        <button class="mx-auto btn-yus-conti-shopping rounded-full w-full py-2 text-white">
                             Continue Shopping
                         </button>
                     </div>
                     <div>
-                        <button class="mx-auto btn-yus rounded-full w-full text-xl py-2 text-white">
+                        <button class="mx-auto btn-yus rounded-full w-full py-2 text-white">
                             Checkout
                         </button>
                     </div>
