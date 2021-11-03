@@ -386,3 +386,23 @@ body{
     align-items: flex-end;
     color: #7E7E7E;
 }
+
+.product-description{
+    font-family: "CircularStd Bold";
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 31px;
+    color: #161616;
+}
+
+.product-description .active{
+    background: #FEF7F3;
+    border-bottom: 3px solid #F37022;
+    cursor: pointer;
+}
+
+.product-description .not-active{
+    border-bottom: 3px solid #E0E0E0;
+    cursor: pointer;
+}

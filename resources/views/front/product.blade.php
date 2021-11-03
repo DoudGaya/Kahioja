@@ -22,7 +22,7 @@
             </ul>
         </div>
         <!-- Product  -->
-        <div id="product-details" class="grid grid-cols-5 gap-6 my-10">
+        <div id="product-details" class="grid grid-cols-5 gap-6 my-12">
             <div class="col-span-1">
                 1
             </div>
@@ -121,6 +121,11 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <hr>
+        <!-- Product Description & Reviews & Return Policy  -->
+        <div id="productDescription">
+            <product-description-component></product-description-component>
         </div>
     </div>
 @endsection

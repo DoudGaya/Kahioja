@@ -17151,6 +17151,52 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/productDescriptionComponent.vue?vue&type=script&lang=js":
+/*!*********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/productDescriptionComponent.vue?vue&type=script&lang=js ***!
+  \*********************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: 'ProductDescription',
+  data: function data() {
+    return {
+      productDescriptionContent: true,
+      buyAndReturnPolicyContent: false,
+      commentAndReviewContent: false
+    };
+  },
+  methods: {
+    productDescription: function productDescription() {
+      this.productDescriptionContent = true;
+      this.buyAndReturnPolicyContent = false;
+      this.commentAndReviewContent = false;
+      console.log('Cliked');
+    },
+    buyAndReturnPolicy: function buyAndReturnPolicy() {
+      this.buyAndReturnPolicyContent = true;
+      this.productDescriptionContent = false;
+      this.commentAndReviewContent = false;
+      console.log('Cliked Buy');
+    },
+    commentAndReview: function commentAndReview() {
+      this.commentAndReviewContent = true;
+      this.buyAndReturnPolicyContent = false;
+      this.productDescriptionContent = false;
+      console.log('Cliked Comment');
+    }
+  },
+  mounted: function mounted() {
+    console.log('productDescription component mounted.');
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/CartComponent.vue?vue&type=template&id=e7ab8a3c":
 /*!***********************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/CartComponent.vue?vue&type=template&id=e7ab8a3c ***!
@@ -17320,6 +17366,71 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/productDescriptionComponent.vue?vue&type=template&id=b66a0e16":
+/*!*************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/productDescriptionComponent.vue?vue&type=template&id=b66a0e16 ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
+var _hoisted_1 = {
+  "class": "product-description grid grid-cols-3 mt-4 py-6 w-2/3 mx-auto"
+};
+var _hoisted_2 = {
+  "class": "w-2/3 mx-auto relative -top-5 p-4 border-1 shadow"
+};
+
+var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div>Description Our policy lasts 30 days. If 30 days have gone by since your purchase, unfortunately we can’t offer you a refund or exchange.</div><div><br></div><div>To be eligible for a return, your item must be unused and in the same condition that you received it. It must also be in the original packaging.</div><div><br></div><div>Several types of goods are exempt from being returned. Perishable goods such as food, flowers, newspapers or magazines cannot be returned. We also do not accept products that are intimate or sanitary goods, hazardous materials, or flammable liquids or gases.</div><div><br></div><div>Additional non-returnable items:</div><div>* Gift cards</div><div>* Downloadable software products</div><div>* Some health and personal care items</div><div><br></div><div>To complete your return, we require a receipt or proof of purchase.</div><div><br></div><div>Please do not send your purchase back to the manufacturer.</div><div><br></div><div>There are certain situations where only partial refunds are granted: (if applicable)</div><div>* Book with obvious signs of use</div><div>* CD, DVD, VHS tape, software, video game, cassette tape, or vinyl record that has been opened.</div><div>* Any item not in its original condition, is damaged or missing parts for reasons not due to our error.</div><div>* Any item that is returned more than 30 days after delivery</div><div><br></div><div>Refunds (if applicable)</div><div>Once your return is received and inspected, we will send you an email to notify you that we have received your returned item. We will also notify you of the approval or rejection of your refund.</div><div>If you are approved, then your refund will be processed, and a credit will automatically be applied to your credit card or original method of payment, within a certain amount of days.</div><div><br></div><div>Late or missing refunds (if applicable)</div><div>If you haven’t received a refund yet, first check your bank account again.</div><div>Then contact your credit card company, it may take some time before your refund is officially posted.</div><div>Next contact your bank. There is often some processing time before a refund is posted.</div><div>If you’ve done all of this and you still have not received your refund yet, please contact us at reversal@kahioja.com.</div><div><br></div><div>Sale items (if applicable)</div><div>Only regular priced items may be refunded, unfortunately sale items cannot be refunded.</div><div><br></div><div>Exchanges (if applicable)</div><div>We only replace items if they are defective or damaged.  If you need to exchange it for the same item, send us an email at replace@kahioja.com and send your item to: suite A1/A2 Hamisu Abba Sumaila plaza, Tarauni market rd. Tarauni, Kano., kano, KN, 700223, Nigeria.</div><div><br></div><div><br></div><div>Shipping</div><div>To return your product, you should mail your product to: suite A1/A2 Hamisu Abba Sumaila plaza, Tarauni market rd. Tarauni, Kano., kano, KN, 700223, Nigeria.</div><div><br></div><div>You will be responsible for paying for your own shipping costs for returning your item. Shipping costs are non-refundable. If you receive a refund, the cost of return shipping will be deducted from your refund.</div><div><br></div><div>Depending on where you live, the time it may take for your exchanged product to reach you, may vary.</div><div><br></div><div>If you are shipping an item over $75/NGN30,000, you should consider using a trackable shipping service or purchasing shipping insurance. We don’t guarantee that we will receive your returned item.</div>", 46);
+
+var _hoisted_49 = [_hoisted_3];
+var _hoisted_50 = {
+  "class": "w-2/3 mx-auto relative -top-5 p-4 border-1 shadow"
+};
+
+var _hoisted_51 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div>Buy Our policy lasts 30 days. If 30 days have gone by since your purchase, unfortunately we can’t offer you a refund or exchange.</div><div><br></div><div>To be eligible for a return, your item must be unused and in the same condition that you received it. It must also be in the original packaging.</div><div><br></div><div>Several types of goods are exempt from being returned. Perishable goods such as food, flowers, newspapers or magazines cannot be returned. We also do not accept products that are intimate or sanitary goods, hazardous materials, or flammable liquids or gases.</div><div><br></div><div>Additional non-returnable items:</div><div>* Gift cards</div><div>* Downloadable software products</div><div>* Some health and personal care items</div><div><br></div><div>To complete your return, we require a receipt or proof of purchase.</div><div><br></div><div>Please do not send your purchase back to the manufacturer.</div><div><br></div><div>There are certain situations where only partial refunds are granted: (if applicable)</div><div>* Book with obvious signs of use</div><div>* CD, DVD, VHS tape, software, video game, cassette tape, or vinyl record that has been opened.</div><div>* Any item not in its original condition, is damaged or missing parts for reasons not due to our error.</div><div>* Any item that is returned more than 30 days after delivery</div><div><br></div><div>Refunds (if applicable)</div><div>Once your return is received and inspected, we will send you an email to notify you that we have received your returned item. We will also notify you of the approval or rejection of your refund.</div><div>If you are approved, then your refund will be processed, and a credit will automatically be applied to your credit card or original method of payment, within a certain amount of days.</div><div><br></div><div>Late or missing refunds (if applicable)</div><div>If you haven’t received a refund yet, first check your bank account again.</div><div>Then contact your credit card company, it may take some time before your refund is officially posted.</div><div>Next contact your bank. There is often some processing time before a refund is posted.</div><div>If you’ve done all of this and you still have not received your refund yet, please contact us at reversal@kahioja.com.</div><div><br></div><div>Sale items (if applicable)</div><div>Only regular priced items may be refunded, unfortunately sale items cannot be refunded.</div><div><br></div><div>Exchanges (if applicable)</div><div>We only replace items if they are defective or damaged.  If you need to exchange it for the same item, send us an email at replace@kahioja.com and send your item to: suite A1/A2 Hamisu Abba Sumaila plaza, Tarauni market rd. Tarauni, Kano., kano, KN, 700223, Nigeria.</div><div><br></div><div><br></div><div>Shipping</div><div>To return your product, you should mail your product to: suite A1/A2 Hamisu Abba Sumaila plaza, Tarauni market rd. Tarauni, Kano., kano, KN, 700223, Nigeria.</div><div><br></div><div>You will be responsible for paying for your own shipping costs for returning your item. Shipping costs are non-refundable. If you receive a refund, the cost of return shipping will be deducted from your refund.</div><div><br></div><div>Depending on where you live, the time it may take for your exchanged product to reach you, may vary.</div><div><br></div><div>If you are shipping an item over $75/NGN30,000, you should consider using a trackable shipping service or purchasing shipping insurance. We don’t guarantee that we will receive your returned item.</div>", 46);
+
+var _hoisted_97 = [_hoisted_51];
+var _hoisted_98 = {
+  "class": "w-2/3 mx-auto relative -top-5 p-4 border-1 shadow"
+};
+
+var _hoisted_99 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div>Comment Our policy lasts 30 days. If 30 days have gone by since your purchase, unfortunately we can’t offer you a refund or exchange.</div><div><br></div><div>To be eligible for a return, your item must be unused and in the same condition that you received it. It must also be in the original packaging.</div><div><br></div><div>Several types of goods are exempt from being returned. Perishable goods such as food, flowers, newspapers or magazines cannot be returned. We also do not accept products that are intimate or sanitary goods, hazardous materials, or flammable liquids or gases.</div><div><br></div><div>Additional non-returnable items:</div><div>* Gift cards</div><div>* Downloadable software products</div><div>* Some health and personal care items</div><div><br></div><div>To complete your return, we require a receipt or proof of purchase.</div><div><br></div><div>Please do not send your purchase back to the manufacturer.</div><div><br></div><div>There are certain situations where only partial refunds are granted: (if applicable)</div><div>* Book with obvious signs of use</div><div>* CD, DVD, VHS tape, software, video game, cassette tape, or vinyl record that has been opened.</div><div>* Any item not in its original condition, is damaged or missing parts for reasons not due to our error.</div><div>* Any item that is returned more than 30 days after delivery</div><div><br></div><div>Refunds (if applicable)</div><div>Once your return is received and inspected, we will send you an email to notify you that we have received your returned item. We will also notify you of the approval or rejection of your refund.</div><div>If you are approved, then your refund will be processed, and a credit will automatically be applied to your credit card or original method of payment, within a certain amount of days.</div><div><br></div><div>Late or missing refunds (if applicable)</div><div>If you haven’t received a refund yet, first check your bank account again.</div><div>Then contact your credit card company, it may take some time before your refund is officially posted.</div><div>Next contact your bank. There is often some processing time before a refund is posted.</div><div>If you’ve done all of this and you still have not received your refund yet, please contact us at reversal@kahioja.com.</div><div><br></div><div>Sale items (if applicable)</div><div>Only regular priced items may be refunded, unfortunately sale items cannot be refunded.</div><div><br></div><div>Exchanges (if applicable)</div><div>We only replace items if they are defective or damaged.  If you need to exchange it for the same item, send us an email at replace@kahioja.com and send your item to: suite A1/A2 Hamisu Abba Sumaila plaza, Tarauni market rd. Tarauni, Kano., kano, KN, 700223, Nigeria.</div><div><br></div><div><br></div><div>Shipping</div><div>To return your product, you should mail your product to: suite A1/A2 Hamisu Abba Sumaila plaza, Tarauni market rd. Tarauni, Kano., kano, KN, 700223, Nigeria.</div><div><br></div><div>You will be responsible for paying for your own shipping costs for returning your item. Shipping costs are non-refundable. If you receive a refund, the cost of return shipping will be deducted from your refund.</div><div><br></div><div>Depending on where you live, the time it may take for your exchanged product to reach you, may vary.</div><div><br></div><div>If you are shipping an item over $75/NGN30,000, you should consider using a trackable shipping service or purchasing shipping insurance. We don’t guarantee that we will receive your returned item.</div>", 46);
+
+var _hoisted_145 = [_hoisted_99];
+function render(_ctx, _cache, $props, $setup, $data, $options) {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    onClick: _cache[0] || (_cache[0] = function ($event) {
+      return $options.productDescription();
+    }),
+    "class": "active py-3 px-8"
+  }, " Product Description "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    onClick: _cache[1] || (_cache[1] = function ($event) {
+      return $options.buyAndReturnPolicy();
+    }),
+    "class": "not-active py-3 px-8"
+  }, " Buy and return policy "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    onClick: _cache[2] || (_cache[2] = function ($event) {
+      return $options.commentAndReview();
+    }),
+    "class": "not-active py-3 px-8"
+  }, " Reviews and Comments ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, _hoisted_49, 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.productDescriptionContent]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_50, _hoisted_97, 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.buyAndReturnPolicyContent]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_98, _hoisted_145, 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.commentAndReviewContent]])], 64
+  /* STABLE_FRAGMENT */
+  );
+}
+
+/***/ }),
+
 /***/ "./resources/js/app.js":
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
@@ -17329,10 +17440,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
+var productDescription = (0,vue__WEBPACK_IMPORTED_MODULE_0__.createApp)({});
 var app = (0,vue__WEBPACK_IMPORTED_MODULE_0__.createApp)({});
 app.component('nav-component', __webpack_require__(/*! ./components/NavComponent.vue */ "./resources/js/components/NavComponent.vue")["default"]);
 app.component('cart-component', __webpack_require__(/*! ./components/CartComponent.vue */ "./resources/js/components/CartComponent.vue")["default"]);
-app.mount(".app");
+productDescription.component('product-description-component', __webpack_require__(/*! ./components/productDescriptionComponent.vue */ "./resources/js/components/productDescriptionComponent.vue")["default"]);
+productDescription.mount('#productDescription');
+app.mount('.app');
 
 /***/ }),
 
@@ -17422,6 +17536,33 @@ if (false) {}
 
 /***/ }),
 
+/***/ "./resources/js/components/productDescriptionComponent.vue":
+/*!*****************************************************************!*\
+  !*** ./resources/js/components/productDescriptionComponent.vue ***!
+  \*****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _productDescriptionComponent_vue_vue_type_template_id_b66a0e16__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./productDescriptionComponent.vue?vue&type=template&id=b66a0e16 */ "./resources/js/components/productDescriptionComponent.vue?vue&type=template&id=b66a0e16");
+/* harmony import */ var _productDescriptionComponent_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./productDescriptionComponent.vue?vue&type=script&lang=js */ "./resources/js/components/productDescriptionComponent.vue?vue&type=script&lang=js");
+/* harmony import */ var C_xampp_htdocs_kahioja_version_2_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+
+
+
+
+;
+const __exports__ = /*#__PURE__*/(0,C_xampp_htdocs_kahioja_version_2_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_productDescriptionComponent_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_productDescriptionComponent_vue_vue_type_template_id_b66a0e16__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/components/productDescriptionComponent.vue"]])
+/* hot reload */
+if (false) {}
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__exports__);
+
+/***/ }),
+
 /***/ "./resources/js/components/CartComponent.vue?vue&type=script&lang=js":
 /*!***************************************************************************!*\
   !*** ./resources/js/components/CartComponent.vue?vue&type=script&lang=js ***!
@@ -17452,6 +17593,21 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/productDescriptionComponent.vue?vue&type=script&lang=js":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/components/productDescriptionComponent.vue?vue&type=script&lang=js ***!
+  \*****************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_productDescriptionComponent_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"])
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_productDescriptionComponent_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./productDescriptionComponent.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/productDescriptionComponent.vue?vue&type=script&lang=js");
+ 
+
+/***/ }),
+
 /***/ "./resources/js/components/CartComponent.vue?vue&type=template&id=e7ab8a3c":
 /*!*********************************************************************************!*\
   !*** ./resources/js/components/CartComponent.vue?vue&type=template&id=e7ab8a3c ***!
@@ -17478,6 +17634,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_NavComponent_vue_vue_type_template_id_152c8205__WEBPACK_IMPORTED_MODULE_0__.render)
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_NavComponent_vue_vue_type_template_id_152c8205__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./NavComponent.vue?vue&type=template&id=152c8205 */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/NavComponent.vue?vue&type=template&id=152c8205");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/productDescriptionComponent.vue?vue&type=template&id=b66a0e16":
+/*!***********************************************************************************************!*\
+  !*** ./resources/js/components/productDescriptionComponent.vue?vue&type=template&id=b66a0e16 ***!
+  \***********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_productDescriptionComponent_vue_vue_type_template_id_b66a0e16__WEBPACK_IMPORTED_MODULE_0__.render)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_productDescriptionComponent_vue_vue_type_template_id_b66a0e16__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./productDescriptionComponent.vue?vue&type=template&id=b66a0e16 */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/productDescriptionComponent.vue?vue&type=template&id=b66a0e16");
 
 
 /***/ }),
