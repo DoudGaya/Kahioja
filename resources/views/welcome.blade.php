@@ -115,20 +115,20 @@
     <div id="main-cat" class="px-14 my-8 text-center">
         <div class="grid grid-cols-2 gap-6">
             <div class="">
-                <div class="mb-4 rounded-lg bg-white">
+                <div class="mb-4 rounded-lg bg-white shadow-md">
                     <div class="cate-title-yus my-12 pt-12">Shop Home Appliances</div>
                     <div class="py-8">
                         <img class="mx-auto" src="{{ asset('images/categories/shop-home-appliciances.png') }}" alt="Shop Home Appliances Logo">
                     </div>
                 </div>
                 <div class="grid grid-cols-2 gap-6">
-                    <div class="bg-white rounded-lg">
+                    <div class="bg-white rounded-lg shadow-md">
                         <div class="cate-title-yus my-12">Phone Accessories</div>
                         <div class="py-6">
                             <img class="mx-auto" src="{{ asset('images/categories/phone-accessories.png') }}" alt="Phone Accessories Logo">
                         </div>
                     </div>
-                    <div class="bg-white rounded-lg">
+                    <div class="bg-white rounded-lg shadow-md">
                         <div class="cate-title-yus my-12">Watches</div>
                         <div class="py-6">
                             <img class="mx-auto" src="{{ asset('images/categories/watches.png') }}" alt="Watches Logo">
@@ -136,8 +136,8 @@
                     </div>
                 </div>
             </div>
-            <div class="border rounded bg-white">
-                <div class="mb-4 rounded-lg">
+            <div class="">
+                <div class="mb-4 rounded-lg shadow-md">
                     <div class="cate-title-yus my-12 pt-16">Shop Groceries</div>
                     <div class="py-12">
                         <img class="mx-auto" src="{{ asset('images/categories/shop-groceries.png') }}" alt="Shop Groceries Logo">

@@ -36,7 +36,7 @@
     </head>
     <body>
         <!-- Nav  -->
-        <div class="app">
+        <div id="navComponent">
             <nav-component></nav-component>
         </div>
         @yield('main')

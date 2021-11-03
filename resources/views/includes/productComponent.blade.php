@@ -1,5 +1,5 @@
 <a href="{{ route('front.product', $prod->slug) }}">
-    <div class="bg-white rounded-lg px-4 my-2 cursor-pointer">
+    <div class="bg-white rounded-lg px-4 my-4 cursor-pointer shadow-md">
         <img class="w-64 mx-auto py-4" src="{{ $prod->thumbnail ? asset('/images/thumbnails/'.$prod->thumbnail):asset('/images/noimage.png') }}" :alt="{{ $prod->showName() }}">
         <!-- Product Details  -->
         <div class="py-3">
@@ -10,11 +10,11 @@
             </div>
             <div class="flex items-center">
                 <div class="flex mr-4">
-                    <img class="" src="images/star.png" alt="Star logo">
-                    <img class="" src="images/star.png" alt="Star logo">
-                    <img class="" src="images/star.png" alt="Star logo">
-                    <img class="" src="images/star.png" alt="Star logo">
-                    <img class="" src="images/star.png" alt="Star logo">
+                    <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5.26444 0.25L6.35956 3.62042H9.90343L7.03638 5.70346L8.13149 9.07388L5.26444 6.99085L2.39739 9.07388L3.4925 5.70346L0.625452 3.62042H4.16932L5.26444 0.25Z" fill="#FFBD00"/></svg>
+                    <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5.26444 0.25L6.35956 3.62042H9.90343L7.03638 5.70346L8.13149 9.07388L5.26444 6.99085L2.39739 9.07388L3.4925 5.70346L0.625452 3.62042H4.16932L5.26444 0.25Z" fill="#FFBD00"/></svg>
+                    <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5.26444 0.25L6.35956 3.62042H9.90343L7.03638 5.70346L8.13149 9.07388L5.26444 6.99085L2.39739 9.07388L3.4925 5.70346L0.625452 3.62042H4.16932L5.26444 0.25Z" fill="#FFBD00"/></svg>
+                    <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5.26444 0.25L6.35956 3.62042H9.90343L7.03638 5.70346L8.13149 9.07388L5.26444 6.99085L2.39739 9.07388L3.4925 5.70346L0.625452 3.62042H4.16932L5.26444 0.25Z" fill="#FFBD00"/></svg>
+                    <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5.26444 0.25L6.35956 3.62042H9.90343L7.03638 5.70346L8.13149 9.07388L5.26444 6.99085L2.39739 9.07388L3.4925 5.70346L0.625452 3.62042H4.16932L5.26444 0.25Z" fill="#FFBD00"/></svg>
                 </div>
                 <div class="card-reviews">120 Reviews</div>
             </div>

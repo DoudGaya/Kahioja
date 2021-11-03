@@ -127,5 +127,14 @@
         <div id="productDescription">
             <product-description-component></product-description-component>
         </div>
+        <!-- Similar Products -->
+        <div id="similar-product" class="px-14 mt-20 mb-8">
+            <h1 class="headings-yus">Similar product you may like</h1>
+            <div class="grid grid-cols-4 gap-6">
+                @foreach($productt->category->products()->where('status','=',1)->where('id','!=',$productt->id)->take(8)->get() as $prod)
+                    @include('includes.productComponent')
+                @endforeach
+            </div>
+        </div>
     </div>
 @endsection
