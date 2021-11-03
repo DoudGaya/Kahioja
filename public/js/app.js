@@ -17175,19 +17175,16 @@ __webpack_require__.r(__webpack_exports__);
       this.productDescriptionContent = true;
       this.buyAndReturnPolicyContent = false;
       this.commentAndReviewContent = false;
-      console.log('Cliked');
     },
     buyAndReturnPolicy: function buyAndReturnPolicy() {
       this.buyAndReturnPolicyContent = true;
       this.productDescriptionContent = false;
       this.commentAndReviewContent = false;
-      console.log('Cliked Buy');
     },
     commentAndReview: function commentAndReview() {
       this.commentAndReviewContent = true;
       this.buyAndReturnPolicyContent = false;
       this.productDescriptionContent = false;
-      console.log('Cliked Comment');
     }
   },
   mounted: function mounted() {
@@ -17407,18 +17404,24 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[0] || (_cache[0] = function ($event) {
       return $options.productDescription();
     }),
-    "class": "active py-3 px-8"
-  }, " Product Description "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([$data.productDescriptionContent ? 'active' : 'not-active', 'py-3', 'px-8'])
+  }, " Product Description ", 2
+  /* CLASS */
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     onClick: _cache[1] || (_cache[1] = function ($event) {
       return $options.buyAndReturnPolicy();
     }),
-    "class": "not-active py-3 px-8"
-  }, " Buy and return policy "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([$data.buyAndReturnPolicyContent ? 'active' : 'not-active', 'py-3', 'px-8'])
+  }, " Buy and return policy ", 2
+  /* CLASS */
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     onClick: _cache[2] || (_cache[2] = function ($event) {
       return $options.commentAndReview();
     }),
-    "class": "not-active py-3 px-8"
-  }, " Reviews and Comments ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, _hoisted_49, 512
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([$data.commentAndReviewContent ? 'active' : 'not-active', 'py-3', 'px-8'])
+  }, " Reviews and Comments ", 2
+  /* CLASS */
+  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, _hoisted_49, 512
   /* NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.productDescriptionContent]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_50, _hoisted_97, 512
   /* NEED_PATCH */

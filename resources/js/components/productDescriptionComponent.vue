@@ -1,12 +1,12 @@
 <template>
     <div class="product-description grid grid-cols-3 mt-4 py-6 w-2/3 mx-auto">
-        <div @click="productDescription()" class="active py-3 px-8">
+        <div @click="productDescription()" :class="[productDescriptionContent ? 'active':'not-active', 'py-3', 'px-8']">
             Product Description
         </div>
-        <div @click="buyAndReturnPolicy()" class="not-active py-3 px-8">
+        <div @click="buyAndReturnPolicy()" :class="[buyAndReturnPolicyContent ? 'active':'not-active', 'py-3', 'px-8']">
             Buy and return policy
         </div>
-        <div @click="commentAndReview()" class="not-active py-3 px-8">
+        <div @click="commentAndReview()" :class="[commentAndReviewContent ? 'active':'not-active', 'py-3', 'px-8']">
             Reviews and Comments
         </div>
     </div>
@@ -36,19 +36,16 @@ export default {
             this.productDescriptionContent = true 
             this.buyAndReturnPolicyContent = false
             this.commentAndReviewContent = false
-            console.log('Cliked')
         },
         buyAndReturnPolicy(){
             this.buyAndReturnPolicyContent = true
             this.productDescriptionContent = false 
             this.commentAndReviewContent = false
-            console.log('Cliked Buy')
         },
         commentAndReview(){
             this.commentAndReviewContent = true
             this.buyAndReturnPolicyContent = false
             this.productDescriptionContent = false 
-            console.log('Cliked Comment')
         }
     },
     mounted() {
