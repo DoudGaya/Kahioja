@@ -1,5 +1,5 @@
 import { createApp } from 'vue'
-import ProductZoomer from 'vue-product-zoomer'
+window.axios = require('axios')
 
 let navComponent = createApp({})
 navComponent.component('nav-component', require('./components/NavComponent.vue').default)

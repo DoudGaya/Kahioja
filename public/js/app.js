@@ -17085,6 +17085,2058 @@ const getGlobalThis = () => {
 
 /***/ }),
 
+/***/ "./node_modules/axios/index.js":
+/*!*************************************!*\
+  !*** ./node_modules/axios/index.js ***!
+  \*************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__(/*! ./lib/axios */ "./node_modules/axios/lib/axios.js");
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/adapters/xhr.js":
+/*!************************************************!*\
+  !*** ./node_modules/axios/lib/adapters/xhr.js ***!
+  \************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+var utils = __webpack_require__(/*! ./../utils */ "./node_modules/axios/lib/utils.js");
+var settle = __webpack_require__(/*! ./../core/settle */ "./node_modules/axios/lib/core/settle.js");
+var cookies = __webpack_require__(/*! ./../helpers/cookies */ "./node_modules/axios/lib/helpers/cookies.js");
+var buildURL = __webpack_require__(/*! ./../helpers/buildURL */ "./node_modules/axios/lib/helpers/buildURL.js");
+var buildFullPath = __webpack_require__(/*! ../core/buildFullPath */ "./node_modules/axios/lib/core/buildFullPath.js");
+var parseHeaders = __webpack_require__(/*! ./../helpers/parseHeaders */ "./node_modules/axios/lib/helpers/parseHeaders.js");
+var isURLSameOrigin = __webpack_require__(/*! ./../helpers/isURLSameOrigin */ "./node_modules/axios/lib/helpers/isURLSameOrigin.js");
+var createError = __webpack_require__(/*! ../core/createError */ "./node_modules/axios/lib/core/createError.js");
+
+module.exports = function xhrAdapter(config) {
+  return new Promise(function dispatchXhrRequest(resolve, reject) {
+    var requestData = config.data;
+    var requestHeaders = config.headers;
+    var responseType = config.responseType;
+
+    if (utils.isFormData(requestData)) {
+      delete requestHeaders['Content-Type']; // Let the browser set it
+    }
+
+    var request = new XMLHttpRequest();
+
+    // HTTP basic authentication
+    if (config.auth) {
+      var username = config.auth.username || '';
+      var password = config.auth.password ? unescape(encodeURIComponent(config.auth.password)) : '';
+      requestHeaders.Authorization = 'Basic ' + btoa(username + ':' + password);
+    }
+
+    var fullPath = buildFullPath(config.baseURL, config.url);
+    request.open(config.method.toUpperCase(), buildURL(fullPath, config.params, config.paramsSerializer), true);
+
+    // Set the request timeout in MS
+    request.timeout = config.timeout;
+
+    function onloadend() {
+      if (!request) {
+        return;
+      }
+      // Prepare the response
+      var responseHeaders = 'getAllResponseHeaders' in request ? parseHeaders(request.getAllResponseHeaders()) : null;
+      var responseData = !responseType || responseType === 'text' ||  responseType === 'json' ?
+        request.responseText : request.response;
+      var response = {
+        data: responseData,
+        status: request.status,
+        statusText: request.statusText,
+        headers: responseHeaders,
+        config: config,
+        request: request
+      };
+
+      settle(resolve, reject, response);
+
+      // Clean up request
+      request = null;
+    }
+
+    if ('onloadend' in request) {
+      // Use onloadend if available
+      request.onloadend = onloadend;
+    } else {
+      // Listen for ready state to emulate onloadend
+      request.onreadystatechange = function handleLoad() {
+        if (!request || request.readyState !== 4) {
+          return;
+        }
+
+        // The request errored out and we didn't get a response, this will be
+        // handled by onerror instead
+        // With one exception: request that using file: protocol, most browsers
+        // will return status as 0 even though it's a successful request
+        if (request.status === 0 && !(request.responseURL && request.responseURL.indexOf('file:') === 0)) {
+          return;
+        }
+        // readystate handler is calling before onerror or ontimeout handlers,
+        // so we should call onloadend on the next 'tick'
+        setTimeout(onloadend);
+      };
+    }
+
+    // Handle browser request cancellation (as opposed to a manual cancellation)
+    request.onabort = function handleAbort() {
+      if (!request) {
+        return;
+      }
+
+      reject(createError('Request aborted', config, 'ECONNABORTED', request));
+
+      // Clean up request
+      request = null;
+    };
+
+    // Handle low level network errors
+    request.onerror = function handleError() {
+      // Real errors are hidden from us by the browser
+      // onerror should only fire if it's a network error
+      reject(createError('Network Error', config, null, request));
+
+      // Clean up request
+      request = null;
+    };
+
+    // Handle timeout
+    request.ontimeout = function handleTimeout() {
+      var timeoutErrorMessage = 'timeout of ' + config.timeout + 'ms exceeded';
+      if (config.timeoutErrorMessage) {
+        timeoutErrorMessage = config.timeoutErrorMessage;
+      }
+      reject(createError(
+        timeoutErrorMessage,
+        config,
+        config.transitional && config.transitional.clarifyTimeoutError ? 'ETIMEDOUT' : 'ECONNABORTED',
+        request));
+
+      // Clean up request
+      request = null;
+    };
+
+    // Add xsrf header
+    // This is only done if running in a standard browser environment.
+    // Specifically not if we're in a web worker, or react-native.
+    if (utils.isStandardBrowserEnv()) {
+      // Add xsrf header
+      var xsrfValue = (config.withCredentials || isURLSameOrigin(fullPath)) && config.xsrfCookieName ?
+        cookies.read(config.xsrfCookieName) :
+        undefined;
+
+      if (xsrfValue) {
+        requestHeaders[config.xsrfHeaderName] = xsrfValue;
+      }
+    }
+
+    // Add headers to the request
+    if ('setRequestHeader' in request) {
+      utils.forEach(requestHeaders, function setRequestHeader(val, key) {
+        if (typeof requestData === 'undefined' && key.toLowerCase() === 'content-type') {
+          // Remove Content-Type if data is undefined
+          delete requestHeaders[key];
+        } else {
+          // Otherwise add header to the request
+          request.setRequestHeader(key, val);
+        }
+      });
+    }
+
+    // Add withCredentials to request if needed
+    if (!utils.isUndefined(config.withCredentials)) {
+      request.withCredentials = !!config.withCredentials;
+    }
+
+    // Add responseType to request if needed
+    if (responseType && responseType !== 'json') {
+      request.responseType = config.responseType;
+    }
+
+    // Handle progress if needed
+    if (typeof config.onDownloadProgress === 'function') {
+      request.addEventListener('progress', config.onDownloadProgress);
+    }
+
+    // Not all browsers support upload events
+    if (typeof config.onUploadProgress === 'function' && request.upload) {
+      request.upload.addEventListener('progress', config.onUploadProgress);
+    }
+
+    if (config.cancelToken) {
+      // Handle cancellation
+      config.cancelToken.promise.then(function onCanceled(cancel) {
+        if (!request) {
+          return;
+        }
+
+        request.abort();
+        reject(cancel);
+        // Clean up request
+        request = null;
+      });
+    }
+
+    if (!requestData) {
+      requestData = null;
+    }
+
+    // Send the request
+    request.send(requestData);
+  });
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/axios.js":
+/*!*****************************************!*\
+  !*** ./node_modules/axios/lib/axios.js ***!
+  \*****************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+var utils = __webpack_require__(/*! ./utils */ "./node_modules/axios/lib/utils.js");
+var bind = __webpack_require__(/*! ./helpers/bind */ "./node_modules/axios/lib/helpers/bind.js");
+var Axios = __webpack_require__(/*! ./core/Axios */ "./node_modules/axios/lib/core/Axios.js");
+var mergeConfig = __webpack_require__(/*! ./core/mergeConfig */ "./node_modules/axios/lib/core/mergeConfig.js");
+var defaults = __webpack_require__(/*! ./defaults */ "./node_modules/axios/lib/defaults.js");
+
+/**
+ * Create an instance of Axios
+ *
+ * @param {Object} defaultConfig The default config for the instance
+ * @return {Axios} A new instance of Axios
+ */
+function createInstance(defaultConfig) {
+  var context = new Axios(defaultConfig);
+  var instance = bind(Axios.prototype.request, context);
+
+  // Copy axios.prototype to instance
+  utils.extend(instance, Axios.prototype, context);
+
+  // Copy context to instance
+  utils.extend(instance, context);
+
+  return instance;
+}
+
+// Create the default instance to be exported
+var axios = createInstance(defaults);
+
+// Expose Axios class to allow class inheritance
+axios.Axios = Axios;
+
+// Factory for creating new instances
+axios.create = function create(instanceConfig) {
+  return createInstance(mergeConfig(axios.defaults, instanceConfig));
+};
+
+// Expose Cancel & CancelToken
+axios.Cancel = __webpack_require__(/*! ./cancel/Cancel */ "./node_modules/axios/lib/cancel/Cancel.js");
+axios.CancelToken = __webpack_require__(/*! ./cancel/CancelToken */ "./node_modules/axios/lib/cancel/CancelToken.js");
+axios.isCancel = __webpack_require__(/*! ./cancel/isCancel */ "./node_modules/axios/lib/cancel/isCancel.js");
+
+// Expose all/spread
+axios.all = function all(promises) {
+  return Promise.all(promises);
+};
+axios.spread = __webpack_require__(/*! ./helpers/spread */ "./node_modules/axios/lib/helpers/spread.js");
+
+// Expose isAxiosError
+axios.isAxiosError = __webpack_require__(/*! ./helpers/isAxiosError */ "./node_modules/axios/lib/helpers/isAxiosError.js");
+
+module.exports = axios;
+
+// Allow use of default import syntax in TypeScript
+module.exports["default"] = axios;
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/cancel/Cancel.js":
+/*!*************************************************!*\
+  !*** ./node_modules/axios/lib/cancel/Cancel.js ***!
+  \*************************************************/
+/***/ ((module) => {
+
+"use strict";
+
+
+/**
+ * A `Cancel` is an object that is thrown when an operation is canceled.
+ *
+ * @class
+ * @param {string=} message The message.
+ */
+function Cancel(message) {
+  this.message = message;
+}
+
+Cancel.prototype.toString = function toString() {
+  return 'Cancel' + (this.message ? ': ' + this.message : '');
+};
+
+Cancel.prototype.__CANCEL__ = true;
+
+module.exports = Cancel;
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/cancel/CancelToken.js":
+/*!******************************************************!*\
+  !*** ./node_modules/axios/lib/cancel/CancelToken.js ***!
+  \******************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+var Cancel = __webpack_require__(/*! ./Cancel */ "./node_modules/axios/lib/cancel/Cancel.js");
+
+/**
+ * A `CancelToken` is an object that can be used to request cancellation of an operation.
+ *
+ * @class
+ * @param {Function} executor The executor function.
+ */
+function CancelToken(executor) {
+  if (typeof executor !== 'function') {
+    throw new TypeError('executor must be a function.');
+  }
+
+  var resolvePromise;
+  this.promise = new Promise(function promiseExecutor(resolve) {
+    resolvePromise = resolve;
+  });
+
+  var token = this;
+  executor(function cancel(message) {
+    if (token.reason) {
+      // Cancellation has already been requested
+      return;
+    }
+
+    token.reason = new Cancel(message);
+    resolvePromise(token.reason);
+  });
+}
+
+/**
+ * Throws a `Cancel` if cancellation has been requested.
+ */
+CancelToken.prototype.throwIfRequested = function throwIfRequested() {
+  if (this.reason) {
+    throw this.reason;
+  }
+};
+
+/**
+ * Returns an object that contains a new `CancelToken` and a function that, when called,
+ * cancels the `CancelToken`.
+ */
+CancelToken.source = function source() {
+  var cancel;
+  var token = new CancelToken(function executor(c) {
+    cancel = c;
+  });
+  return {
+    token: token,
+    cancel: cancel
+  };
+};
+
+module.exports = CancelToken;
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/cancel/isCancel.js":
+/*!***************************************************!*\
+  !*** ./node_modules/axios/lib/cancel/isCancel.js ***!
+  \***************************************************/
+/***/ ((module) => {
+
+"use strict";
+
+
+module.exports = function isCancel(value) {
+  return !!(value && value.__CANCEL__);
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/core/Axios.js":
+/*!**********************************************!*\
+  !*** ./node_modules/axios/lib/core/Axios.js ***!
+  \**********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+var utils = __webpack_require__(/*! ./../utils */ "./node_modules/axios/lib/utils.js");
+var buildURL = __webpack_require__(/*! ../helpers/buildURL */ "./node_modules/axios/lib/helpers/buildURL.js");
+var InterceptorManager = __webpack_require__(/*! ./InterceptorManager */ "./node_modules/axios/lib/core/InterceptorManager.js");
+var dispatchRequest = __webpack_require__(/*! ./dispatchRequest */ "./node_modules/axios/lib/core/dispatchRequest.js");
+var mergeConfig = __webpack_require__(/*! ./mergeConfig */ "./node_modules/axios/lib/core/mergeConfig.js");
+var validator = __webpack_require__(/*! ../helpers/validator */ "./node_modules/axios/lib/helpers/validator.js");
+
+var validators = validator.validators;
+/**
+ * Create a new instance of Axios
+ *
+ * @param {Object} instanceConfig The default config for the instance
+ */
+function Axios(instanceConfig) {
+  this.defaults = instanceConfig;
+  this.interceptors = {
+    request: new InterceptorManager(),
+    response: new InterceptorManager()
+  };
+}
+
+/**
+ * Dispatch a request
+ *
+ * @param {Object} config The config specific for this request (merged with this.defaults)
+ */
+Axios.prototype.request = function request(config) {
+  /*eslint no-param-reassign:0*/
+  // Allow for axios('example/url'[, config]) a la fetch API
+  if (typeof config === 'string') {
+    config = arguments[1] || {};
+    config.url = arguments[0];
+  } else {
+    config = config || {};
+  }
+
+  config = mergeConfig(this.defaults, config);
+
+  // Set config.method
+  if (config.method) {
+    config.method = config.method.toLowerCase();
+  } else if (this.defaults.method) {
+    config.method = this.defaults.method.toLowerCase();
+  } else {
+    config.method = 'get';
+  }
+
+  var transitional = config.transitional;
+
+  if (transitional !== undefined) {
+    validator.assertOptions(transitional, {
+      silentJSONParsing: validators.transitional(validators.boolean, '1.0.0'),
+      forcedJSONParsing: validators.transitional(validators.boolean, '1.0.0'),
+      clarifyTimeoutError: validators.transitional(validators.boolean, '1.0.0')
+    }, false);
+  }
+
+  // filter out skipped interceptors
+  var requestInterceptorChain = [];
+  var synchronousRequestInterceptors = true;
+  this.interceptors.request.forEach(function unshiftRequestInterceptors(interceptor) {
+    if (typeof interceptor.runWhen === 'function' && interceptor.runWhen(config) === false) {
+      return;
+    }
+
+    synchronousRequestInterceptors = synchronousRequestInterceptors && interceptor.synchronous;
+
+    requestInterceptorChain.unshift(interceptor.fulfilled, interceptor.rejected);
+  });
+
+  var responseInterceptorChain = [];
+  this.interceptors.response.forEach(function pushResponseInterceptors(interceptor) {
+    responseInterceptorChain.push(interceptor.fulfilled, interceptor.rejected);
+  });
+
+  var promise;
+
+  if (!synchronousRequestInterceptors) {
+    var chain = [dispatchRequest, undefined];
+
+    Array.prototype.unshift.apply(chain, requestInterceptorChain);
+    chain = chain.concat(responseInterceptorChain);
+
+    promise = Promise.resolve(config);
+    while (chain.length) {
+      promise = promise.then(chain.shift(), chain.shift());
+    }
+
+    return promise;
+  }
+
+
+  var newConfig = config;
+  while (requestInterceptorChain.length) {
+    var onFulfilled = requestInterceptorChain.shift();
+    var onRejected = requestInterceptorChain.shift();
+    try {
+      newConfig = onFulfilled(newConfig);
+    } catch (error) {
+      onRejected(error);
+      break;
+    }
+  }
+
+  try {
+    promise = dispatchRequest(newConfig);
+  } catch (error) {
+    return Promise.reject(error);
+  }
+
+  while (responseInterceptorChain.length) {
+    promise = promise.then(responseInterceptorChain.shift(), responseInterceptorChain.shift());
+  }
+
+  return promise;
+};
+
+Axios.prototype.getUri = function getUri(config) {
+  config = mergeConfig(this.defaults, config);
+  return buildURL(config.url, config.params, config.paramsSerializer).replace(/^\?/, '');
+};
+
+// Provide aliases for supported request methods
+utils.forEach(['delete', 'get', 'head', 'options'], function forEachMethodNoData(method) {
+  /*eslint func-names:0*/
+  Axios.prototype[method] = function(url, config) {
+    return this.request(mergeConfig(config || {}, {
+      method: method,
+      url: url,
+      data: (config || {}).data
+    }));
+  };
+});
+
+utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
+  /*eslint func-names:0*/
+  Axios.prototype[method] = function(url, data, config) {
+    return this.request(mergeConfig(config || {}, {
+      method: method,
+      url: url,
+      data: data
+    }));
+  };
+});
+
+module.exports = Axios;
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/core/InterceptorManager.js":
+/*!***********************************************************!*\
+  !*** ./node_modules/axios/lib/core/InterceptorManager.js ***!
+  \***********************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+var utils = __webpack_require__(/*! ./../utils */ "./node_modules/axios/lib/utils.js");
+
+function InterceptorManager() {
+  this.handlers = [];
+}
+
+/**
+ * Add a new interceptor to the stack
+ *
+ * @param {Function} fulfilled The function to handle `then` for a `Promise`
+ * @param {Function} rejected The function to handle `reject` for a `Promise`
+ *
+ * @return {Number} An ID used to remove interceptor later
+ */
+InterceptorManager.prototype.use = function use(fulfilled, rejected, options) {
+  this.handlers.push({
+    fulfilled: fulfilled,
+    rejected: rejected,
+    synchronous: options ? options.synchronous : false,
+    runWhen: options ? options.runWhen : null
+  });
+  return this.handlers.length - 1;
+};
+
+/**
+ * Remove an interceptor from the stack
+ *
+ * @param {Number} id The ID that was returned by `use`
+ */
+InterceptorManager.prototype.eject = function eject(id) {
+  if (this.handlers[id]) {
+    this.handlers[id] = null;
+  }
+};
+
+/**
+ * Iterate over all the registered interceptors
+ *
+ * This method is particularly useful for skipping over any
+ * interceptors that may have become `null` calling `eject`.
+ *
+ * @param {Function} fn The function to call for each interceptor
+ */
+InterceptorManager.prototype.forEach = function forEach(fn) {
+  utils.forEach(this.handlers, function forEachHandler(h) {
+    if (h !== null) {
+      fn(h);
+    }
+  });
+};
+
+module.exports = InterceptorManager;
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/core/buildFullPath.js":
+/*!******************************************************!*\
+  !*** ./node_modules/axios/lib/core/buildFullPath.js ***!
+  \******************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+var isAbsoluteURL = __webpack_require__(/*! ../helpers/isAbsoluteURL */ "./node_modules/axios/lib/helpers/isAbsoluteURL.js");
+var combineURLs = __webpack_require__(/*! ../helpers/combineURLs */ "./node_modules/axios/lib/helpers/combineURLs.js");
+
+/**
+ * Creates a new URL by combining the baseURL with the requestedURL,
+ * only when the requestedURL is not already an absolute URL.
+ * If the requestURL is absolute, this function returns the requestedURL untouched.
+ *
+ * @param {string} baseURL The base URL
+ * @param {string} requestedURL Absolute or relative URL to combine
+ * @returns {string} The combined full path
+ */
+module.exports = function buildFullPath(baseURL, requestedURL) {
+  if (baseURL && !isAbsoluteURL(requestedURL)) {
+    return combineURLs(baseURL, requestedURL);
+  }
+  return requestedURL;
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/core/createError.js":
+/*!****************************************************!*\
+  !*** ./node_modules/axios/lib/core/createError.js ***!
+  \****************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+var enhanceError = __webpack_require__(/*! ./enhanceError */ "./node_modules/axios/lib/core/enhanceError.js");
+
+/**
+ * Create an Error with the specified message, config, error code, request and response.
+ *
+ * @param {string} message The error message.
+ * @param {Object} config The config.
+ * @param {string} [code] The error code (for example, 'ECONNABORTED').
+ * @param {Object} [request] The request.
+ * @param {Object} [response] The response.
+ * @returns {Error} The created error.
+ */
+module.exports = function createError(message, config, code, request, response) {
+  var error = new Error(message);
+  return enhanceError(error, config, code, request, response);
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/core/dispatchRequest.js":
+/*!********************************************************!*\
+  !*** ./node_modules/axios/lib/core/dispatchRequest.js ***!
+  \********************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+var utils = __webpack_require__(/*! ./../utils */ "./node_modules/axios/lib/utils.js");
+var transformData = __webpack_require__(/*! ./transformData */ "./node_modules/axios/lib/core/transformData.js");
+var isCancel = __webpack_require__(/*! ../cancel/isCancel */ "./node_modules/axios/lib/cancel/isCancel.js");
+var defaults = __webpack_require__(/*! ../defaults */ "./node_modules/axios/lib/defaults.js");
+
+/**
+ * Throws a `Cancel` if cancellation has been requested.
+ */
+function throwIfCancellationRequested(config) {
+  if (config.cancelToken) {
+    config.cancelToken.throwIfRequested();
+  }
+}
+
+/**
+ * Dispatch a request to the server using the configured adapter.
+ *
+ * @param {object} config The config that is to be used for the request
+ * @returns {Promise} The Promise to be fulfilled
+ */
+module.exports = function dispatchRequest(config) {
+  throwIfCancellationRequested(config);
+
+  // Ensure headers exist
+  config.headers = config.headers || {};
+
+  // Transform request data
+  config.data = transformData.call(
+    config,
+    config.data,
+    config.headers,
+    config.transformRequest
+  );
+
+  // Flatten headers
+  config.headers = utils.merge(
+    config.headers.common || {},
+    config.headers[config.method] || {},
+    config.headers
+  );
+
+  utils.forEach(
+    ['delete', 'get', 'head', 'post', 'put', 'patch', 'common'],
+    function cleanHeaderConfig(method) {
+      delete config.headers[method];
+    }
+  );
+
+  var adapter = config.adapter || defaults.adapter;
+
+  return adapter(config).then(function onAdapterResolution(response) {
+    throwIfCancellationRequested(config);
+
+    // Transform response data
+    response.data = transformData.call(
+      config,
+      response.data,
+      response.headers,
+      config.transformResponse
+    );
+
+    return response;
+  }, function onAdapterRejection(reason) {
+    if (!isCancel(reason)) {
+      throwIfCancellationRequested(config);
+
+      // Transform response data
+      if (reason && reason.response) {
+        reason.response.data = transformData.call(
+          config,
+          reason.response.data,
+          reason.response.headers,
+          config.transformResponse
+        );
+      }
+    }
+
+    return Promise.reject(reason);
+  });
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/core/enhanceError.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/axios/lib/core/enhanceError.js ***!
+  \*****************************************************/
+/***/ ((module) => {
+
+"use strict";
+
+
+/**
+ * Update an Error with the specified config, error code, and response.
+ *
+ * @param {Error} error The error to update.
+ * @param {Object} config The config.
+ * @param {string} [code] The error code (for example, 'ECONNABORTED').
+ * @param {Object} [request] The request.
+ * @param {Object} [response] The response.
+ * @returns {Error} The error.
+ */
+module.exports = function enhanceError(error, config, code, request, response) {
+  error.config = config;
+  if (code) {
+    error.code = code;
+  }
+
+  error.request = request;
+  error.response = response;
+  error.isAxiosError = true;
+
+  error.toJSON = function toJSON() {
+    return {
+      // Standard
+      message: this.message,
+      name: this.name,
+      // Microsoft
+      description: this.description,
+      number: this.number,
+      // Mozilla
+      fileName: this.fileName,
+      lineNumber: this.lineNumber,
+      columnNumber: this.columnNumber,
+      stack: this.stack,
+      // Axios
+      config: this.config,
+      code: this.code
+    };
+  };
+  return error;
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/core/mergeConfig.js":
+/*!****************************************************!*\
+  !*** ./node_modules/axios/lib/core/mergeConfig.js ***!
+  \****************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+var utils = __webpack_require__(/*! ../utils */ "./node_modules/axios/lib/utils.js");
+
+/**
+ * Config-specific merge-function which creates a new config-object
+ * by merging two configuration objects together.
+ *
+ * @param {Object} config1
+ * @param {Object} config2
+ * @returns {Object} New object resulting from merging config2 to config1
+ */
+module.exports = function mergeConfig(config1, config2) {
+  // eslint-disable-next-line no-param-reassign
+  config2 = config2 || {};
+  var config = {};
+
+  var valueFromConfig2Keys = ['url', 'method', 'data'];
+  var mergeDeepPropertiesKeys = ['headers', 'auth', 'proxy', 'params'];
+  var defaultToConfig2Keys = [
+    'baseURL', 'transformRequest', 'transformResponse', 'paramsSerializer',
+    'timeout', 'timeoutMessage', 'withCredentials', 'adapter', 'responseType', 'xsrfCookieName',
+    'xsrfHeaderName', 'onUploadProgress', 'onDownloadProgress', 'decompress',
+    'maxContentLength', 'maxBodyLength', 'maxRedirects', 'transport', 'httpAgent',
+    'httpsAgent', 'cancelToken', 'socketPath', 'responseEncoding'
+  ];
+  var directMergeKeys = ['validateStatus'];
+
+  function getMergedValue(target, source) {
+    if (utils.isPlainObject(target) && utils.isPlainObject(source)) {
+      return utils.merge(target, source);
+    } else if (utils.isPlainObject(source)) {
+      return utils.merge({}, source);
+    } else if (utils.isArray(source)) {
+      return source.slice();
+    }
+    return source;
+  }
+
+  function mergeDeepProperties(prop) {
+    if (!utils.isUndefined(config2[prop])) {
+      config[prop] = getMergedValue(config1[prop], config2[prop]);
+    } else if (!utils.isUndefined(config1[prop])) {
+      config[prop] = getMergedValue(undefined, config1[prop]);
+    }
+  }
+
+  utils.forEach(valueFromConfig2Keys, function valueFromConfig2(prop) {
+    if (!utils.isUndefined(config2[prop])) {
+      config[prop] = getMergedValue(undefined, config2[prop]);
+    }
+  });
+
+  utils.forEach(mergeDeepPropertiesKeys, mergeDeepProperties);
+
+  utils.forEach(defaultToConfig2Keys, function defaultToConfig2(prop) {
+    if (!utils.isUndefined(config2[prop])) {
+      config[prop] = getMergedValue(undefined, config2[prop]);
+    } else if (!utils.isUndefined(config1[prop])) {
+      config[prop] = getMergedValue(undefined, config1[prop]);
+    }
+  });
+
+  utils.forEach(directMergeKeys, function merge(prop) {
+    if (prop in config2) {
+      config[prop] = getMergedValue(config1[prop], config2[prop]);
+    } else if (prop in config1) {
+      config[prop] = getMergedValue(undefined, config1[prop]);
+    }
+  });
+
+  var axiosKeys = valueFromConfig2Keys
+    .concat(mergeDeepPropertiesKeys)
+    .concat(defaultToConfig2Keys)
+    .concat(directMergeKeys);
+
+  var otherKeys = Object
+    .keys(config1)
+    .concat(Object.keys(config2))
+    .filter(function filterAxiosKeys(key) {
+      return axiosKeys.indexOf(key) === -1;
+    });
+
+  utils.forEach(otherKeys, mergeDeepProperties);
+
+  return config;
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/core/settle.js":
+/*!***********************************************!*\
+  !*** ./node_modules/axios/lib/core/settle.js ***!
+  \***********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+var createError = __webpack_require__(/*! ./createError */ "./node_modules/axios/lib/core/createError.js");
+
+/**
+ * Resolve or reject a Promise based on response status.
+ *
+ * @param {Function} resolve A function that resolves the promise.
+ * @param {Function} reject A function that rejects the promise.
+ * @param {object} response The response.
+ */
+module.exports = function settle(resolve, reject, response) {
+  var validateStatus = response.config.validateStatus;
+  if (!response.status || !validateStatus || validateStatus(response.status)) {
+    resolve(response);
+  } else {
+    reject(createError(
+      'Request failed with status code ' + response.status,
+      response.config,
+      null,
+      response.request,
+      response
+    ));
+  }
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/core/transformData.js":
+/*!******************************************************!*\
+  !*** ./node_modules/axios/lib/core/transformData.js ***!
+  \******************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+var utils = __webpack_require__(/*! ./../utils */ "./node_modules/axios/lib/utils.js");
+var defaults = __webpack_require__(/*! ./../defaults */ "./node_modules/axios/lib/defaults.js");
+
+/**
+ * Transform the data for a request or a response
+ *
+ * @param {Object|String} data The data to be transformed
+ * @param {Array} headers The headers for the request or response
+ * @param {Array|Function} fns A single function or Array of functions
+ * @returns {*} The resulting transformed data
+ */
+module.exports = function transformData(data, headers, fns) {
+  var context = this || defaults;
+  /*eslint no-param-reassign:0*/
+  utils.forEach(fns, function transform(fn) {
+    data = fn.call(context, data, headers);
+  });
+
+  return data;
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/defaults.js":
+/*!********************************************!*\
+  !*** ./node_modules/axios/lib/defaults.js ***!
+  \********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+var utils = __webpack_require__(/*! ./utils */ "./node_modules/axios/lib/utils.js");
+var normalizeHeaderName = __webpack_require__(/*! ./helpers/normalizeHeaderName */ "./node_modules/axios/lib/helpers/normalizeHeaderName.js");
+var enhanceError = __webpack_require__(/*! ./core/enhanceError */ "./node_modules/axios/lib/core/enhanceError.js");
+
+var DEFAULT_CONTENT_TYPE = {
+  'Content-Type': 'application/x-www-form-urlencoded'
+};
+
+function setContentTypeIfUnset(headers, value) {
+  if (!utils.isUndefined(headers) && utils.isUndefined(headers['Content-Type'])) {
+    headers['Content-Type'] = value;
+  }
+}
+
+function getDefaultAdapter() {
+  var adapter;
+  if (typeof XMLHttpRequest !== 'undefined') {
+    // For browsers use XHR adapter
+    adapter = __webpack_require__(/*! ./adapters/xhr */ "./node_modules/axios/lib/adapters/xhr.js");
+  } else if (typeof process !== 'undefined' && Object.prototype.toString.call(process) === '[object process]') {
+    // For node use HTTP adapter
+    adapter = __webpack_require__(/*! ./adapters/http */ "./node_modules/axios/lib/adapters/xhr.js");
+  }
+  return adapter;
+}
+
+function stringifySafely(rawValue, parser, encoder) {
+  if (utils.isString(rawValue)) {
+    try {
+      (parser || JSON.parse)(rawValue);
+      return utils.trim(rawValue);
+    } catch (e) {
+      if (e.name !== 'SyntaxError') {
+        throw e;
+      }
+    }
+  }
+
+  return (encoder || JSON.stringify)(rawValue);
+}
+
+var defaults = {
+
+  transitional: {
+    silentJSONParsing: true,
+    forcedJSONParsing: true,
+    clarifyTimeoutError: false
+  },
+
+  adapter: getDefaultAdapter(),
+
+  transformRequest: [function transformRequest(data, headers) {
+    normalizeHeaderName(headers, 'Accept');
+    normalizeHeaderName(headers, 'Content-Type');
+
+    if (utils.isFormData(data) ||
+      utils.isArrayBuffer(data) ||
+      utils.isBuffer(data) ||
+      utils.isStream(data) ||
+      utils.isFile(data) ||
+      utils.isBlob(data)
+    ) {
+      return data;
+    }
+    if (utils.isArrayBufferView(data)) {
+      return data.buffer;
+    }
+    if (utils.isURLSearchParams(data)) {
+      setContentTypeIfUnset(headers, 'application/x-www-form-urlencoded;charset=utf-8');
+      return data.toString();
+    }
+    if (utils.isObject(data) || (headers && headers['Content-Type'] === 'application/json')) {
+      setContentTypeIfUnset(headers, 'application/json');
+      return stringifySafely(data);
+    }
+    return data;
+  }],
+
+  transformResponse: [function transformResponse(data) {
+    var transitional = this.transitional;
+    var silentJSONParsing = transitional && transitional.silentJSONParsing;
+    var forcedJSONParsing = transitional && transitional.forcedJSONParsing;
+    var strictJSONParsing = !silentJSONParsing && this.responseType === 'json';
+
+    if (strictJSONParsing || (forcedJSONParsing && utils.isString(data) && data.length)) {
+      try {
+        return JSON.parse(data);
+      } catch (e) {
+        if (strictJSONParsing) {
+          if (e.name === 'SyntaxError') {
+            throw enhanceError(e, this, 'E_JSON_PARSE');
+          }
+          throw e;
+        }
+      }
+    }
+
+    return data;
+  }],
+
+  /**
+   * A timeout in milliseconds to abort a request. If set to 0 (default) a
+   * timeout is not created.
+   */
+  timeout: 0,
+
+  xsrfCookieName: 'XSRF-TOKEN',
+  xsrfHeaderName: 'X-XSRF-TOKEN',
+
+  maxContentLength: -1,
+  maxBodyLength: -1,
+
+  validateStatus: function validateStatus(status) {
+    return status >= 200 && status < 300;
+  }
+};
+
+defaults.headers = {
+  common: {
+    'Accept': 'application/json, text/plain, */*'
+  }
+};
+
+utils.forEach(['delete', 'get', 'head'], function forEachMethodNoData(method) {
+  defaults.headers[method] = {};
+});
+
+utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
+  defaults.headers[method] = utils.merge(DEFAULT_CONTENT_TYPE);
+});
+
+module.exports = defaults;
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/helpers/bind.js":
+/*!************************************************!*\
+  !*** ./node_modules/axios/lib/helpers/bind.js ***!
+  \************************************************/
+/***/ ((module) => {
+
+"use strict";
+
+
+module.exports = function bind(fn, thisArg) {
+  return function wrap() {
+    var args = new Array(arguments.length);
+    for (var i = 0; i < args.length; i++) {
+      args[i] = arguments[i];
+    }
+    return fn.apply(thisArg, args);
+  };
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/helpers/buildURL.js":
+/*!****************************************************!*\
+  !*** ./node_modules/axios/lib/helpers/buildURL.js ***!
+  \****************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+var utils = __webpack_require__(/*! ./../utils */ "./node_modules/axios/lib/utils.js");
+
+function encode(val) {
+  return encodeURIComponent(val).
+    replace(/%3A/gi, ':').
+    replace(/%24/g, '$').
+    replace(/%2C/gi, ',').
+    replace(/%20/g, '+').
+    replace(/%5B/gi, '[').
+    replace(/%5D/gi, ']');
+}
+
+/**
+ * Build a URL by appending params to the end
+ *
+ * @param {string} url The base of the url (e.g., http://www.google.com)
+ * @param {object} [params] The params to be appended
+ * @returns {string} The formatted url
+ */
+module.exports = function buildURL(url, params, paramsSerializer) {
+  /*eslint no-param-reassign:0*/
+  if (!params) {
+    return url;
+  }
+
+  var serializedParams;
+  if (paramsSerializer) {
+    serializedParams = paramsSerializer(params);
+  } else if (utils.isURLSearchParams(params)) {
+    serializedParams = params.toString();
+  } else {
+    var parts = [];
+
+    utils.forEach(params, function serialize(val, key) {
+      if (val === null || typeof val === 'undefined') {
+        return;
+      }
+
+      if (utils.isArray(val)) {
+        key = key + '[]';
+      } else {
+        val = [val];
+      }
+
+      utils.forEach(val, function parseValue(v) {
+        if (utils.isDate(v)) {
+          v = v.toISOString();
+        } else if (utils.isObject(v)) {
+          v = JSON.stringify(v);
+        }
+        parts.push(encode(key) + '=' + encode(v));
+      });
+    });
+
+    serializedParams = parts.join('&');
+  }
+
+  if (serializedParams) {
+    var hashmarkIndex = url.indexOf('#');
+    if (hashmarkIndex !== -1) {
+      url = url.slice(0, hashmarkIndex);
+    }
+
+    url += (url.indexOf('?') === -1 ? '?' : '&') + serializedParams;
+  }
+
+  return url;
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/helpers/combineURLs.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/axios/lib/helpers/combineURLs.js ***!
+  \*******************************************************/
+/***/ ((module) => {
+
+"use strict";
+
+
+/**
+ * Creates a new URL by combining the specified URLs
+ *
+ * @param {string} baseURL The base URL
+ * @param {string} relativeURL The relative URL
+ * @returns {string} The combined URL
+ */
+module.exports = function combineURLs(baseURL, relativeURL) {
+  return relativeURL
+    ? baseURL.replace(/\/+$/, '') + '/' + relativeURL.replace(/^\/+/, '')
+    : baseURL;
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/helpers/cookies.js":
+/*!***************************************************!*\
+  !*** ./node_modules/axios/lib/helpers/cookies.js ***!
+  \***************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+var utils = __webpack_require__(/*! ./../utils */ "./node_modules/axios/lib/utils.js");
+
+module.exports = (
+  utils.isStandardBrowserEnv() ?
+
+  // Standard browser envs support document.cookie
+    (function standardBrowserEnv() {
+      return {
+        write: function write(name, value, expires, path, domain, secure) {
+          var cookie = [];
+          cookie.push(name + '=' + encodeURIComponent(value));
+
+          if (utils.isNumber(expires)) {
+            cookie.push('expires=' + new Date(expires).toGMTString());
+          }
+
+          if (utils.isString(path)) {
+            cookie.push('path=' + path);
+          }
+
+          if (utils.isString(domain)) {
+            cookie.push('domain=' + domain);
+          }
+
+          if (secure === true) {
+            cookie.push('secure');
+          }
+
+          document.cookie = cookie.join('; ');
+        },
+
+        read: function read(name) {
+          var match = document.cookie.match(new RegExp('(^|;\\s*)(' + name + ')=([^;]*)'));
+          return (match ? decodeURIComponent(match[3]) : null);
+        },
+
+        remove: function remove(name) {
+          this.write(name, '', Date.now() - 86400000);
+        }
+      };
+    })() :
+
+  // Non standard browser env (web workers, react-native) lack needed support.
+    (function nonStandardBrowserEnv() {
+      return {
+        write: function write() {},
+        read: function read() { return null; },
+        remove: function remove() {}
+      };
+    })()
+);
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/helpers/isAbsoluteURL.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/axios/lib/helpers/isAbsoluteURL.js ***!
+  \*********************************************************/
+/***/ ((module) => {
+
+"use strict";
+
+
+/**
+ * Determines whether the specified URL is absolute
+ *
+ * @param {string} url The URL to test
+ * @returns {boolean} True if the specified URL is absolute, otherwise false
+ */
+module.exports = function isAbsoluteURL(url) {
+  // A URL is considered absolute if it begins with "<scheme>://" or "//" (protocol-relative URL).
+  // RFC 3986 defines scheme name as a sequence of characters beginning with a letter and followed
+  // by any combination of letters, digits, plus, period, or hyphen.
+  return /^([a-z][a-z\d\+\-\.]*:)?\/\//i.test(url);
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/helpers/isAxiosError.js":
+/*!********************************************************!*\
+  !*** ./node_modules/axios/lib/helpers/isAxiosError.js ***!
+  \********************************************************/
+/***/ ((module) => {
+
+"use strict";
+
+
+/**
+ * Determines whether the payload is an error thrown by Axios
+ *
+ * @param {*} payload The value to test
+ * @returns {boolean} True if the payload is an error thrown by Axios, otherwise false
+ */
+module.exports = function isAxiosError(payload) {
+  return (typeof payload === 'object') && (payload.isAxiosError === true);
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/helpers/isURLSameOrigin.js":
+/*!***********************************************************!*\
+  !*** ./node_modules/axios/lib/helpers/isURLSameOrigin.js ***!
+  \***********************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+var utils = __webpack_require__(/*! ./../utils */ "./node_modules/axios/lib/utils.js");
+
+module.exports = (
+  utils.isStandardBrowserEnv() ?
+
+  // Standard browser envs have full support of the APIs needed to test
+  // whether the request URL is of the same origin as current location.
+    (function standardBrowserEnv() {
+      var msie = /(msie|trident)/i.test(navigator.userAgent);
+      var urlParsingNode = document.createElement('a');
+      var originURL;
+
+      /**
+    * Parse a URL to discover it's components
+    *
+    * @param {String} url The URL to be parsed
+    * @returns {Object}
+    */
+      function resolveURL(url) {
+        var href = url;
+
+        if (msie) {
+        // IE needs attribute set twice to normalize properties
+          urlParsingNode.setAttribute('href', href);
+          href = urlParsingNode.href;
+        }
+
+        urlParsingNode.setAttribute('href', href);
+
+        // urlParsingNode provides the UrlUtils interface - http://url.spec.whatwg.org/#urlutils
+        return {
+          href: urlParsingNode.href,
+          protocol: urlParsingNode.protocol ? urlParsingNode.protocol.replace(/:$/, '') : '',
+          host: urlParsingNode.host,
+          search: urlParsingNode.search ? urlParsingNode.search.replace(/^\?/, '') : '',
+          hash: urlParsingNode.hash ? urlParsingNode.hash.replace(/^#/, '') : '',
+          hostname: urlParsingNode.hostname,
+          port: urlParsingNode.port,
+          pathname: (urlParsingNode.pathname.charAt(0) === '/') ?
+            urlParsingNode.pathname :
+            '/' + urlParsingNode.pathname
+        };
+      }
+
+      originURL = resolveURL(window.location.href);
+
+      /**
+    * Determine if a URL shares the same origin as the current location
+    *
+    * @param {String} requestURL The URL to test
+    * @returns {boolean} True if URL shares the same origin, otherwise false
+    */
+      return function isURLSameOrigin(requestURL) {
+        var parsed = (utils.isString(requestURL)) ? resolveURL(requestURL) : requestURL;
+        return (parsed.protocol === originURL.protocol &&
+            parsed.host === originURL.host);
+      };
+    })() :
+
+  // Non standard browser envs (web workers, react-native) lack needed support.
+    (function nonStandardBrowserEnv() {
+      return function isURLSameOrigin() {
+        return true;
+      };
+    })()
+);
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/helpers/normalizeHeaderName.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/axios/lib/helpers/normalizeHeaderName.js ***!
+  \***************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+var utils = __webpack_require__(/*! ../utils */ "./node_modules/axios/lib/utils.js");
+
+module.exports = function normalizeHeaderName(headers, normalizedName) {
+  utils.forEach(headers, function processHeader(value, name) {
+    if (name !== normalizedName && name.toUpperCase() === normalizedName.toUpperCase()) {
+      headers[normalizedName] = value;
+      delete headers[name];
+    }
+  });
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/helpers/parseHeaders.js":
+/*!********************************************************!*\
+  !*** ./node_modules/axios/lib/helpers/parseHeaders.js ***!
+  \********************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+var utils = __webpack_require__(/*! ./../utils */ "./node_modules/axios/lib/utils.js");
+
+// Headers whose duplicates are ignored by node
+// c.f. https://nodejs.org/api/http.html#http_message_headers
+var ignoreDuplicateOf = [
+  'age', 'authorization', 'content-length', 'content-type', 'etag',
+  'expires', 'from', 'host', 'if-modified-since', 'if-unmodified-since',
+  'last-modified', 'location', 'max-forwards', 'proxy-authorization',
+  'referer', 'retry-after', 'user-agent'
+];
+
+/**
+ * Parse headers into an object
+ *
+ * ```
+ * Date: Wed, 27 Aug 2014 08:58:49 GMT
+ * Content-Type: application/json
+ * Connection: keep-alive
+ * Transfer-Encoding: chunked
+ * ```
+ *
+ * @param {String} headers Headers needing to be parsed
+ * @returns {Object} Headers parsed into an object
+ */
+module.exports = function parseHeaders(headers) {
+  var parsed = {};
+  var key;
+  var val;
+  var i;
+
+  if (!headers) { return parsed; }
+
+  utils.forEach(headers.split('\n'), function parser(line) {
+    i = line.indexOf(':');
+    key = utils.trim(line.substr(0, i)).toLowerCase();
+    val = utils.trim(line.substr(i + 1));
+
+    if (key) {
+      if (parsed[key] && ignoreDuplicateOf.indexOf(key) >= 0) {
+        return;
+      }
+      if (key === 'set-cookie') {
+        parsed[key] = (parsed[key] ? parsed[key] : []).concat([val]);
+      } else {
+        parsed[key] = parsed[key] ? parsed[key] + ', ' + val : val;
+      }
+    }
+  });
+
+  return parsed;
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/helpers/spread.js":
+/*!**************************************************!*\
+  !*** ./node_modules/axios/lib/helpers/spread.js ***!
+  \**************************************************/
+/***/ ((module) => {
+
+"use strict";
+
+
+/**
+ * Syntactic sugar for invoking a function and expanding an array for arguments.
+ *
+ * Common use case would be to use `Function.prototype.apply`.
+ *
+ *  ```js
+ *  function f(x, y, z) {}
+ *  var args = [1, 2, 3];
+ *  f.apply(null, args);
+ *  ```
+ *
+ * With `spread` this example can be re-written.
+ *
+ *  ```js
+ *  spread(function(x, y, z) {})([1, 2, 3]);
+ *  ```
+ *
+ * @param {Function} callback
+ * @returns {Function}
+ */
+module.exports = function spread(callback) {
+  return function wrap(arr) {
+    return callback.apply(null, arr);
+  };
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/helpers/validator.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/axios/lib/helpers/validator.js ***!
+  \*****************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+var pkg = __webpack_require__(/*! ./../../package.json */ "./node_modules/axios/package.json");
+
+var validators = {};
+
+// eslint-disable-next-line func-names
+['object', 'boolean', 'number', 'function', 'string', 'symbol'].forEach(function(type, i) {
+  validators[type] = function validator(thing) {
+    return typeof thing === type || 'a' + (i < 1 ? 'n ' : ' ') + type;
+  };
+});
+
+var deprecatedWarnings = {};
+var currentVerArr = pkg.version.split('.');
+
+/**
+ * Compare package versions
+ * @param {string} version
+ * @param {string?} thanVersion
+ * @returns {boolean}
+ */
+function isOlderVersion(version, thanVersion) {
+  var pkgVersionArr = thanVersion ? thanVersion.split('.') : currentVerArr;
+  var destVer = version.split('.');
+  for (var i = 0; i < 3; i++) {
+    if (pkgVersionArr[i] > destVer[i]) {
+      return true;
+    } else if (pkgVersionArr[i] < destVer[i]) {
+      return false;
+    }
+  }
+  return false;
+}
+
+/**
+ * Transitional option validator
+ * @param {function|boolean?} validator
+ * @param {string?} version
+ * @param {string} message
+ * @returns {function}
+ */
+validators.transitional = function transitional(validator, version, message) {
+  var isDeprecated = version && isOlderVersion(version);
+
+  function formatMessage(opt, desc) {
+    return '[Axios v' + pkg.version + '] Transitional option \'' + opt + '\'' + desc + (message ? '. ' + message : '');
+  }
+
+  // eslint-disable-next-line func-names
+  return function(value, opt, opts) {
+    if (validator === false) {
+      throw new Error(formatMessage(opt, ' has been removed in ' + version));
+    }
+
+    if (isDeprecated && !deprecatedWarnings[opt]) {
+      deprecatedWarnings[opt] = true;
+      // eslint-disable-next-line no-console
+      console.warn(
+        formatMessage(
+          opt,
+          ' has been deprecated since v' + version + ' and will be removed in the near future'
+        )
+      );
+    }
+
+    return validator ? validator(value, opt, opts) : true;
+  };
+};
+
+/**
+ * Assert object's properties type
+ * @param {object} options
+ * @param {object} schema
+ * @param {boolean?} allowUnknown
+ */
+
+function assertOptions(options, schema, allowUnknown) {
+  if (typeof options !== 'object') {
+    throw new TypeError('options must be an object');
+  }
+  var keys = Object.keys(options);
+  var i = keys.length;
+  while (i-- > 0) {
+    var opt = keys[i];
+    var validator = schema[opt];
+    if (validator) {
+      var value = options[opt];
+      var result = value === undefined || validator(value, opt, options);
+      if (result !== true) {
+        throw new TypeError('option ' + opt + ' must be ' + result);
+      }
+      continue;
+    }
+    if (allowUnknown !== true) {
+      throw Error('Unknown option ' + opt);
+    }
+  }
+}
+
+module.exports = {
+  isOlderVersion: isOlderVersion,
+  assertOptions: assertOptions,
+  validators: validators
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/utils.js":
+/*!*****************************************!*\
+  !*** ./node_modules/axios/lib/utils.js ***!
+  \*****************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+var bind = __webpack_require__(/*! ./helpers/bind */ "./node_modules/axios/lib/helpers/bind.js");
+
+// utils is a library of generic helper functions non-specific to axios
+
+var toString = Object.prototype.toString;
+
+/**
+ * Determine if a value is an Array
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is an Array, otherwise false
+ */
+function isArray(val) {
+  return toString.call(val) === '[object Array]';
+}
+
+/**
+ * Determine if a value is undefined
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if the value is undefined, otherwise false
+ */
+function isUndefined(val) {
+  return typeof val === 'undefined';
+}
+
+/**
+ * Determine if a value is a Buffer
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a Buffer, otherwise false
+ */
+function isBuffer(val) {
+  return val !== null && !isUndefined(val) && val.constructor !== null && !isUndefined(val.constructor)
+    && typeof val.constructor.isBuffer === 'function' && val.constructor.isBuffer(val);
+}
+
+/**
+ * Determine if a value is an ArrayBuffer
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is an ArrayBuffer, otherwise false
+ */
+function isArrayBuffer(val) {
+  return toString.call(val) === '[object ArrayBuffer]';
+}
+
+/**
+ * Determine if a value is a FormData
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is an FormData, otherwise false
+ */
+function isFormData(val) {
+  return (typeof FormData !== 'undefined') && (val instanceof FormData);
+}
+
+/**
+ * Determine if a value is a view on an ArrayBuffer
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a view on an ArrayBuffer, otherwise false
+ */
+function isArrayBufferView(val) {
+  var result;
+  if ((typeof ArrayBuffer !== 'undefined') && (ArrayBuffer.isView)) {
+    result = ArrayBuffer.isView(val);
+  } else {
+    result = (val) && (val.buffer) && (val.buffer instanceof ArrayBuffer);
+  }
+  return result;
+}
+
+/**
+ * Determine if a value is a String
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a String, otherwise false
+ */
+function isString(val) {
+  return typeof val === 'string';
+}
+
+/**
+ * Determine if a value is a Number
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a Number, otherwise false
+ */
+function isNumber(val) {
+  return typeof val === 'number';
+}
+
+/**
+ * Determine if a value is an Object
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is an Object, otherwise false
+ */
+function isObject(val) {
+  return val !== null && typeof val === 'object';
+}
+
+/**
+ * Determine if a value is a plain Object
+ *
+ * @param {Object} val The value to test
+ * @return {boolean} True if value is a plain Object, otherwise false
+ */
+function isPlainObject(val) {
+  if (toString.call(val) !== '[object Object]') {
+    return false;
+  }
+
+  var prototype = Object.getPrototypeOf(val);
+  return prototype === null || prototype === Object.prototype;
+}
+
+/**
+ * Determine if a value is a Date
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a Date, otherwise false
+ */
+function isDate(val) {
+  return toString.call(val) === '[object Date]';
+}
+
+/**
+ * Determine if a value is a File
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a File, otherwise false
+ */
+function isFile(val) {
+  return toString.call(val) === '[object File]';
+}
+
+/**
+ * Determine if a value is a Blob
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a Blob, otherwise false
+ */
+function isBlob(val) {
+  return toString.call(val) === '[object Blob]';
+}
+
+/**
+ * Determine if a value is a Function
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a Function, otherwise false
+ */
+function isFunction(val) {
+  return toString.call(val) === '[object Function]';
+}
+
+/**
+ * Determine if a value is a Stream
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a Stream, otherwise false
+ */
+function isStream(val) {
+  return isObject(val) && isFunction(val.pipe);
+}
+
+/**
+ * Determine if a value is a URLSearchParams object
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a URLSearchParams object, otherwise false
+ */
+function isURLSearchParams(val) {
+  return typeof URLSearchParams !== 'undefined' && val instanceof URLSearchParams;
+}
+
+/**
+ * Trim excess whitespace off the beginning and end of a string
+ *
+ * @param {String} str The String to trim
+ * @returns {String} The String freed of excess whitespace
+ */
+function trim(str) {
+  return str.trim ? str.trim() : str.replace(/^\s+|\s+$/g, '');
+}
+
+/**
+ * Determine if we're running in a standard browser environment
+ *
+ * This allows axios to run in a web worker, and react-native.
+ * Both environments support XMLHttpRequest, but not fully standard globals.
+ *
+ * web workers:
+ *  typeof window -> undefined
+ *  typeof document -> undefined
+ *
+ * react-native:
+ *  navigator.product -> 'ReactNative'
+ * nativescript
+ *  navigator.product -> 'NativeScript' or 'NS'
+ */
+function isStandardBrowserEnv() {
+  if (typeof navigator !== 'undefined' && (navigator.product === 'ReactNative' ||
+                                           navigator.product === 'NativeScript' ||
+                                           navigator.product === 'NS')) {
+    return false;
+  }
+  return (
+    typeof window !== 'undefined' &&
+    typeof document !== 'undefined'
+  );
+}
+
+/**
+ * Iterate over an Array or an Object invoking a function for each item.
+ *
+ * If `obj` is an Array callback will be called passing
+ * the value, index, and complete array for each item.
+ *
+ * If 'obj' is an Object callback will be called passing
+ * the value, key, and complete object for each property.
+ *
+ * @param {Object|Array} obj The object to iterate
+ * @param {Function} fn The callback to invoke for each item
+ */
+function forEach(obj, fn) {
+  // Don't bother if no value provided
+  if (obj === null || typeof obj === 'undefined') {
+    return;
+  }
+
+  // Force an array if not already something iterable
+  if (typeof obj !== 'object') {
+    /*eslint no-param-reassign:0*/
+    obj = [obj];
+  }
+
+  if (isArray(obj)) {
+    // Iterate over array values
+    for (var i = 0, l = obj.length; i < l; i++) {
+      fn.call(null, obj[i], i, obj);
+    }
+  } else {
+    // Iterate over object keys
+    for (var key in obj) {
+      if (Object.prototype.hasOwnProperty.call(obj, key)) {
+        fn.call(null, obj[key], key, obj);
+      }
+    }
+  }
+}
+
+/**
+ * Accepts varargs expecting each argument to be an object, then
+ * immutably merges the properties of each object and returns result.
+ *
+ * When multiple objects contain the same key the later object in
+ * the arguments list will take precedence.
+ *
+ * Example:
+ *
+ * ```js
+ * var result = merge({foo: 123}, {foo: 456});
+ * console.log(result.foo); // outputs 456
+ * ```
+ *
+ * @param {Object} obj1 Object to merge
+ * @returns {Object} Result of all merge properties
+ */
+function merge(/* obj1, obj2, obj3, ... */) {
+  var result = {};
+  function assignValue(val, key) {
+    if (isPlainObject(result[key]) && isPlainObject(val)) {
+      result[key] = merge(result[key], val);
+    } else if (isPlainObject(val)) {
+      result[key] = merge({}, val);
+    } else if (isArray(val)) {
+      result[key] = val.slice();
+    } else {
+      result[key] = val;
+    }
+  }
+
+  for (var i = 0, l = arguments.length; i < l; i++) {
+    forEach(arguments[i], assignValue);
+  }
+  return result;
+}
+
+/**
+ * Extends object a by mutably adding to it the properties of object b.
+ *
+ * @param {Object} a The object to be extended
+ * @param {Object} b The object to copy properties from
+ * @param {Object} thisArg The object to bind function to
+ * @return {Object} The resulting value of object a
+ */
+function extend(a, b, thisArg) {
+  forEach(b, function assignValue(val, key) {
+    if (thisArg && typeof val === 'function') {
+      a[key] = bind(val, thisArg);
+    } else {
+      a[key] = val;
+    }
+  });
+  return a;
+}
+
+/**
+ * Remove byte order marker. This catches EF BB BF (the UTF-8 BOM)
+ *
+ * @param {string} content with BOM
+ * @return {string} content value without BOM
+ */
+function stripBOM(content) {
+  if (content.charCodeAt(0) === 0xFEFF) {
+    content = content.slice(1);
+  }
+  return content;
+}
+
+module.exports = {
+  isArray: isArray,
+  isArrayBuffer: isArrayBuffer,
+  isBuffer: isBuffer,
+  isFormData: isFormData,
+  isArrayBufferView: isArrayBufferView,
+  isString: isString,
+  isNumber: isNumber,
+  isObject: isObject,
+  isPlainObject: isPlainObject,
+  isUndefined: isUndefined,
+  isDate: isDate,
+  isFile: isFile,
+  isBlob: isBlob,
+  isFunction: isFunction,
+  isStream: isStream,
+  isURLSearchParams: isURLSearchParams,
+  isStandardBrowserEnv: isStandardBrowserEnv,
+  forEach: forEach,
+  merge: merge,
+  extend: extend,
+  trim: trim,
+  stripBOM: stripBOM
+};
+
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/CartComponent.vue?vue&type=script&lang=js":
 /*!*******************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/CartComponent.vue?vue&type=script&lang=js ***!
@@ -17137,7 +19189,10 @@ __webpack_require__.r(__webpack_exports__);
       displayLogin: true,
       displayLoginForm: true,
       displaySignUpForm: false,
-      displayForgotPasswordForm: false
+      displayForgotPasswordForm: false,
+      loginEmail: '',
+      loginPassword: '',
+      callback: ''
     };
   },
   methods: {
@@ -17162,6 +19217,24 @@ __webpack_require__.r(__webpack_exports__);
       this.displayForgotPasswordForm = true;
       this.displayLoginForm = false;
       this.displaySignUpForm = false;
+    },
+    loginUser: function loginUser() {
+      var _this = this;
+
+      if (this.loginEmail !== '') {
+        if (this.loginPassword !== '') {
+          axios.post('/login', {
+            email: this.loginEmail,
+            password: this.loginPassword
+          }).then(function (response) {
+            _this.callback = response.data;
+          });
+        } else {
+          this.callback = 'Password field empty';
+        }
+      } else {
+        this.callback = 'Email Address field empty';
+      }
     }
   },
   mounted: function mounted() {
@@ -17439,31 +19512,21 @@ var _hoisted_6 = {
 
 var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div><svg class=\"mx-auto\" width=\"37\" height=\"43\" viewBox=\"0 0 37 43\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M29.9105 40.487C32.1742 40.487 33.9928 38.6489 33.9928 36.4046C33.9928 34.1603 32.1548 32.3223 29.9105 32.3223C27.6468 32.3223 25.8281 34.1603 25.8281 36.4046C25.8281 38.6489 27.6468 40.487 29.9105 40.487Z\" fill=\"#F37022\"></path><path d=\"M11.8011 42.3825C14.0648 42.3825 15.8835 40.5444 15.8835 38.3001C15.8835 36.0364 14.0454 34.2178 11.8011 34.2178C9.55678 34.2178 7.71875 36.0558 7.71875 38.3001C7.71875 40.5444 9.55678 42.3825 11.8011 42.3825Z\" fill=\"#F37022\"></path><path d=\"M30.0082 30.988L9.22883 33.1742C5.08843 33.5999 1.39303 30.601 0.948035 26.48L0 17.522L35.7545 13.7686L36.7025 22.7265C37.1668 26.8669 34.1486 30.5623 30.0082 30.988Z\" fill=\"#F37022\"></path><path d=\"M5.30474 13.5548C4.64692 6.84119 9.59991 0.766028 16.3135 0.0695131C23.0272 -0.64635 29.1217 4.2486 29.8762 10.9816L25.6004 11.4459C25.1167 7.05401 21.1311 3.86165 16.7392 4.34534C12.3473 4.80968 9.11622 8.7566 9.54187 13.1485L5.30474 13.5548Z\" fill=\"#F37022\"></path></svg></div>", 1);
 
-var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_8 = {
+  "class": "mt-4 font-bold underline"
+};
+
+var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "my-4"
 }, " Log in into your account ", -1
 /* HOISTED */
 );
 
-var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_10 = {
   "class": "my-4"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-  "class": "border border-gray-300 rounded py-2 px-6 w-full my-2 focus:outline-none",
-  type: "text",
-  name: "email",
-  id: "email",
-  placeholder: "Email Address"
-})]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-  "class": "border border-gray-300 rounded py-2 px-6 w-full my-2 focus:outline-none",
-  type: "password",
-  name: "password",
-  id: "password",
-  placeholder: "Password"
-})])], -1
-/* HOISTED */
-);
+};
 
-var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "text-left my-4"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
   type: "checkbox",
@@ -17472,86 +19535,115 @@ var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "my-8"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-  "class": "mx-auto btn-yus rounded-full w-full py-2 text-white"
-}, " Login ")], -1
-/* HOISTED */
-);
-
 var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-  "class": "mx-auto btn-yus-conti-shopping rounded-full w-full py-2 text-white"
-}, " Create account ", -1
+  "class": "mx-auto btn-yus rounded-full w-full py-2 text-white"
+}, " Login ", -1
 /* HOISTED */
 );
 
 var _hoisted_13 = [_hoisted_12];
 
-var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"my-4\"> Welcome! Create an account </div><div class=\"my-4\"><div><input class=\"border border-gray-300 rounded py-2 px-6 w-full my-2 focus:outline-none\" type=\"text\" name=\"name\" id=\"name\" placeholder=\"Full Name\"></div><div><input class=\"border border-gray-300 rounded py-2 px-6 w-full my-2 focus:outline-none\" type=\"text\" name=\"email\" id=\"email\" placeholder=\"Email Address\"></div><div><input class=\"border border-gray-300 rounded py-2 px-6 w-full my-2 focus:outline-none\" type=\"password\" name=\"password\" id=\"password\" placeholder=\"Password\"></div></div><div class=\"text-left my-4\"><span><input type=\"checkbox\" name=\"signed\"></span><span> Keep me signed in </span></div><div class=\"my-8\"><button class=\"mx-auto btn-yus rounded-full w-full py-2 text-white\"> Create account </button></div>", 4);
+var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  "class": "mx-auto btn-yus-conti-shopping rounded-full w-full py-2 text-white"
+}, " Create account ", -1
+/* HOISTED */
+);
 
-var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+var _hoisted_15 = [_hoisted_14];
+
+var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"my-4\"> Welcome! Create an account </div><div class=\"my-4\"><div><input class=\"border border-gray-300 rounded py-2 px-6 w-full my-2 focus:outline-none\" type=\"text\" name=\"name\" id=\"signUpName\" placeholder=\"Full Name\"></div><div><input class=\"border border-gray-300 rounded py-2 px-6 w-full my-2 focus:outline-none\" type=\"text\" name=\"email\" id=\"signUpEmail\" placeholder=\"Email Address\"></div><div><input class=\"border border-gray-300 rounded py-2 px-6 w-full my-2 focus:outline-none\" type=\"password\" name=\"password\" id=\"password\" placeholder=\"Password\"></div></div><div class=\"text-left my-4\"><span><input type=\"checkbox\" name=\"signed\"></span><span> Keep me signed in </span></div><div class=\"my-8\"><button class=\"mx-auto btn-yus rounded-full w-full py-2 text-white\"> Create account </button></div>", 4);
+
+var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
   "class": "mx-auto btn-yus-conti-shopping rounded-full w-full py-2 text-white"
 }, " Login ", -1
 /* HOISTED */
 );
 
-var _hoisted_19 = [_hoisted_18];
+var _hoisted_21 = [_hoisted_20];
 
-var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"my-8\"> Enter the email address your register your account. We will send you a verification link to reset your account. </div><div class=\"my-4\"><div><input class=\"border border-gray-300 rounded py-2 px-6 w-full my-2 focus:outline-none\" type=\"text\" name=\"email\" id=\"email\" placeholder=\"Email Address\"></div></div><div class=\"my-8\"><button class=\"mx-auto btn-yus rounded-full w-full py-2 text-white\"> Submit </button></div>", 3);
+var _hoisted_22 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"my-8\"> Enter the email address your register your account. We will send you a verification link to reset your account. </div><div class=\"my-4\"><div><input class=\"border border-gray-300 rounded py-2 px-6 w-full my-2 focus:outline-none\" type=\"text\" name=\"email\" id=\"ForgotPasswordEmail\" placeholder=\"Email Address\"></div></div><div class=\"my-8\"><button class=\"mx-auto btn-yus rounded-full w-full py-2 text-white\"> Submit </button></div>", 3);
 
-var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, "Remember your password?", -1
+var _hoisted_25 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, "Remember your password?", -1
 /* HOISTED */
 );
 
-var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+var _hoisted_26 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "ml-2"
 }, "Sign in", -1
 /* HOISTED */
 );
 
-var _hoisted_25 = [_hoisted_23, _hoisted_24];
+var _hoisted_27 = [_hoisted_25, _hoisted_26];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
     onClick: _cache[0] || (_cache[0] = function ($event) {
       return $options.closeCart();
     }),
     "class": "cursor-pointer"
-  }, _hoisted_5)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [_hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Login Form  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_8, _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    onClick: _cache[1] || (_cache[1] = function ($event) {
+  }, _hoisted_5)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [_hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.callback), 1
+  /* TEXT */
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Login Form  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
+      return $data.loginEmail = $event;
+    }),
+    "class": "border border-gray-300 rounded py-2 px-6 w-full my-2 focus:outline-none",
+    type: "text",
+    name: "email",
+    id: "loginEmail",
+    placeholder: "Email Address"
+  }, null, 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.loginEmail]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+      return $data.loginPassword = $event;
+    }),
+    "class": "border border-gray-300 rounded py-2 px-6 w-full my-2 focus:outline-none",
+    type: "password",
+    name: "password",
+    id: "loginPassword",
+    placeholder: "Password"
+  }, null, 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.loginPassword]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    onClick: _cache[3] || (_cache[3] = function ($event) {
       return $options.showForgotPasswordForm();
     }),
     "class": "cursor-pointer flex justify-end my-4"
-  }, " Forgot Password? "), _hoisted_10, _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    onClick: _cache[2] || (_cache[2] = function ($event) {
+  }, " Forgot Password? "), _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    onClick: _cache[4] || (_cache[4] = function ($event) {
+      return $options.loginUser();
+    }),
+    "class": "my-8"
+  }, _hoisted_13), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    onClick: _cache[5] || (_cache[5] = function ($event) {
       return $options.showSignUpForm();
     }),
     "class": "my-4 cursor-pointer"
   }, " Do not have an account? "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    onClick: _cache[3] || (_cache[3] = function ($event) {
+    onClick: _cache[6] || (_cache[6] = function ($event) {
       return $options.showSignUpForm();
     }),
     "class": "my-8"
-  }, _hoisted_13)], 512
+  }, _hoisted_15)], 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.displayLoginForm]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Signup Form  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    onClick: _cache[4] || (_cache[4] = function ($event) {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.displayLoginForm]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Signup Form  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    onClick: _cache[7] || (_cache[7] = function ($event) {
       return $options.showLoginForm();
     }),
     "class": "my-4 cursor-pointer"
   }, " Already have an account? "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    onClick: _cache[5] || (_cache[5] = function ($event) {
+    onClick: _cache[8] || (_cache[8] = function ($event) {
       return $options.showLoginForm();
     }),
     "class": "my-8"
-  }, _hoisted_19)], 512
+  }, _hoisted_21)], 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.displaySignUpForm]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Forgot Password Form  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    onClick: _cache[6] || (_cache[6] = function ($event) {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.displaySignUpForm]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Forgot Password Form  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_22, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    onClick: _cache[9] || (_cache[9] = function ($event) {
       return $options.showLoginForm();
     }),
     "class": "my-4 cursor-pointer"
-  }, _hoisted_25)], 512
+  }, _hoisted_27)], 512
   /* NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.displayForgotPasswordForm]])])])], 512
   /* NEED_PATCH */
@@ -17884,10 +19976,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var vue_product_zoomer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-product-zoomer */ "./node_modules/vue-product-zoomer/dist/assets/js/app.bundle.js");
-/* harmony import */ var vue_product_zoomer__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_product_zoomer__WEBPACK_IMPORTED_MODULE_1__);
 
-
+window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 var navComponent = (0,vue__WEBPACK_IMPORTED_MODULE_0__.createApp)({});
 navComponent.component('nav-component', __webpack_require__(/*! ./components/NavComponent.vue */ "./resources/js/components/NavComponent.vue")["default"]);
 navComponent.component('login-component', __webpack_require__(/*! ./components/LoginComponent.vue */ "./resources/js/components/LoginComponent.vue"));
@@ -18236,144 +20326,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/vue-product-zoomer/dist/assets/js/app.bundle.js":
-/*!**********************************************************************!*\
-  !*** ./node_modules/vue-product-zoomer/dist/assets/js/app.bundle.js ***!
-  \**********************************************************************/
-/***/ ((module) => {
-
-!function(e,t){ true?module.exports=t():0}(window,function(){return function(n){var s={};function i(e){if(s[e])return s[e].exports;var t=s[e]={i:e,l:!1,exports:{}};return n[e].call(t.exports,t,t.exports,i),t.l=!0,t.exports}return i.m=n,i.c=s,i.d=function(e,t,n){i.o(e,t)||Object.defineProperty(e,t,{enumerable:!0,get:n})},i.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},i.t=function(t,e){if(1&e&&(t=i(t)),8&e)return t;if(4&e&&"object"==typeof t&&t&&t.__esModule)return t;var n=Object.create(null);if(i.r(n),Object.defineProperty(n,"default",{enumerable:!0,value:t}),2&e&&"string"!=typeof t)for(var s in t)i.d(n,s,function(e){return t[e]}.bind(null,s));return n},i.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return i.d(t,"a",t),t},i.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},i.p="",i(i.s="./src/publish.js")}({"./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./src/components/ProductZoomer.vue?vue&type=script&lang=js&":
-/*!*************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--1!./node_modules/vue-loader/lib??vue-loader-options!./src/components/ProductZoomer.vue?vue&type=script&lang=js& ***!
-  \*************************************************************************************************************************************************************/
-/*! exports provided: default */function(e,t,n){"use strict";n.r(t);var s=n(/*! ../assets/drift-zoom/src/js/Drift.js */"./src/assets/drift-zoom/src/js/Drift.js"),i=n(/*! ../assets/svg-icons/arrow-down-s-fill.svg */"./src/assets/svg-icons/arrow-down-s-fill.svg"),o=n.n(i),r=n(/*! ../assets/svg-icons/arrow-down-s-line.svg */"./src/assets/svg-icons/arrow-down-s-line.svg"),a=n.n(r),l=n(/*! ../assets/svg-icons/arrow-left-s-fill.svg */"./src/assets/svg-icons/arrow-left-s-fill.svg"),c=n.n(l),d=n(/*! ../assets/svg-icons/arrow-left-s-line.svg */"./src/assets/svg-icons/arrow-left-s-line.svg"),u=n.n(d),m=n(/*! ../assets/svg-icons/arrow-right-s-fill.svg */"./src/assets/svg-icons/arrow-right-s-fill.svg"),h=n.n(m),g=n(/*! ../assets/svg-icons/arrow-right-s-line.svg */"./src/assets/svg-icons/arrow-right-s-line.svg"),f=n.n(g),p=n(/*! ../assets/svg-icons/arrow-up-s-fill.svg */"./src/assets/svg-icons/arrow-up-s-fill.svg"),v=n.n(p),b=n(/*! ../assets/svg-icons/arrow-up-s-line.svg */"./src/assets/svg-icons/arrow-up-s-line.svg"),y=n.n(b);function w(e){return function(e){if(Array.isArray(e)){for(var t=0,n=new Array(e.length);t<e.length;t++)n[t]=e[t];return n}}(e)||function(e){if(Symbol.iterator in Object(e)||"[object Arguments]"===Object.prototype.toString.call(e))return Array.from(e)}(e)||function(){throw new TypeError("Invalid attempt to spread non-iterable instance")}()}t.default={name:"ProductZoomer",props:{baseZoomerOptions:{type:Object,default:function(){return{}}},baseImages:{type:Object,required:!0,default:function(){return{}}}},data:function(){return{previewImg:{},previewLargeImg:{},thumbs:[],normal_size:[],large_size:[],choosedThumb:{},drift:null,options:{zoomFactor:4,pane:"container",hoverDelay:300,namespace:"container-zoomer",move_by_click:!0,scroll_items:4,choosed_thumb_border_color:"#ff3d00",scroller_button_style:"line",scroller_position:"left",zoomer_pane_position:"right"}}},computed:{base_container_div:function(){return document.querySelector("."+this.options.namespace+"-base-container")},pane_container_id:function(){return this.options.namespace+"-pane-container"},preview_img:function(){return"."+this.options.namespace+"-base-container .preview-box"},scroller_icon_first:function(){return["top","bottom"].includes(this.options.scroller_position)?"line"===this.options.scroller_button_style?u.a:c.a:["left","right"].includes(this.options.scroller_position)?"line"===this.options.scroller_button_style?y.a:v.a:void 0},scroller_icon_second:function(){return["top","bottom"].includes(this.options.scroller_position)?"line"===this.options.scroller_button_style?f.a:h.a:["left","right"].includes(this.options.scroller_position)?"line"===this.options.scroller_button_style?a.a:o.a:void 0}},mounted:function(){var t=this;if(!["left","right","top","bottom"].includes(this.options.scroller_position))throw"scroller_position is invalid";if(!["fill","line"].includes(this.options.scroller_button_style))throw"scroller_button_style is invalid";if(!["left","right"].includes(this.options.zoomer_pane_position))throw"zoomer_pane_position is invalid";this.$nextTick(function(){if(t[function(e){return"scrollerAt"+(e.substr(0,1).toUpperCase()+e.substr(1).toLowerCase())}(t.options.scroller_position)](),t.options.injectBaseStyles=!0,"container-round"===t.options.pane)t.options.inlinePane=!0;else{t.options.inlinePane=!1,t.options.paneContainer=document.getElementById(t.pane_container_id);var e=document.querySelector("."+t.options.namespace+"-base-container").getBoundingClientRect();document.getElementById(t.pane_container_id).setAttribute("style",function(){var e=0<arguments.length&&void 0!==arguments[0]?arguments[0]:"pane",t=1<arguments.length?arguments[1]:void 0,n=2<arguments.length?arguments[2]:void 0,s="";return"left"===n?s="width:"+t.width+"px;height:"+t.height+"px;left:"+("container"===e?0:0-t.width-window.scrollX-5)+"px;":"right"===n&&(s="width:"+t.width+"px;height:"+t.height+"px;left:"+("container"===e?0:t.width+window.scrollX+5)+"px;"),s}(t.options.pane,e,t.options.zoomer_pane_position))}t.drift=new s.default(document.querySelector(t.preview_img),t.options)})},watch:{choosedThumb:function(t){var e=this.normal_size.find(function(e){return e.id===t.id}),n=this.large_size.find(function(e){return e.id===t.id});this.previewLargeImg=Object.assign({},n),this.previewImg=Object.assign({},e),null!==this.drift&&this.drift.setZoomImageURL(n.url)}},created:function(){if(0<Object.keys(this.baseImages).length)for(var e in this.baseImages)this.baseImages.hasOwnProperty(e)&&(this[e]=this.baseImages[e]);if(0===this.normal_size.length)throw"Product Zoomer Need Normal Size Image At Least!!!";if(0===this.thumbs.length?this.thumbs=Object.assign([],this.normal_size):this.choosedThumb=this.thumbs[0],0===this.large_size.length&&(this.large_size=Object.assign([],this.normal_size)),0<Object.keys(this.baseZoomerOptions).length)for(var t in this.baseZoomerOptions)if(this.baseZoomerOptions.hasOwnProperty(t)){var n=this.baseZoomerOptions[t];this.options[t]=n}"container-round"===this.options.pane||"container"===this.options.pane?this.options.hoverBoundingBox=!1:this.options.hoverBoundingBox=!0},methods:{moveThumbs:function(e){var t=this.thumbs.length;if("backward"===e){var n=this.thumbs.splice(t-1,1);this.thumbs=[n[0]].concat(w(this.thumbs))}else{var s=this.thumbs.splice(0,1);this.thumbs=[].concat(w(this.thumbs),[s[0]])}},chooseThumb:function(e,t){"mouseover"===t.type?!0!==this.options.move_by_click&&(this.choosedThumb=e):this.choosedThumb=e},scrollerAtBottom:function(){var e=parseInt(this.baseZoomerOptions.scroll_items)+2,t=document.querySelector("."+this.options.namespace+"-base-container .preview-box"),n=document.querySelector("."+this.options.namespace+"-base-container .thumb-list"),s=n.children[1].naturalHeight*(t.naturalWidth/n.children[1].naturalWidth)/(e-1);document.querySelector("."+this.options.namespace+"-base-container").setAttribute("style","height:"+(t.naturalHeight+s+2)+"px;width:"+t.naturalHeight+"px;position:relative"),document.querySelector("."+this.options.namespace+"-base-container .thumb-list").setAttribute("style","width:"+t.naturalWidth+"px;height:"+s+"px;grid-template-columns:calc(100%/"+e+"/2) repeat("+(e-2)+", auto) calc(100%/"+e+"/2);visibility:visible;")},scrollerAtTop:function(){var e=parseInt(this.baseZoomerOptions.scroll_items)+2,t=document.querySelector("."+this.options.namespace+"-base-container .preview-box"),n=document.querySelector("."+this.options.namespace+"-base-container .thumb-list"),s=n.children[1].naturalHeight*(t.naturalWidth/n.children[1].naturalWidth)/(e-1);document.querySelector("."+this.options.namespace+"-base-container").setAttribute("style","height:"+(t.naturalHeight+s+2)+"px;width:"+t.naturalHeight+"px;position:relative"),document.querySelector("."+this.options.namespace+"-base-container .thumb-list").setAttribute("style","width:"+t.naturalWidth+"px;height:"+s+"px;grid-template-columns:calc(100%/"+e+"/2) repeat("+(e-2)+", auto) calc(100%/"+e+"/2);visibility:visible;")},scrollerAtRight:function(){var e=parseInt(this.baseZoomerOptions.scroll_items)+2,t=document.querySelector("."+this.options.namespace+"-base-container .preview-box"),n=document.querySelector("."+this.options.namespace+"-base-container .thumb-list"),s=n.children[1].naturalWidth*(t.naturalHeight/n.children[1].naturalHeight)/(e-1);document.querySelector("."+this.options.namespace+"-base-container").setAttribute("style","width:"+(t.naturalWidth+s+2)+"px;position:relative"),document.querySelector("."+this.options.namespace+"-base-container .thumb-list").setAttribute("style","height:"+t.naturalHeight+"px;width:"+s+"px;grid-template-rows:calc(100%/"+e+"/2) repeat("+(e-2)+", auto) calc(100%/"+e+"/2);visibility:visible;")},scrollerAtLeft:function(){var e=parseInt(this.baseZoomerOptions.scroll_items)+2,t=document.querySelector("."+this.options.namespace+"-base-container .preview-box"),n=document.querySelector("."+this.options.namespace+"-base-container .thumb-list"),s=n.children[1].naturalWidth*(t.naturalHeight/n.children[1].naturalHeight)/(e-1);document.querySelector("."+this.options.namespace+"-base-container").setAttribute("style","width:"+(t.naturalWidth+s+2)+"px;position:relative"),document.querySelector("."+this.options.namespace+"-base-container .thumb-list").setAttribute("style","height:"+t.naturalHeight+"px;width:"+s+"px;grid-template-rows:calc(100%/"+e+"/2) repeat("+(e-2)+", auto) calc(100%/"+e+"/2);visibility:visible;")}}}},"./node_modules/css-loader/dist/cjs.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./src/components/ProductZoomer.vue?vue&type=style&index=0&lang=css&":
-/*!**************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ref--2-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib??vue-loader-options!./src/components/ProductZoomer.vue?vue&type=style&index=0&lang=css& ***!
-  \**************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */function(e,t,n){(t=e.exports=n(/*! ../../node_modules/css-loader/dist/runtime/api.js */"./node_modules/css-loader/dist/runtime/api.js")(!1)).i(n(/*! -!../../node_modules/css-loader/dist/cjs.js??ref--2-1!../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../assets/drift-zoom/src/css/drift-basic.css */"./node_modules/css-loader/dist/cjs.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./src/assets/drift-zoom/src/css/drift-basic.css"),""),t.push([e.i,"\n",""])},"./node_modules/css-loader/dist/cjs.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./src/components/ProductZoomer.vue?vue&type=style&index=1&id=033bd07e&scoped=true&lang=css&":
-/*!**************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ref--2-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib??vue-loader-options!./src/components/ProductZoomer.vue?vue&type=style&index=1&id=033bd07e&scoped=true&lang=css& ***!
-  \**************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */function(e,t,n){(e.exports=n(/*! ../../node_modules/css-loader/dist/runtime/api.js */"./node_modules/css-loader/dist/runtime/api.js")(!1)).push([e.i,"\n.scroller-at-top[data-v-033bd07e] {\n  display: grid;\n  grid-gap: 2px;\n  grid-template-columns: 1fr;\n  align-items: center;\n}\n.scroller-at-top .preview-box[data-v-033bd07e] {\n  grid-column: 1 / 2;\n  grid-row: 2 / 3;\n}\n.scroller-at-top .thumb-list[data-v-033bd07e] {\n  display: grid;\n  align-items: center;\n  grid-column-gap: 0.2em;\n  grid-column: 1 / 2;\n  grid-row: 1 / 2;\n  visibility: hidden;\n}\n.scroller-at-bottom[data-v-033bd07e] {\n  display: grid;\n  grid-gap: 2px;\n  grid-template-columns: 1fr;\n  align-items: center;\n}\n.scroller-at-bottom .preview-box[data-v-033bd07e] {\n  grid-column: 1 / 2;\n  grid-row: 1 / 2;\n}\n.scroller-at-bottom .thumb-list[data-v-033bd07e] {\n  display: grid;\n  align-items: center;\n  grid-column-gap: 0.2em;\n  grid-column: 1 / 2;\n  grid-row: 2 / 3;\n  visibility: hidden;\n}\n.scroller-at-left[data-v-033bd07e] {\n  display: grid;\n  grid-gap: 2px;\n  grid-template-columns: 1fr;\n}\n.scroller-at-left .preview-box[data-v-033bd07e] {\n  grid-column: 2 / 3;\n  grid-row: 1 / 2;\n}\n.scroller-at-left .thumb-list[data-v-033bd07e] {\n  display: grid;\n  grid-row-gap: 0.2em;\n  grid-column: 1 / 2;\n  grid-row: 1 / 2;\n  visibility: hidden;\n  justify-items: center;\n}\n.scroller-at-right[data-v-033bd07e] {\n  display: grid;\n  grid-gap: 2px;\n  grid-template-columns: 1fr;\n}\n.scroller-at-right .preview-box[data-v-033bd07e] {\n  grid-column: 1 / 2;\n  grid-row: 1 / 2;\n}\n.scroller-at-right .thumb-list[data-v-033bd07e] {\n  display: grid;\n  grid-row-gap: 0.2em;\n  grid-column: 2 / 3;\n  grid-row: 1 / 2;\n  visibility: hidden;\n  justify-items: center;\n}\n.scroller-at-right .thumb-list .responsive-image[data-v-033bd07e],\n.scroller-at-left .thumb-list .responsive-image[data-v-033bd07e] {\n  width: auto;\n  height: 100%;\n}\n.scroller-at-top .thumb-list .responsive-image[data-v-033bd07e],\n.scroller-at-bottom .thumb-list .responsive-image[data-v-033bd07e] {\n  height: auto;\n  width: 100%;\n}\n.zoomer-control[data-v-033bd07e] {\n  cursor: pointer;\n}\n.choosed-thumb[data-v-033bd07e] {\n  border-radius: 0px;\n}\n.pane-container[data-v-033bd07e] {\n  display: none;\n  position: absolute;\n  z-index: 10000;\n  pointer-events: none;\n}\n",""])},"./node_modules/css-loader/dist/cjs.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./src/assets/drift-zoom/src/css/drift-basic.css":
-/*!****************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ref--2-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./src/assets/drift-zoom/src/css/drift-basic.css ***!
-  \****************************************************************************************************************************************************************/
-/*! no static exports found */function(e,t,n){(e.exports=n(/*! ../../../../../node_modules/css-loader/dist/runtime/api.js */"./node_modules/css-loader/dist/runtime/api.js")(!1)).push([e.i,"@keyframes drift-fadeZoomIn {\n0% {\n    transform: scale(1.5);\n    opacity: 0;\n}\n100% {\n    transform: scale(1);\n    opacity: 1;\n}\n}\n@keyframes drift-fadeZoomOut {\n0% {\n    transform: scale(1);\n    opacity: 1;\n}\n15% {\n    transform: scale(1.1);\n    opacity: 1;\n}\n100% {\n    transform: scale(0.5);\n    opacity: 0;\n}\n}\n@keyframes drift-loader-rotate {\n0% {\n    transform: translate(-50%, -50%) rotate(0);\n}\n50% {\n    transform: translate(-50%, -50%) rotate(-180deg);\n}\n100% {\n    transform: translate(-50%, -50%) rotate(-360deg);\n}\n}\n@keyframes drift-loader-before {\n0% {\n    transform: scale(1);\n}\n10% {\n    transform: scale(1.2) translateX(6px);\n}\n25% {\n    transform: scale(1.3) translateX(8px);\n}\n40% {\n    transform: scale(1.2) translateX(6px);\n}\n50% {\n    transform: scale(1);\n}\n60% {\n    transform: scale(0.8) translateX(6px);\n}\n75% {\n    transform: scale(0.7) translateX(8px);\n}\n90% {\n    transform: scale(0.8) translateX(6px);\n}\n100% {\n    transform: scale(1);\n}\n}\n@keyframes drift-loader-after {\n0% {\n    transform: scale(1);\n}\n10% {\n    transform: scale(1.2) translateX(-6px);\n}\n25% {\n    transform: scale(1.3) translateX(-8px);\n}\n40% {\n    transform: scale(1.2) translateX(-6px);\n}\n50% {\n    transform: scale(1);\n}\n60% {\n    transform: scale(0.8) translateX(-6px);\n}\n75% {\n    transform: scale(0.7) translateX(-8px);\n}\n90% {\n    transform: scale(0.8) translateX(-6px);\n}\n100% {\n    transform: scale(1);\n}\n}\n@-webkit-keyframes drift-fadeZoomIn {\n0% {\n    -webkit-transform: scale(1.5);\n    opacity: 0;\n}\n100% {\n    -webkit-transform: scale(1);\n    opacity: 1;\n}\n}\n@-webkit-keyframes drift-fadeZoomOut {\n0% {\n    -webkit-transform: scale(1);\n    opacity: 1;\n}\n15% {\n    -webkit-transform: scale(1.1);\n    opacity: 1;\n}\n100% {\n    -webkit-transform: scale(0.5);\n    opacity: 0;\n}\n}\n@-webkit-keyframes drift-loader-rotate {\n0% {\n    -webkit-transform: translate(-50%, -50%) rotate(0);\n}\n50% {\n    -webkit-transform: translate(-50%, -50%) rotate(-180deg);\n}\n100% {\n    -webkit-transform: translate(-50%, -50%) rotate(-360deg);\n}\n}\n@-webkit-keyframes drift-loader-before {\n0% {\n    -webkit-transform: scale(1);\n}\n10% {\n    -webkit-transform: scale(1.2) translateX(6px);\n}\n25% {\n    -webkit-transform: scale(1.3) translateX(8px);\n}\n40% {\n    -webkit-transform: scale(1.2) translateX(6px);\n}\n50% {\n    -webkit-transform: scale(1);\n}\n60% {\n    -webkit-transform: scale(0.8) translateX(6px);\n}\n75% {\n    -webkit-transform: scale(0.7) translateX(8px);\n}\n90% {\n    -webkit-transform: scale(0.8) translateX(6px);\n}\n100% {\n    -webkit-transform: scale(1);\n}\n}\n@-webkit-keyframes drift-loader-after {\n0% {\n    -webkit-transform: scale(1);\n}\n10% {\n    -webkit-transform: scale(1.2) translateX(-6px);\n}\n25% {\n    -webkit-transform: scale(1.3) translateX(-8px);\n}\n40% {\n    -webkit-transform: scale(1.2) translateX(-6px);\n}\n50% {\n    -webkit-transform: scale(1);\n}\n60% {\n    -webkit-transform: scale(0.8) translateX(-6px);\n}\n75% {\n    -webkit-transform: scale(0.7) translateX(-8px);\n}\n90% {\n    -webkit-transform: scale(0.8) translateX(-6px);\n}\n100% {\n    -webkit-transform: scale(1);\n}\n}\n.drift-zoom-pane {\n  background: rgba(0, 0, 0, 0.5);\n  /* This is required because of a bug that causes border-radius to not\n  work with child elements in certain cases. */\n  transform: translate3d(0, 0, 0);\n  -webkit-transform: translate3d(0, 0, 0);\n}\n.drift-zoom-pane.drift-opening {\n  animation: drift-fadeZoomIn 180ms ease-out;\n  -webkit-animation: drift-fadeZoomIn 180ms ease-out;\n}\n.drift-zoom-pane.drift-closing {\n  animation: drift-fadeZoomOut 210ms ease-in;\n  -webkit-animation: drift-fadeZoomOut 210ms ease-in;\n}\n.drift-zoom-pane.drift-inline {\n  position: absolute;\n  width: 150px;\n  height: 150px;\n  border-radius: 75px;\n  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);\n}\n.drift-loading .drift-zoom-pane-loader {\n  display: block;\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  -webkit-transform: translate(-50%, -50%);\n  width: 66px;\n  height: 20px;\n  animation: drift-loader-rotate 1800ms infinite linear;\n  -webkit-animation: drift-loader-rotate 1800ms infinite linear;\n}\n.drift-zoom-pane-loader:before,\n.drift-zoom-pane-loader:after {\n  content: '';\n  display: block;\n  width: 20px;\n  height: 20px;\n  position: absolute;\n  top: 50%;\n  margin-top: -10px;\n  border-radius: 20px;\n  background: rgba(255, 255, 255, 0.9);\n}\n.drift-zoom-pane-loader:before {\n  left: 0;\n  animation: drift-loader-before 1800ms infinite linear;\n  -webkit-animation: drift-loader-before 1800ms infinite linear;\n}\n.drift-zoom-pane-loader:after {\n  right: 0;\n  animation: drift-loader-after 1800ms infinite linear;\n  -webkit-animation: drift-loader-after 1800ms infinite linear;\n  animation-delay: -900ms;\n  -webkit-animation-delay: -900ms;\n}\n.drift-bounding-box {\n  background-color: rgba(0, 0, 0, 0.4);\n}\n",""])},"./node_modules/css-loader/dist/runtime/api.js":
-/*!*****************************************************!*\
-  !*** ./node_modules/css-loader/dist/runtime/api.js ***!
-  \*****************************************************/
-/*! no static exports found */function(e,t,n){"use strict";e.exports=function(n){var r=[];return r.toString=function(){return this.map(function(e){var t=function(e,t){var n=e[1]||"",s=e[3];if(!s)return n;if(t&&"function"==typeof btoa){var i=function(e){return"/*# sourceMappingURL=data:application/json;charset=utf-8;base64,"+btoa(unescape(encodeURIComponent(JSON.stringify(e))))+" */"}(s),o=s.sources.map(function(e){return"/*# sourceURL="+s.sourceRoot+e+" */"});return[n].concat(o).concat([i]).join("\n")}return[n].join("\n")}(e,n);return e[2]?"@media "+e[2]+"{"+t+"}":t}).join("")},r.i=function(e,t){"string"==typeof e&&(e=[[null,e,""]]);for(var n={},s=0;s<this.length;s++){var i=this[s][0];null!=i&&(n[i]=!0)}for(s=0;s<e.length;s++){var o=e[s];null!=o[0]&&n[o[0]]||(t&&!o[2]?o[2]=t:t&&(o[2]="("+o[2]+") and ("+t+")"),r.push(o))}},r}},"./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/components/ProductZoomer.vue?vue&type=template&id=033bd07e&scoped=true&":
-/*!*******************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/components/ProductZoomer.vue?vue&type=template&id=033bd07e&scoped=true& ***!
-  \*******************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */function(e,t,n){"use strict";n.r(t),n.d(t,"render",function(){return s}),n.d(t,"staticRenderFns",function(){return i});var s=function(){var n=this,e=n.$createElement,s=n._self._c||e;return s("div",{class:n.options.namespace+"-base-container scroller-at-"+n.options.scroller_position},[s("img",{staticClass:"responsive-image preview-box",attrs:{src:n.previewImg.url,"data-zoom":n.previewLargeImg.url,draggable:"false"}}),n._v(" "),s("div",{staticClass:"thumb-list"},[s("img",{staticClass:"zoomer-control responsive-image",attrs:{src:n.scroller_icon_first,alt:"move thumb icon"},on:{click:function(e){return n.moveThumbs("backward")}}}),n._v(" "),n._l(n.thumbs,function(t,e){return s("img",{directives:[{name:"show",rawName:"v-show",value:e<n.options.scroll_items,expression:"key < options.scroll_items"}],key:e,staticClass:"responsive-image",class:{"choosed-thumb":t.id===n.choosedThumb.id},style:{boxShadow:t.id===n.choosedThumb.id?"0px 0px 0px 2px "+n.options.choosed_thumb_border_color:""},attrs:{draggable:"false",src:t.url},on:{mouseover:function(e){return n.chooseThumb(t,e)},click:function(e){return n.chooseThumb(t,e)}}})}),n._v(" "),s("img",{staticClass:"zoomer-control responsive-image",attrs:{src:n.scroller_icon_second,alt:"move thumb icon"},on:{click:function(e){return n.moveThumbs("forward")}}})],2),n._v(" "),s("div",{staticClass:"pane-container",attrs:{id:n.pane_container_id}})])},i=[]},"./node_modules/vue-loader/lib/runtime/componentNormalizer.js":
-/*!********************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/runtime/componentNormalizer.js ***!
-  \********************************************************************/
-/*! exports provided: default */function(e,t,n){"use strict";function s(e,t,n,s,i,o,r,a){var l,c="function"==typeof e?e.options:e;if(t&&(c.render=t,c.staticRenderFns=n,c._compiled=!0),s&&(c.functional=!0),o&&(c._scopeId="data-v-"+o),r?(l=function(e){(e=e||this.$vnode&&this.$vnode.ssrContext||this.parent&&this.parent.$vnode&&this.parent.$vnode.ssrContext)||"undefined"==typeof __VUE_SSR_CONTEXT__||(e=__VUE_SSR_CONTEXT__),i&&i.call(this,e),e&&e._registeredComponents&&e._registeredComponents.add(r)},c._ssrRegister=l):i&&(l=a?function(){i.call(this,this.$root.$options.shadowRoot)}:i),l)if(c.functional){c._injectStyles=l;var d=c.render;c.render=function(e,t){return l.call(t),d(e,t)}}else{var u=c.beforeCreate;c.beforeCreate=u?[].concat(u,l):[l]}return{exports:e,options:c}}n.r(t),n.d(t,"default",function(){return s})},"./node_modules/vue-style-loader/index.js!./node_modules/css-loader/dist/cjs.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./src/components/ProductZoomer.vue?vue&type=style&index=0&lang=css&":
-/*!**********************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-style-loader!./node_modules/css-loader/dist/cjs.js??ref--2-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib??vue-loader-options!./src/components/ProductZoomer.vue?vue&type=style&index=0&lang=css& ***!
-  \**********************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */function(e,t,n){var s=n(/*! !../../node_modules/css-loader/dist/cjs.js??ref--2-1!../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../node_modules/vue-loader/lib??vue-loader-options!./ProductZoomer.vue?vue&type=style&index=0&lang=css& */"./node_modules/css-loader/dist/cjs.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./src/components/ProductZoomer.vue?vue&type=style&index=0&lang=css&");"string"==typeof s&&(s=[[e.i,s,""]]),s.locals&&(e.exports=s.locals);(0,n(/*! ../../node_modules/vue-style-loader/lib/addStylesClient.js */"./node_modules/vue-style-loader/lib/addStylesClient.js").default)("4f185cd4",s,!0,{})},"./node_modules/vue-style-loader/index.js!./node_modules/css-loader/dist/cjs.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./src/components/ProductZoomer.vue?vue&type=style&index=1&id=033bd07e&scoped=true&lang=css&":
-/*!**********************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-style-loader!./node_modules/css-loader/dist/cjs.js??ref--2-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib??vue-loader-options!./src/components/ProductZoomer.vue?vue&type=style&index=1&id=033bd07e&scoped=true&lang=css& ***!
-  \**********************************************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */function(e,t,n){var s=n(/*! !../../node_modules/css-loader/dist/cjs.js??ref--2-1!../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../node_modules/vue-loader/lib??vue-loader-options!./ProductZoomer.vue?vue&type=style&index=1&id=033bd07e&scoped=true&lang=css& */"./node_modules/css-loader/dist/cjs.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./src/components/ProductZoomer.vue?vue&type=style&index=1&id=033bd07e&scoped=true&lang=css&");"string"==typeof s&&(s=[[e.i,s,""]]),s.locals&&(e.exports=s.locals);(0,n(/*! ../../node_modules/vue-style-loader/lib/addStylesClient.js */"./node_modules/vue-style-loader/lib/addStylesClient.js").default)("09114bf6",s,!0,{})},"./node_modules/vue-style-loader/lib/addStylesClient.js":
-/*!**************************************************************!*\
-  !*** ./node_modules/vue-style-loader/lib/addStylesClient.js ***!
-  \**************************************************************/
-/*! exports provided: default */function(e,t,n){"use strict";n.r(t),n.d(t,"default",function(){return g});var l=n(/*! ./listToStyles */"./node_modules/vue-style-loader/lib/listToStyles.js"),s="undefined"!=typeof document;if("undefined"!=typeof DEBUG&&DEBUG&&!s)throw new Error("vue-style-loader cannot be used in a non-browser environment. Use { target: 'node' } in your Webpack config to indicate a server-rendering environment.");var c={},i=s&&(document.head||document.getElementsByTagName("head")[0]),o=null,r=0,d=!1,a=function(){},u=null,m="data-vue-ssr-id",h="undefined"!=typeof navigator&&/msie [6-9]\b/.test(navigator.userAgent.toLowerCase());function g(r,e,t,n){d=t,u=n||{};var a=Object(l.default)(r,e);return f(a),function(e){for(var t=[],n=0;n<a.length;n++){var s=a[n];(i=c[s.id]).refs--,t.push(i)}e?f(a=Object(l.default)(r,e)):a=[];for(n=0;n<t.length;n++){var i;if(0===(i=t[n]).refs){for(var o=0;o<i.parts.length;o++)i.parts[o]();delete c[i.id]}}}}function f(e){for(var t=0;t<e.length;t++){var n=e[t],s=c[n.id];if(s){s.refs++;for(var i=0;i<s.parts.length;i++)s.parts[i](n.parts[i]);for(;i<n.parts.length;i++)s.parts.push(v(n.parts[i]));s.parts.length>n.parts.length&&(s.parts.length=n.parts.length)}else{var o=[];for(i=0;i<n.parts.length;i++)o.push(v(n.parts[i]));c[n.id]={id:n.id,refs:1,parts:o}}}}function p(){var e=document.createElement("style");return e.type="text/css",i.appendChild(e),e}function v(t){var n,s,e=document.querySelector("style["+m+'~="'+t.id+'"]');if(e){if(d)return a;e.parentNode.removeChild(e)}if(h){var i=r++;e=o||(o=p()),n=w.bind(null,e,i,!1),s=w.bind(null,e,i,!0)}else e=p(),n=function(e,t){var n=t.css,s=t.media,i=t.sourceMap;s&&e.setAttribute("media",s);u.ssrId&&e.setAttribute(m,t.id);i&&(n+="\n/*# sourceURL="+i.sources[0]+" */",n+="\n/*# sourceMappingURL=data:application/json;base64,"+btoa(unescape(encodeURIComponent(JSON.stringify(i))))+" */");if(e.styleSheet)e.styleSheet.cssText=n;else{for(;e.firstChild;)e.removeChild(e.firstChild);e.appendChild(document.createTextNode(n))}}.bind(null,e),s=function(){e.parentNode.removeChild(e)};return n(t),function(e){if(e){if(e.css===t.css&&e.media===t.media&&e.sourceMap===t.sourceMap)return;n(t=e)}else s()}}var b,y=(b=[],function(e,t){return b[e]=t,b.filter(Boolean).join("\n")});function w(e,t,n,s){var i=n?"":s.css;if(e.styleSheet)e.styleSheet.cssText=y(t,i);else{var o=document.createTextNode(i),r=e.childNodes;r[t]&&e.removeChild(r[t]),r.length?e.insertBefore(o,r[t]):e.appendChild(o)}}},"./node_modules/vue-style-loader/lib/listToStyles.js":
-/*!***********************************************************!*\
-  !*** ./node_modules/vue-style-loader/lib/listToStyles.js ***!
-  \***********************************************************/
-/*! exports provided: default */function(e,t,n){"use strict";function s(e,t){for(var n=[],s={},i=0;i<t.length;i++){var o=t[i],r=o[0],a={id:e+":"+i,css:o[1],media:o[2],sourceMap:o[3]};s[r]?s[r].parts.push(a):n.push(s[r]={id:r,parts:[a]})}return n}n.r(t),n.d(t,"default",function(){return s})},"./src/assets/drift-zoom/src/js/BoundingBox.js":
-/*!*****************************************************!*\
-  !*** ./src/assets/drift-zoom/src/js/BoundingBox.js ***!
-  \*****************************************************/
-/*! exports provided: default */function(e,t,n){"use strict";n.r(t),n.d(t,"default",function(){return r});var l=n(/*! ./util/throwIfMissing */"./src/assets/drift-zoom/src/js/util/throwIfMissing.js"),s=n(/*! ./util/dom */"./src/assets/drift-zoom/src/js/util/dom.js");function i(e,t){for(var n=0;n<t.length;n++){var s=t[n];s.enumerable=s.enumerable||!1,s.configurable=!0,"value"in s&&(s.writable=!0),Object.defineProperty(e,s.key,s)}}var o,c=function(e){return e&&(o=e),o},r=function(){function a(e){if(function(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}(this,a),c())return c();this.isShowing=!1;var t=e.namespace,n=void 0===t?null:t,s=e.zoomFactor,i=void 0===s?Object(l.default)():s,o=e.containerEl,r=void 0===o?Object(l.default)():o;this.settings={namespace:n,zoomFactor:i,containerEl:r},this.openClasses=this._buildClasses("open"),this._buildElement(),c(this)}return function(e,t,n){t&&i(e.prototype,t),n&&i(e,n)}(a,[{key:"_buildClasses",value:function(e){var t=["drift-".concat(e)],n=this.settings.namespace;return n&&t.push("".concat(n,"-").concat(e)),t}},{key:"_buildElement",value:function(){this.el=this.el?this.el:document.createElement("div"),Object(s.addClasses)(this.el,this._buildClasses("bounding-box"))}},{key:"show",value:function(e,t){this.isShowing=!0,document.querySelector("body").appendChild(this.el);var n=this.el.style;n.width="".concat(Math.round(e/this.settings.zoomFactor),"px"),n.height="".concat(Math.round(t/this.settings.zoomFactor),"px"),Object(s.addClasses)(this.el,this.openClasses)}},{key:"hide",value:function(){this.isShowing&&document.querySelector("body").removeChild(this.el),this.isShowing=!1,Object(s.removeClasses)(this.el,this.openClasses)}},{key:"setPosition",value:function(e,t,n){var s=window.pageXOffset,i=window.pageYOffset,o=n.left+e*n.width-this.el.clientWidth/2+s,r=n.top+t*n.height-this.el.clientHeight/2+i;o<n.left+s?o=n.left+s:o+this.el.clientWidth>n.left+n.width+s&&(o=n.left+n.width-this.el.clientWidth+s),r<n.top+i?r=n.top+i:r+this.el.clientHeight>n.top+n.height+i&&(r=n.top+n.height-this.el.clientHeight+i),this.el.style.left="".concat(o,"px"),this.el.style.top="".concat(r,"px")}}]),a}()},"./src/assets/drift-zoom/src/js/Drift.js":
-/*!***********************************************!*\
-  !*** ./src/assets/drift-zoom/src/js/Drift.js ***!
-  \***********************************************/
-/*! exports provided: default */function(e,t,n){"use strict";n.r(t),n.d(t,"default",function(){return r});var B=n(/*! ./util/dom */"./src/assets/drift-zoom/src/js/util/dom.js"),X=n(/*! ./injectBaseStylesheet */"./src/assets/drift-zoom/src/js/injectBaseStylesheet.js"),s=n(/*! ./Trigger */"./src/assets/drift-zoom/src/js/Trigger.js"),i=n(/*! ./ZoomPane */"./src/assets/drift-zoom/src/js/ZoomPane.js");function o(e,t){for(var n=0;n<t.length;n++){var s=t[n];s.enumerable=s.enumerable||!1,s.configurable=!0,"value"in s&&(s.writable=!0),Object.defineProperty(e,s.key,s)}}var r=function(){function H(e){var t=this,n=1<arguments.length&&void 0!==arguments[1]?arguments[1]:{};if(function(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}(this,H),this.destroy=function(){t.trigger._unbindEvents()},this.triggerEl=e,!Object(B.isDOMElement)(this.triggerEl))throw new TypeError("`new Drift` requires a DOM element as its first argument.");var s=n.namespace,i=void 0===s?null:s,o=n.showWhitespaceAtEdges,r=void 0!==o&&o,a=n.containInline,l=void 0!==a&&a,c=n.inlineOffsetX,d=void 0===c?0:c,u=n.inlineOffsetY,m=void 0===u?0:u,h=n.inlineContainer,g=void 0===h?document.body:h,f=n.sourceAttribute,p=void 0===f?"data-zoom":f,v=n.zoomFactor,b=void 0===v?3:v,y=n.paneContainer,w=void 0===y?document.body:y,_=n.inlinePane,x=void 0===_?375:_,C=n.handleTouch,j=void 0===C||C,I=n.onShow,A=void 0===I?null:I,E=n.onHide,z=void 0===E?null:E,k=n.injectBaseStyles,P=void 0===k||k,M=n.hoverDelay,O=void 0===M?0:M,Z=n.touchDelay,S=void 0===Z?0:Z,N=n.hoverBoundingBox,T=void 0!==N&&N,L=n.touchBoundingBox,D=void 0!==L&&L;if(!0!==x&&!Object(B.isDOMElement)(w))throw new TypeError("`paneContainer` must be a DOM element when `inlinePane !== true`");if(!Object(B.isDOMElement)(g))throw new TypeError("`inlineContainer` must be a DOM element");this.settings={namespace:i,showWhitespaceAtEdges:r,containInline:l,inlineOffsetX:d,inlineOffsetY:m,inlineContainer:g,sourceAttribute:p,zoomFactor:b,paneContainer:w,inlinePane:x,handleTouch:j,onShow:A,onHide:z,injectBaseStyles:P,hoverDelay:O,touchDelay:S,hoverBoundingBox:T,touchBoundingBox:D},this.settings.injectBaseStyles&&Object(X.default)(),this._buildZoomPane(),this._buildTrigger()}return function(e,t,n){t&&o(e.prototype,t),n&&o(e,n)}(H,[{key:"_buildZoomPane",value:function(){this.zoomPane=new i.default({container:this.settings.paneContainer,zoomFactor:this.settings.zoomFactor,showWhitespaceAtEdges:this.settings.showWhitespaceAtEdges,containInline:this.settings.containInline,inline:this.settings.inlinePane,namespace:this.settings.namespace,inlineOffsetX:this.settings.inlineOffsetX,inlineOffsetY:this.settings.inlineOffsetY,inlineContainer:this.settings.inlineContainer})}},{key:"_buildTrigger",value:function(){this.trigger=new s.default({el:this.triggerEl,zoomPane:this.zoomPane,handleTouch:this.settings.handleTouch,onShow:this.settings.onShow,onHide:this.settings.onHide,sourceAttribute:this.settings.sourceAttribute,hoverDelay:this.settings.hoverDelay,touchDelay:this.settings.touchDelay,hoverBoundingBox:this.settings.hoverBoundingBox,touchBoundingBox:this.settings.touchBoundingBox,namespace:this.settings.namespace,zoomFactor:this.settings.zoomFactor})}},{key:"setZoomImageURL",value:function(e){this.zoomPane._setImageURL(e)}},{key:"disable",value:function(){this.trigger.enabled=!1}},{key:"enable",value:function(){this.trigger.enabled=!0}},{key:"isShowing",get:function(){return this.zoomPane.isShowing}},{key:"zoomFactor",get:function(){return this.settings.zoomFactor},set:function(e){this.settings.zoomFactor=e,this.zoomPane.settings.zoomFactor=e}}]),H}()},"./src/assets/drift-zoom/src/js/Trigger.js":
-/*!*************************************************!*\
-  !*** ./src/assets/drift-zoom/src/js/Trigger.js ***!
-  \*************************************************/
-/*! exports provided: default */function(e,t,n){"use strict";n.r(t),n.d(t,"default",function(){return i});var E=n(/*! ./util/throwIfMissing */"./src/assets/drift-zoom/src/js/util/throwIfMissing.js"),z=n(/*! ./BoundingBox */"./src/assets/drift-zoom/src/js/BoundingBox.js");function s(e,t){for(var n=0;n<t.length;n++){var s=t[n];s.enumerable=s.enumerable||!1,s.configurable=!0,"value"in s&&(s.writable=!0),Object.defineProperty(e,s.key,s)}}var i=function(){function A(){var c=this,e=0<arguments.length&&void 0!==arguments[0]?arguments[0]:{};!function(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}(this,A),this._handleEntry=function(e){e.preventDefault(),"mouseenter"==(c._lastMovement=e).type&&c.settings.hoverDelay?c.entryTimeout=setTimeout(c._show,c.settings.hoverDelay):c.settings.touchDelay?c.entryTimeout=setTimeout(c._show,c.settings.touchDelay):c._show()},this._show=function(){if(c.enabled){var e=c.settings.onShow;if(e&&"function"==typeof e&&e(),c.settings.zoomPane.show(c.settings.el.getAttribute(c.settings.sourceAttribute),c.settings.el.clientWidth,c.settings.el.clientHeight),c._lastMovement){var t=c._lastMovement.touches;(t&&c.settings.touchBoundingBox||!t&&c.settings.hoverBoundingBox)&&c.boundingBox.show(c.settings.zoomPane.el.clientWidth,c.settings.zoomPane.el.clientHeight)}c._handleMovement()}},this._hide=function(e){e.preventDefault(),c._lastMovement=null,c.entryTimeout&&clearTimeout(c.entryTimeout),c.boundingBox&&c.boundingBox.hide();var t=c.settings.onHide;t&&"function"==typeof t&&t(),c.settings.zoomPane.hide()},this._handleMovement=function(e){if(e)e.preventDefault(),c._lastMovement=e;else{if(!c._lastMovement)return;e=c._lastMovement}var t,n;if(e.touches){var s=e.touches[0];t=s.clientX,n=s.clientY}else t=e.clientX,n=e.clientY;var i=c.settings.el.getBoundingClientRect(),o=t-i.left,r=n-i.top,a=o/c.settings.el.clientWidth,l=r/c.settings.el.clientHeight;c.boundingBox&&c.boundingBox.setPosition(a,l,i),c.settings.zoomPane.setPosition(a,l,i)};var t=e.el,n=void 0===t?Object(E.default)():t,s=e.zoomPane,i=void 0===s?Object(E.default)():s,o=e.sourceAttribute,r=void 0===o?Object(E.default)():o,a=e.handleTouch,l=void 0===a?Object(E.default)():a,d=e.onShow,u=void 0===d?null:d,m=e.onHide,h=void 0===m?null:m,g=e.hoverDelay,f=void 0===g?0:g,p=e.touchDelay,v=void 0===p?0:p,b=e.hoverBoundingBox,y=void 0===b?Object(E.default)():b,w=e.touchBoundingBox,_=void 0===w?Object(E.default)():w,x=e.namespace,C=void 0===x?null:x,j=e.zoomFactor,I=void 0===j?Object(E.default)():j;this.settings={el:n,zoomPane:i,sourceAttribute:r,handleTouch:l,onShow:u,onHide:h,hoverDelay:f,touchDelay:v,hoverBoundingBox:y,touchBoundingBox:_,namespace:C,zoomFactor:I},(this.settings.hoverBoundingBox||this.settings.touchBoundingBox)&&(this.boundingBox=new z.default({namespace:this.settings.namespace,zoomFactor:this.settings.zoomFactor,containerEl:this.settings.el.offsetParent})),this.enabled=!0,this._bindEvents()}return function(e,t,n){t&&s(e.prototype,t),n&&s(e,n)}(A,[{key:"_bindEvents",value:function(){this.settings.el.addEventListener("mouseenter",this._handleEntry,!1),this.settings.el.addEventListener("mouseleave",this._hide,!1),this.settings.el.addEventListener("mousemove",this._handleMovement,!1),this.settings.handleTouch&&(this.settings.el.addEventListener("touchstart",this._handleEntry,!1),this.settings.el.addEventListener("touchend",this._hide,!1),this.settings.el.addEventListener("touchmove",this._handleMovement,!1))}},{key:"_unbindEvents",value:function(){this.settings.el.removeEventListener("mouseenter",this._handleEntry,!1),this.settings.el.removeEventListener("mouseleave",this._hide,!1),this.settings.el.removeEventListener("mousemove",this._handleMovement,!1),this.settings.handleTouch&&(this.settings.el.removeEventListener("touchstart",this._handleEntry,!1),this.settings.el.removeEventListener("touchend",this._hide,!1),this.settings.el.removeEventListener("touchmove",this._handleMovement,!1))}},{key:"isShowing",get:function(){return this.settings.zoomPane.isShowing}}]),A}()},"./src/assets/drift-zoom/src/js/ZoomPane.js":
-/*!**************************************************!*\
-  !*** ./src/assets/drift-zoom/src/js/ZoomPane.js ***!
-  \**************************************************/
-/*! exports provided: default */function(e,t,n){"use strict";n.r(t),n.d(t,"default",function(){return a});var _=n(/*! ./util/throwIfMissing */"./src/assets/drift-zoom/src/js/util/throwIfMissing.js"),x=n(/*! ./util/dom */"./src/assets/drift-zoom/src/js/util/dom.js");function s(e,t){for(var n=0;n<t.length;n++){var s=t[n];s.enumerable=s.enumerable||!1,s.configurable=!0,"value"in s&&(s.writable=!0),Object.defineProperty(e,s.key,s)}}var i,o=document.createElement("div").style,r="undefined"!=typeof document&&("animation"in o||"webkitAnimation"in o),C=function(e){return e&&(i=e),i},a=function(){function w(){var e=this,t=0<arguments.length&&void 0!==arguments[0]?arguments[0]:{};!function(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}(this,w),this._completeShow=function(){e.el.removeEventListener("animationend",e._completeShow,!1),e.el.removeEventListener("webkitAnimationEnd",e._completeShow,!1),Object(x.removeClasses)(e.el,e.openingClasses)},this._completeHide=function(){e.el.removeEventListener("animationend",e._completeHide,!1),e.el.removeEventListener("webkitAnimationEnd",e._completeHide,!1),Object(x.removeClasses)(e.el,e.openClasses),Object(x.removeClasses)(e.el,e.closingClasses),Object(x.removeClasses)(e.el,e.inlineClasses),e.el.setAttribute("style",""),e.el.parentElement===e.settings.container?e.settings.container.removeChild(e.el):e.el.parentElement===e.settings.inlineContainer&&e.settings.inlineContainer.removeChild(e.el),!0!==e.settings.inline&&(e.settings.container.style.display="none")},this._handleLoad=function(){e.imgEl.removeEventListener("load",e._handleLoad,!1),Object(x.removeClasses)(e.el,e.loadingClasses)},this.isShowing=!1;var n=t.container,s=void 0===n?null:n,i=t.zoomFactor,o=void 0===i?Object(_.default)():i,r=t.inline,a=void 0===r?Object(_.default)():r,l=t.namespace,c=void 0===l?null:l,d=t.showWhitespaceAtEdges,u=void 0===d?Object(_.default)():d,m=t.containInline,h=void 0===m?Object(_.default)():m,g=t.inlineOffsetX,f=void 0===g?0:g,p=t.inlineOffsetY,v=void 0===p?0:p,b=t.inlineContainer,y=void 0===b?document.body:b;this.settings={container:s,zoomFactor:o,inline:a,namespace:c,showWhitespaceAtEdges:u,containInline:h,inlineOffsetX:f,inlineOffsetY:v,inlineContainer:y},this.openClasses=this._buildClasses("open"),this.openingClasses=this._buildClasses("opening"),this.closingClasses=this._buildClasses("closing"),this.inlineClasses=this._buildClasses("inline"),this.loadingClasses=this._buildClasses("loading"),this._buildElement(),C(this)}return function(e,t,n){t&&s(e.prototype,t),n&&s(e,n)}(w,[{key:"_buildClasses",value:function(e){var t=["drift-".concat(e)],n=this.settings.namespace;return n&&t.push("".concat(n,"-").concat(e)),t}},{key:"_buildElement",value:function(){this.el=document.createElement("div"),Object(x.addClasses)(this.el,this._buildClasses("zoom-pane"));var e=document.createElement("div");Object(x.addClasses)(e,this._buildClasses("zoom-pane-loader")),this.el.appendChild(e),this.imgEl=document.createElement("img"),this.el.appendChild(this.imgEl)}},{key:"_setImageURL",value:function(e){this.imgEl.setAttribute("src",e)}},{key:"_setImageSize",value:function(e,t){this.imgEl.style.width="".concat(e*this.settings.zoomFactor,"px"),this.imgEl.style.height="".concat(t*this.settings.zoomFactor,"px")}},{key:"setPosition",value:function(e,t,n){var s=-(this.imgEl.clientWidth*e-this.el.clientWidth/2),i=-(this.imgEl.clientHeight*t-this.el.clientHeight/2),o=-(this.imgEl.clientWidth-this.el.clientWidth),r=-(this.imgEl.clientHeight-this.el.clientHeight);if(this.el.parentElement===this.settings.inlineContainer){var a=window.pageXOffset,l=window.pageYOffset,c=n.left+e*n.width-this.el.clientWidth/2+this.settings.inlineOffsetX+a,d=n.top+t*n.height-this.el.clientHeight/2+this.settings.inlineOffsetY+l;this.settings.containInline&&(c<n.left+a?c=n.left+a:c+this.el.clientWidth>n.left+n.width+a&&(c=n.left+n.width-this.el.clientWidth+a),d<n.top+l?d=n.top+l:d+this.el.clientHeight>n.top+n.height+l&&(d=n.top+n.height-this.el.clientHeight+l)),this.el.style.left="".concat(c,"px"),this.el.style.top="".concat(d,"px")}this.settings.showWhitespaceAtEdges||(0<s?s=0:s<o&&(s=o),0<i?i=0:i<r&&(i=r)),this.imgEl.style.transform="translate(".concat(s,"px, ").concat(i,"px)"),this.imgEl.style.webkitTransform="translate(".concat(s,"px, ").concat(i,"px)")}},{key:"_removeListenersAndResetClasses",value:function(){this.el.removeEventListener("animationend",this._completeShow,!1),this.el.removeEventListener("animationend",this._completeHide,!1),this.el.removeEventListener("webkitAnimationEnd",this._completeShow,!1),this.el.removeEventListener("webkitAnimationEnd",this._completeHide,!1),Object(x.removeClasses)(this.el,this.openClasses),Object(x.removeClasses)(this.el,this.closingClasses)}},{key:"show",value:function(e,t,n){this._removeListenersAndResetClasses(),this.isShowing=!0,Object(x.addClasses)(this.el,this.openClasses),Object(x.addClasses)(this.el,this.loadingClasses),this.imgEl.addEventListener("load",this._handleLoad,!1),this._setImageURL(e),this._setImageSize(t,n),this._isInline?this._showInline():this._showInContainer(),r&&(this.el.addEventListener("animationend",this._completeShow,!1),this.el.addEventListener("webkitAnimationEnd",this._completeShow,!1),Object(x.addClasses)(this.el,this.openingClasses))}},{key:"_showInline",value:function(){this.settings.inlineContainer.appendChild(this.el),Object(x.addClasses)(this.el,this.inlineClasses)}},{key:"_showInContainer",value:function(){this.settings.container.style.display="block",this.settings.container.appendChild(this.el)}},{key:"hide",value:function(){this._removeListenersAndResetClasses(),this.isShowing=!1,r?(this.el.addEventListener("animationend",this._completeHide,!1),this.el.addEventListener("webkitAnimationEnd",this._completeHide,!1),Object(x.addClasses)(this.el,this.closingClasses)):(Object(x.removeClasses)(this.el,this.openClasses),Object(x.removeClasses)(this.el,this.inlineClasses))}},{key:"_isInline",get:function(){var e=this.settings.inline;return!0===e||"number"==typeof e&&window.innerWidth<=e}}]),w}()},"./src/assets/drift-zoom/src/js/injectBaseStylesheet.js":
-/*!**************************************************************!*\
-  !*** ./src/assets/drift-zoom/src/js/injectBaseStylesheet.js ***!
-  \**************************************************************/
-/*! exports provided: default */function(e,t,n){"use strict";n.r(t),n.d(t,"default",function(){return i});var s="\n@keyframes noop {\n  0% { zoom: 1; }\n}\n\n@-webkit-keyframes noop {\n  0% { zoom: 1; }\n}\n\n.drift-zoom-pane.drift-open {\n  display: block;\n}\n\n.drift-zoom-pane.drift-opening, .drift-zoom-pane.drift-closing {\n  animation: noop 1ms;\n  -webkit-animation: noop 1ms;\n}\n\n.drift-zoom-pane {\n  position: absolute;\n  overflow: hidden;\n  width: 100%;\n  height: 100%;\n  top: 0;\n  left: 0;\n  pointer-events: none;\n}\n\n.drift-zoom-pane-loader {\n  display: none;\n}\n\n.drift-zoom-pane img {\n  position: absolute;\n  display: block;\n  max-width: none;\n  max-height: none;\n}\n\n.drift-bounding-box {\n  position: absolute;\n  pointer-events: none;\n}\n";function i(){if(!document.querySelector(".drift-base-styles")){var e=document.createElement("style");e.type="text/css",e.classList.add("drift-base-styles"),e.appendChild(document.createTextNode(s));var t=document.head;t.insertBefore(e,t.firstChild)}}},"./src/assets/drift-zoom/src/js/util/dom.js":
-/*!**************************************************!*\
-  !*** ./src/assets/drift-zoom/src/js/util/dom.js ***!
-  \**************************************************/
-/*! exports provided: isDOMElement, addClasses, removeClasses */function(e,t,n){"use strict";function s(e){return(s="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e})(e)}n.r(t),n.d(t,"isDOMElement",function(){return o}),n.d(t,"addClasses",function(){return r}),n.d(t,"removeClasses",function(){return a});var i="object"===("undefined"==typeof HTMLElement?"undefined":s(HTMLElement));function o(e){return i?e instanceof HTMLElement:e&&"object"===s(e)&&null!==e&&1===e.nodeType&&"string"==typeof e.nodeName}function r(t,e){e.forEach(function(e){t.classList.add(e)})}function a(t,e){e.forEach(function(e){t.classList.remove(e)})}},"./src/assets/drift-zoom/src/js/util/throwIfMissing.js":
-/*!*************************************************************!*\
-  !*** ./src/assets/drift-zoom/src/js/util/throwIfMissing.js ***!
-  \*************************************************************/
-/*! exports provided: default */function(e,t,n){"use strict";function s(){throw new Error("Missing parameter")}n.r(t),n.d(t,"default",function(){return s})},"./src/assets/svg-icons/arrow-down-s-fill.svg":
-/*!****************************************************!*\
-  !*** ./src/assets/svg-icons/arrow-down-s-fill.svg ***!
-  \****************************************************/
-/*! no static exports found */function(e,t){e.exports="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PGc+CiAgICAgICAgPHBhdGggZmlsbD0ibm9uZSIgZD0iTTAgMGgyNHYyNEgweiIvPgogICAgICAgIDxwYXRoIGQ9Ik0xMiAxNmwtNi02aDEyeiIvPgogICAgPC9nPgo8L3N2Zz4="},"./src/assets/svg-icons/arrow-down-s-line.svg":
-/*!****************************************************!*\
-  !*** ./src/assets/svg-icons/arrow-down-s-line.svg ***!
-  \****************************************************/
-/*! no static exports found */function(e,t){e.exports="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PGc+CiAgICAgICAgPHBhdGggZmlsbD0ibm9uZSIgZD0iTTAgMGgyNHYyNEgweiIvPgogICAgICAgIDxwYXRoIGQ9Ik0xMiAxMy4xNzJsNC45NS00Ljk1IDEuNDE0IDEuNDE0TDEyIDE2IDUuNjM2IDkuNjM2IDcuMDUgOC4yMjJ6Ii8+CiAgICA8L2c+Cjwvc3ZnPg=="},"./src/assets/svg-icons/arrow-left-s-fill.svg":
-/*!****************************************************!*\
-  !*** ./src/assets/svg-icons/arrow-left-s-fill.svg ***!
-  \****************************************************/
-/*! no static exports found */function(e,t){e.exports="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PGc+CiAgICAgICAgPHBhdGggZmlsbD0ibm9uZSIgZD0iTTAgMGgyNHYyNEgweiIvPgogICAgICAgIDxwYXRoIGQ9Ik04IDEybDYtNnYxMnoiLz4KICAgIDwvZz4KPC9zdmc+"},"./src/assets/svg-icons/arrow-left-s-line.svg":
-/*!****************************************************!*\
-  !*** ./src/assets/svg-icons/arrow-left-s-line.svg ***!
-  \****************************************************/
-/*! no static exports found */function(e,t){e.exports="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PGc+CiAgICAgICAgPHBhdGggZmlsbD0ibm9uZSIgZD0iTTAgMGgyNHYyNEgweiIvPgogICAgICAgIDxwYXRoIGQ9Ik0xMC44MjggMTJsNC45NSA0Ljk1LTEuNDE0IDEuNDE0TDggMTJsNi4zNjQtNi4zNjQgMS40MTQgMS40MTR6Ii8+CiAgICA8L2c+Cjwvc3ZnPg=="},"./src/assets/svg-icons/arrow-right-s-fill.svg":
-/*!*****************************************************!*\
-  !*** ./src/assets/svg-icons/arrow-right-s-fill.svg ***!
-  \*****************************************************/
-/*! no static exports found */function(e,t){e.exports="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PGc+CiAgICAgICAgPHBhdGggZmlsbD0ibm9uZSIgZD0iTTAgMGgyNHYyNEgweiIvPgogICAgICAgIDxwYXRoIGQ9Ik0xNiAxMmwtNiA2VjZ6Ii8+CiAgICA8L2c+Cjwvc3ZnPg=="},"./src/assets/svg-icons/arrow-right-s-line.svg":
-/*!*****************************************************!*\
-  !*** ./src/assets/svg-icons/arrow-right-s-line.svg ***!
-  \*****************************************************/
-/*! no static exports found */function(e,t){e.exports="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PGc+CiAgICAgICAgPHBhdGggZmlsbD0ibm9uZSIgZD0iTTAgMGgyNHYyNEgweiIvPgogICAgICAgIDxwYXRoIGQ9Ik0xMy4xNzIgMTJsLTQuOTUtNC45NSAxLjQxNC0xLjQxNEwxNiAxMmwtNi4zNjQgNi4zNjQtMS40MTQtMS40MTR6Ii8+CiAgICA8L2c+Cjwvc3ZnPg=="},"./src/assets/svg-icons/arrow-up-s-fill.svg":
-/*!**************************************************!*\
-  !*** ./src/assets/svg-icons/arrow-up-s-fill.svg ***!
-  \**************************************************/
-/*! no static exports found */function(e,t){e.exports="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PGc+CiAgICAgICAgPHBhdGggZmlsbD0ibm9uZSIgZD0iTTAgMGgyNHYyNEgweiIvPgogICAgICAgIDxwYXRoIGQ9Ik0xMiA4bDYgNkg2eiIvPgogICAgPC9nPgo8L3N2Zz4="},"./src/assets/svg-icons/arrow-up-s-line.svg":
-/*!**************************************************!*\
-  !*** ./src/assets/svg-icons/arrow-up-s-line.svg ***!
-  \**************************************************/
-/*! no static exports found */function(e,t){e.exports="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PGc+CiAgICAgICAgPHBhdGggZmlsbD0ibm9uZSIgZD0iTTAgMGgyNHYyNEgweiIvPgogICAgICAgIDxwYXRoIGQ9Ik0xMiAxMC44MjhsLTQuOTUgNC45NS0xLjQxNC0xLjQxNEwxMiA4bDYuMzY0IDYuMzY0LTEuNDE0IDEuNDE0eiIvPgogICAgPC9nPgo8L3N2Zz4="},"./src/components/ProductZoomer.vue":
-/*!******************************************!*\
-  !*** ./src/components/ProductZoomer.vue ***!
-  \******************************************/
-/*! exports provided: default */function(e,t,n){"use strict";n.r(t);var s=n(/*! ./ProductZoomer.vue?vue&type=template&id=033bd07e&scoped=true& */"./src/components/ProductZoomer.vue?vue&type=template&id=033bd07e&scoped=true&"),i=n(/*! ./ProductZoomer.vue?vue&type=script&lang=js& */"./src/components/ProductZoomer.vue?vue&type=script&lang=js&"),o=(n(/*! ./ProductZoomer.vue?vue&type=style&index=0&lang=css& */"./src/components/ProductZoomer.vue?vue&type=style&index=0&lang=css&"),n(/*! ./ProductZoomer.vue?vue&type=style&index=1&id=033bd07e&scoped=true&lang=css& */"./src/components/ProductZoomer.vue?vue&type=style&index=1&id=033bd07e&scoped=true&lang=css&"),n(/*! ../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */"./node_modules/vue-loader/lib/runtime/componentNormalizer.js")),r=Object(o.default)(i.default,s.render,s.staticRenderFns,!1,null,"033bd07e",null);t.default=r.exports},"./src/components/ProductZoomer.vue?vue&type=script&lang=js&":
-/*!*******************************************************************!*\
-  !*** ./src/components/ProductZoomer.vue?vue&type=script&lang=js& ***!
-  \*******************************************************************/
-/*! exports provided: default */function(e,t,n){"use strict";n.r(t);var s=n(/*! -!../../node_modules/babel-loader/lib??ref--1!../../node_modules/vue-loader/lib??vue-loader-options!./ProductZoomer.vue?vue&type=script&lang=js& */"./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./src/components/ProductZoomer.vue?vue&type=script&lang=js&");t.default=s.default},"./src/components/ProductZoomer.vue?vue&type=style&index=0&lang=css&":
-/*!***************************************************************************!*\
-  !*** ./src/components/ProductZoomer.vue?vue&type=style&index=0&lang=css& ***!
-  \***************************************************************************/
-/*! no static exports found */function(e,t,n){"use strict";n.r(t);var s=n(/*! -!../../node_modules/vue-style-loader!../../node_modules/css-loader/dist/cjs.js??ref--2-1!../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../node_modules/vue-loader/lib??vue-loader-options!./ProductZoomer.vue?vue&type=style&index=0&lang=css& */"./node_modules/vue-style-loader/index.js!./node_modules/css-loader/dist/cjs.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./src/components/ProductZoomer.vue?vue&type=style&index=0&lang=css&"),i=n.n(s);for(var o in s)"default"!==o&&function(e){n.d(t,e,function(){return s[e]})}(o);t.default=i.a},"./src/components/ProductZoomer.vue?vue&type=style&index=1&id=033bd07e&scoped=true&lang=css&":
-/*!***************************************************************************************************!*\
-  !*** ./src/components/ProductZoomer.vue?vue&type=style&index=1&id=033bd07e&scoped=true&lang=css& ***!
-  \***************************************************************************************************/
-/*! no static exports found */function(e,t,n){"use strict";n.r(t);var s=n(/*! -!../../node_modules/vue-style-loader!../../node_modules/css-loader/dist/cjs.js??ref--2-1!../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../node_modules/vue-loader/lib??vue-loader-options!./ProductZoomer.vue?vue&type=style&index=1&id=033bd07e&scoped=true&lang=css& */"./node_modules/vue-style-loader/index.js!./node_modules/css-loader/dist/cjs.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./src/components/ProductZoomer.vue?vue&type=style&index=1&id=033bd07e&scoped=true&lang=css&"),i=n.n(s);for(var o in s)"default"!==o&&function(e){n.d(t,e,function(){return s[e]})}(o);t.default=i.a},"./src/components/ProductZoomer.vue?vue&type=template&id=033bd07e&scoped=true&":
-/*!*************************************************************************************!*\
-  !*** ./src/components/ProductZoomer.vue?vue&type=template&id=033bd07e&scoped=true& ***!
-  \*************************************************************************************/
-/*! exports provided: render, staticRenderFns */function(e,t,n){"use strict";n.r(t);var s=n(/*! -!../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../node_modules/vue-loader/lib??vue-loader-options!./ProductZoomer.vue?vue&type=template&id=033bd07e&scoped=true& */"./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/components/ProductZoomer.vue?vue&type=template&id=033bd07e&scoped=true&");n.d(t,"render",function(){return s.render}),n.d(t,"staticRenderFns",function(){return s.staticRenderFns})},"./src/publish.js":
-/*!************************!*\
-  !*** ./src/publish.js ***!
-  \************************/
-/*! exports provided: default */function(e,t,n){"use strict";n.r(t);var s=n(/*! ./components/ProductZoomer */"./src/components/ProductZoomer.vue"),i={install:function(e,t){e.component(s.default.name,s.default)}};t.default=i}})});
-
-/***/ }),
-
 /***/ "./node_modules/vue/dist/vue.esm-bundler.js":
 /*!**************************************************!*\
   !*** ./node_modules/vue/dist/vue.esm-bundler.js ***!
@@ -18601,6 +20553,17 @@ function compileToFunction(template, options) {
 
 
 
+/***/ }),
+
+/***/ "./node_modules/axios/package.json":
+/*!*****************************************!*\
+  !*** ./node_modules/axios/package.json ***!
+  \*****************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = JSON.parse('{"_args":[["axios@0.21.4","C:\\\\xampp\\\\htdocs\\\\kahioja-version-2"]],"_development":true,"_from":"axios@0.21.4","_id":"axios@0.21.4","_inBundle":false,"_integrity":"sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==","_location":"/axios","_phantomChildren":{},"_requested":{"type":"version","registry":true,"raw":"axios@0.21.4","name":"axios","escapedName":"axios","rawSpec":"0.21.4","saveSpec":null,"fetchSpec":"0.21.4"},"_requiredBy":["#DEV:/"],"_resolved":"https://registry.npmjs.org/axios/-/axios-0.21.4.tgz","_spec":"0.21.4","_where":"C:\\\\xampp\\\\htdocs\\\\kahioja-version-2","author":{"name":"Matt Zabriskie"},"browser":{"./lib/adapters/http.js":"./lib/adapters/xhr.js"},"bugs":{"url":"https://github.com/axios/axios/issues"},"bundlesize":[{"path":"./dist/axios.min.js","threshold":"5kB"}],"dependencies":{"follow-redirects":"^1.14.0"},"description":"Promise based HTTP client for the browser and node.js","devDependencies":{"coveralls":"^3.0.0","es6-promise":"^4.2.4","grunt":"^1.3.0","grunt-banner":"^0.6.0","grunt-cli":"^1.2.0","grunt-contrib-clean":"^1.1.0","grunt-contrib-watch":"^1.0.0","grunt-eslint":"^23.0.0","grunt-karma":"^4.0.0","grunt-mocha-test":"^0.13.3","grunt-ts":"^6.0.0-beta.19","grunt-webpack":"^4.0.2","istanbul-instrumenter-loader":"^1.0.0","jasmine-core":"^2.4.1","karma":"^6.3.2","karma-chrome-launcher":"^3.1.0","karma-firefox-launcher":"^2.1.0","karma-jasmine":"^1.1.1","karma-jasmine-ajax":"^0.1.13","karma-safari-launcher":"^1.0.0","karma-sauce-launcher":"^4.3.6","karma-sinon":"^1.0.5","karma-sourcemap-loader":"^0.3.8","karma-webpack":"^4.0.2","load-grunt-tasks":"^3.5.2","minimist":"^1.2.0","mocha":"^8.2.1","sinon":"^4.5.0","terser-webpack-plugin":"^4.2.3","typescript":"^4.0.5","url-search-params":"^0.10.0","webpack":"^4.44.2","webpack-dev-server":"^3.11.0"},"homepage":"https://axios-http.com","jsdelivr":"dist/axios.min.js","keywords":["xhr","http","ajax","promise","node"],"license":"MIT","main":"index.js","name":"axios","repository":{"type":"git","url":"git+https://github.com/axios/axios.git"},"scripts":{"build":"NODE_ENV=production grunt build","coveralls":"cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js","examples":"node ./examples/server.js","fix":"eslint --fix lib/**/*.js","postversion":"git push && git push --tags","preversion":"npm test","start":"node ./sandbox/server.js","test":"grunt test","version":"npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json"},"typings":"./index.d.ts","unpkg":"dist/axios.min.js","version":"0.21.4"}');
+
 /***/ })
 
 /******/ 	});
@@ -18662,18 +20625,6 @@ function compileToFunction(template, options) {
 /******/ 				}
 /******/ 			}
 /******/ 			return result;
-/******/ 		};
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/compat get default export */
-/******/ 	(() => {
-/******/ 		// getDefaultExport function for compatibility with non-harmony modules
-/******/ 		__webpack_require__.n = (module) => {
-/******/ 			var getter = module && module.__esModule ?
-/******/ 				() => (module['default']) :
-/******/ 				() => (module);
-/******/ 			__webpack_require__.d(getter, { a: getter });
-/******/ 			return getter;
 /******/ 		};
 /******/ 	})();
 /******/ 	
