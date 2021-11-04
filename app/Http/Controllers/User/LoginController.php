@@ -42,7 +42,8 @@ class LoginController extends Controller
           }
 
           // Login as User
-          return redirect()->route('front.index');
+          $request->session()->flash('flash', 'User successfully created.');
+          return response()->json('Login Successful');
       }
 
         // if unsuccessful, then redirect back to the login with the form data

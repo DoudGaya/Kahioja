@@ -13,6 +13,7 @@
                 <div class="mt-4 font-bold underline">
                     {{ callback }}
                 </div>
+                <div v-if="isLoading" class="loader mx-auto"></div>
                 <!-- Login Form  -->
                 <div v-show="displayLoginForm">
                     <div class="my-4">
@@ -125,7 +126,8 @@ export default {
             displayForgotPasswordForm: false,
             loginEmail: '',
             loginPassword: '',
-            callback: ''
+            callback: '',
+            isLoading: false
         }
     },
     methods:{
@@ -152,6 +154,9 @@ export default {
             this.displaySignUpForm = false
         },
         loginUser(){
+            
+            this.isLoading = true 
+
             if(this.loginEmail !== ''){
                 if(this.loginPassword !== ''){
                     axios.post('/login', {
@@ -160,7 +165,15 @@ export default {
                     }).then(response => {
                         this.loginEmail = '',
                         this.loginPassword = '',
+
+                        this.isLoading = false
+
                         this.callback = response.data
+
+                        setTimeout(()=>{
+                            window.location = '/'
+                        }, 3000)
+
                     }).catch(error => {
                         console.log(error)
                     })
@@ -177,3 +190,23 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+.loader {
+  border: 16px solid #f3f3f3;
+  border-top: 16px solid #3498db;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+</style>
