@@ -17134,7 +17134,10 @@ __webpack_require__.r(__webpack_exports__);
   name: 'LoginComponent',
   data: function data() {
     return {
-      displayLogin: true
+      displayLogin: true,
+      displayLoginForm: true,
+      displaySignUpForm: false,
+      displayForgotPasswordForm: false
     };
   },
   methods: {
@@ -17144,6 +17147,21 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         this.displayLogin = true;
       }
+    },
+    showLoginForm: function showLoginForm() {
+      this.displayLoginForm = true;
+      this.displaySignUpForm = false;
+      this.displayForgotPasswordForm = false;
+    },
+    showSignUpForm: function showSignUpForm() {
+      this.displaySignUpForm = true;
+      this.displayLoginForm = false;
+      this.displayForgotPasswordForm = false;
+    },
+    showForgotPasswordForm: function showForgotPasswordForm() {
+      this.displayForgotPasswordForm = true;
+      this.displayLoginForm = false;
+      this.displaySignUpForm = false;
     }
   },
   mounted: function mounted() {
@@ -17414,16 +17432,128 @@ var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 );
 
 var _hoisted_5 = [_hoisted_4];
+var _hoisted_6 = {
+  id: "login-body",
+  "class": "py-6 text-center px-16"
+};
 
-var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div id=\"login-body\" class=\"py-6 text-center px-16\"><div><svg class=\"mx-auto\" width=\"37\" height=\"43\" viewBox=\"0 0 37 43\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M29.9105 40.487C32.1742 40.487 33.9928 38.6489 33.9928 36.4046C33.9928 34.1603 32.1548 32.3223 29.9105 32.3223C27.6468 32.3223 25.8281 34.1603 25.8281 36.4046C25.8281 38.6489 27.6468 40.487 29.9105 40.487Z\" fill=\"#F37022\"></path><path d=\"M11.8011 42.3825C14.0648 42.3825 15.8835 40.5444 15.8835 38.3001C15.8835 36.0364 14.0454 34.2178 11.8011 34.2178C9.55678 34.2178 7.71875 36.0558 7.71875 38.3001C7.71875 40.5444 9.55678 42.3825 11.8011 42.3825Z\" fill=\"#F37022\"></path><path d=\"M30.0082 30.988L9.22883 33.1742C5.08843 33.5999 1.39303 30.601 0.948035 26.48L0 17.522L35.7545 13.7686L36.7025 22.7265C37.1668 26.8669 34.1486 30.5623 30.0082 30.988Z\" fill=\"#F37022\"></path><path d=\"M5.30474 13.5548C4.64692 6.84119 9.59991 0.766028 16.3135 0.0695131C23.0272 -0.64635 29.1217 4.2486 29.8762 10.9816L25.6004 11.4459C25.1167 7.05401 21.1311 3.86165 16.7392 4.34534C12.3473 4.80968 9.11622 8.7566 9.54187 13.1485L5.30474 13.5548Z\" fill=\"#F37022\"></path></svg></div><div class=\"my-4\"> Log in into your account </div><div class=\"my-4\"><div><input class=\"border border-gray-300 rounded py-2 px-6 w-full my-2 focus:outline-none\" type=\"text\" name=\"email\" id=\"email\" placeholder=\"Email Address\"></div><div><input class=\"border border-gray-300 rounded py-2 px-6 w-full my-2 focus:outline-none\" type=\"password\" name=\"password\" id=\"password\" placeholder=\"Password\"></div></div><div class=\"flex justify-end my-4\"> Forgot Password? </div><div class=\"text-left my-4\"><span><input type=\"checkbox\" name=\"signed\"></span><span> Keep me signed in </span></div><div class=\"my-8\"><button class=\"mx-auto btn-yus rounded-full w-full py-2 text-white\"> Login </button></div><div class=\"my-4\"> Do not have an account? </div><div class=\"my-8\"><button class=\"mx-auto btn-yus-conti-shopping rounded-full w-full py-2 text-white\"> Create account </button></div></div>", 1);
+var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div><svg class=\"mx-auto\" width=\"37\" height=\"43\" viewBox=\"0 0 37 43\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M29.9105 40.487C32.1742 40.487 33.9928 38.6489 33.9928 36.4046C33.9928 34.1603 32.1548 32.3223 29.9105 32.3223C27.6468 32.3223 25.8281 34.1603 25.8281 36.4046C25.8281 38.6489 27.6468 40.487 29.9105 40.487Z\" fill=\"#F37022\"></path><path d=\"M11.8011 42.3825C14.0648 42.3825 15.8835 40.5444 15.8835 38.3001C15.8835 36.0364 14.0454 34.2178 11.8011 34.2178C9.55678 34.2178 7.71875 36.0558 7.71875 38.3001C7.71875 40.5444 9.55678 42.3825 11.8011 42.3825Z\" fill=\"#F37022\"></path><path d=\"M30.0082 30.988L9.22883 33.1742C5.08843 33.5999 1.39303 30.601 0.948035 26.48L0 17.522L35.7545 13.7686L36.7025 22.7265C37.1668 26.8669 34.1486 30.5623 30.0082 30.988Z\" fill=\"#F37022\"></path><path d=\"M5.30474 13.5548C4.64692 6.84119 9.59991 0.766028 16.3135 0.0695131C23.0272 -0.64635 29.1217 4.2486 29.8762 10.9816L25.6004 11.4459C25.1167 7.05401 21.1311 3.86165 16.7392 4.34534C12.3473 4.80968 9.11622 8.7566 9.54187 13.1485L5.30474 13.5548Z\" fill=\"#F37022\"></path></svg></div>", 1);
 
+var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "my-4"
+}, " Log in into your account ", -1
+/* HOISTED */
+);
+
+var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "my-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  "class": "border border-gray-300 rounded py-2 px-6 w-full my-2 focus:outline-none",
+  type: "text",
+  name: "email",
+  id: "email",
+  placeholder: "Email Address"
+})]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  "class": "border border-gray-300 rounded py-2 px-6 w-full my-2 focus:outline-none",
+  type: "password",
+  name: "password",
+  id: "password",
+  placeholder: "Password"
+})])], -1
+/* HOISTED */
+);
+
+var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "text-left my-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  type: "checkbox",
+  name: "signed"
+})]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, " Keep me signed in ")], -1
+/* HOISTED */
+);
+
+var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "my-8"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  "class": "mx-auto btn-yus rounded-full w-full py-2 text-white"
+}, " Login ")], -1
+/* HOISTED */
+);
+
+var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  "class": "mx-auto btn-yus-conti-shopping rounded-full w-full py-2 text-white"
+}, " Create account ", -1
+/* HOISTED */
+);
+
+var _hoisted_13 = [_hoisted_12];
+
+var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"my-4\"> Welcome! Create an account </div><div class=\"my-4\"><div><input class=\"border border-gray-300 rounded py-2 px-6 w-full my-2 focus:outline-none\" type=\"text\" name=\"name\" id=\"name\" placeholder=\"Full Name\"></div><div><input class=\"border border-gray-300 rounded py-2 px-6 w-full my-2 focus:outline-none\" type=\"text\" name=\"email\" id=\"email\" placeholder=\"Email Address\"></div><div><input class=\"border border-gray-300 rounded py-2 px-6 w-full my-2 focus:outline-none\" type=\"password\" name=\"password\" id=\"password\" placeholder=\"Password\"></div></div><div class=\"text-left my-4\"><span><input type=\"checkbox\" name=\"signed\"></span><span> Keep me signed in </span></div><div class=\"my-8\"><button class=\"mx-auto btn-yus rounded-full w-full py-2 text-white\"> Create account </button></div>", 4);
+
+var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  "class": "mx-auto btn-yus-conti-shopping rounded-full w-full py-2 text-white"
+}, " Login ", -1
+/* HOISTED */
+);
+
+var _hoisted_19 = [_hoisted_18];
+
+var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"my-8\"> Enter the email address your register your account. We will send you a verification link to reset your account. </div><div class=\"my-4\"><div><input class=\"border border-gray-300 rounded py-2 px-6 w-full my-2 focus:outline-none\" type=\"text\" name=\"email\" id=\"email\" placeholder=\"Email Address\"></div></div><div class=\"my-8\"><button class=\"mx-auto btn-yus rounded-full w-full py-2 text-white\"> Submit </button></div>", 3);
+
+var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, "Remember your password?", -1
+/* HOISTED */
+);
+
+var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "ml-2"
+}, "Sign in", -1
+/* HOISTED */
+);
+
+var _hoisted_25 = [_hoisted_23, _hoisted_24];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
     onClick: _cache[0] || (_cache[0] = function ($event) {
       return $options.closeCart();
     }),
     "class": "cursor-pointer"
-  }, _hoisted_5)]), _hoisted_6])], 512
+  }, _hoisted_5)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [_hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Login Form  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_8, _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    onClick: _cache[1] || (_cache[1] = function ($event) {
+      return $options.showForgotPasswordForm();
+    }),
+    "class": "cursor-pointer flex justify-end my-4"
+  }, " Forgot Password? "), _hoisted_10, _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    onClick: _cache[2] || (_cache[2] = function ($event) {
+      return $options.showSignUpForm();
+    }),
+    "class": "my-4 cursor-pointer"
+  }, " Do not have an account? "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    onClick: _cache[3] || (_cache[3] = function ($event) {
+      return $options.showSignUpForm();
+    }),
+    "class": "my-8"
+  }, _hoisted_13)], 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.displayLoginForm]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Signup Form  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    onClick: _cache[4] || (_cache[4] = function ($event) {
+      return $options.showLoginForm();
+    }),
+    "class": "my-4 cursor-pointer"
+  }, " Already have an account? "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    onClick: _cache[5] || (_cache[5] = function ($event) {
+      return $options.showLoginForm();
+    }),
+    "class": "my-8"
+  }, _hoisted_19)], 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.displaySignUpForm]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Forgot Password Form  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    onClick: _cache[6] || (_cache[6] = function ($event) {
+      return $options.showLoginForm();
+    }),
+    "class": "my-4 cursor-pointer"
+  }, _hoisted_25)], 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.displayForgotPasswordForm]])])])], 512
   /* NEED_PATCH */
   )), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.displayLogin]]);
 }
