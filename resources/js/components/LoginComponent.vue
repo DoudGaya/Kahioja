@@ -20,10 +20,10 @@
                     </div>
                     <div class="my-4">
                         <div>
-                            <input v-model="loginEmail" class="border border-gray-300 rounded py-2 px-6 w-full my-2 focus:outline-none" type="text" name="email" id="loginEmail" placeholder="Email Address">
+                            <input required v-model="loginEmail" class="border border-gray-300 rounded py-2 px-6 w-full my-2 focus:outline-none" type="text" name="email" id="loginEmail" placeholder="Email Address">
                         </div>
                         <div>
-                            <input v-model="loginPassword" class="border border-gray-300 rounded py-2 px-6 w-full my-2 focus:outline-none" type="password" name="password" id="loginPassword" placeholder="Password">
+                            <input required v-model="loginPassword" class="border border-gray-300 rounded py-2 px-6 w-full my-2 focus:outline-none" type="password" name="password" id="loginPassword" placeholder="Password">
                         </div>
                     </div>
                     <div @click="showForgotPasswordForm()" class="cursor-pointer flex justify-end my-4">
@@ -158,7 +158,11 @@ export default {
                         email: this.loginEmail,
                         password: this.loginPassword
                     }).then(response => {
+                        this.loginEmail = '',
+                        this.loginPassword = '',
                         this.callback = response.data
+                    }).catch(error => {
+                        console.log(error)
                     })
                 }else{
                     this.callback = 'Password field empty'
