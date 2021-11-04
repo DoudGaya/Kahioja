@@ -36,9 +36,17 @@
     </head>
     <body>
         <!-- Nav  -->
-        <div id="navComponent">
-            <nav-component></nav-component>
-        </div>
+        @if(!Auth::guard('web')->check())
+            <script>window.authUser=null;</script>
+            <div id="navComponent">
+                <nav-component></nav-component>
+            </div>
+        @else
+            <script>window.authUser={!! json_encode(Auth::user()); !!};</script>
+            <div id="navComponent">
+                <nav-component></nav-component>
+            </div>
+        @endif 
         @yield('main')
         <!-- Footer  -->
         <div id="footer" class="mt-16 py-8">

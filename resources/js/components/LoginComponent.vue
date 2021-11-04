@@ -153,7 +153,7 @@ export default {
             this.displayLoginForm = false
             this.displaySignUpForm = false
         },
-        loginUser(){
+        async loginUser(){
             
             this.isLoading = true 
 
