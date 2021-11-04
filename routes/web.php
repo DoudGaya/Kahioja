@@ -43,3 +43,7 @@ Route::get('/', [FrontendController::class, 'index'])->name('front.index');
     // User Login
     Route::post('/login', [LoginController::class ,'login'])->name('user.login.submit');
     // User Login End
+
+    // User Logout
+    Route::get('/logout', [LoginController::class, 'logout'])->name('user-logout');
+    // User Logout Ends

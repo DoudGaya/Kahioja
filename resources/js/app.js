@@ -5,6 +5,7 @@ let navComponent = createApp({})
 navComponent.component('nav-component', require('./components/NavComponent.vue').default)
 navComponent.component('login-component', require('./components/LoginComponent.vue'))
 navComponent.component('cart-component', require('./components/CartComponent.vue'))
+navComponent.component('user-account-settings-component', require('./components/UserAccountSettingComponent.vue'))
 navComponent.mount('#navComponent')
 
 let productDetails = createApp({})

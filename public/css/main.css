@@ -201,6 +201,11 @@ body{
     right: 0px; 
 }
 
+#account-settings{
+    position: absolute;
+    left: 78%;
+}
+
 #cart-header, #login-header{
     background-color: #F37022;
     height: 65px;
