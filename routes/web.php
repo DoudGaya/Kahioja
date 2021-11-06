@@ -23,6 +23,9 @@ use App\Http\Controllers\User\LoginController;
 
 Route::get('/', [FrontendController::class, 'index'])->name('front.index');
 
+    // PRODCT AUTO SEARCH SECTION
+    Route::get('/autosearch/product/{slug}',[FrontendController::class, 'autosearch']);
+    // PRODCT AUTO SEARCH SECTION ENDS
 
     // PRODCT SECTION
     Route::get('/item/{slug}', [CatalogController::class, 'product'])->name('front.product');

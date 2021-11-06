@@ -24,14 +24,11 @@ body{
 }
 
 .search_box{
-    width: 100%;
+    width: 95%;
     height: 50px;
     border: 2px solid #F37022;
     box-sizing: border-box;
     border-radius: 58.6832px;
-    background-image: url('../images/search-2.png');
-    background-repeat: no-repeat;
-    background-position: right center;
 }
 
 .category{
