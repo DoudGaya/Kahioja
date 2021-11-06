@@ -44,7 +44,7 @@
         @else
             <script> window.authUser = {!! json_encode(Auth::user()); !!} </script>        
         @endif 
-        
+
         @yield('main')
         <!-- Footer  -->
         <div id="footer" class="mt-16 py-8">
@@ -68,7 +68,7 @@
                     <h1>Useful Links</h1>
                     <div class="mt-3">
                         <ul id="footer-nav">
-                            <li class="py-2">
+                            <li class="py-4">
                                 <a href="#">All Categories</a>
                             </li>
                             <li class="py-2">
@@ -82,7 +82,7 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="flex mt-2">
+                    <div class="flex mt-3">
                         <img class="" src="{{ asset('images/instagram.png') }}" alt="Instagram Logo">
                         <img class="ml-3" src="{{ asset('images/facebook.png') }}" alt="Facebook Logo">
                         <img class="ml-3" src="{{ asset('images/twitter.png') }}" alt="Twitter Logo">
