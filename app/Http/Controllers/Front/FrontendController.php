@@ -121,19 +121,9 @@ class FrontendController extends Controller
     public function autosearch($slug)
     {
         if(mb_strlen($slug,'utf-8') > 1){
-            $search = ' '.$slug;
-            $prods = Product::where('status','=',1)->where('name', 'like', '%' . $search . '%')->orWhere('name', 'like', $slug . '%')->take(10)->get()->reject(function($item){
-
-                if($item->user_id != 0){
-                  if($item->user->is_vendor != 2){
-                    return true;
-                  }
-                }
-                    return false;
-            });
-
+            $search = '%'.$slug.'%';
+            $prods = Product::where('status','=',1)->where('name', 'like', $search)->orWhere('name', 'like', $slug . '%')->take(10)->get();
             return $response = \Response::json($prods, 200);
-
         }
         return "";
     }
