@@ -19378,7 +19378,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   name: 'searchBar',
   data: function data() {
     return {
-      callback: '',
+      callback: 'This is itThis is itThis is itThis is itThis is itThis is itThis is itThis is itThis is itThis is it',
       search_box: ''
     };
   },
@@ -19940,10 +19940,13 @@ __webpack_require__.r(__webpack_exports__);
 
 var _hoisted_1 = {
   id: "search_box",
-  "class": "col-span-3 w-full text-center flex items-center"
+  "class": "col-span-3 w-full text-center"
+};
+var _hoisted_2 = {
+  "class": "flex items-center"
 };
 
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
   "class": "relative -left-12 p-2 rounded-full",
   style: {
     "background-color": "#F37022"
@@ -19962,8 +19965,12 @@ var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 /* HOISTED */
 );
 
+var _hoisted_4 = {
+  id: "search-bar-callback",
+  "class": "text-left bg-white yus-shadow p-3"
+};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Search Box  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Search Box  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     onKeyup: _cache[0] || (_cache[0] = function ($event) {
       return $options.searchProduct();
     }),
@@ -19977,7 +19984,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     id: "search"
   }, null, 544
   /* HYDRATE_EVENTS, NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.search_box]]), _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.callback), 1
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.search_box]]), _hoisted_3]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.callback) + " " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.callback) + " " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.callback) + " " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.callback) + " " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.callback) + " " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.callback) + " " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.callback), 1
   /* TEXT */
   )])], 2112
   /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */

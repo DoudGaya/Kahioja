@@ -203,6 +203,13 @@ body{
     left: 78%;
 }
 
+#search-bar-callback{
+    position: absolute;
+    width: 38%;
+    left: 37%;
+    z-index: 100;
+}
+
 #cart-header, #login-header{
     background-color: #F37022;
     height: 65px;
@@ -219,8 +226,6 @@ body{
     max-height: 550px;
     overflow: auto;
 }
-
-
 
 #cart-body-time-arrived{
     height: 58px;
@@ -409,4 +414,8 @@ body{
 .product-description .not-active{
     border-bottom: 3px solid #E0E0E0;
     cursor: pointer;
+}
+
+.yus-shadow{
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
