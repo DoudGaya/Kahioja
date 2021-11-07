@@ -117,4 +117,23 @@ class FrontendController extends Controller
         $sale_products =  Product::where('sale','=',1)->where('status','=',1)->select($selectable)->orderBy('id','desc')->take(8)->get();
         return view('welcome',compact('best_products','top_products','hot_products','sale_products','ps','gs'));
 	}
+
+    public function autosearch($slug)
+    {
+        if(mb_strlen($slug,'utf-8') > 1){
+            $search = ' '.$slug;
+            $prods = Product::where('status','=',1)->where('name', 'like', '%' . $search . '%')->orWhere('name', 'like', $slug . '%')->take(10)->get()->reject(function($item){
+
+                if($item->user_id != 0){
+                  if($item->user->is_vendor != 2){
+                    return true;
+                  }
+                }
+                    return false;
+            });
+
+            return view('load.suggest',compact('prods','slug'));
+        }
+        return "";
+    }
 }

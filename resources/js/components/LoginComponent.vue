@@ -185,9 +185,9 @@ export default {
             }
         }
     },
-    mounted() {
-        console.log('Login component mounted.')
-    }
+    // mounted() {
+    //     console.log('Login component mounted.')
+    // }
 }
 </script>
 
