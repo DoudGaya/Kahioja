@@ -9,12 +9,17 @@
         </div>
         <div v-show="showCallBack" id="search-bar-callback" class="text-left bg-white yus-shadow p-3">
             <div v-if="isLoading" class="loader mx-auto"></div>
-            <div :key="product.id" v-for="product in products">
+            <div :key="product.id" v-for="product in products" class="text-sm">
                 <a :href="`/item/${product.slug}`">
-                    <img :src="`/images/thumbnails/${product.thumbnail}`" alt="">
-                    <div class="search-content" style="background-color:#fff; border:none;">
-                        <p>{{ product.name }} </p>
-                        <span style="font-size: 14px; font-weight:600; display:block;">{{ product.price }}</span>
+                    <div class="grid grid-cols-4 gap-2 border-b items-center">
+                        <div class="col-span-1">
+                            <img class="w-2/4" :src="`/images/thumbnails/${product.thumbnail}`" alt="">
+                        </div>
+                        <div class="col-span-3">
+                            <div><b>{{ product.name }}</b></div>
+                            <div>Price: {{ product.price }}</div>
+                            <div>Delivery Fee: {{ product.ship_fee }}</div>
+                        </div>
                     </div>
                 </a>
             </div>
@@ -43,8 +48,14 @@ export default {
                     slug: this.product
                 }).then(response => {
                     this.isLoading = false
+
+                    if(response.data.length == 0){
+                        this.showCallBack = false
+                    }
+
                     this.products = response.data
                     console.log(response.data)
+                
                 }).catch(error => {
                     console.log(error)
                 })
