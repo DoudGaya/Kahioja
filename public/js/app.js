@@ -19399,11 +19399,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 if (product.length > 2) {
                   _this.showCallBack = true;
                   _this.isLoading = true;
-                  axois.post("/autosearch/product/".concat(product), {
+                  axios.get("/autosearch/product/".concat(product), {
                     slug: _this.product
                   }).then(function (response) {
                     _this.isLoading = false;
                     _this.callback = response.data;
+                    console.log(response.data);
                   })["catch"](function (error) {
                     console.log(error);
                   });

@@ -132,7 +132,8 @@ class FrontendController extends Controller
                     return false;
             });
 
-            return view('load.suggest',compact('prods','slug'));
+            return $response = \Response::json($prods, 200);
+
         }
         return "";
     }

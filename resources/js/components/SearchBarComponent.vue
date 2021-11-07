@@ -31,11 +31,12 @@ export default {
             if(product.length > 2){
                 this.showCallBack = true
                 this.isLoading = true
-                axois.post(`/autosearch/product/${product}`, {
+                axios.get(`/autosearch/product/${product}`, {
                     slug: this.product
                 }).then(response => {
                     this.isLoading = false
                     this.callback = response.data
+                    console.log(response.data)
                 }).catch(error => {
                     console.log(error)
                 })
