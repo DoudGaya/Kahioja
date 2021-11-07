@@ -16,8 +16,8 @@
                             <img class="w-1/6" :src="`/images/thumbnails/${product.thumbnail}`" alt="">
                             <div class="flex-col">
                                 <div><b>{{ product.name }}</b></div>
-                                <div><b>Price</b>: {{ product.price }}</div>
-                                <div><b>Delivery Fee</b>: {{ (product.ship_fee != null) ? product.ship_fee: ' Free Delivery' }}</div>
+                                <div><b>Price</b>: ₦{{ product.price }}</div>
+                                <div><b>Delivery Fee</b>: {{ (product.ship_fee != null) ? `₦${product.ship_fee}`: ' Free Delivery' }}</div>
                             </div>
                         </div>
                     </div>

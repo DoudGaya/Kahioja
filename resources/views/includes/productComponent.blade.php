@@ -1,5 +1,5 @@
 <a href="{{ route('front.product', $prod->slug) }}">
-    <div class="bg-white rounded-lg px-4 my-4 cursor-pointer shadow-md">
+    <div class="bg-white rounded-lg px-4 my-4 cursor-pointer yus-shadow">
         <img class="w-64 mx-auto py-4" src="{{ $prod->thumbnail ? asset('/images/thumbnails/'.$prod->thumbnail):asset('/images/noimage.png') }}" :alt="{{ $prod->showName() }}">
         <!-- Product Details  -->
         <div class="py-3">
