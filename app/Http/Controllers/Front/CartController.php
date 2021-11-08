@@ -13,12 +13,7 @@ class CartController extends Controller
 {
     public function index(Request $request){
         $user_id = Auth::user()->id;
-        // $bag = Bag::where('user_id','=',$user_id)->get();
-        $bag = DB::table('bags')
-                ->join('products','bags.product_id', '=', 'products.id')
-                ->where('bags.paid','=','unpaid')
-                ->where('bags.user_id','=',$user_id)
-                ->get();
+        $bag = DB::select("SELECT DISTINCT bags.id as 'bagId', bags.quantity, products.name, products.price, products.ship_fee, products.photo, bags.quantity * products.price as 'subTotal' FROM bags, products, users WHERE bags.product_id = products.id && bags.user_id = 98 ORDER BY bags.id");
         return $response = \Response::json($bag, 200);
     }
 }

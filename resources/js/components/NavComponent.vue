@@ -103,7 +103,7 @@ export default {
     },
     computed: {
         subTotal(){
-            return this.cart.reduce((sum, {price}) => sum + price, 0)
+            return this.cart.reduce((sum, {subTotal}) => sum + subTotal, 0)
         },
         deliveryFee(){
             return this.cart.reduce((sum, {ship_fee}) => sum + ship_fee, 0)
