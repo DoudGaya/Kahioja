@@ -13,8 +13,10 @@
                 <a :href="`/item/${product.slug}`">
                     <div class="flex px-3">
                         <div class="flex items-center">
-                            <img class="w-1/6" :src="`/images/thumbnails/${product.thumbnail}`" alt="">
-                            <div class="flex-col">
+                            <div>
+                                <img style="width:60px; height:60px" :src="`/images/thumbnails/${product.thumbnail}`" alt="">
+                            </div>
+                            <div class="flex-col ml-3">
                                 <div><b>{{ product.name }}</b></div>
                                 <div><b>Price</b>: ₦{{ product.price }}</div>
                                 <div><b>Delivery Fee</b>: {{ (product.ship_fee != null) ? `₦${product.ship_fee}`: ' Free Delivery' }}</div>
