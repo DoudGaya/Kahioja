@@ -138,7 +138,9 @@ export default {
     name: 'CartComponent',
     data(){
         return{
-            displayCart: true
+            displayCart: true,
+            cart: [],
+            authUser: window.authUser
         }
     },
     methods:{
@@ -150,8 +152,14 @@ export default {
             }
         }
     },
-    mounted() {
-        console.log('Cart component mounted.')
+    async created(){
+        axios.get(`/cart`,{
+            user_id: this.authUser.id
+        }).then(response => {
+            console.log(response.data)
+        }).catch(error => {
+            console.log(error)
+        })
     }
 }
 </script>
