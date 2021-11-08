@@ -59,7 +59,7 @@ export default {
     props: ['account'],
     data(){
         return{
-            displayCart: false,
+            displayCart: true,
             displayLogin: false,
             displayAccountSettings: false,
             authUser: window.authUser,
