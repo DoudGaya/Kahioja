@@ -44,14 +44,14 @@
                 </div>
 
                 <!-- Cart Total  -->
-                <div :key="product.product_id" v-for="product in cart" id="cart-total" class="px-16 py-5 my-5">
+                <div id="cart-total" class="px-16 py-5 my-5">
                     <div class="grid grid-cols-2 gap-6 py-1 w-full font-bold">
                         <div>Subtotal <span class="font-normal">(all products)</span></div>
                         <div class="text-right">₦{{ subTotal }}</div>
                         <div>Delivery Fee</div>
-                        <div class="text-right">₦400</div>
+                        <div class="text-right">₦{{ deliveryFee }}</div>
                         <div>Estimated Total</div>
-                        <div class="text-right">₦140,400</div>
+                        <div class="text-right">₦{{ estimatedTotal }}</div>
                     </div>
                 </div>
             </div>
@@ -59,8 +59,8 @@
             <div id="cart-checkout" class="px-16 py-4 mt-5">
                 <div class="grid grid-cols-2 gap-6 py-1 w-full font-bold">
                     <div>Estimated Product(s) Total)</div>
-                    <div class="text-right text-xl">₦140,400</div>
-                    <div>
+                    <div class="text-right text-xl">₦{{ estimatedTotal }}</div>
+                    <div @click="closeCart()">
                         <button class="mx-auto btn-yus-conti-shopping rounded-full w-full py-2 text-white">
                             Continue Shopping
                         </button>
@@ -79,6 +79,7 @@
 <script>
 export default {
     name: 'CartComponent',
+    emits:['cartItemsNo','cartEstimatedTotal'],
     data(){
         return{
             displayCart: true,
@@ -108,6 +109,12 @@ export default {
     computed: {
         subTotal(){
             return this.cart.reduce((sum, {price}) => sum + price, 0)
+        },
+        deliveryFee(){
+            return this.cart.reduce((sum, {ship_fee}) => sum + ship_fee, 0)
+        },
+        estimatedTotal(){
+            return this.subTotal + this.deliveryFee
         }
     }   
 }
