@@ -59,7 +59,7 @@ export default {
     props: ['account'],
     data(){
         return{
-            displayCart: true,
+            displayCart: false,
             displayLogin: false,
             displayAccountSettings: false,
             authUser: window.authUser,
@@ -103,10 +103,10 @@ export default {
     },
     computed: {
         subTotal(){
-            return this.cart.reduce((sum, {subTotal}) => sum + subTotal, 0)
+            return this.cart.reduce((sum, {subTotal}) => parseInt(sum + subTotal), 0)
         },
         deliveryFee(){
-            return this.cart.reduce((sum, {ship_fee}) => sum + ship_fee, 0)
+            return this.cart.reduce((sum, {ship_fee}) => parseInt(sum + ship_fee), 0)
         },
         estimatedTotal(){
             return this.subTotal + this.deliveryFee

@@ -12,7 +12,7 @@
                 <!-- <div id="cart-body-time-arrived" class="p-4 my-5">
                     This product arrives by 6th Oct, 2pm
                 </div> -->
-                <div v-if="cart.length > 0">
+                <div v-if="cart.length > 0" class="my-5">
                     <div :key="product.product_id" v-for="product in cart" id="cart-body-products" class="p-4">
                         <div class="grid grid-cols-3 gap-6">
                             <div id="cart-body-product-image">
@@ -35,9 +35,9 @@
                                     N{{ product.subTotal }}
                                 </div>
                                 <div id="cart-body-product-add" class="flex justify-between w-3/4 py-2 px-4 rounded-full mt-11">
-                                    <div>-</div>
-                                    <div>1</div>
-                                    <div>+</div>
+                                    <div class="cursor-pointer">-</div>
+                                    <div>{{ product.quantity }}</div>
+                                    <div class="cursor-pointer">+</div>
                                 </div>
                             </div>
                         </div>
@@ -124,10 +124,10 @@ export default {
     },
     computed: {
         subTotal(){
-            return this.cart.reduce((sum, {subTotal}) => sum + subTotal, 0)
+            return this.cart.reduce((sum, {subTotal}) => parseInt(sum + subTotal), 0)
         },
         deliveryFee(){
-            return this.cart.reduce((sum, {ship_fee}) => sum + ship_fee, 0)
+            return this.cart.reduce((sum, {ship_fee}) => parseInt(sum + ship_fee), 0)
         },
         estimatedTotal(){
             return this.subTotal + this.deliveryFee
