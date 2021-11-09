@@ -16,4 +16,17 @@ class CartController extends Controller
         $bag = DB::select("SELECT DISTINCT bags.id as 'bagId', bags.quantity, products.name, products.price, products.ship_fee, products.photo, bags.quantity * products.price as 'subTotal' FROM bags, products, users WHERE bags.product_id = products.id && bags.user_id = '$user_id' && bags.paid = 'unpaid' ORDER BY bags.id DESC");
         return $response = \Response::json($bag, 200);
     }
+
+    public function addbyone()
+    {     
+        return response()->json('hit');          
+    }  
+    
+    public function reducebyone(Request $request)
+    {
+        $bagId = $request->id;
+        $quantity = $request->quantity;
+        return response()->json($quantity);          
+        // return $response = \Response::json($bagId, 200);
+    }
 }

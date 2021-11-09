@@ -36,11 +36,11 @@
                                 </div>
                                 <div id="cart-body-product-add" class="flex justify-between w-3/4 py-2 px-4 rounded-full mt-11">
                                     <div class="cursor-pointer">
-                                       <button @click="minusProduct(product.bagId)"> - </button>
+                                       <button @click="minusProduct(product.bagId, product.quantity)"> - </button>
                                     </div>
                                     <div>{{ product.quantity }}</div>
                                     <div class="cursor-pointer">
-                                        <button @click="addProduct(product.bagId)">+</button>
+                                        <button @click="addProduct(product.bagId, product.quantity)">+</button>
                                     </div>
                                 </div>
                             </div>
@@ -105,6 +105,7 @@ export default {
         return{
             displayCart: true,
             cart: [],
+            test: 2323,
             authUser: window.authUser,
         }
     },
@@ -119,8 +120,15 @@ export default {
         })
     },
     methods:{
-        minusProduct(id){
-            console.log(id)
+        async minusProduct(id, quantity){
+            if(quantity > 1){
+                quantity--
+                axios.post(`/reducebyone/${id}/${quantity}`).then(response => {
+                    console.log(response.data)
+                }).catch(error => {
+                    console.log(error)
+                })
+            } 
         },
         addProduct(id){
             console.log(id)

@@ -24,12 +24,23 @@ use App\Http\Controllers\User\LoginController;
 
 Route::get('/', [FrontendController::class, 'index'])->name('front.index');
 
+    
+    // User Login
+    Route::post('/login', [LoginController::class ,'login'])->name('user.login.submit');
+    // User Login End
+
+    // User Logout
+    Route::get('/logout', [LoginController::class, 'logout'])->name('user-logout');
+    // User Logout Ends
+
     // PRODCT AUTO SEARCH SECTION
     Route::get('/autosearch/product/{slug}',[FrontendController::class, 'autosearch']);
     // PRODCT AUTO SEARCH SECTION ENDS
 
     // CART
     Route::get('/cart', [CartController::class, 'index']);
+    Route::get('/addbyone', [CartController::class, 'addbyone']);
+    Route::post('/reducebyone/{id}/{quantity}', [CartController::class,'reducebyone']);
     // CART ENDS
 
     // PRODCT SECTION
@@ -47,11 +58,3 @@ Route::get('/', [FrontendController::class, 'index'])->name('front.index');
     Route::get('/categories/', [CatalogController::class, 'categories'])->name('front.categories');
     Route::get('/childcategories/{slug}',  [CatalogController::class, 'childcategories'])->name('front.childcategories');
     // CATEGORY SECTION ENDS
-
-    // User Login
-    Route::post('/login', [LoginController::class ,'login'])->name('user.login.submit');
-    // User Login End
-
-    // User Logout
-    Route::get('/logout', [LoginController::class, 'logout'])->name('user-logout');
-    // User Logout Ends
