@@ -1,6 +1,7 @@
 @extends('layout.template')
 
 @section('main')
+    <div id="product">
     <!-- Banner -->
     <div id="banner" class="mt-6">
         <div class="flex items-center">
@@ -197,6 +198,8 @@
     <!-- More items -->
     <div class="mt-16 mb-8 flex justify-center">
         <button class="mx-auto btn-yus-conti-shopping rounded-full w-1/6 text-lg py-2 text-white">Shop all Items</button>
+    </div>
+    
     </div>
     <!-- Trust  -->
     <div class="mt-16 px-14">
