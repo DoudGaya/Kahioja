@@ -5,6 +5,7 @@
             <img class="w-64 mx-auto py-4" :src="productimage" :alt="productname">
             <!-- Product Details  -->
             <div class="py-3">
+                <h1 style="display:none;">{{ productid }}</h1>
                 <h1 class="card-title">{{ productname }}</h1>
                 <div class="flex items-center">
                     <span class="card-curr-price"><b>{{ productcurrprice }}</b></span>
@@ -44,6 +45,7 @@
 export default {
     name: 'ProductComponent',
     props:[
+        'productid',
         'productlink',
         'productimage',
         'productname',
@@ -52,7 +54,7 @@ export default {
     ],
     methods:{
         addToBag(){
-            alert(this.productname)
+            alert(this.productid)
         }
     }   
 }
