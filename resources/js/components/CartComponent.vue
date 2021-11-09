@@ -12,6 +12,7 @@
                 <!-- <div id="cart-body-time-arrived" class="p-4 my-5">
                     This product arrives by 6th Oct, 2pm
                 </div> -->
+                <div v-if="isLoading" class="loader mx-auto mt-5"></div>
                 <div v-if="cart.length > 0" class="my-5">
                     <div :key="product.product_id" v-for="product in cart" id="cart-body-products" class="p-4">
                         <div class="grid grid-cols-3 gap-6">
@@ -104,7 +105,7 @@ export default {
         return{
             displayCart: true,
             cart: [],
-            test: 2323,
+            isLoading: false,
             authUser: window.authUser,
         }
     },
@@ -113,7 +114,6 @@ export default {
             user_id: this.authUser.id
         }).then(response => {
             this.cart = response.data;
-            console.log(response.data)
         }).catch(error => {
             console.log(error)
         })
@@ -121,9 +121,11 @@ export default {
     methods:{
         async minusProduct(id, quantity){
             if(quantity > 1){
+                this.isLoading = true
                 quantity--
                 axios.post(`/reducebyone/${id}/${quantity}`).then(response => {
-                    this.cart = response.data
+                    let cart = this.cart = response.data
+                    this.isLoading = false
                 }).catch(error => {
                     console.log(error)
                 })
@@ -131,29 +133,38 @@ export default {
         },
         async addProduct(id, quantity){
             if(quantity >= 1){
+                this.isLoading = true
                 quantity++
                 axios.post(`/addbyone/${id}/${quantity}`).then(response => {
                     this.cart = response.data
+                    this.isLoading = false
                 }).catch(error => {
                     console.log(error)
                 })
             }
         },
         removeProduct(id){
+            this.isLoading = true
             axios.post(`/removeproduct/${id}/`).then(response => {
                 this.cart = response.data
+                this.isLoading = false
             }).catch(error => {
                 console.log(error)
             })
         },
         closeCart(){
             if(this.displayCart == true){
+                let cart = this.cart
+                this.$emit('updated-cart', cart)
                 this.displayCart = false
             }else{
                 this.displayCart = true
             }
         }
     },
+    emits:[
+        'updated-cart',
+    ],
     computed: {
         subTotal(){
             return this.cart.reduce((sum, {subTotal}) => parseInt(sum + subTotal), 0)

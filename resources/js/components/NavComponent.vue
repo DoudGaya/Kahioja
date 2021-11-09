@@ -36,7 +36,10 @@
         </div>
     </div>
     <UserAccountSettingsComponent v-show="displayAccountSettings" />
-    <CartComponent v-show="displayCart" />
+    <CartComponent 
+        @updated-cart="updatedCart"  
+        v-show="displayCart" 
+    />
     <LoginComponent v-show="displayLogin" />
 </template>
 
@@ -69,12 +72,14 @@ export default {
             user_id: this.authUser.id
         }).then(response => {
             this.cart = response.data;
-            // console.log(response.data)
         }).catch(error => {
             console.log(error)
         })
     },
     methods:{
+        updatedCart(newcart){
+            this.cart = newcart
+        },
         cartToggle(){
             if(this.displayCart == false){
                 this.displayCart = true
