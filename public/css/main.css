@@ -15,12 +15,13 @@ body{
 }
 
 #nav{
-    position: absolute;
+    position: fixed;
     width: 100%;
     left: 0px;
     top: 0px;
     background: #FFFFFF;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.12);
+    z-index: 200;
 }
 
 .search_box{
@@ -181,7 +182,7 @@ body{
 #cart, #login{
     background-color: rgba(0, 0, 0, 0.8);
     position: fixed;
-    z-index: 60;
+    z-index: 300;
     left: 0;
     top: 0;
     width: 100%;
