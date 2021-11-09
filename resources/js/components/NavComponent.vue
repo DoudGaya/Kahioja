@@ -69,7 +69,7 @@ export default {
             user_id: this.authUser.id
         }).then(response => {
             this.cart = response.data;
-            console.log(response.data)
+            // console.log(response.data)
         }).catch(error => {
             console.log(error)
         })

@@ -22,7 +22,9 @@ class CartController extends Controller
         $bagId = $request->id;
         $quantity = $request->quantity;
         $updateBag = Bag::where('id', $bagId)->update(['quantity' => $quantity]);          
-        return response()->json('added');          
+        $user_id = Auth::user()->id;
+        $bag = DB::select("SELECT DISTINCT bags.id as 'bagId', bags.quantity, products.name, products.price, products.ship_fee, products.photo, bags.quantity * products.price as 'subTotal' FROM bags, products, users WHERE bags.product_id = products.id && bags.user_id = '$user_id' && bags.paid = 'unpaid' ORDER BY bags.id DESC");
+        return $response = \Response::json($bag, 200);          
     }  
     
     public function reducebyone(Request $request)
@@ -30,6 +32,17 @@ class CartController extends Controller
         $bagId = $request->id;
         $quantity = $request->quantity;
         $updateBag = Bag::where('id', $bagId)->update(['quantity' => $quantity]);          
-        return response()->json('removed');
+        $user_id = Auth::user()->id;
+        $bag = DB::select("SELECT DISTINCT bags.id as 'bagId', bags.quantity, products.name, products.price, products.ship_fee, products.photo, bags.quantity * products.price as 'subTotal' FROM bags, products, users WHERE bags.product_id = products.id && bags.user_id = '$user_id' && bags.paid = 'unpaid' ORDER BY bags.id DESC");
+        return $response = \Response::json($bag, 200);
+    }
+
+    public function removeproduct(Request $request)
+    {
+        $bagId = $request->id;
+        $removeProduct = Bag::where('id', $bagId)->delete();          
+        $user_id = Auth::user()->id;
+        $bag = DB::select("SELECT DISTINCT bags.id as 'bagId', bags.quantity, products.name, products.price, products.ship_fee, products.photo, bags.quantity * products.price as 'subTotal' FROM bags, products, users WHERE bags.product_id = products.id && bags.user_id = '$user_id' && bags.paid = 'unpaid' ORDER BY bags.id DESC");
+        return $response = \Response::json($bag, 200);
     }
 }

@@ -38,7 +38,7 @@
                                     <div class="cursor-pointer">
                                        <button @click="minusProduct(product.bagId, product.quantity)"> - </button>
                                     </div>
-                                    <div>{{ product.quantity }}</div>
+                                    <input class="w-1/3 text-center bg-white" :value="product.quantity" disabled>
                                     <div class="cursor-pointer">
                                         <button @click="addProduct(product.bagId, product.quantity)">+</button>
                                     </div>
@@ -100,7 +100,6 @@
 <script>
 export default {
     name: 'CartComponent',
-    emits:['cartItemsNo','cartEstimatedTotal'],
     data(){
         return{
             displayCart: true,
@@ -123,8 +122,8 @@ export default {
         async minusProduct(id, quantity){
             if(quantity > 1){
                 quantity--
-                axios.post(`/addbyone/${id}/${quantity}`).then(response => {
-                    console.log(response.data)
+                axios.post(`/reducebyone/${id}/${quantity}`).then(response => {
+                    this.cart = response.data
                 }).catch(error => {
                     console.log(error)
                 })
@@ -133,15 +132,19 @@ export default {
         async addProduct(id, quantity){
             if(quantity >= 1){
                 quantity++
-                axios.post(`/reducebyone/${id}/${quantity}`).then(response => {
-                    console.log(response.data)
+                axios.post(`/addbyone/${id}/${quantity}`).then(response => {
+                    this.cart = response.data
                 }).catch(error => {
                     console.log(error)
                 })
             }
         },
         removeProduct(id){
-            console.log(id)
+            axios.post(`/removeproduct/${id}/`).then(response => {
+                this.cart = response.data
+            }).catch(error => {
+                console.log(error)
+            })
         },
         closeCart(){
             if(this.displayCart == true){
