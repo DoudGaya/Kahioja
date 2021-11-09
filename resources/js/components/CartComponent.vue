@@ -123,15 +123,22 @@ export default {
         async minusProduct(id, quantity){
             if(quantity > 1){
                 quantity--
-                axios.post(`/reducebyone/${id}/${quantity}`).then(response => {
+                axios.post(`/addbyone/${id}/${quantity}`).then(response => {
                     console.log(response.data)
                 }).catch(error => {
                     console.log(error)
                 })
             } 
         },
-        addProduct(id){
-            console.log(id)
+        async addProduct(id, quantity){
+            if(quantity >= 1){
+                quantity++
+                axios.post(`/reducebyone/${id}/${quantity}`).then(response => {
+                    console.log(response.data)
+                }).catch(error => {
+                    console.log(error)
+                })
+            }
         },
         removeProduct(id){
             console.log(id)

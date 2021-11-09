@@ -39,8 +39,8 @@ Route::get('/', [FrontendController::class, 'index'])->name('front.index');
 
     // CART
     Route::get('/cart', [CartController::class, 'index']);
-    Route::get('/addbyone', [CartController::class, 'addbyone']);
     Route::post('/reducebyone/{id}/{quantity}', [CartController::class,'reducebyone']);
+    Route::post('/addbyone/{id}/{quantity}', [CartController::class,'addbyone']);
     // CART ENDS
 
     // PRODCT SECTION

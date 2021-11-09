@@ -17,16 +17,19 @@ class CartController extends Controller
         return $response = \Response::json($bag, 200);
     }
 
-    public function addbyone()
+    public function addbyone(Request $request)
     {     
-        return response()->json('hit');          
+        $bagId = $request->id;
+        $quantity = $request->quantity;
+        $updateBag = Bag::where('id', $bagId)->update(['quantity' => $quantity]);          
+        return response()->json('added');          
     }  
     
     public function reducebyone(Request $request)
     {
         $bagId = $request->id;
         $quantity = $request->quantity;
-        return response()->json($quantity);          
-        // return $response = \Response::json($bagId, 200);
+        $updateBag = Bag::where('id', $bagId)->update(['quantity' => $quantity]);          
+        return response()->json('removed');
     }
 }

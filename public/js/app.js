@@ -19212,7 +19212,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 if (quantity > 1) {
                   quantity--;
-                  axios.post("/reducebyone/".concat(id, "/").concat(quantity)).then(function (response) {
+                  axios.post("/addbyone/".concat(id, "/").concat(quantity)).then(function (response) {
                     console.log(response.data);
                   })["catch"](function (error) {
                     console.log(error);
@@ -19227,8 +19227,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee2);
       }))();
     },
-    addProduct: function addProduct(id) {
-      console.log(id);
+    addProduct: function addProduct(id, quantity) {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                if (quantity >= 1) {
+                  quantity++;
+                  axios.post("/reducebyone/".concat(id, "/").concat(quantity)).then(function (response) {
+                    console.log(response.data);
+                  })["catch"](function (error) {
+                    console.log(error);
+                  });
+                }
+
+              case 1:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }))();
     },
     removeProduct: function removeProduct(id) {
       console.log(id);
