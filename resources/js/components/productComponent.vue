@@ -53,8 +53,14 @@ export default {
         'productprevprice',
     ],
     methods:{
-        addToBag(){
-            alert(this.productid)
+        async addToBag(){
+            axios.post('/addtobag', {
+                product_id: this.productid
+            }).then(response => {
+                console.log(response.data)
+            }).catch(error => {
+                console.log(error)
+            })
         }
     }   
 }

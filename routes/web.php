@@ -39,6 +39,7 @@ Route::get('/', [FrontendController::class, 'index'])->name('front.index');
 
     // CART
     Route::get('/cart', [CartController::class, 'index']);
+    Route::post('/addtobag', [CartController::class,'addtobag']);
     Route::post('/addbyone/{id}/{quantity}', [CartController::class,'addbyone']);
     Route::post('/reducebyone/{id}/{quantity}', [CartController::class,'reducebyone']);
     Route::post('/removeproduct/{id}', [CartController::class,'removeproduct']);
