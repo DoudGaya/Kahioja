@@ -36,16 +36,17 @@
     </head>
     <body>
         <!-- Nav  -->
-        <div id="navComponent">
+        <div id="app">
             <nav-component></nav-component>
-        </div>
-        @if(!Auth::guard('web')->check())
-            <script> window.authUser = null </script>    
-        @else
-            <script> window.authUser = {!! json_encode(Auth::user()); !!} </script>        
-        @endif 
+            @if(!Auth::guard('web')->check())
+                <script> window.authUser = null </script>    
+            @else
+                <script> window.authUser = {!! json_encode(Auth::user()); !!} </script>        
+            @endif 
 
-        @yield('main')
+            @yield('main')
+        </div>
+        
         <!-- Footer  -->
         <div id="footer" class="mt-16 py-12">
             <div class="grid grid-cols-4 gap-6 px-14">

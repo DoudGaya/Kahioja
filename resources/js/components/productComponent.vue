@@ -52,12 +52,19 @@ export default {
         'productcurrprice',
         'productprevprice',
     ],
+    data(){
+        return{
+            cart: [],
+        }
+    },
     methods:{
         async addToBag(){
             axios.post('/addtobag', {
                 product_id: this.productid
             }).then(response => {
-                console.log(response.data)
+                let cartAddProduct = this.cart 
+                cartAddProduct = response.data
+                alert()       
             }).catch(error => {
                 console.log(error)
             })

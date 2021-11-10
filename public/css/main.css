@@ -200,8 +200,9 @@ body{
 }
 
 #account-settings{
-    position: absolute;
+    position: fixed;
     left: 78%;
+    z-index: 320;
 }
 
 #search-bar-callback{

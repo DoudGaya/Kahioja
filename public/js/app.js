@@ -19268,13 +19268,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       });
     },
     closeCart: function closeCart() {
-      if (this.displayCart == true) {
-        var cart = this.cart;
-        this.$emit('updated-cart', cart);
-        this.displayCart = false;
-      } else {
-        this.displayCart = true;
-      }
+      var cart = this.cart;
+      this.$emit('updated-cart', cart);
+      this.displayCart = !this.displayCart;
     }
   },
   emits: ['updated-cart'],
@@ -19419,11 +19415,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _CartComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./CartComponent */ "./resources/js/components/CartComponent.vue");
 /* harmony import */ var _LoginComponent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./LoginComponent */ "./resources/js/components/LoginComponent.vue");
 /* harmony import */ var _UserAccountSettingComponent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./UserAccountSettingComponent */ "./resources/js/components/UserAccountSettingComponent.vue");
+/* harmony import */ var _productComponent__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./productComponent */ "./resources/js/components/productComponent.vue");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 
 
 
@@ -19435,13 +19433,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     SearchBar: _SearchBarComponent__WEBPACK_IMPORTED_MODULE_1__["default"],
     CartComponent: _CartComponent__WEBPACK_IMPORTED_MODULE_2__["default"],
     LoginComponent: _LoginComponent__WEBPACK_IMPORTED_MODULE_3__["default"],
-    UserAccountSettingsComponent: _UserAccountSettingComponent__WEBPACK_IMPORTED_MODULE_4__["default"]
+    UserAccountSettingsComponent: _UserAccountSettingComponent__WEBPACK_IMPORTED_MODULE_4__["default"],
+    ProductComponent: _productComponent__WEBPACK_IMPORTED_MODULE_5__["default"]
   },
   props: ['account'],
   data: function data() {
     return {
       displayCart: false,
       displayLogin: false,
+      displayProduct: false,
       displayAccountSettings: false,
       authUser: window.authUser,
       cart: []
@@ -19475,26 +19475,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     updatedCart: function updatedCart(newcart) {
       this.cart = newcart;
     },
+    cartAddProduct: function cartAddProduct(productadd) {
+      this.cart = productadd;
+    },
     cartToggle: function cartToggle() {
-      if (this.displayCart == false) {
-        this.displayCart = true;
-      } else {
-        this.displayCart = false;
-      }
+      this.displayCart = !this.displayCart;
     },
     loginToggle: function loginToggle() {
       if (this.authUser !== null) {
-        if (this.displayAccountSettings == false) {
-          this.displayAccountSettings = true;
-        } else {
-          this.displayAccountSettings = false;
-        }
+        this.displayAccountSettings = !this.displayAccountSettings;
       } else {
-        if (this.displayLogin == false) {
-          this.displayLogin = true;
-        } else {
-          this.displayLogin = false;
-        }
+        this.displayLogin = !this.displayLogin;
       }
     }
   },
@@ -19633,6 +19624,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'ProductComponent',
   props: ['productid', 'productlink', 'productimage', 'productname', 'productcurrprice', 'productprevprice'],
+  data: function data() {
+    return {
+      cart: []
+    };
+  },
   methods: {
     addToBag: function addToBag() {
       var _this = this;
@@ -19645,7 +19641,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 axios.post('/addtobag', {
                   product_id: _this.productid
                 }).then(function (response) {
-                  console.log(response.data);
+                  var cartAddProduct = _this.cart;
+                  cartAddProduct = response.data;
+                  alert();
                 })["catch"](function (error) {
                   console.log(error);
                 });
@@ -20237,6 +20235,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   var _component_LoginComponent = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("LoginComponent");
 
+  var _component_ProductComponent = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("ProductComponent");
+
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" logo  "), _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Search Box  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SearchBar), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Account & Cart  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Login  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     onClick: _cache[0] || (_cache[0] = function ($event) {
       return $options.loginToggle();
@@ -20262,7 +20262,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* PROPS */
   , ["onUpdatedCart"]), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.displayCart]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_LoginComponent, null, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.displayLogin]])], 64
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.displayLogin]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ProductComponent, {
+    onCartAddProduct: $options.cartAddProduct
+  }, null, 8
+  /* PROPS */
+  , ["onCartAddProduct"]), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.displayProduct]])], 64
   /* STABLE_FRAGMENT */
   );
 }
@@ -20402,7 +20406,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var _hoisted_1 = {
   id: "account-settings",
-  "class": "text-black z-50 top-20 bg-white shadow-md w-1/6 p-4"
+  "class": "text-black top-20 bg-white shadow-md w-1/6 p-4"
 };
 
 var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<ul><div class=\"flex justify-between border-b py-2 items-center\"><span><svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M5.93408 6.64286H12.5357\" stroke=\"#222222\" stroke-width=\"1.35205\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M5.93408 9.31318H9.79123\" stroke=\"#222222\" stroke-width=\"1.35205\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M8.70742 20.25H3.71741C3.52714 20.25 3.34467 20.1744 3.21013 20.0399C3.07558 19.9053 3 19.7229 3 19.5326V4.46741C3 4.27714 3.07558 4.09467 3.21013 3.96013C3.34467 3.82558 3.52714 3.75 3.71741 3.75H20.2826C20.4729 3.75 20.6553 3.82558 20.7899 3.96013C20.9244 4.09467 21 4.27714 21 4.46741V12.6758\" stroke=\"#222222\" stroke-width=\"1.35205\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M12.8282 21.3916C13.4029 21.3916 13.8688 20.9257 13.8688 20.351C13.8688 19.7762 13.4029 19.3104 12.8282 19.3104C12.2535 19.3104 11.7876 19.7762 11.7876 20.351C11.7876 20.9257 12.2535 21.3916 12.8282 21.3916Z\" stroke=\"#222222\" stroke-width=\"1.35205\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M19.9689 21.3916C20.5436 21.3916 21.0095 20.9257 21.0095 20.351C21.0095 19.7762 20.5436 19.3104 19.9689 19.3104C19.3942 19.3104 18.9283 19.7762 18.9283 20.351C18.9283 20.9257 19.3942 21.3916 19.9689 21.3916Z\" stroke=\"#222222\" stroke-width=\"1.35205\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M11.788 20.3796H11.1921C11.1716 20.3796 11.152 20.3714 11.1375 20.357C11.123 20.3425 11.1148 20.3228 11.1148 20.3023V14.8242C11.1148 14.8037 11.123 14.7841 11.1375 14.7696C11.152 14.7551 11.1716 14.7469 11.1921 14.7469H19.4484C19.5066 14.7469 19.564 14.7601 19.6164 14.7854C19.6688 14.8107 19.7148 14.8475 19.7509 14.8931L21.7853 17.4579C21.8395 17.5261 21.869 17.6107 21.869 17.6979V20.3024C21.869 20.3125 21.867 20.3226 21.8631 20.332C21.8592 20.3413 21.8535 20.3498 21.8463 20.357C21.8392 20.3642 21.8306 20.3699 21.8213 20.3738C21.8119 20.3776 21.8018 20.3796 21.7917 20.3796H21.0097\" stroke=\"#222222\" stroke-width=\"1.35205\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M18.9286 20.3796H13.8688\" stroke=\"#222222\" stroke-width=\"1.35205\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M17.4836 14.747V20.3509\" stroke=\"#222222\" stroke-width=\"1.35205\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path></svg></span><span><li class=\"text-sm\">Track Order</li></span></div><div class=\"flex justify-between border-b py-2 items-center\"><span><svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M5.93408 6.64286H12.5357\" stroke=\"#222222\" stroke-width=\"1.35205\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M5.93408 9.31318H9.79123\" stroke=\"#222222\" stroke-width=\"1.35205\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M8.70742 20.25H3.71741C3.52714 20.25 3.34467 20.1744 3.21013 20.0399C3.07558 19.9053 3 19.7229 3 19.5326V4.46741C3 4.27714 3.07558 4.09467 3.21013 3.96013C3.34467 3.82558 3.52714 3.75 3.71741 3.75H20.2826C20.4729 3.75 20.6553 3.82558 20.7899 3.96013C20.9244 4.09467 21 4.27714 21 4.46741V12.6758\" stroke=\"#222222\" stroke-width=\"1.35205\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M12.8282 21.3916C13.4029 21.3916 13.8688 20.9257 13.8688 20.351C13.8688 19.7762 13.4029 19.3104 12.8282 19.3104C12.2535 19.3104 11.7876 19.7762 11.7876 20.351C11.7876 20.9257 12.2535 21.3916 12.8282 21.3916Z\" stroke=\"#222222\" stroke-width=\"1.35205\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M19.9689 21.3916C20.5436 21.3916 21.0095 20.9257 21.0095 20.351C21.0095 19.7762 20.5436 19.3104 19.9689 19.3104C19.3942 19.3104 18.9283 19.7762 18.9283 20.351C18.9283 20.9257 19.3942 21.3916 19.9689 21.3916Z\" stroke=\"#222222\" stroke-width=\"1.35205\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M11.788 20.3796H11.1921C11.1716 20.3796 11.152 20.3714 11.1375 20.357C11.123 20.3425 11.1148 20.3228 11.1148 20.3023V14.8242C11.1148 14.8037 11.123 14.7841 11.1375 14.7696C11.152 14.7551 11.1716 14.7469 11.1921 14.7469H19.4484C19.5066 14.7469 19.564 14.7601 19.6164 14.7854C19.6688 14.8107 19.7148 14.8475 19.7509 14.8931L21.7853 17.4579C21.8395 17.5261 21.869 17.6107 21.869 17.6979V20.3024C21.869 20.3125 21.867 20.3226 21.8631 20.332C21.8592 20.3413 21.8535 20.3498 21.8463 20.357C21.8392 20.3642 21.8306 20.3699 21.8213 20.3738C21.8119 20.3776 21.8018 20.3796 21.7917 20.3796H21.0097\" stroke=\"#222222\" stroke-width=\"1.35205\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M18.9286 20.3796H13.8688\" stroke=\"#222222\" stroke-width=\"1.35205\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M17.4836 14.747V20.3509\" stroke=\"#222222\" stroke-width=\"1.35205\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path></svg></span><span><li class=\"text-sm\">Account Settings</li></span></div><a href=\"/logout\"><div class=\"flex justify-between border-b py-2 items-center\"><span><svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M5.93408 6.64286H12.5357\" stroke=\"#222222\" stroke-width=\"1.35205\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M5.93408 9.31318H9.79123\" stroke=\"#222222\" stroke-width=\"1.35205\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M8.70742 20.25H3.71741C3.52714 20.25 3.34467 20.1744 3.21013 20.0399C3.07558 19.9053 3 19.7229 3 19.5326V4.46741C3 4.27714 3.07558 4.09467 3.21013 3.96013C3.34467 3.82558 3.52714 3.75 3.71741 3.75H20.2826C20.4729 3.75 20.6553 3.82558 20.7899 3.96013C20.9244 4.09467 21 4.27714 21 4.46741V12.6758\" stroke=\"#222222\" stroke-width=\"1.35205\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M12.8282 21.3916C13.4029 21.3916 13.8688 20.9257 13.8688 20.351C13.8688 19.7762 13.4029 19.3104 12.8282 19.3104C12.2535 19.3104 11.7876 19.7762 11.7876 20.351C11.7876 20.9257 12.2535 21.3916 12.8282 21.3916Z\" stroke=\"#222222\" stroke-width=\"1.35205\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M19.9689 21.3916C20.5436 21.3916 21.0095 20.9257 21.0095 20.351C21.0095 19.7762 20.5436 19.3104 19.9689 19.3104C19.3942 19.3104 18.9283 19.7762 18.9283 20.351C18.9283 20.9257 19.3942 21.3916 19.9689 21.3916Z\" stroke=\"#222222\" stroke-width=\"1.35205\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M11.788 20.3796H11.1921C11.1716 20.3796 11.152 20.3714 11.1375 20.357C11.123 20.3425 11.1148 20.3228 11.1148 20.3023V14.8242C11.1148 14.8037 11.123 14.7841 11.1375 14.7696C11.152 14.7551 11.1716 14.7469 11.1921 14.7469H19.4484C19.5066 14.7469 19.564 14.7601 19.6164 14.7854C19.6688 14.8107 19.7148 14.8475 19.7509 14.8931L21.7853 17.4579C21.8395 17.5261 21.869 17.6107 21.869 17.6979V20.3024C21.869 20.3125 21.867 20.3226 21.8631 20.332C21.8592 20.3413 21.8535 20.3498 21.8463 20.357C21.8392 20.3642 21.8306 20.3699 21.8213 20.3738C21.8119 20.3776 21.8018 20.3796 21.7917 20.3796H21.0097\" stroke=\"#222222\" stroke-width=\"1.35205\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M18.9286 20.3796H13.8688\" stroke=\"#222222\" stroke-width=\"1.35205\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M17.4836 14.747V20.3509\" stroke=\"#222222\" stroke-width=\"1.35205\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path></svg></span><span><li class=\"py-2 text-sm\">Logout</li></span></div></a></ul>", 1);
@@ -20707,18 +20711,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-var navComponent = (0,vue__WEBPACK_IMPORTED_MODULE_0__.createApp)({});
-navComponent.component('nav-component', __webpack_require__(/*! ./components/NavComponent.vue */ "./resources/js/components/NavComponent.vue")["default"]);
-navComponent.mount('#navComponent');
-var product = (0,vue__WEBPACK_IMPORTED_MODULE_0__.createApp)({});
-product.component('product-component', __webpack_require__(/*! ./components/productComponent.vue */ "./resources/js/components/productComponent.vue")["default"]);
-product.mount('#product');
-var productDetails = (0,vue__WEBPACK_IMPORTED_MODULE_0__.createApp)({});
-productDetails.component('product-details-component', __webpack_require__(/*! ./components/productDetailsComponent.vue */ "./resources/js/components/productDetailsComponent.vue")["default"]);
-productDetails.mount('#productDetails');
-var productDescription = (0,vue__WEBPACK_IMPORTED_MODULE_0__.createApp)({});
-productDescription.component('product-description-component', __webpack_require__(/*! ./components/productDescriptionComponent.vue */ "./resources/js/components/productDescriptionComponent.vue")["default"]);
-productDescription.mount('#productDescription');
+var app = (0,vue__WEBPACK_IMPORTED_MODULE_0__.createApp)({});
+app.component('nav-component', __webpack_require__(/*! ./components/NavComponent.vue */ "./resources/js/components/NavComponent.vue")["default"]);
+app.component('product-component', __webpack_require__(/*! ./components/productComponent.vue */ "./resources/js/components/productComponent.vue")["default"]);
+app.component('product-details-component', __webpack_require__(/*! ./components/productDetailsComponent.vue */ "./resources/js/components/productDetailsComponent.vue")["default"]);
+app.component('product-description-component', __webpack_require__(/*! ./components/productDescriptionComponent.vue */ "./resources/js/components/productDescriptionComponent.vue")["default"]);
+app.mount('#app'); // let product = createApp({})
+// product.mount('#product')
+// let productDetails = createApp({})
+// productDetails.mount('#productDetails')
+// let productDescription = createApp({})
+// productDescription.mount('#productDescription')
 
 /***/ }),
 

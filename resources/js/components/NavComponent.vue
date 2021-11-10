@@ -41,6 +41,9 @@
         v-show="displayCart" 
     />
     <LoginComponent v-show="displayLogin" />
+    <ProductComponent 
+        @cart-add-product="cartAddProduct"  
+        v-show="displayProduct" />
 </template>
 
 <script>
@@ -48,6 +51,7 @@ import SearchBar from './SearchBarComponent'
 import CartComponent from './CartComponent'
 import LoginComponent from './LoginComponent'
 import UserAccountSettingsComponent from './UserAccountSettingComponent'
+import ProductComponent from './productComponent'
 
 export default {
     name: 'Nav',
@@ -55,18 +59,21 @@ export default {
         SearchBar,
         CartComponent,
         LoginComponent,
-        UserAccountSettingsComponent
+        UserAccountSettingsComponent,
+        ProductComponent
     },
     props: ['account'],
     data(){
         return{
             displayCart: false,
             displayLogin: false,
+            displayProduct: false,
             displayAccountSettings: false,
             authUser: window.authUser,
             cart: []
         }
     },
+    
     async created(){
         axios.get(`/cart`,{
             user_id: this.authUser.id
@@ -80,26 +87,17 @@ export default {
         updatedCart(newcart){
             this.cart = newcart
         },
-        cartToggle(){
-            if(this.displayCart == false){
-                this.displayCart = true
-            }else{
-                this.displayCart = false
-            } 
+        cartAddProduct(productadd){
+            this.cart = productadd
+        },
+        cartToggle(){ 
+            this.displayCart = !this.displayCart 
         },
         loginToggle(){
             if(this.authUser !== null){
-                if(this.displayAccountSettings == false){
-                    this.displayAccountSettings = true
-                }else{
-                    this.displayAccountSettings = false
-                }
+                this.displayAccountSettings = !this.displayAccountSettings
             }else{
-                if(this.displayLogin == false){
-                    this.displayLogin = true
-                }else{
-                    this.displayLogin = false
-                }
+                this.displayLogin = !this.displayLogin
             }
              
         }

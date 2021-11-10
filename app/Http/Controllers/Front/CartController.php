@@ -29,7 +29,10 @@ class CartController extends Controller
                         'quantity'=> 1,
                         'paid'=> 'unpaid'
                     ]);
-                    return $response = \Response::json('Added to Cart', 200);    
+                    
+                    $bag = DB::select("SELECT DISTINCT bags.id as 'bagId', bags.quantity, products.name, products.price, products.ship_fee, products.photo, bags.quantity * products.price as 'subTotal' FROM bags, products, users WHERE bags.product_id = products.id && bags.user_id = '$user_id' && bags.paid = 'unpaid' ORDER BY bags.id DESC");
+                    return $response = \Response::json($bag, 200);
+                
                 }catch(Exception $e){
                     return $response = \Response::json($e, 500);                    
                 }
@@ -38,12 +41,14 @@ class CartController extends Controller
                 $quantity = $quantity[0]->quantity + 1;
                     try{
                         Bag::where('product_id', $product_id)->where('user_id', $user_id)->update(['quantity' => $quantity]);
-                        return $response = \Response::json('Added to Cart +1', 200);    
+                        
+                        $bag = DB::select("SELECT DISTINCT bags.id as 'bagId', bags.quantity, products.name, products.price, products.ship_fee, products.photo, bags.quantity * products.price as 'subTotal' FROM bags, products, users WHERE bags.product_id = products.id && bags.user_id = '$user_id' && bags.paid = 'unpaid' ORDER BY bags.id DESC");
+                        return $response = \Response::json($bag, 200);
+                    
                     }catch(Exception $e){
                         return $response = \Response::json($e, 500);                    
                     }                    
             }
-        return $response = \Response::json($bag, 200);    
     }
 
     public function addbyone(Request $request)
