@@ -12,6 +12,7 @@
         <!-- Product Details  -->
         <div class="rounded-xl px-10 py-8 border col-span-2 shadow">
             <div class="py-3">
+                <div v-if="isLoading" class="loader mx-auto mt-5"></div>
                 <h1 class="product-details-title">{{ productname }}</h1>
                 <div class="flex items-center">
                     <span class="product-curr-price"><b>{{ productcurrprice }}</b></span>
@@ -51,9 +52,13 @@
                     </div>
                 </div>
                 <div id="cart-body-product-add" class="flex justify-between w-1/4 py-2 px-4 rounded-full my-2">
-                    <div>-</div>
-                    <div>1</div>
-                    <div>+</div>
+                    <div class="cursor-pointer">
+                        <button @click="minusProduct()"> - </button>
+                    </div>
+                    <input class="w-1/3 text-center bg-white" :value="quantity" disabled>
+                    <div class="cursor-pointer">
+                        <button @click="addProduct()">+</button>
+                    </div>
                 </div>
                 <div class="grid grid-cols-2 gap-6 my-7">
                     <div>
@@ -112,5 +117,27 @@ export default {
         'productid',
         'productdeliveryfee'
     ],
+    data(){
+        return{
+            quantity: 1,
+            isLoading: false
+        }
+    },
+    methods:{
+        async minusProduct(){
+            if(this.quantity > 1){
+                this.isLoading = true
+                this.quantity = this.quantity - 1
+                this.isLoading = false
+            } 
+        },
+        async addProduct(){
+            if(this.quantity >= 1){
+                this.isLoading = true
+                this.quantity = this.quantity + 1
+                this.isLoading = false
+            }
+        }
+    }
 }
 </script>
