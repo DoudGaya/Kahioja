@@ -19762,6 +19762,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'Nav',
+  mounted: function mounted() {
+    this.$store.dispatch("allCartFromDatabase");
+  },
   components: {
     SearchBar: _SearchBarComponent__WEBPACK_IMPORTED_MODULE_1__["default"],
     CartComponent: _CartComponent__WEBPACK_IMPORTED_MODULE_2__["default"],
@@ -19777,8 +19780,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       displayProduct: false,
       displayAccountSettings: false,
       authUser: window.authUser,
-      cart: [],
-      test: '121 '
+      cart: []
     };
   },
   created: function created() {
@@ -19789,7 +19791,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _this.test = _this.$store.getters.getTitle;
               axios.get("/cart", {
                 user_id: _this.authUser.id
               }).then(function (response) {
@@ -19798,7 +19799,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 console.log(error);
               });
 
-            case 2:
+            case 1:
             case "end":
               return _context.stop();
           }
@@ -19825,6 +19826,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   computed: {
+    computed: {
+      getAllCart: function getAllCart() {
+        //final output from here
+        return this.cart = this.$store.getters.getCart;
+      }
+    },
     subTotal: function subTotal() {
       return this.cart.reduce(function (sum, _ref) {
         var subTotal = _ref.subTotal;
@@ -20660,7 +20667,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }),
     id: "displayLogin",
     "class": "ml-5 mx-auto cursor-pointer"
-  }, [_hoisted_4, $data.authUser ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.test) + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.authUser.name), 1
+  }, [_hoisted_4, $data.authUser ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.authUser.name), 1
   /* TEXT */
   )) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_6, "Login"))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Cart  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     onClick: _cache[1] || (_cache[1] = function ($event) {
@@ -21225,27 +21232,27 @@ __webpack_require__.r(__webpack_exports__);
 var store = new vuex__WEBPACK_IMPORTED_MODULE_0__["default"].Store({
   strict: true,
   state: {
-    title: 'Code Highlighter',
-    copyright: {
-      license: 'MIT',
-      author: 'Philip Purwoko',
-      repository: 'https://github.com/PhilipPurwoko/CodeHighlighter'
-    },
-    api: "https://highlight-code-api.jefrydco.vercel.app/api",
-    langs: ["javascript", "python"]
+    cart: []
   },
   getters: {
-    getTitle: function getTitle(state) {
-      return state.title;
-    },
-    getCopyright: function getCopyright(state) {
-      return state.copyright;
-    },
-    getAPI: function getAPI(state) {
-      return state.api;
-    },
-    getLangs: function getLangs(state) {
-      return state.langs;
+    getCart: function getCart(state) {
+      //take parameter state
+      return state.cart;
+    }
+  },
+  actions: {
+    allCartFromDatabase: function allCartFromDatabase(context) {
+      axios.get("/cart").then(function (response) {
+        console.log(response.data);
+        context.commit("cart", response.data); //categories will be run from mutation
+      })["catch"](function () {
+        console.log("Error........");
+      });
+    }
+  },
+  mutations: {
+    cart: function cart(state, data) {
+      return state.cart = data;
     }
   }
 });
