@@ -6,7 +6,7 @@ export const store = new Vuex.Store({
         cart: []
     },
     getters:{
-        getCart(state){ //take parameter state
+        getCart(state){
             return state.cart
         },
         addCart(state){

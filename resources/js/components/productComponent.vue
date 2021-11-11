@@ -60,7 +60,8 @@ export default {
     methods:{
         async addToBag(){
             axios.post('/addtobag', {
-                product_id: this.productid
+                product_id: this.productid,
+                quantity: 1
             }).then(response => {
                 this.cart = response.data
                 console.log('Added')

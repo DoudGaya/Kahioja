@@ -36,14 +36,9 @@
         </div>
     </div>
     <UserAccountSettingsComponent v-show="displayAccountSettings" />
-    <CartComponent 
-        @updated-cart="updatedCart"  
-        v-show="displayCart" 
-    />
+    <CartComponent v-show="displayCart" />
     <LoginComponent v-show="displayLogin" />
-    <ProductComponent 
-        @cart-add-product="cartAddProduct"  
-        v-show="displayProduct" />
+    <ProductComponent v-show="displayProduct" />
 </template>
 
 <script>
@@ -86,12 +81,6 @@ export default {
         })
     },
     methods:{
-        updatedCart(newcart){
-            this.cart = newcart
-        },
-        cartAddProduct(productadd){
-            this.cart = productadd
-        },
         cartToggle(){ 
             this.displayCart = !this.displayCart 
             this.cart = this.$store.dispatch("allCartFromDatabase")
