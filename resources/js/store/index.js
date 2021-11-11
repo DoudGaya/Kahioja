@@ -10,7 +10,13 @@ export const store = new Vuex.Store({
             return state.cart
         },
         addCart(state){
-            return state.cart.length + 1
+            return state.cart.length
+        },
+        subTotal(state){
+            return state.cart.reduce((sum, {subTotal}) => parseInt(sum + subTotal), 0)
+        },
+        deliveryFee(state){
+            return state.cart.reduce((sum, {ship_fee}) => parseInt(sum + ship_fee), 0)
         }
     },
     actions:{
@@ -18,7 +24,7 @@ export const store = new Vuex.Store({
             axios.get(`/cart`)
                 .then((response)=>{
                     console.log(response.data)
-                    context.commit("cart",response.data) //categories will be run from mutation
+                    context.commit("cart",response.data)
                 }).catch(()=>{
                 console.log("Error........")
             })
@@ -26,10 +32,16 @@ export const store = new Vuex.Store({
     },
     mutations: {
         cart(state, data) {
-           return state.cart = data
+            return state.cart = data
         },
         addCart(state, payload){
-            state.cart.length = payload
+            return state.cart.length = payload
+        },
+        subTotal(state, payload){
+            return state.cart = payload
+        },
+        deliveryFee(state, payload){
+            return state.cart = payload
         }
     }
 });

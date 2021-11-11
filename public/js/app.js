@@ -19604,6 +19604,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var cart = this.cart;
       this.$emit('updated-cart', cart);
       this.displayCart = !this.displayCart;
+      this.$store.dispatch("allCartFromDatabase");
     }
   },
   emits: ['updated-cart'],
@@ -19816,6 +19817,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     cartToggle: function cartToggle() {
       this.displayCart = !this.displayCart;
+      this.cart = this.$store.dispatch("allCartFromDatabase");
     },
     loginToggle: function loginToggle() {
       if (this.authUser !== null) {
@@ -19829,17 +19831,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     getAllCart: function getAllCart() {
       return this.cart = this.$store.getters.getCart;
     },
+    cartNo: function cartNo() {
+      return this.$store.getters.addCart;
+    },
     subTotal: function subTotal() {
-      return this.cart.reduce(function (sum, _ref) {
-        var subTotal = _ref.subTotal;
-        return parseInt(sum + subTotal);
-      }, 0);
+      return this.$store.getters.subTotal;
     },
     deliveryFee: function deliveryFee() {
-      return this.cart.reduce(function (sum, _ref2) {
-        var ship_fee = _ref2.ship_fee;
-        return parseInt(sum + ship_fee);
-      }, 0);
+      return this.$store.getters.deliveryFee;
     },
     estimatedTotal: function estimatedTotal() {
       return this.subTotal + this.deliveryFee;
@@ -20676,7 +20675,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return $options.cartToggle();
     }),
     "class": "mx-auto cursor-pointer"
-  }, [_hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(this.$store.getters.addCart), 1
+  }, [_hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.cartNo), 1
   /* TEXT */
   ), $data.authUser ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_9, "N" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.estimatedTotal), 1
   /* TEXT */
@@ -21242,14 +21241,26 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_0__["default"].Store({
       return state.cart;
     },
     addCart: function addCart(state) {
-      return state.cart.length + 1;
+      return state.cart.length;
+    },
+    subTotal: function subTotal(state) {
+      return state.cart.reduce(function (sum, _ref) {
+        var subTotal = _ref.subTotal;
+        return parseInt(sum + subTotal);
+      }, 0);
+    },
+    deliveryFee: function deliveryFee(state) {
+      return state.cart.reduce(function (sum, _ref2) {
+        var ship_fee = _ref2.ship_fee;
+        return parseInt(sum + ship_fee);
+      }, 0);
     }
   },
   actions: {
     allCartFromDatabase: function allCartFromDatabase(context) {
       axios.get("/cart").then(function (response) {
         console.log(response.data);
-        context.commit("cart", response.data); //categories will be run from mutation
+        context.commit("cart", response.data);
       })["catch"](function () {
         console.log("Error........");
       });
@@ -21260,7 +21271,13 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_0__["default"].Store({
       return state.cart = data;
     },
     addCart: function addCart(state, payload) {
-      state.cart.length = payload;
+      return state.cart.length = payload;
+    },
+    subTotal: function subTotal(state, payload) {
+      return state.cart = payload;
+    },
+    deliveryFee: function deliveryFee(state, payload) {
+      return state.cart = payload;
     }
   }
 });

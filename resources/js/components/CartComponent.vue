@@ -156,6 +156,7 @@ export default {
             let cart = this.cart
             this.$emit('updated-cart', cart)
             this.displayCart = !this.displayCart 
+            this.$store.dispatch("allCartFromDatabase")
         }
     },
     emits:[
