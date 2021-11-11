@@ -8,6 +8,9 @@ export const store = new Vuex.Store({
     getters:{
         getCart(state){ //take parameter state
             return state.cart
+        },
+        addCart(state){
+            return state.cart.length + 1
         }
     },
     actions:{
@@ -19,11 +22,14 @@ export const store = new Vuex.Store({
                 }).catch(()=>{
                 console.log("Error........")
             })
-         },
+        },
     },
     mutations: {
         cart(state, data) {
            return state.cart = data
+        },
+        addCart(state, payload){
+            state.cart.length = payload
         }
     }
 });

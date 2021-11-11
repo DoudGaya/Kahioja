@@ -19826,11 +19826,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   computed: {
-    computed: {
-      getAllCart: function getAllCart() {
-        //final output from here
-        return this.cart = this.$store.getters.getCart;
-      }
+    getAllCart: function getAllCart() {
+      return this.cart = this.$store.getters.getCart;
     },
     subTotal: function subTotal() {
       return this.cart.reduce(function (sum, _ref) {
@@ -19983,9 +19980,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 axios.post('/addtobag', {
                   product_id: _this.productid
                 }).then(function (response) {
-                  var cartAddProduct = _this.cart;
-                  cartAddProduct = response.data;
-                  alert();
+                  _this.cart = response.data;
+                  console.log('Added');
+                  _this.cart = _this.$store.dispatch("allCartFromDatabase");
                 })["catch"](function (error) {
                   console.log(error);
                 });
@@ -19997,6 +19994,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee);
       }))();
+    }
+  },
+  computed: {
+    getAllCart: function getAllCart() {
+      return this.cart = this.$store.dispatch("allCartFromDatabase");
     }
   }
 });
@@ -20674,7 +20676,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return $options.cartToggle();
     }),
     "class": "mx-auto cursor-pointer"
-  }, [_hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.cart.length), 1
+  }, [_hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(this.$store.getters.addCart), 1
   /* TEXT */
   ), $data.authUser ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_9, "N" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.estimatedTotal), 1
   /* TEXT */
@@ -21238,6 +21240,9 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_0__["default"].Store({
     getCart: function getCart(state) {
       //take parameter state
       return state.cart;
+    },
+    addCart: function addCart(state) {
+      return state.cart.length + 1;
     }
   },
   actions: {
@@ -21253,6 +21258,9 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_0__["default"].Store({
   mutations: {
     cart: function cart(state, data) {
       return state.cart = data;
+    },
+    addCart: function addCart(state, payload) {
+      state.cart.length = payload;
     }
   }
 });

@@ -62,13 +62,18 @@ export default {
             axios.post('/addtobag', {
                 product_id: this.productid
             }).then(response => {
-                let cartAddProduct = this.cart 
-                cartAddProduct = response.data
-                alert()       
+                this.cart = response.data
+                console.log('Added')
+                this.cart = this.$store.dispatch("allCartFromDatabase")
             }).catch(error => {
                 console.log(error)
             })
         }
-    }   
+    },
+    computed:{
+        getAllCart(){ 
+            return this.cart = this.$store.dispatch("allCartFromDatabase")
+        }
+    },   
 }
 </script>
