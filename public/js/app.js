@@ -20069,7 +20069,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'ProductDetails',
-  props: ['productimage', 'productname', 'productcurrprice', 'productprevprice', 'productid', 'productdeliveryfee'],
+  props: ['productid', 'productimage', 'productname', 'productcurrprice', 'productprevprice', 'productsku', 'productdeliveryfee'],
   data: function data() {
     return {
       quantity: 1,
@@ -20121,21 +20121,24 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee2);
       }))();
     },
-    addToBag: function addToBag() {// alert(this.productid)
-      // axios.post('/addtobag', {
-      //     product_id: this.productid,
-      //     quantity: this.quantity
-      // }).then(response => {
-      //     console.log(response.data)
-      // }).catch(error => {
-      //     console.log(error)
-      // })
+    addToBag: function addToBag() {
+      var _this3 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
+                alert(_this3.productid); // axios.post('/addtobag', {
+                //     product_id: this.productid,
+                //     quantity: this.quantity
+                // }).then(response => {
+                //     console.log(response.data)
+                // }).catch(error => {
+                //     console.log(error)
+                // })
+
+              case 1:
               case "end":
                 return _context3.stop();
             }
@@ -21160,7 +21163,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* TEXT */
   )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("b", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.productprevprice), 1
   /* TEXT */
-  )])]), _hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, " Product ID: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.productid), 1
+  )])]), _hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, " Product ID: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.productsku), 1
   /* TEXT */
   )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [_hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.productdeliveryfee), 1
   /* TEXT */

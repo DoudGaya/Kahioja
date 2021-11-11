@@ -24,10 +24,11 @@
         <!-- Product  -->
         <div id="productDetails">
             <product-details-component 
+                :productid="{{ json_encode($productt->id) }}" 
                 :productimage="{{ json_encode(asset('images/products/'.$productt->photo)) }}" 
                 :productname="{{ json_encode($productt->name) }}" 
                 :productcurrprice="{{ json_encode($productt->showPrice()) }}" 
-                :productid="{{ json_encode($productt->sku) }}" 
+                :productsku="{{ json_encode($productt->sku) }}" 
                 :productdeliveryfee="{{ json_encode($productt->showShippingFee()) }}" 
             >
             </product-details-component>    

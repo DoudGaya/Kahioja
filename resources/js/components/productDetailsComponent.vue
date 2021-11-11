@@ -30,7 +30,7 @@
                 </div>
                 <div class="product-details-content">
                     <p>
-                        Product ID: {{ productid }}
+                        Product ID: {{ productsku }}
                     </p>
                 </div>
                 <div class="product-details-content grid grid-cols-2 gap-6 card-reviews my-4">
@@ -110,11 +110,12 @@
 export default {
     name: 'ProductDetails',
     props:[
+        'productid',
         'productimage',
         'productname',
         'productcurrprice',
         'productprevprice',
-        'productid',
+        'productsku',
         'productdeliveryfee'
     ],
     data(){
@@ -139,7 +140,7 @@ export default {
             }
         },
         async addToBag(){
-            // alert(this.productid)
+            alert(this.productid)
             // axios.post('/addtobag', {
             //     product_id: this.productid,
             //     quantity: this.quantity
