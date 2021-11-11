@@ -139,7 +139,7 @@ export default {
             }
         },
         async addToBag(){
-            alert(this.productid)
+            // alert(this.productid)
             // axios.post('/addtobag', {
             //     product_id: this.productid,
             //     quantity: this.quantity
