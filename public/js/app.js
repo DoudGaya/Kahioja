@@ -19502,9 +19502,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'CartComponent',
-  mounted: function mounted() {
-    this.$store.dispatch("allCartFromDatabase");
-  },
   data: function data() {
     return {
       displayCart: true,
@@ -19527,26 +19524,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     estimatedTotal: function estimatedTotal() {
       return this.subTotal + this.deliveryFee;
-    } // subTotal(){
-    //     return this.cart.reduce((sum, {subTotal}) => parseInt(sum + subTotal), 0)
-    // },
-    // deliveryFee(){
-    //     return this.cart.reduce((sum, {ship_fee}) => parseInt(sum + ship_fee), 0)
-    // },
-    // estimatedTotal(){
-    //     return this.subTotal + this.deliveryFee
-    // }
-
+    }
   },
-  // async created(){
-  //     axios.get(`/cart`,{
-  //         user_id: this.authUser.id
-  //     }).then(response => {
-  //         this.cart = response.data;
-  //     }).catch(error => {
-  //         console.log(error)
-  //     })
-  // },
   methods: {
     minusProduct: function minusProduct(id, quantity) {
       var _this = this;
@@ -21265,8 +21244,8 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_0__["default"].Store({
     }
   },
   mutations: {
-    cart: function cart(state, data) {
-      return state.cart = data;
+    cart: function cart(state, payload) {
+      return state.cart = payload;
     },
     addCart: function addCart(state, payload) {
       return state.cart.length = payload;

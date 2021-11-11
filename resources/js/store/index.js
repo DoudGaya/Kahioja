@@ -31,8 +31,8 @@ export const store = new Vuex.Store({
         },
     },
     mutations: {
-        cart(state, data) {
-            return state.cart = data
+        cart(state, payload) {
+            return state.cart = payload
         },
         addCart(state, payload){
             return state.cart.length = payload

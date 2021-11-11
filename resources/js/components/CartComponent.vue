@@ -101,9 +101,6 @@
 <script>
 export default {
     name: 'CartComponent',
-    mounted() {
-        this.$store.dispatch("allCartFromDatabase")
-    },
     data(){
         return{
             displayCart: true,
@@ -127,25 +124,7 @@ export default {
         estimatedTotal(){
             return this.subTotal + this.deliveryFee
         }
-        // subTotal(){
-        //     return this.cart.reduce((sum, {subTotal}) => parseInt(sum + subTotal), 0)
-        // },
-        // deliveryFee(){
-        //     return this.cart.reduce((sum, {ship_fee}) => parseInt(sum + ship_fee), 0)
-        // },
-        // estimatedTotal(){
-        //     return this.subTotal + this.deliveryFee
-        // }
     },
-    // async created(){
-    //     axios.get(`/cart`,{
-    //         user_id: this.authUser.id
-    //     }).then(response => {
-    //         this.cart = response.data;
-    //     }).catch(error => {
-    //         console.log(error)
-    //     })
-    // },
     methods:{
         async minusProduct(id, quantity){
             if(quantity > 1){
