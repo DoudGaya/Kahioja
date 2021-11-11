@@ -30,7 +30,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Fonts -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-	    <link rel="icon"  type="image/x-icon" href="{{asset('assets/images/'.$gs->favicon)}}"/>
+	    <link rel="icon"  type="image/x-icon" href="{{ asset('images/favicon.ico')}}"/>
         <link href="{{ asset('css/main.css') }}" rel="stylesheet">
     
     </head>

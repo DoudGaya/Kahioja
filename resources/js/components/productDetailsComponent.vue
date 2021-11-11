@@ -62,7 +62,7 @@
                 </div>
                 <div class="grid grid-cols-2 gap-6 my-7">
                     <div>
-                        <button class="mx-auto btn-yus rounded-full w-full flex flex-row justify-center items-center py-2 text-white">
+                        <button @click="addToBag()" class="mx-auto btn-yus rounded-full w-full flex flex-row justify-center items-center py-2 text-white">
                             <div class="card-bag-label">
                                 Add to Bag 
                             </div>
@@ -137,6 +137,17 @@ export default {
                 this.quantity = this.quantity + 1
                 this.isLoading = false
             }
+        },
+        async addToBag(){
+            alert(this.productid)
+            // axios.post('/addtobag', {
+            //     product_id: this.productid,
+            //     quantity: this.quantity
+            // }).then(response => {
+            //     console.log(response.data)
+            // }).catch(error => {
+            //     console.log(error)
+            // })
         }
     }
 }
