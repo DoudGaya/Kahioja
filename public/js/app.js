@@ -20129,14 +20129,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                alert(_this3.productid); // axios.post('/addtobag', {
-                //     product_id: this.productid,
-                //     quantity: this.quantity
-                // }).then(response => {
-                //     console.log(response.data)
-                // }).catch(error => {
-                //     console.log(error)
-                // })
+                axios.post('/addtobag', {
+                  product_id: _this3.productid,
+                  quantity: _this3.quantity
+                }).then(function (response) {
+                  console.log(response.data);
+
+                  _this3.$store.dispatch("allCartFromDatabase");
+                })["catch"](function (error) {
+                  console.log(error);
+                });
 
               case 1:
               case "end":

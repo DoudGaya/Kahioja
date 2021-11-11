@@ -20,13 +20,15 @@ class CartController extends Controller
     public function addtobag(Request $request){
         $user_id = Auth::user()->id;
         $product_id = $request->product_id;
+        $quantity = $request->quantity;
+        
         $is_product_in_bag = Bag::where('product_id', $product_id)->where('user_id', $user_id)->count();
             if($is_product_in_bag == 0){
                 try{
                     Bag::create([
                         'product_id'=> $product_id,
                         'user_id'=> $user_id,
-                        'quantity'=> 1,
+                        'quantity'=> ($quantity == 0) ? 1 : $quantity,
                         'paid'=> 'unpaid'
                     ]);
                     
@@ -37,10 +39,10 @@ class CartController extends Controller
                     return $response = \Response::json($e, 500);                    
                 }
             }else{
-                $quantity = DB::select("SELECT `quantity` FROM bags WHERE bags.product_id='$product_id' && bags.user_id='$user_id'");
-                $quantity = $quantity[0]->quantity + 1;
+                $quantity_check = DB::select("SELECT `quantity` FROM bags WHERE bags.product_id='$product_id' && bags.user_id='$user_id'");
+                $quantity_add = $quantity_check[0]->quantity + $quantity;
                     try{
-                        Bag::where('product_id', $product_id)->where('user_id', $user_id)->update(['quantity' => $quantity]);
+                        Bag::where('product_id', $product_id)->where('user_id', $user_id)->update(['quantity' => $quantity_add]);
                         
                         $bag = DB::select("SELECT DISTINCT bags.id as 'bagId', bags.quantity, products.name, products.price, products.ship_fee, products.photo, bags.quantity * products.price as 'subTotal' FROM bags, products, users WHERE bags.product_id = products.id && bags.user_id = '$user_id' && bags.paid = 'unpaid' ORDER BY bags.id DESC");
                         return $response = \Response::json($bag, 200);

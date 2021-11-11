@@ -140,15 +140,15 @@ export default {
             }
         },
         async addToBag(){
-            alert(this.productid)
-            // axios.post('/addtobag', {
-            //     product_id: this.productid,
-            //     quantity: this.quantity
-            // }).then(response => {
-            //     console.log(response.data)
-            // }).catch(error => {
-            //     console.log(error)
-            // })
+            axios.post('/addtobag', {
+                product_id: this.productid,
+                quantity: this.quantity
+            }).then(response => {
+                console.log(response.data)
+                this.$store.dispatch("allCartFromDatabase")
+            }).catch(error => {
+                console.log(error)
+            })
         }
     }
 }
