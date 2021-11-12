@@ -37,6 +37,11 @@ class CatalogController extends Controller
       return view('front.categories', compact('products','gs'));
     }
 
+    public function allcategories(){
+      $category = Category::where('status', 1)->orderBy('name', 'asc')->get();
+      return $response = \Response::json($category, 200);
+    }
+
     // -------------------------------- CATEGORY SECTION ----------------------------------------
     //
     // public function filteredProducts(Request $request, $slug=null, $slug1=null, $slug2=null)

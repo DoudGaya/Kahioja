@@ -461,3 +461,10 @@ body{
     background: #FFFFFF;
     border: 2px solid #F37022;
 }
+
+#cate-btn{
+    position: fixed;
+    top: 189px;
+    left: 5%;
+    z-index: 320;
+}

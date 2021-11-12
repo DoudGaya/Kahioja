@@ -8,6 +8,7 @@ app.component('nav-component', require('./components/NavComponent.vue').default)
 app.component('product-component', require('./components/productComponent.vue').default)
 app.component('product-details-component', require('./components/productDetailsComponent.vue').default)
 app.component('product-description-component', require('./components/productDescriptionComponent.vue').default)
+app.component('category-component', require('./components/categoryComponent.vue').default)
 app.use(store).mount('#app')
 
 // let product = createApp({})
