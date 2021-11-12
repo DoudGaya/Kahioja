@@ -28,8 +28,10 @@
         <div v-show="displayCategory" id="cate-btn" class="text-black top-20 bg-white shadow-md w-1/6 p-4">
             <ul>
                 <div :key="category.id" v-for="category in categories" class="flex justify-between border-b py-2 items-center">
-                    <span><img style="width:30px; height:30px;" :src="`images/categories/${category.photo}`" :alt="category.name"></span>
-                    <span><li class="text-sm">{{ category.name }}</li></span>
+                    <a :href="`/category/${category.slug}`" class="flex justify-between w-full items-center">
+                        <span><img style="width:30px; height:30px;" :src="`/images/categories/${category.photo}`" :alt="category.name"></span>
+                        <span><li class="text-sm">{{ category.name }}</li></span>
+                    </a>
                 </div>
             </ul>
         </div>

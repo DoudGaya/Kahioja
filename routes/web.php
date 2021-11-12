@@ -54,7 +54,7 @@ Route::get('/', [FrontendController::class, 'index'])->name('front.index');
     // PRODCT SECTION ENDS
     
     // CATEGORY SECTION
-    Route::get('/category/{category?}/{subcategory?}/{childcategory?}', [CatalogController::class, 'category'])->name('front.category');
+    Route::get('/category/{slug}/', [CatalogController::class, 'category'])->name('front.category');
     Route::get('/category/{slug1}/{slug2}', [CatalogController::class, 'subcategory'])->name('front.subcat');
     Route::get('/category/{slug1}/{slug2}/{slug3}', [CatalogController::class, 'childcategory'])->name('front.childcat');
     Route::get('/categories/', [CatalogController::class, 'categories'])->name('front.categories');
