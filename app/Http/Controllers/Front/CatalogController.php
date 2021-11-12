@@ -67,6 +67,14 @@ class CatalogController extends Controller
       return view('front.category', compact('products','gs'));
     }
 
+    public function shop(Request $request)
+    {
+      $gs = Generalsetting::findOrFail(1);
+      $shop_name = $request->shop_name;
+      $user_id = User::select('id')->where('shop_name', $shop_name)->first();
+      $products = Product::where('user_id', $user_id->id)->orderBy('id','desc')->paginate(12);
+      return view('front.category', compact('products','gs'));
+    }
 
     public function getsubs(Request $request) {
       $category = Category::where('slug', $request->category)->firstOrFail();

@@ -20893,7 +20893,7 @@ var _hoisted_1 = {
   "class": "grid grid-cols-2 gap-4"
 };
 var _hoisted_2 = {
-  "class": "flex justify-between"
+  "class": "flex"
 };
 
 var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
@@ -20938,38 +20938,37 @@ var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 
 var _hoisted_8 = [_hoisted_6, _hoisted_7];
 
-var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<button class=\"flex justify-between items-center\"><span class=\"mr-3\">Brands</span><span><svg width=\"14\" height=\"8\" viewBox=\"0 0 14 8\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M7.07163 5.31388L12.0216 0.363882C12.1139 0.268372 12.2242 0.19219 12.3462 0.139781C12.4682 0.0873716 12.5995 0.0597853 12.7322 0.0586315C12.865 0.0574777 12.9967 0.0827794 13.1196 0.13306C13.2425 0.183341 13.3541 0.257594 13.448 0.351487C13.5419 0.44538 13.6162 0.557032 13.6665 0.679928C13.7167 0.802824 13.742 0.934504 13.7409 1.06728C13.7397 1.20006 13.7121 1.33128 13.6597 1.45329C13.6073 1.57529 13.5311 1.68564 13.4356 1.77788L7.77863 7.43488C7.5911 7.62235 7.3368 7.72767 7.07163 7.72767C6.80647 7.72767 6.55216 7.62235 6.36463 7.43488L0.707632 1.77788C0.612122 1.68564 0.53594 1.57529 0.483531 1.45329C0.431122 1.33128 0.403535 1.20006 0.402382 1.06728C0.401228 0.934504 0.426529 0.802824 0.47681 0.679928C0.527091 0.557032 0.601344 0.44538 0.695237 0.351487C0.78913 0.257594 0.900782 0.183341 1.02368 0.13306C1.14657 0.0827794 1.27825 0.0574777 1.41103 0.0586315C1.54381 0.0597853 1.67503 0.0873716 1.79704 0.139781C1.91904 0.19219 2.02939 0.268372 2.12163 0.363882L7.07163 5.31388Z\" fill=\"#626262\"></path></svg></span></button><button class=\"flex justify-between items-center\"><span class=\"mr-3\">Price</span><span><svg width=\"14\" height=\"8\" viewBox=\"0 0 14 8\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M7.07163 5.31388L12.0216 0.363882C12.1139 0.268372 12.2242 0.19219 12.3462 0.139781C12.4682 0.0873716 12.5995 0.0597853 12.7322 0.0586315C12.865 0.0574777 12.9967 0.0827794 13.1196 0.13306C13.2425 0.183341 13.3541 0.257594 13.448 0.351487C13.5419 0.44538 13.6162 0.557032 13.6665 0.679928C13.7167 0.802824 13.742 0.934504 13.7409 1.06728C13.7397 1.20006 13.7121 1.33128 13.6597 1.45329C13.6073 1.57529 13.5311 1.68564 13.4356 1.77788L7.77863 7.43488C7.5911 7.62235 7.3368 7.72767 7.07163 7.72767C6.80647 7.72767 6.55216 7.62235 6.36463 7.43488L0.707632 1.77788C0.612122 1.68564 0.53594 1.57529 0.483531 1.45329C0.431122 1.33128 0.403535 1.20006 0.402382 1.06728C0.401228 0.934504 0.426529 0.802824 0.47681 0.679928C0.527091 0.557032 0.601344 0.44538 0.695237 0.351487C0.78913 0.257594 0.900782 0.183341 1.02368 0.13306C1.14657 0.0827794 1.27825 0.0574777 1.41103 0.0586315C1.54381 0.0597853 1.67503 0.0873716 1.79704 0.139781C1.91904 0.19219 2.02939 0.268372 2.12163 0.363882L7.07163 5.31388Z\" fill=\"#626262\"></path></svg></span></button>", 2);
+var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"flex justify-end\"><button class=\"flex justify-between items-center border w-1/2\" style=\"background-color:#ffffff;\"><span class=\"mr-3\">Sort by | Lastest Product</span><span><svg width=\"14\" height=\"8\" viewBox=\"0 0 14 8\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M7.07163 5.31388L12.0216 0.363882C12.1139 0.268372 12.2242 0.19219 12.3462 0.139781C12.4682 0.0873716 12.5995 0.0597853 12.7322 0.0586315C12.865 0.0574777 12.9967 0.0827794 13.1196 0.13306C13.2425 0.183341 13.3541 0.257594 13.448 0.351487C13.5419 0.44538 13.6162 0.557032 13.6665 0.679928C13.7167 0.802824 13.742 0.934504 13.7409 1.06728C13.7397 1.20006 13.7121 1.33128 13.6597 1.45329C13.6073 1.57529 13.5311 1.68564 13.4356 1.77788L7.77863 7.43488C7.5911 7.62235 7.3368 7.72767 7.07163 7.72767C6.80647 7.72767 6.55216 7.62235 6.36463 7.43488L0.707632 1.77788C0.612122 1.68564 0.53594 1.57529 0.483531 1.45329C0.431122 1.33128 0.403535 1.20006 0.402382 1.06728C0.401228 0.934504 0.426529 0.802824 0.47681 0.679928C0.527091 0.557032 0.601344 0.44538 0.695237 0.351487C0.78913 0.257594 0.900782 0.183341 1.02368 0.13306C1.14657 0.0827794 1.27825 0.0574777 1.41103 0.0586315C1.54381 0.0597853 1.67503 0.0873716 1.79704 0.139781C1.91904 0.19219 2.02939 0.268372 2.12163 0.363882L7.07163 5.31388Z\" fill=\"#626262\"></path></svg></span></button></div>", 1);
 
-var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"flex justify-end\"><button class=\"flex justify-between items-center border w-1/2\" style=\"background-color:#ffffff;\"><span class=\"mr-3\">Sort by | Lastest Product</span><span><svg width=\"14\" height=\"8\" viewBox=\"0 0 14 8\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M7.07163 5.31388L12.0216 0.363882C12.1139 0.268372 12.2242 0.19219 12.3462 0.139781C12.4682 0.0873716 12.5995 0.0597853 12.7322 0.0586315C12.865 0.0574777 12.9967 0.0827794 13.1196 0.13306C13.2425 0.183341 13.3541 0.257594 13.448 0.351487C13.5419 0.44538 13.6162 0.557032 13.6665 0.679928C13.7167 0.802824 13.742 0.934504 13.7409 1.06728C13.7397 1.20006 13.7121 1.33128 13.6597 1.45329C13.6073 1.57529 13.5311 1.68564 13.4356 1.77788L7.77863 7.43488C7.5911 7.62235 7.3368 7.72767 7.07163 7.72767C6.80647 7.72767 6.55216 7.62235 6.36463 7.43488L0.707632 1.77788C0.612122 1.68564 0.53594 1.57529 0.483531 1.45329C0.431122 1.33128 0.403535 1.20006 0.402382 1.06728C0.401228 0.934504 0.426529 0.802824 0.47681 0.679928C0.527091 0.557032 0.601344 0.44538 0.695237 0.351487C0.78913 0.257594 0.900782 0.183341 1.02368 0.13306C1.14657 0.0827794 1.27825 0.0574777 1.41103 0.0586315C1.54381 0.0597853 1.67503 0.0873716 1.79704 0.139781C1.91904 0.19219 2.02939 0.268372 2.12163 0.363882L7.07163 5.31388Z\" fill=\"#626262\"></path></svg></span></button></div>", 1);
-
-var _hoisted_12 = {
+var _hoisted_10 = {
   id: "cate-btn",
   "class": "text-black top-20 bg-white shadow-md w-1/6 p-4"
 };
-var _hoisted_13 = ["href"];
-var _hoisted_14 = ["src", "alt"];
-var _hoisted_15 = {
+var _hoisted_11 = ["href"];
+var _hoisted_12 = ["src", "alt"];
+var _hoisted_13 = {
   "class": "text-sm"
 };
-var _hoisted_16 = {
+var _hoisted_14 = {
   id: "store-btn",
   "class": "text-black top-20 bg-white shadow-md w-1/6 p-4"
 };
-var _hoisted_17 = {
-  "class": "text-sm"
+var _hoisted_15 = ["href"];
+var _hoisted_16 = {
+  "class": "text-sm py-1"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Categories  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     onClick: _cache[0] || (_cache[0] = function ($event) {
       return $options.categoryBtn();
     }),
-    "class": "flex justify-between items-center"
+    "class": "flex justify-between items-center mr-12"
   }, _hoisted_5), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     onClick: _cache[1] || (_cache[1] = function ($event) {
       return $options.storeBtn();
     }),
     "class": "flex justify-between items-center"
-  }, _hoisted_8), _hoisted_9]), _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.categories, function (category) {
+  }, _hoisted_8), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <button class=\"flex justify-between items-center\">\r\n                <span class=\"mr-3\">Brands</span>\r\n                <span><svg width=\"14\" height=\"8\" viewBox=\"0 0 14 8\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M7.07163 5.31388L12.0216 0.363882C12.1139 0.268372 12.2242 0.19219 12.3462 0.139781C12.4682 0.0873716 12.5995 0.0597853 12.7322 0.0586315C12.865 0.0574777 12.9967 0.0827794 13.1196 0.13306C13.2425 0.183341 13.3541 0.257594 13.448 0.351487C13.5419 0.44538 13.6162 0.557032 13.6665 0.679928C13.7167 0.802824 13.742 0.934504 13.7409 1.06728C13.7397 1.20006 13.7121 1.33128 13.6597 1.45329C13.6073 1.57529 13.5311 1.68564 13.4356 1.77788L7.77863 7.43488C7.5911 7.62235 7.3368 7.72767 7.07163 7.72767C6.80647 7.72767 6.55216 7.62235 6.36463 7.43488L0.707632 1.77788C0.612122 1.68564 0.53594 1.57529 0.483531 1.45329C0.431122 1.33128 0.403535 1.20006 0.402382 1.06728C0.401228 0.934504 0.426529 0.802824 0.47681 0.679928C0.527091 0.557032 0.601344 0.44538 0.695237 0.351487C0.78913 0.257594 0.900782 0.183341 1.02368 0.13306C1.14657 0.0827794 1.27825 0.0574777 1.41103 0.0586315C1.54381 0.0597853 1.67503 0.0873716 1.79704 0.139781C1.91904 0.19219 2.02939 0.268372 2.12163 0.363882L7.07163 5.31388Z\" fill=\"#626262\"/></svg></span>\r\n            </button>\r\n            <button class=\"flex justify-between items-center\">\r\n                <span class=\"mr-3\">Price</span>\r\n                <span><svg width=\"14\" height=\"8\" viewBox=\"0 0 14 8\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M7.07163 5.31388L12.0216 0.363882C12.1139 0.268372 12.2242 0.19219 12.3462 0.139781C12.4682 0.0873716 12.5995 0.0597853 12.7322 0.0586315C12.865 0.0574777 12.9967 0.0827794 13.1196 0.13306C13.2425 0.183341 13.3541 0.257594 13.448 0.351487C13.5419 0.44538 13.6162 0.557032 13.6665 0.679928C13.7167 0.802824 13.742 0.934504 13.7409 1.06728C13.7397 1.20006 13.7121 1.33128 13.6597 1.45329C13.6073 1.57529 13.5311 1.68564 13.4356 1.77788L7.77863 7.43488C7.5911 7.62235 7.3368 7.72767 7.07163 7.72767C6.80647 7.72767 6.55216 7.62235 6.36463 7.43488L0.707632 1.77788C0.612122 1.68564 0.53594 1.57529 0.483531 1.45329C0.431122 1.33128 0.403535 1.20006 0.402382 1.06728C0.401228 0.934504 0.426529 0.802824 0.47681 0.679928C0.527091 0.557032 0.601344 0.44538 0.695237 0.351487C0.78913 0.257594 0.900782 0.183341 1.02368 0.13306C1.14657 0.0827794 1.27825 0.0574777 1.41103 0.0586315C1.54381 0.0597853 1.67503 0.0873716 1.79704 0.139781C1.91904 0.19219 2.02939 0.268372 2.12163 0.363882L7.07163 5.31388Z\" fill=\"#626262\"/></svg></span>\r\n            </button> ")]), _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.categories, function (category) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       key: category.id,
       "class": "flex justify-between border-b py-2 items-center"
@@ -20985,22 +20984,26 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       alt: category.name
     }, null, 8
     /* PROPS */
-    , _hoisted_14)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(category.name), 1
+    , _hoisted_12)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(category.name), 1
     /* TEXT */
     )])], 8
     /* PROPS */
-    , _hoisted_13)]);
+    , _hoisted_11)]);
   }), 128
   /* KEYED_FRAGMENT */
   ))])], 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.displayCategory]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.stores, function (store) {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.displayCategory]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.stores, function (store) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       key: store.id,
       "class": "flex justify-between border-b py-2 items-center"
-    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(store.shop_name), 1
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+      href: "/store/".concat(store.shop_name)
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(store.shop_name), 1
     /* TEXT */
-    )])]);
+    )])], 8
+    /* PROPS */
+    , _hoisted_15)]);
   }), 128
   /* KEYED_FRAGMENT */
   ))])], 512
