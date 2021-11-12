@@ -462,9 +462,13 @@ body{
     border: 2px solid #F37022;
 }
 
-#cate-btn{
-    position: fixed;
-    top: 189px;
+#cate-btn, #store-btn{
+    position: absolute;
+    top: 45px;
     left: 5%;
     z-index: 320;
+}
+
+#store-btn{
+    left: 15%;
 }

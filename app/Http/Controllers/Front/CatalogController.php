@@ -9,6 +9,7 @@ use App\Models\Comment;
 use App\Models\Generalsetting;
 use App\Models\Currency;
 use App\Models\Order;
+use App\Models\User;
 use App\Models\Product;
 use App\Models\ProductClick;
 use App\Models\Rating;
@@ -38,8 +39,13 @@ class CatalogController extends Controller
     }
 
     public function allcategories(){
-      $category = Category::where('status', 1)->orderBy('name', 'asc')->get();
+      $category = Category::select('name', 'photo')->where('status', 1)->orderBy('name', 'asc')->get();
       return $response = \Response::json($category, 200);
+    }
+
+    public function allstores(){
+      $stores = User::select('shop_name')->where('is_vendor', 1)->orderBy('shop_name', 'asc')->get();
+      return $response = \Response::json($stores, 200);
     }
 
     // -------------------------------- CATEGORY SECTION ----------------------------------------

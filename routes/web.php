@@ -58,6 +58,7 @@ Route::get('/', [FrontendController::class, 'index'])->name('front.index');
     Route::get('/category/{slug1}/{slug2}', [CatalogController::class, 'subcategory'])->name('front.subcat');
     Route::get('/category/{slug1}/{slug2}/{slug3}', [CatalogController::class, 'childcategory'])->name('front.childcat');
     Route::get('/categories/', [CatalogController::class, 'categories'])->name('front.categories');
-    Route::get('/allcategories/', [CatalogController::class, 'allcategories'])->name('front.categories');
+    Route::get('/allcategories/', [CatalogController::class, 'allcategories']);
+    Route::get('/allstores/', [CatalogController::class, 'allstores']);
     Route::get('/childcategories/{slug}',  [CatalogController::class, 'childcategories'])->name('front.childcategories');
     // CATEGORY SECTION ENDS
