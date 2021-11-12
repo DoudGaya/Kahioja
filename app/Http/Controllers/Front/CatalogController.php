@@ -32,7 +32,9 @@ class CatalogController extends Controller
     public function categories()
     {
       $gs = Generalsetting::findOrFail(1);
-      return view('front.categories', compact('gs'));
+      $products = Product::where('status','=',1)->orderBy('id','desc')->paginate(12);
+        
+      return view('front.categories', compact('products','gs'));
     }
 
     // -------------------------------- CATEGORY SECTION ----------------------------------------

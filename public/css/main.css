@@ -447,5 +447,17 @@ body{
     padding: 5px 34px;
     background: #EBEAEA;
     border-radius: 29.5464px;
+}
 
+#pagination-control li{
+    margin-left: 10px;
+    padding-top: 0.5%;
+    padding-bottom: 0.5%;
+    width: 45px;
+    text-align: center;
+}
+
+.active-page{
+    background: #FFFFFF;
+    border: 2px solid #F37022;
 }
