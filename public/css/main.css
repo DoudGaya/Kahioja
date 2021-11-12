@@ -442,3 +442,10 @@ body{
       transform: rotate(360deg);
     }
 }
+
+#category-nav button{
+    padding: 5px 34px;
+    background: #EBEAEA;
+    border-radius: 29.5464px;
+
+}

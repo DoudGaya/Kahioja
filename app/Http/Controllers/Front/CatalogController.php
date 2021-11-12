@@ -31,7 +31,8 @@ class CatalogController extends Controller
 
     public function categories()
     {
-        return view('front.categories');
+      $gs = Generalsetting::findOrFail(1);
+      return view('front.categories', compact('gs'));
     }
 
     // -------------------------------- CATEGORY SECTION ----------------------------------------
