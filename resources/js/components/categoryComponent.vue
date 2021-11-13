@@ -26,9 +26,9 @@
             </button>
         </div>
         <!-- Category Catalog  -->
-        <div v-show="displayCategory" id="cate-btn" class="text-black top-20 bg-white shadow-md w-1/6 p-4">
+        <div v-show="displayCategory" id="cate-btn" class="text-black top-20 bg-white shadow-md w-1/6">
             <ul>
-                <div :key="category.id" v-for="category in categories" class="flex justify-between border-b py-2 items-center">
+                <div :key="category.id" v-for="category in categories" class="flex justify-between border-b p-4 items-center">
                     <a :href="`/category/${category.slug}`" class="flex justify-between w-full items-center">
                         <span><img style="width:30px; height:30px;" :src="`/images/categories/${category.photo}`" :alt="category.name"></span>
                         <span><li class="text-sm">{{ category.name }}</li></span>
@@ -37,9 +37,9 @@
             </ul>
         </div>
         <!-- Store Catalog  -->
-        <div v-show="displayStore" id="store-btn" class="text-black top-20 bg-white shadow-md w-1/6 p-4">
+        <div v-show="displayStore" id="store-btn" class="text-black top-20 bg-white shadow-md w-1/6">
             <ul>
-                <div :key="store.id" v-for="store in stores" class="flex justify-between border-b py-2 items-center">
+                <div :key="store.id" v-for="store in stores" class="flex justify-between border-b p-4 items-center">
                     <a :href="`/store/${store.shop_name}`">
                         <span><li class="text-sm py-1">{{ store.shop_name }}</li></span>
                     </a>
@@ -47,12 +47,19 @@
             </ul>
         </div>
         <!-- Sort Product  -->
-        <div v-show="displaySortProduct" id="sort-btn" class="text-black top-20 bg-white shadow-md w-1/6 p-4">
+        <div v-show="displaySortProduct" id="sort-btn" class="text-black top-20 bg-white shadow-md w-1/6">
             <ul>
-                <div :key="store.id" v-for="store in stores" class="flex justify-between border-b py-2 items-center">
-                    <a :href="`/store/${store.shop_name}`">
-                        <span><li class="text-sm py-1">{{ store.shop_name }}</li></span>
-                    </a>
+                <div class="p-4 flex justify-between border-b items-center">
+                    <span><li class="text-sm">Lastest Products</li></span>
+                </div>
+                <div class="p-4 flex justify-between border-b items-center">
+                    <span><li class="text-sm">Oldest Product</li></span>
+                </div>
+                <div class="p-4 flex justify-between border-b items-center">
+                    <span><li class="text-sm">Lowest Price</li></span>
+                </div>
+                <div class="p-4 flex justify-between border-b items-center">
+                    <span><li class="text-sm">Highest Price</li></span>
                 </div>
             </ul>
         </div>

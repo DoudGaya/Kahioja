@@ -20970,7 +20970,7 @@ var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 var _hoisted_12 = [_hoisted_10, _hoisted_11];
 var _hoisted_13 = {
   id: "cate-btn",
-  "class": "text-black top-20 bg-white shadow-md w-1/6 p-4"
+  "class": "text-black top-20 bg-white shadow-md w-1/6"
 };
 var _hoisted_14 = ["href"];
 var _hoisted_15 = ["src", "alt"];
@@ -20979,7 +20979,7 @@ var _hoisted_16 = {
 };
 var _hoisted_17 = {
   id: "store-btn",
-  "class": "text-black top-20 bg-white shadow-md w-1/6 p-4"
+  "class": "text-black top-20 bg-white shadow-md w-1/6"
 };
 var _hoisted_18 = ["href"];
 var _hoisted_19 = {
@@ -20987,12 +20987,12 @@ var _hoisted_19 = {
 };
 var _hoisted_20 = {
   id: "sort-btn",
-  "class": "text-black top-20 bg-white shadow-md w-1/6 p-4"
+  "class": "text-black top-20 bg-white shadow-md w-1/6"
 };
-var _hoisted_21 = ["href"];
-var _hoisted_22 = {
-  "class": "text-sm py-1"
-};
+
+var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<ul><div class=\"p-4 flex justify-between border-b items-center\"><span><li class=\"text-sm\">Lastest Products</li></span></div><div class=\"p-4 flex justify-between border-b items-center\"><span><li class=\"text-sm\">Oldest Product</li></span></div><div class=\"p-4 flex justify-between border-b items-center\"><span><li class=\"text-sm\">Lowest Price</li></span></div><div class=\"p-4 flex justify-between border-b items-center\"><span><li class=\"text-sm\">Highest Price</li></span></div></ul>", 1);
+
+var _hoisted_22 = [_hoisted_21];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Categories  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     onClick: _cache[0] || (_cache[0] = function ($event) {
@@ -21015,7 +21015,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, _hoisted_12)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Category Catalog  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.categories, function (category) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       key: category.id,
-      "class": "flex justify-between border-b py-2 items-center"
+      "class": "flex justify-between border-b p-4 items-center"
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
       href: "/category/".concat(category.slug),
       "class": "flex justify-between w-full items-center"
@@ -21040,7 +21040,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.displayCategory]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Store Catalog  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.stores, function (store) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       key: store.id,
-      "class": "flex justify-between border-b py-2 items-center"
+      "class": "flex justify-between border-b p-4 items-center"
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
       href: "/store/".concat(store.shop_name)
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(store.shop_name), 1
@@ -21052,20 +21052,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* KEYED_FRAGMENT */
   ))])], 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.displayStore]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Sort Product  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.stores, function (store) {
-    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
-      key: store.id,
-      "class": "flex justify-between border-b py-2 items-center"
-    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-      href: "/store/".concat(store.shop_name)
-    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_22, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(store.shop_name), 1
-    /* TEXT */
-    )])], 8
-    /* PROPS */
-    , _hoisted_21)]);
-  }), 128
-  /* KEYED_FRAGMENT */
-  ))])], 512
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.displayStore]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Sort Product  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, _hoisted_22, 512
   /* NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.displaySortProduct]])]);
 }

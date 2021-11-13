@@ -467,14 +467,21 @@ body{
     top: 2%;
     left: 5%;
     z-index: 320;
-    max-height: 300px;
+    max-height: 340px;
+    min-width: 283px;
     overflow: auto;
 }
 
 #store-btn{
-    left: 15%;
+    left: 20%;
 }
 
 #sort-btn{
     left: 77%;
+}
+
+#cate-btn div:hover, #store-btn div:hover, #sort-btn div:hover{
+    background-color: #FDE2D3;
+    border-left: 4px solid #F37022;
+    cursor: pointer;
 }
