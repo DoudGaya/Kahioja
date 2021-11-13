@@ -19774,9 +19774,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              axios.get("/cart", {
-                user_id: _this.authUser.id
-              }).then(function (response) {
+              axios.get("/cart").then(function (response) {
                 _this.cart = response.data;
               })["catch"](function (error) {
                 console.log(error);
@@ -21061,8 +21059,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       "class": "flex justify-between w-full items-center"
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
       style: {
-        "width": "30px",
-        "height": "30px"
+        "width": "35px"
       },
       src: "/images/categories/".concat(category.photo),
       alt: category.name

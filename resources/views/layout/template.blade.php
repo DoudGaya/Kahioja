@@ -43,7 +43,6 @@
             @else
                 <script> window.authUser = {!! json_encode(Auth::user()); !!} </script>        
             @endif 
-
             @yield('main')
         </div>
         

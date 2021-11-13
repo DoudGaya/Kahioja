@@ -3,7 +3,7 @@ import Vuex from 'vuex';
 export const store = new Vuex.Store({
     strict:true,
     state:{
-        cart: []
+        cart: [],
     },
     getters:{
         getCart(state){

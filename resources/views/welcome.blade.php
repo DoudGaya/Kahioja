@@ -49,7 +49,6 @@
             </svg>
         </div>
         <div class="flex flex-row justify-center items-center mt-8 mx-auto">
-            <!-- <img class="ml-3" src="{{ asset('images/dot-active.png') }}" alt="dot icon"> -->
             <!-- Active Slider  -->
             <svg width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <circle opacity="0.7" cx="13.5" cy="13.5" r="13" stroke="#F37022"/>
@@ -74,42 +73,16 @@
             Popular Product Categories
         </h1>
         <div class="grid grid-cols-6 gap-6 my-8 text-center">
-            <div>
-                <div class="cate-yus rounded-full">
-                    <img class="mx-auto" src="{{ asset('images/categories/games.png') }}" alt="Games Logo">
+            @foreach($categories as $category)
+                <div>
+                    <a href="{{ route('front.category', $category->slug) }}">
+                        <div class="cate-yus rounded-full">
+                            <img style="width:138px; height:177px;" class="mx-auto" src="{{ asset('/images/categories/'.$category->photo) }}" alt="{{ $category->name }}">
+                        </div>
+                        <span class="cate-title-yus">{{ $category->name }}</span>
+                    </a>
                 </div>
-                <span class="cate-title-yus">Games</span>
-            </div>
-            <div>
-                <div class="cate-yus rounded-full">
-                    <img class="mx-auto" src="{{ asset('images/categories/smart-phones.png') }}" alt="Smart Phone Logo">
-                </div>
-                <span class="cate-title-yus">Smart Phone</span>
-            </div>
-            <div>
-                <div class="cate-yus rounded-full">
-                    <img class="mx-auto" src="{{ asset('images/categories/groceries.png') }}" alt="Groceries Logo">
-                </div>
-                <span class="cate-title-yus">Groceries</span>
-            </div>
-            <div>
-                <div class="cate-yus rounded-full">
-                    <img class="mx-auto" src="{{ asset('images/categories/electronics.png') }}" alt="Electronics Logo">
-                </div>
-                <span class="cate-title-yus">Electronics</span>
-            </div>
-            <div>
-                <div class="cate-yus rounded-full">
-                    <img class="mx-auto" src="{{ asset('images/categories/smart-watches.png') }}" alt="Smart Watches Logo">
-                </div>
-                <span class="cate-title-yus">Smart Watches</span>
-            </div>
-            <div>
-                <div class="cate-yus rounded-full">
-                    <img class="mx-auto" src="{{ asset('images/categories/household.png') }}" alt="Household Logo">
-                </div>
-                <span class="cate-title-yus">Household</span>
-            </div>
+            @endforeach
         </div>
     </div>
     <!-- Main Category -->

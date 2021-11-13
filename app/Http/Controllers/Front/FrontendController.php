@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Front;
 use App\Http\Controllers\Controller;
 use App\Models\Counter;
 use App\Models\Product;
+use App\Models\Category;
 use App\Models\Generalsetting;
 use DB;
 
@@ -115,7 +116,9 @@ class FrontendController extends Controller
         $latest_products =  Product::where('latest','=',1)->where('status','=',1)->select($selectable)->orderBy('id','desc')->take(8)->get();
         $trending_products =  Product::where('trending','=',1)->where('status','=',1)->select($selectable)->orderBy('id','desc')->take(8)->get();
         $sale_products =  Product::where('sale','=',1)->where('status','=',1)->select($selectable)->orderBy('id','desc')->take(8)->get();
-        return view('welcome',compact('best_products','top_products','hot_products','sale_products','ps','gs'));
+        $categories = Category::select('name', 'photo', 'slug')->where('status', 1)->orderBy('id', 'desc')->take(6)->get();
+      
+        return view('welcome',compact('best_products','top_products','hot_products','sale_products','ps','gs','categories'));
 	}
 
     public function autosearch($slug)

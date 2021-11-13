@@ -74,9 +74,7 @@ export default {
         }
     },
     async created(){
-        axios.get(`/cart`,{
-            user_id: this.authUser.id
-        }).then(response => {
+        axios.get(`/cart`).then(response => {
             this.cart = response.data;
         }).catch(error => {
             console.log(error)
