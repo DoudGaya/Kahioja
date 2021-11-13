@@ -35,6 +35,7 @@ Route::get('/', [FrontendController::class, 'index'])->name('front.index');
 
     // PRODCT AUTO SEARCH SECTION
     Route::get('/autosearch/product/{slug}',[FrontendController::class, 'autosearch']);
+    Route::get('/allproducts/',[FrontendController::class, 'allproducts']);
     // PRODCT AUTO SEARCH SECTION ENDS
 
     // CART

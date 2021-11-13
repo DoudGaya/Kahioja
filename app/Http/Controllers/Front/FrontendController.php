@@ -130,4 +130,9 @@ class FrontendController extends Controller
         }
         return "";
     }
+
+    public function allproducts(){
+        $products = Product::where('status', 1)->orderBy('id', 'desc')->get();
+        return $response = \Response::json($products, 200);
+    }
 }
