@@ -462,9 +462,9 @@ body{
     border: 2px solid #F37022;
 }
 
-#cate-btn, #store-btn{
+#cate-btn, #store-btn, #sort-btn{
     position: absolute;
-    top: 45px;
+    top: 2%;
     left: 5%;
     z-index: 320;
     max-height: 300px;
@@ -473,4 +473,8 @@ body{
 
 #store-btn{
     left: 15%;
+}
+
+#sort-btn{
+    left: 77%;
 }

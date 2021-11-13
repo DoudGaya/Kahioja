@@ -19933,6 +19933,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       displayCategory: false,
       displayStore: false,
+      displaySortProduct: true,
       categories: [],
       stores: []
     };
@@ -19940,11 +19941,18 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     categoryBtn: function categoryBtn() {
       this.displayStore = false;
+      this.displaySortProduct = false;
       this.displayCategory = !this.displayCategory;
     },
     storeBtn: function storeBtn() {
       this.displayCategory = false;
+      this.displaySortProduct = false;
       this.displayStore = !this.displayStore;
+    },
+    sortBtn: function sortBtn() {
+      this.displayCategory = false;
+      this.displayStore = false;
+      this.displaySortProduct = !this.displaySortProduct;
     }
   },
   mounted: function mounted() {
@@ -19956,8 +19964,7 @@ __webpack_require__.r(__webpack_exports__);
       console.log(error);
     });
     axios.get("/allstores/").then(function (response) {
-      _this.stores = response.data;
-      console.log(response.data);
+      _this.stores = response.data; // console.log(response.data)
     })["catch"](function (error) {
       console.log(error);
     });
@@ -20937,24 +20944,53 @@ var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 );
 
 var _hoisted_8 = [_hoisted_6, _hoisted_7];
+var _hoisted_9 = {
+  "class": "flex justify-end"
+};
 
-var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"flex justify-end\"><button class=\"flex justify-between items-center border w-1/2\" style=\"background-color:#ffffff;\"><span class=\"mr-3\">Sort by | Lastest Product</span><span><svg width=\"14\" height=\"8\" viewBox=\"0 0 14 8\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M7.07163 5.31388L12.0216 0.363882C12.1139 0.268372 12.2242 0.19219 12.3462 0.139781C12.4682 0.0873716 12.5995 0.0597853 12.7322 0.0586315C12.865 0.0574777 12.9967 0.0827794 13.1196 0.13306C13.2425 0.183341 13.3541 0.257594 13.448 0.351487C13.5419 0.44538 13.6162 0.557032 13.6665 0.679928C13.7167 0.802824 13.742 0.934504 13.7409 1.06728C13.7397 1.20006 13.7121 1.33128 13.6597 1.45329C13.6073 1.57529 13.5311 1.68564 13.4356 1.77788L7.77863 7.43488C7.5911 7.62235 7.3368 7.72767 7.07163 7.72767C6.80647 7.72767 6.55216 7.62235 6.36463 7.43488L0.707632 1.77788C0.612122 1.68564 0.53594 1.57529 0.483531 1.45329C0.431122 1.33128 0.403535 1.20006 0.402382 1.06728C0.401228 0.934504 0.426529 0.802824 0.47681 0.679928C0.527091 0.557032 0.601344 0.44538 0.695237 0.351487C0.78913 0.257594 0.900782 0.183341 1.02368 0.13306C1.14657 0.0827794 1.27825 0.0574777 1.41103 0.0586315C1.54381 0.0597853 1.67503 0.0873716 1.79704 0.139781C1.91904 0.19219 2.02939 0.268372 2.12163 0.363882L7.07163 5.31388Z\" fill=\"#626262\"></path></svg></span></button></div>", 1);
+var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "mr-3"
+}, "Sort by | Lastest Product", -1
+/* HOISTED */
+);
 
-var _hoisted_10 = {
+var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
+  width: "14",
+  height: "8",
+  viewBox: "0 0 14 8",
+  fill: "none",
+  xmlns: "http://www.w3.org/2000/svg"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
+  d: "M7.07163 5.31388L12.0216 0.363882C12.1139 0.268372 12.2242 0.19219 12.3462 0.139781C12.4682 0.0873716 12.5995 0.0597853 12.7322 0.0586315C12.865 0.0574777 12.9967 0.0827794 13.1196 0.13306C13.2425 0.183341 13.3541 0.257594 13.448 0.351487C13.5419 0.44538 13.6162 0.557032 13.6665 0.679928C13.7167 0.802824 13.742 0.934504 13.7409 1.06728C13.7397 1.20006 13.7121 1.33128 13.6597 1.45329C13.6073 1.57529 13.5311 1.68564 13.4356 1.77788L7.77863 7.43488C7.5911 7.62235 7.3368 7.72767 7.07163 7.72767C6.80647 7.72767 6.55216 7.62235 6.36463 7.43488L0.707632 1.77788C0.612122 1.68564 0.53594 1.57529 0.483531 1.45329C0.431122 1.33128 0.403535 1.20006 0.402382 1.06728C0.401228 0.934504 0.426529 0.802824 0.47681 0.679928C0.527091 0.557032 0.601344 0.44538 0.695237 0.351487C0.78913 0.257594 0.900782 0.183341 1.02368 0.13306C1.14657 0.0827794 1.27825 0.0574777 1.41103 0.0586315C1.54381 0.0597853 1.67503 0.0873716 1.79704 0.139781C1.91904 0.19219 2.02939 0.268372 2.12163 0.363882L7.07163 5.31388Z",
+  fill: "#626262"
+})])], -1
+/* HOISTED */
+);
+
+var _hoisted_12 = [_hoisted_10, _hoisted_11];
+var _hoisted_13 = {
   id: "cate-btn",
   "class": "text-black top-20 bg-white shadow-md w-1/6 p-4"
 };
-var _hoisted_11 = ["href"];
-var _hoisted_12 = ["src", "alt"];
-var _hoisted_13 = {
+var _hoisted_14 = ["href"];
+var _hoisted_15 = ["src", "alt"];
+var _hoisted_16 = {
   "class": "text-sm"
 };
-var _hoisted_14 = {
+var _hoisted_17 = {
   id: "store-btn",
   "class": "text-black top-20 bg-white shadow-md w-1/6 p-4"
 };
-var _hoisted_15 = ["href"];
-var _hoisted_16 = {
+var _hoisted_18 = ["href"];
+var _hoisted_19 = {
+  "class": "text-sm py-1"
+};
+var _hoisted_20 = {
+  id: "sort-btn",
+  "class": "text-black top-20 bg-white shadow-md w-1/6 p-4"
+};
+var _hoisted_21 = ["href"];
+var _hoisted_22 = {
   "class": "text-sm py-1"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -20968,7 +21004,15 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return $options.storeBtn();
     }),
     "class": "flex justify-between items-center"
-  }, _hoisted_8), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <button class=\"flex justify-between items-center\">\r\n                <span class=\"mr-3\">Brands</span>\r\n                <span><svg width=\"14\" height=\"8\" viewBox=\"0 0 14 8\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M7.07163 5.31388L12.0216 0.363882C12.1139 0.268372 12.2242 0.19219 12.3462 0.139781C12.4682 0.0873716 12.5995 0.0597853 12.7322 0.0586315C12.865 0.0574777 12.9967 0.0827794 13.1196 0.13306C13.2425 0.183341 13.3541 0.257594 13.448 0.351487C13.5419 0.44538 13.6162 0.557032 13.6665 0.679928C13.7167 0.802824 13.742 0.934504 13.7409 1.06728C13.7397 1.20006 13.7121 1.33128 13.6597 1.45329C13.6073 1.57529 13.5311 1.68564 13.4356 1.77788L7.77863 7.43488C7.5911 7.62235 7.3368 7.72767 7.07163 7.72767C6.80647 7.72767 6.55216 7.62235 6.36463 7.43488L0.707632 1.77788C0.612122 1.68564 0.53594 1.57529 0.483531 1.45329C0.431122 1.33128 0.403535 1.20006 0.402382 1.06728C0.401228 0.934504 0.426529 0.802824 0.47681 0.679928C0.527091 0.557032 0.601344 0.44538 0.695237 0.351487C0.78913 0.257594 0.900782 0.183341 1.02368 0.13306C1.14657 0.0827794 1.27825 0.0574777 1.41103 0.0586315C1.54381 0.0597853 1.67503 0.0873716 1.79704 0.139781C1.91904 0.19219 2.02939 0.268372 2.12163 0.363882L7.07163 5.31388Z\" fill=\"#626262\"/></svg></span>\r\n            </button>\r\n            <button class=\"flex justify-between items-center\">\r\n                <span class=\"mr-3\">Price</span>\r\n                <span><svg width=\"14\" height=\"8\" viewBox=\"0 0 14 8\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M7.07163 5.31388L12.0216 0.363882C12.1139 0.268372 12.2242 0.19219 12.3462 0.139781C12.4682 0.0873716 12.5995 0.0597853 12.7322 0.0586315C12.865 0.0574777 12.9967 0.0827794 13.1196 0.13306C13.2425 0.183341 13.3541 0.257594 13.448 0.351487C13.5419 0.44538 13.6162 0.557032 13.6665 0.679928C13.7167 0.802824 13.742 0.934504 13.7409 1.06728C13.7397 1.20006 13.7121 1.33128 13.6597 1.45329C13.6073 1.57529 13.5311 1.68564 13.4356 1.77788L7.77863 7.43488C7.5911 7.62235 7.3368 7.72767 7.07163 7.72767C6.80647 7.72767 6.55216 7.62235 6.36463 7.43488L0.707632 1.77788C0.612122 1.68564 0.53594 1.57529 0.483531 1.45329C0.431122 1.33128 0.403535 1.20006 0.402382 1.06728C0.401228 0.934504 0.426529 0.802824 0.47681 0.679928C0.527091 0.557032 0.601344 0.44538 0.695237 0.351487C0.78913 0.257594 0.900782 0.183341 1.02368 0.13306C1.14657 0.0827794 1.27825 0.0574777 1.41103 0.0586315C1.54381 0.0597853 1.67503 0.0873716 1.79704 0.139781C1.91904 0.19219 2.02939 0.268372 2.12163 0.363882L7.07163 5.31388Z\" fill=\"#626262\"/></svg></span>\r\n            </button> ")]), _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.categories, function (category) {
+  }, _hoisted_8), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <button class=\"flex justify-between items-center\">\r\n                <span class=\"mr-3\">Brands</span>\r\n                <span><svg width=\"14\" height=\"8\" viewBox=\"0 0 14 8\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M7.07163 5.31388L12.0216 0.363882C12.1139 0.268372 12.2242 0.19219 12.3462 0.139781C12.4682 0.0873716 12.5995 0.0597853 12.7322 0.0586315C12.865 0.0574777 12.9967 0.0827794 13.1196 0.13306C13.2425 0.183341 13.3541 0.257594 13.448 0.351487C13.5419 0.44538 13.6162 0.557032 13.6665 0.679928C13.7167 0.802824 13.742 0.934504 13.7409 1.06728C13.7397 1.20006 13.7121 1.33128 13.6597 1.45329C13.6073 1.57529 13.5311 1.68564 13.4356 1.77788L7.77863 7.43488C7.5911 7.62235 7.3368 7.72767 7.07163 7.72767C6.80647 7.72767 6.55216 7.62235 6.36463 7.43488L0.707632 1.77788C0.612122 1.68564 0.53594 1.57529 0.483531 1.45329C0.431122 1.33128 0.403535 1.20006 0.402382 1.06728C0.401228 0.934504 0.426529 0.802824 0.47681 0.679928C0.527091 0.557032 0.601344 0.44538 0.695237 0.351487C0.78913 0.257594 0.900782 0.183341 1.02368 0.13306C1.14657 0.0827794 1.27825 0.0574777 1.41103 0.0586315C1.54381 0.0597853 1.67503 0.0873716 1.79704 0.139781C1.91904 0.19219 2.02939 0.268372 2.12163 0.363882L7.07163 5.31388Z\" fill=\"#626262\"/></svg></span>\r\n            </button>\r\n            <button class=\"flex justify-between items-center\">\r\n                <span class=\"mr-3\">Price</span>\r\n                <span><svg width=\"14\" height=\"8\" viewBox=\"0 0 14 8\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M7.07163 5.31388L12.0216 0.363882C12.1139 0.268372 12.2242 0.19219 12.3462 0.139781C12.4682 0.0873716 12.5995 0.0597853 12.7322 0.0586315C12.865 0.0574777 12.9967 0.0827794 13.1196 0.13306C13.2425 0.183341 13.3541 0.257594 13.448 0.351487C13.5419 0.44538 13.6162 0.557032 13.6665 0.679928C13.7167 0.802824 13.742 0.934504 13.7409 1.06728C13.7397 1.20006 13.7121 1.33128 13.6597 1.45329C13.6073 1.57529 13.5311 1.68564 13.4356 1.77788L7.77863 7.43488C7.5911 7.62235 7.3368 7.72767 7.07163 7.72767C6.80647 7.72767 6.55216 7.62235 6.36463 7.43488L0.707632 1.77788C0.612122 1.68564 0.53594 1.57529 0.483531 1.45329C0.431122 1.33128 0.403535 1.20006 0.402382 1.06728C0.401228 0.934504 0.426529 0.802824 0.47681 0.679928C0.527091 0.557032 0.601344 0.44538 0.695237 0.351487C0.78913 0.257594 0.900782 0.183341 1.02368 0.13306C1.14657 0.0827794 1.27825 0.0574777 1.41103 0.0586315C1.54381 0.0597853 1.67503 0.0873716 1.79704 0.139781C1.91904 0.19219 2.02939 0.268372 2.12163 0.363882L7.07163 5.31388Z\" fill=\"#626262\"/></svg></span>\r\n            </button> ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    onClick: _cache[2] || (_cache[2] = function ($event) {
+      return $options.sortBtn();
+    }),
+    "class": "flex justify-between items-center border w-1/2",
+    style: {
+      "background-color": "#ffffff"
+    }
+  }, _hoisted_12)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Category Catalog  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.categories, function (category) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       key: category.id,
       "class": "flex justify-between border-b py-2 items-center"
@@ -20984,31 +21028,46 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       alt: category.name
     }, null, 8
     /* PROPS */
-    , _hoisted_12)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(category.name), 1
+    , _hoisted_15)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(category.name), 1
     /* TEXT */
     )])], 8
     /* PROPS */
-    , _hoisted_11)]);
+    , _hoisted_14)]);
   }), 128
   /* KEYED_FRAGMENT */
   ))])], 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.displayCategory]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.stores, function (store) {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.displayCategory]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Store Catalog  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.stores, function (store) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       key: store.id,
       "class": "flex justify-between border-b py-2 items-center"
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
       href: "/store/".concat(store.shop_name)
-    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(store.shop_name), 1
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(store.shop_name), 1
     /* TEXT */
     )])], 8
     /* PROPS */
-    , _hoisted_15)]);
+    , _hoisted_18)]);
   }), 128
   /* KEYED_FRAGMENT */
   ))])], 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.displayStore]])]);
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.displayStore]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Sort Product  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.stores, function (store) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
+      key: store.id,
+      "class": "flex justify-between border-b py-2 items-center"
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+      href: "/store/".concat(store.shop_name)
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_22, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(store.shop_name), 1
+    /* TEXT */
+    )])], 8
+    /* PROPS */
+    , _hoisted_21)]);
+  }), 128
+  /* KEYED_FRAGMENT */
+  ))])], 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.displaySortProduct]])]);
 }
 
 /***/ }),
@@ -21425,7 +21484,7 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_0__["default"].Store({
   actions: {
     allCartFromDatabase: function allCartFromDatabase(context) {
       axios.get("/cart").then(function (response) {
-        console.log(response.data);
+        // console.log(response.data)
         context.commit("cart", response.data);
       })["catch"](function () {
         console.log("Error........");
