@@ -49,16 +49,16 @@
         <!-- Sort Product  -->
         <div v-show="displaySortProduct" id="sort-btn" class="text-black top-20 bg-white shadow-md w-1/6">
             <ul>
-                <div class="p-4 flex justify-between border-b items-center">
+                <div @click="lastestProduct()" class="p-4 flex justify-between border-b items-center">
                     <span><li class="text-sm">Lastest Products</li></span>
                 </div>
-                <div class="p-4 flex justify-between border-b items-center">
+                <div @click="oldestProduct()" class="p-4 flex justify-between border-b items-center">
                     <span><li class="text-sm">Oldest Product</li></span>
                 </div>
-                <div class="p-4 flex justify-between border-b items-center">
+                <div @click="lowestProduct()" class="p-4 flex justify-between border-b items-center">
                     <span><li class="text-sm">Lowest Price</li></span>
                 </div>
-                <div class="p-4 flex justify-between border-b items-center">
+                <div @click="highestProduct()" class="p-4 flex justify-between border-b items-center">
                     <span><li class="text-sm">Highest Price</li></span>
                 </div>
             </ul>
@@ -74,7 +74,7 @@ export default {
         return{
             displayCategory: false,
             displayStore: false,
-            displaySortProduct: true,
+            displaySortProduct: false,
             categories: [],
             stores: []
         }
@@ -94,6 +94,18 @@ export default {
             this.displayCategory = false
             this.displayStore = false
             this.displaySortProduct = !this.displaySortProduct
+        },
+        lastestProduct(){
+            window.location = '/lastestproduct'
+        },
+        oldestProduct(){
+            window.location = '/oldestproduct'
+        },
+        lowestProduct(){
+            window.location = '/lowestproduct'
+        },
+        highestProduct(){
+            window.location = '/highestproduct'
         }
     },
     mounted(){
@@ -104,7 +116,6 @@ export default {
         })
         axios.get(`/allstores/`).then(response => {
             this.stores = response.data
-            // console.log(response.data)
         }).catch(error => {
             console.log(error)
         })

@@ -63,7 +63,7 @@ class CatalogController extends Controller
       $gs = Generalsetting::findOrFail(1);
       $category_slug = $request->slug;
       $category_id = Category::select('id')->where('slug', $category_slug)->first();
-      $products = Product::where('category_id', $category_id->id)->orderBy('id','desc')->paginate(12);
+      $products = Product::where('category_id', $category_id->id)->where('status', 1)->orderBy('id','desc')->paginate(12);
       return view('front.category', compact('products','gs'));
     }
 
@@ -72,7 +72,35 @@ class CatalogController extends Controller
       $gs = Generalsetting::findOrFail(1);
       $shop_name = $request->shop_name;
       $user_id = User::select('id')->where('shop_name', $shop_name)->first();
-      $products = Product::where('user_id', $user_id->id)->orderBy('id','desc')->paginate(12);
+      $products = Product::where('user_id', $user_id->id)->where('status', 1)->orderBy('id','desc')->paginate(12);
+      return view('front.category', compact('products','gs'));
+    }
+
+    public function lastestproduct(Request $request)
+    {
+      $gs = Generalsetting::findOrFail(1);
+      $products = Product::where('status', 1)->orderBy('created_at','desc')->paginate(12);
+      return view('front.category', compact('products','gs'));
+    }
+
+    public function oldestproduct(Request $request)
+    {
+      $gs = Generalsetting::findOrFail(1);
+      $products = Product::where('status', 1)->orderBy('created_at','asc')->paginate(12);
+      return view('front.category', compact('products','gs'));
+    }
+
+    public function lowestproduct(Request $request)
+    {
+      $gs = Generalsetting::findOrFail(1);
+      $products = Product::where('status', 1)->orderBy('price','asc')->paginate(12);
+      return view('front.category', compact('products','gs'));
+    }
+
+    public function highestproduct(Request $request)
+    {
+      $gs = Generalsetting::findOrFail(1);
+      $products = Product::where('status', 1)->orderBy('price','desc')->paginate(12);
       return view('front.category', compact('products','gs'));
     }
 

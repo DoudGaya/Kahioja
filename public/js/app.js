@@ -19933,7 +19933,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       displayCategory: false,
       displayStore: false,
-      displaySortProduct: true,
+      displaySortProduct: false,
       categories: [],
       stores: []
     };
@@ -19953,6 +19953,18 @@ __webpack_require__.r(__webpack_exports__);
       this.displayCategory = false;
       this.displayStore = false;
       this.displaySortProduct = !this.displaySortProduct;
+    },
+    lastestProduct: function lastestProduct() {
+      window.location = '/lastestproduct';
+    },
+    oldestProduct: function oldestProduct() {
+      window.location = '/oldestproduct';
+    },
+    lowestProduct: function lowestProduct() {
+      window.location = '/lowestproduct';
+    },
+    highestProduct: function highestProduct() {
+      window.location = '/highestproduct';
     }
   },
   mounted: function mounted() {
@@ -19964,7 +19976,7 @@ __webpack_require__.r(__webpack_exports__);
       console.log(error);
     });
     axios.get("/allstores/").then(function (response) {
-      _this.stores = response.data; // console.log(response.data)
+      _this.stores = response.data;
     })["catch"](function (error) {
       console.log(error);
     });
@@ -20990,9 +21002,37 @@ var _hoisted_20 = {
   "class": "text-black top-20 bg-white shadow-md w-1/6"
 };
 
-var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<ul><div class=\"p-4 flex justify-between border-b items-center\"><span><li class=\"text-sm\">Lastest Products</li></span></div><div class=\"p-4 flex justify-between border-b items-center\"><span><li class=\"text-sm\">Oldest Product</li></span></div><div class=\"p-4 flex justify-between border-b items-center\"><span><li class=\"text-sm\">Lowest Price</li></span></div><div class=\"p-4 flex justify-between border-b items-center\"><span><li class=\"text-sm\">Highest Price</li></span></div></ul>", 1);
+var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", {
+  "class": "text-sm"
+}, "Lastest Products")], -1
+/* HOISTED */
+);
 
 var _hoisted_22 = [_hoisted_21];
+
+var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", {
+  "class": "text-sm"
+}, "Oldest Product")], -1
+/* HOISTED */
+);
+
+var _hoisted_24 = [_hoisted_23];
+
+var _hoisted_25 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", {
+  "class": "text-sm"
+}, "Lowest Price")], -1
+/* HOISTED */
+);
+
+var _hoisted_26 = [_hoisted_25];
+
+var _hoisted_27 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", {
+  "class": "text-sm"
+}, "Highest Price")], -1
+/* HOISTED */
+);
+
+var _hoisted_28 = [_hoisted_27];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Categories  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     onClick: _cache[0] || (_cache[0] = function ($event) {
@@ -21052,7 +21092,27 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* KEYED_FRAGMENT */
   ))])], 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.displayStore]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Sort Product  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, _hoisted_22, 512
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.displayStore]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Sort Product  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    onClick: _cache[3] || (_cache[3] = function ($event) {
+      return $options.lastestProduct();
+    }),
+    "class": "p-4 flex justify-between border-b items-center"
+  }, _hoisted_22), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    onClick: _cache[4] || (_cache[4] = function ($event) {
+      return $options.oldestProduct();
+    }),
+    "class": "p-4 flex justify-between border-b items-center"
+  }, _hoisted_24), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    onClick: _cache[5] || (_cache[5] = function ($event) {
+      return $options.lowestProduct();
+    }),
+    "class": "p-4 flex justify-between border-b items-center"
+  }, _hoisted_26), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    onClick: _cache[6] || (_cache[6] = function ($event) {
+      return $options.highestProduct();
+    }),
+    "class": "p-4 flex justify-between border-b items-center"
+  }, _hoisted_28)])], 512
   /* NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.displaySortProduct]])]);
 }
