@@ -15,7 +15,7 @@
                 <div v-if="isLoading" class="loader mx-auto mt-5"></div>
                 <div v-if="cartNo > 0" class="my-5">
                     <div :key="product.product_id" v-for="product in getAllCart" id="cart-body-products" class="p-4">
-                        <div class="grid grid-cols-3 gap-6">
+                        <div class="grid grid-cols-3 gap-6 items-center">
                             <div id="cart-body-product-image">
                                 <img :src="`/images/products/${product.photo}`" :alt="`${ product.name }`">
                             </div>
@@ -27,22 +27,42 @@
                                     </span>
                                     <span class="relative -top-1 left-1">1 day within Kano</span>
                                 </div>
-                                <div class="cursor-pointer" @click="removeProduct(product.bagId)" id="cart-body-product-remove">
-                                    Remove Product
+                                <div class="hidden md:block">
+                                    <div class="cursor-pointer" @click="removeProduct(product.bagId)" id="cart-body-product-remove">
+                                        Remove Product
+                                    </div>
                                 </div>
+                                
                             </div>
                             <div>
                                 <div id="cart-body-product-price">
                                     N{{ product.subTotal }}
                                 </div>
-                                <div id="cart-body-product-add" class="flex justify-between w-3/4 py-2 px-4 rounded-full mt-11">
-                                    <div class="cursor-pointer">
-                                       <button @click="minusProduct(product.bagId, product.quantity)"> - </button>
+                                <div class="hidden md:block">
+                                    <div id="cart-body-product-add" class="flex justify-between w-3/4 py-2 px-4 rounded-full mt-11">
+                                        <div class="cursor-pointer">
+                                        <button @click="minusProduct(product.bagId, product.quantity)"> - </button>
+                                        </div>
+                                        <input class="w-1/3 text-center bg-white" :value="product.quantity" disabled>
+                                        <div class="cursor-pointer">
+                                            <button @click="addProduct(product.bagId, product.quantity)">+</button>
+                                        </div>
                                     </div>
-                                    <input class="w-1/3 text-center bg-white" :value="product.quantity" disabled>
-                                    <div class="cursor-pointer">
-                                        <button @click="addProduct(product.bagId, product.quantity)">+</button>
-                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- //Mobile View  -->
+                        <div class="grid grid-cols-2 gap-6 md:hidden">
+                            <div class="cursor-pointer mx-auto" @click="removeProduct(product.bagId)" id="cart-body-product-remove">
+                                Remove Product
+                            </div>
+                            <div id="cart-body-product-add" class=" flex justify-between w-3/4 py-2 px-4 rounded-full my-auto">
+                                <div class="cursor-pointer">
+                                <button @click="minusProduct(product.bagId, product.quantity)"> - </button>
+                                </div>
+                                <input class="w-1/3 text-center bg-white" :value="product.quantity" disabled>
+                                <div class="cursor-pointer">
+                                    <button @click="addProduct(product.bagId, product.quantity)">+</button>
                                 </div>
                             </div>
                         </div>
@@ -78,7 +98,7 @@
                 </div>
             </div>
             <!-- Checkout  -->
-            <div v-if="cartNo > 0" id="cart-checkout" class="px-16 py-4 mt-5">
+            <div v-if="cartNo > 0" id="cart-checkout" class="px-4 md:px-16 py-4 mt-5 bg-white">
                 <div class="grid grid-cols-2 gap-6 py-1 w-full font-bold">
                     <div>Estimated Product(s) Total)</div>
                     <div class="text-right text-xl">₦{{ estimatedTotal }}</div>

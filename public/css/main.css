@@ -194,7 +194,7 @@ body{
 
 #cart-content, #login-content{
     width: 522px;
-    height: 100%;
+    height: 100vh;
     background: #FFFFFF;
     position: absolute;
     top: 0px;
@@ -248,7 +248,6 @@ body{
 }
 
 #cart-body-products{
-    height: 175px;
     background: #FFFFFF;
     border-bottom: 1px solid #EEEEEE;
 }
@@ -575,9 +574,24 @@ body{
 
     #cart-content, #login-content{
         width: 100%;
-        position: absolute;
-        top: 0px;
-        right: 0px; 
+         
+    }
+
+    #cart-body-product-title{
+        font-size: 10px;
+    }
+
+    #cart-body-product-delivery-time{
+        font-size: 9px;
+    }
+
+    #cart-body{
+        max-height: 60vh;
+        overflow: auto;
+    }
+
+    #cart-checkout{
+        height: 25vh;
     }
     
 }
