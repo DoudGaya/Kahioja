@@ -21,7 +21,7 @@
                     </div>
                     <div class="my-4">
                         <div>
-                            <input required v-model="loginEmail" class="border border-gray-300 rounded py-2 px-6 w-full my-2 focus:outline-none" type="text" name="email" id="loginEmail" placeholder="Email Address">
+                            <input required v-model="loginEmail" class="border border-gray-300 rounded py-2 px-6 w-full my-2 focus:outline-none" type="email" name="email" id="loginEmail" placeholder="Email Address">
                         </div>
                         <div>
                             <input required v-model="loginPassword" class="border border-gray-300 rounded py-2 px-6 w-full my-2 focus:outline-none" type="password" name="password" id="loginPassword" placeholder="Password">
@@ -59,13 +59,13 @@
                     </div>
                     <div class="my-4">
                         <div>
-                            <input class="border border-gray-300 rounded py-2 px-6 w-full my-2 focus:outline-none" type="text" name="name" id="signUpName" placeholder="Full Name">
+                            <input required v-model="signUpName" class="border border-gray-300 rounded py-2 px-6 w-full my-2 focus:outline-none" type="text" name="name" id="signUpName" placeholder="Full Name">
                         </div>
                         <div>
-                            <input class="border border-gray-300 rounded py-2 px-6 w-full my-2 focus:outline-none" type="text" name="email" id="signUpEmail" placeholder="Email Address">
+                            <input required v-model="signUpEmail" class="border border-gray-300 rounded py-2 px-6 w-full my-2 focus:outline-none" type="email" name="email" id="signUpEmail" placeholder="Email Address">
                         </div>
                         <div>
-                            <input class="border border-gray-300 rounded py-2 px-6 w-full my-2 focus:outline-none" type="password" name="password" id="password" placeholder="Password">
+                            <input required v-model="signUpPassword" class="border border-gray-300 rounded py-2 px-6 w-full my-2 focus:outline-none" type="password" name="password" id="signUpPassword" placeholder="Password">
                         </div>
                     </div>
                     <div class="text-left my-4">
@@ -126,6 +126,9 @@ export default {
             displayForgotPasswordForm: false,
             loginEmail: '',
             loginPassword: '',
+            signUpName: '',
+            signUpEmail: '',
+            signUpPassword: '',
             callback: '',
             isLoading: false
         }
@@ -143,10 +146,43 @@ export default {
             this.displaySignUpForm = false
             this.displayForgotPasswordForm = false
         },
-        showSignUpForm(){
+        async showSignUpForm(){
             this.displaySignUpForm = true 
             this.displayLoginForm = false 
             this.displayForgotPasswordForm = false
+            this.isLoading = true 
+
+                if(this.signUpName !== ''){
+                    if(this.signUpEmail !== ''){
+                        if(this.signUpPassword !== ''){
+                            axios.post('/register', {
+                                name: this.signUpName,
+                                email: this.signUpEmail,
+                                password: this.signUpPassword
+                            }).then(response => {
+                                this.signUpName = '',
+                                this.signUpEmail = '',
+                                this.signUpPassword = '',
+
+                                this.isLoading = false
+                                this.callback = response.data
+
+                                setTimeout(()=>{
+                                    window.location = '/'
+                                }, 3000)
+
+                            }).catch(error => {
+                                console.log(error)
+                            })
+                        }else{
+                            this.callback = 'Password field empty'
+                        }
+                    }else{
+                        this.callback = 'Email field empty'
+                    }
+                }else{
+                    this.callback = 'Name field empty'
+                }
         },
         showForgotPasswordForm(){
             this.displayForgotPasswordForm = true 
@@ -184,9 +220,6 @@ export default {
                 this.callback = 'Email Address field empty'
             }
         }
-    },
-    // mounted() {
-    //     console.log('Login component mounted.')
-    // }
+    }
 }
 </script>

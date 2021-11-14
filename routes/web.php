@@ -24,6 +24,10 @@ use App\Http\Controllers\User\LoginController;
 
 Route::get('/', [FrontendController::class, 'index'])->name('front.index');
 
+    // User Register
+    Route::post('/register', 'User\RegisterController@register')->name('user-register-submit');
+    Route::get('/register/verify/{token}', 'User\RegisterController@token')->name('user-register-token');
+    // User Register End
     
     // User Login
     Route::post('/login', [LoginController::class ,'login'])->name('user.login.submit');

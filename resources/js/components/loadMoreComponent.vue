@@ -11,7 +11,7 @@
                         <h1 class="card-title">{{products[productIndex].name}}</h1>
                         <div class="flex items-center">
                             <span class="card-curr-price"><b>N{{products[productIndex].price}}</b></span>
-                            <span class="card-prev-price"><b>N{{products[productIndex].previous_price}}</b></span>
+                            <span class="card-prev-price"><b>{{ (products[productIndex].previous_price != '') ? `N${products[productIndex].previous_price}` : ''}}</b></span>
                         </div>
                         <div class="flex items-center">
                             <div class="flex mr-4">
@@ -33,18 +33,13 @@
         </div>
     </div>
     <div v-if="productsToShow < products.length || products.length > productsToShow"  class="mt-16 mb-8 flex justify-center">
-        <button  class="mx-auto btn-yus-conti-shopping rounded-full w-1/6 text-lg py-2 text-white" @click="productsToShow += 8">Shop More Items</button>
+        <button  class="mx-auto btn-yus-conti-shopping rounded-full w-1/6 text-lg py-2 text-white focus:outline-none" @click="productsToShow += 8">Shop More Items</button>
     </div>
 </template>
 
 <script>
-import ProductComponent from './productComponent'
-
 export default {
     name: 'loadMoreComponent',
-    components:[
-        ProductComponent
-    ],
     data() {
         return {
             products: [
@@ -63,7 +58,7 @@ export default {
             totalProducts: 0
         };
     },
-    mounted() {
+    created() {
         axios.get(`/allproducts`)
             .then((response)=>{
                 this.products = response.data
