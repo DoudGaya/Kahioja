@@ -84,7 +84,7 @@ body{
     font-family: 'Circular Std';
     font-style: normal;
     font-weight: 500;
-    /* font-size: 20px; */
+    font-size: 20px;
     line-height: 30px;
     color: #000000;
 }
@@ -116,7 +116,7 @@ body{
 .card-curr-price{
     font-style: normal;
     font-weight: bold;
-    /* font-size: 20px; */
+    font-size: 20px;
     line-height: 26px;
     display: flex;
     align-items: center;
@@ -486,4 +486,58 @@ body{
     background-color: #FDE2D3;
     border-left: 4px solid #F37022;
     cursor: pointer;
+}
+
+@media only screen and (max-width:736px)
+{
+    body{
+        font-size: 12px;
+    }
+
+    .search_box{
+        height: 50px;
+    }
+
+    .headings-yus{
+        font-size: 16px;
+    }
+
+    .cate-yus{
+        border: 9.8146px solid #F37022;
+    }
+
+    .cate-yus img{
+        width: 80%;
+    }
+
+    .cate-title-yus{
+        font-weight: 450;
+        font-size: 12px;
+        line-height: 20px;
+    }
+
+    .card-title{
+        font-size: 13px;
+        line-height: 18px;
+    }
+
+    .card-bag-label{
+        font-size: 14px;
+        line-height: 16px;
+        margin: 0px 8px;
+    }
+
+    .btn-yus, #cart-checkout, .btn-yus-conti-shopping{
+        height: 40px;
+        font-size: 12px;
+    }
+
+    .card-reviews{
+        font-size: 10px;
+    }
+
+    .trust-label{
+        font-size: 12px;
+    }
+    
 }

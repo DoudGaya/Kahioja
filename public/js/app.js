@@ -20873,22 +20873,27 @@ var _hoisted_10 = {
 };
 var _hoisted_11 = {
   id: "nav",
-  "class": "md:hidden px-4 py-2 mb-4 text-sm"
+  "class": "md:hidden px-4 py-2 mb-4 text-sm fixed"
 };
 var _hoisted_12 = {
-  "class": "grid grid-cols-2 gap-2 items-center"
+  "class": "grid grid-cols-4 gap-2 items-center"
 };
 
-var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"w-1/2\"><div><a href=\"/\"><svg width=\"140\" height=\"30\" viewBox=\"0 0 197 43\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M29.9097 40.487C32.1734 40.487 33.9921 38.649 33.9921 36.4046C33.9921 34.1603 32.1541 32.3223 29.9097 32.3223C27.6461 32.3223 25.8274 34.1603 25.8274 36.4046C25.8274 38.649 27.6461 40.487 29.9097 40.487Z\" fill=\"#F37022\"></path><path d=\"M11.801 42.3826C14.0647 42.3826 15.8834 40.5445 15.8834 38.3002C15.8834 36.0365 14.0453 34.2179 11.801 34.2179C9.55668 34.2179 7.71865 36.0559 7.71865 38.3002C7.71865 40.5445 9.55668 42.3826 11.801 42.3826Z\" fill=\"#F37022\"></path><path d=\"M30.0082 30.9875L9.22883 33.1738C5.08843 33.5994 1.39303 30.6005 0.948035 26.4795L0 17.5215L35.7545 13.7681L36.7025 22.726C37.1668 26.8664 34.1486 30.5618 30.0082 30.9875Z\" fill=\"#F37022\"></path><path d=\"M5.30382 13.5548C4.646 6.84119 9.599 0.766028 16.3126 0.0695131C23.0263 -0.64635 29.1208 4.2486 29.8753 10.9816L25.5995 11.4459C25.1158 7.05401 21.1302 3.86165 16.7383 4.34534C12.3464 4.80968 9.11531 8.7566 9.54096 13.1485L5.30382 13.5548Z\" fill=\"#F37022\"></path><path d=\"M54.5434 22.7262L51.8154 25.7445V31.8777H47.5202V9.82137H51.8154V19.8048L60.6572 9.82137H66.2874L57.5423 19.4372L66.3454 31.8777H60.9474L54.5434 22.7262Z\" fill=\"#222222\"></path><path d=\"M109.587 32.0909V22.9394H99.9714V32.0909H95.6762V10.0345H99.9714V18.8958H109.587V10.0345H113.921V32.0909H109.587Z\" fill=\"#222222\"></path><path d=\"M119.589 32.0909V10.0345H123.923V32.0909H119.589Z\" fill=\"#222222\"></path><path d=\"M139.867 32.9803C133.559 32.9803 128.432 27.8532 128.432 21.5459C128.432 15.2386 133.559 10.1114 139.867 10.1114C146.174 10.1114 151.301 15.2386 151.301 21.5459C151.301 27.8532 146.174 32.9803 139.867 32.9803ZM139.867 14.484C135.958 14.484 132.785 17.657 132.785 21.5652C132.785 25.4735 135.958 28.6465 139.867 28.6465C143.775 28.6465 146.948 25.4735 146.948 21.5652C146.948 17.6377 143.775 14.484 139.867 14.484Z\" fill=\"#222222\"></path><path d=\"M80.4492 9.41507C74.1418 9.41507 69.0147 14.5422 69.0147 20.8495V31.8777H73.3679V25.106H87.5304V32.0325H91.8836V20.8689C91.8836 14.5422 86.7565 9.41507 80.4492 9.41507ZM80.4492 13.7683C84.3187 13.7683 87.453 16.9026 87.511 20.7334H73.3486C73.426 16.8833 76.5796 13.7683 80.4492 13.7683Z\" fill=\"#222222\"></path><path d=\"M185.566 9.41507C179.258 9.41507 174.131 14.5422 174.131 20.8495V31.8777H178.484V25.106H192.647V32.0325H197V20.8689C197 14.5422 191.873 9.41507 185.566 9.41507ZM185.566 13.7683C189.435 13.7683 192.57 16.9026 192.628 20.7334H178.465C178.562 16.8833 181.696 13.7683 185.566 13.7683Z\" fill=\"#222222\"></path><path d=\"M170.513 24.5643V10.3051H166.141V24.5643C166.141 26.5958 164.477 28.2404 162.465 28.2404C160.433 28.2404 158.789 26.5765 158.789 24.5643C158.789 24.4289 158.789 24.2935 158.808 24.158C158.808 24.1 158.827 24.0226 158.847 23.9452H154.455C154.455 24.0032 154.455 24.0806 154.435 24.158C154.435 24.2935 154.435 24.4289 154.435 24.5643C154.435 28.9949 158.034 32.5936 162.465 32.5936C166.837 32.5936 170.417 29.0723 170.494 24.7385L170.513 24.5643Z\" fill=\"#222222\"></path></svg></a></div></div>", 1);
+var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"col-span-1\"><svg width=\"30\" height=\"20\" viewBox=\"0 0 36 26\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M34 2H2\" stroke=\"black\" stroke-width=\"3\" stroke-linecap=\"round\"></path><path d=\"M34 13L2 13\" stroke=\"black\" stroke-width=\"3\" stroke-linecap=\"round\"></path><path d=\"M34 24H2\" stroke=\"black\" stroke-width=\"3\" stroke-linecap=\"round\"></path></svg></div>", 1);
 
-var _hoisted_14 = {
-  "class": "relative top-4 left-9 bg-yus px-2 text-white rounded-full"
+var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"col-span-2\"><div><a href=\"/\"><svg width=\"140\" height=\"30\" viewBox=\"0 0 197 43\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M29.9097 40.487C32.1734 40.487 33.9921 38.649 33.9921 36.4046C33.9921 34.1603 32.1541 32.3223 29.9097 32.3223C27.6461 32.3223 25.8274 34.1603 25.8274 36.4046C25.8274 38.649 27.6461 40.487 29.9097 40.487Z\" fill=\"#F37022\"></path><path d=\"M11.801 42.3826C14.0647 42.3826 15.8834 40.5445 15.8834 38.3002C15.8834 36.0365 14.0453 34.2179 11.801 34.2179C9.55668 34.2179 7.71865 36.0559 7.71865 38.3002C7.71865 40.5445 9.55668 42.3826 11.801 42.3826Z\" fill=\"#F37022\"></path><path d=\"M30.0082 30.9875L9.22883 33.1738C5.08843 33.5994 1.39303 30.6005 0.948035 26.4795L0 17.5215L35.7545 13.7681L36.7025 22.726C37.1668 26.8664 34.1486 30.5618 30.0082 30.9875Z\" fill=\"#F37022\"></path><path d=\"M5.30382 13.5548C4.646 6.84119 9.599 0.766028 16.3126 0.0695131C23.0263 -0.64635 29.1208 4.2486 29.8753 10.9816L25.5995 11.4459C25.1158 7.05401 21.1302 3.86165 16.7383 4.34534C12.3464 4.80968 9.11531 8.7566 9.54096 13.1485L5.30382 13.5548Z\" fill=\"#F37022\"></path><path d=\"M54.5434 22.7262L51.8154 25.7445V31.8777H47.5202V9.82137H51.8154V19.8048L60.6572 9.82137H66.2874L57.5423 19.4372L66.3454 31.8777H60.9474L54.5434 22.7262Z\" fill=\"#222222\"></path><path d=\"M109.587 32.0909V22.9394H99.9714V32.0909H95.6762V10.0345H99.9714V18.8958H109.587V10.0345H113.921V32.0909H109.587Z\" fill=\"#222222\"></path><path d=\"M119.589 32.0909V10.0345H123.923V32.0909H119.589Z\" fill=\"#222222\"></path><path d=\"M139.867 32.9803C133.559 32.9803 128.432 27.8532 128.432 21.5459C128.432 15.2386 133.559 10.1114 139.867 10.1114C146.174 10.1114 151.301 15.2386 151.301 21.5459C151.301 27.8532 146.174 32.9803 139.867 32.9803ZM139.867 14.484C135.958 14.484 132.785 17.657 132.785 21.5652C132.785 25.4735 135.958 28.6465 139.867 28.6465C143.775 28.6465 146.948 25.4735 146.948 21.5652C146.948 17.6377 143.775 14.484 139.867 14.484Z\" fill=\"#222222\"></path><path d=\"M80.4492 9.41507C74.1418 9.41507 69.0147 14.5422 69.0147 20.8495V31.8777H73.3679V25.106H87.5304V32.0325H91.8836V20.8689C91.8836 14.5422 86.7565 9.41507 80.4492 9.41507ZM80.4492 13.7683C84.3187 13.7683 87.453 16.9026 87.511 20.7334H73.3486C73.426 16.8833 76.5796 13.7683 80.4492 13.7683Z\" fill=\"#222222\"></path><path d=\"M185.566 9.41507C179.258 9.41507 174.131 14.5422 174.131 20.8495V31.8777H178.484V25.106H192.647V32.0325H197V20.8689C197 14.5422 191.873 9.41507 185.566 9.41507ZM185.566 13.7683C189.435 13.7683 192.57 16.9026 192.628 20.7334H178.465C178.562 16.8833 181.696 13.7683 185.566 13.7683Z\" fill=\"#222222\"></path><path d=\"M170.513 24.5643V10.3051H166.141V24.5643C166.141 26.5958 164.477 28.2404 162.465 28.2404C160.433 28.2404 158.789 26.5765 158.789 24.5643C158.789 24.4289 158.789 24.2935 158.808 24.158C158.808 24.1 158.827 24.0226 158.847 23.9452H154.455C154.455 24.0032 154.455 24.0806 154.435 24.158C154.435 24.2935 154.435 24.4289 154.435 24.5643C154.435 28.9949 158.034 32.5936 162.465 32.5936C166.837 32.5936 170.417 29.0723 170.494 24.7385L170.513 24.5643Z\" fill=\"#222222\"></path></svg></a></div></div>", 1);
+
+var _hoisted_15 = {
+  "class": "text-xs"
+};
+var _hoisted_16 = {
+  "class": "relative top-3 left-3 bg-yus px-1 text-xs md:px-2 text-white rounded-full"
 };
 
-var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
-  "class": "mx-auto",
-  width: "27",
-  height: "27",
+var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
+  "class": "",
+  width: "20",
+  height: "20",
   viewBox: "0 0 28 28",
   fill: "none",
   xmlns: "http://www.w3.org/2000/svg"
@@ -20899,10 +20904,10 @@ var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_16 = {
+var _hoisted_18 = {
   key: 0
 };
-var _hoisted_17 = {
+var _hoisted_19 = {
   key: 1
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -20933,16 +20938,16 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* TEXT */
   ), $data.authUser ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_9, "N" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.estimatedTotal), 1
   /* TEXT */
-  )) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_10, "Bag Empty"))])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Mobile Screen  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" logo  "), _hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Cart  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  )) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_10, "Bag Empty"))])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Mobile Screen  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Caret  "), _hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" logo  "), _hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Cart  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     onClick: _cache[2] || (_cache[2] = function ($event) {
       return $options.cartToggle();
     }),
-    "class": "mx-auto cursor-pointer"
-  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.cartNo), 1
+    "class": "cursor-pointer col-span-1"
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.cartNo), 1
   /* TEXT */
-  ), _hoisted_15, $data.authUser ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_16, "N" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.estimatedTotal), 1
+  ), _hoisted_17, $data.authUser ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_18, "N" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.estimatedTotal), 1
   /* TEXT */
-  )) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_17, "Bag Empty"))])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Search Box  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SearchBar)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_UserAccountSettingsComponent, null, null, 512
+  )) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_19, "Bag Empty"))])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Search Box  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SearchBar)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_UserAccountSettingsComponent, null, null, 512
   /* NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.displayAccountSettings]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_CartComponent, null, null, 512
   /* NEED_PATCH */
@@ -20972,7 +20977,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var _hoisted_1 = {
   id: "search_box",
-  "class": "col-span-3 w-full text-center"
+  "class": "my-3 md:my-0 col-span-3 w-full text-center"
 };
 var _hoisted_2 = {
   "class": "flex items-center"
@@ -20985,8 +20990,8 @@ var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
   },
   type: "submit"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
-  width: "22",
-  height: "22",
+  width: "20",
+  height: "20",
   viewBox: "0 0 24 24",
   fill: "none",
   xmlns: "http://www.w3.org/2000/svg"
@@ -21344,46 +21349,49 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "grid grid-cols-4 gap-6 px-14 mt-20 mb-8"
+  "class": "px-4 md:px-14 mt-20 mb-8 relative top-36 md:top-0"
 };
 var _hoisted_2 = {
+  "class": "grid md:grid-cols-4 grid-cols-2 gap-6"
+};
+var _hoisted_3 = {
   "class": "bg-white rounded-lg px-4 my-4 cursor-pointer yus-shadow"
 };
-var _hoisted_3 = ["href"];
-var _hoisted_4 = ["src", "alt"];
-var _hoisted_5 = {
+var _hoisted_4 = ["href"];
+var _hoisted_5 = ["src", "alt"];
+var _hoisted_6 = {
   "class": "py-3"
 };
-var _hoisted_6 = {
+var _hoisted_7 = {
   style: {
     "display": "none"
   }
 };
-var _hoisted_7 = {
+var _hoisted_8 = {
   "class": "card-title"
 };
-var _hoisted_8 = {
+var _hoisted_9 = {
   "class": "flex items-center"
 };
-var _hoisted_9 = {
+var _hoisted_10 = {
   "class": "card-curr-price"
 };
-var _hoisted_10 = {
+var _hoisted_11 = {
   "class": "card-prev-price"
 };
 
-var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"flex items-center\"><div class=\"flex mr-4\"><svg width=\"10\" height=\"10\" viewBox=\"0 0 10 10\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M5.26444 0.25L6.35956 3.62042H9.90343L7.03638 5.70346L8.13149 9.07388L5.26444 6.99085L2.39739 9.07388L3.4925 5.70346L0.625452 3.62042H4.16932L5.26444 0.25Z\" fill=\"#FFBD00\"></path></svg><svg width=\"10\" height=\"10\" viewBox=\"0 0 10 10\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M5.26444 0.25L6.35956 3.62042H9.90343L7.03638 5.70346L8.13149 9.07388L5.26444 6.99085L2.39739 9.07388L3.4925 5.70346L0.625452 3.62042H4.16932L5.26444 0.25Z\" fill=\"#FFBD00\"></path></svg><svg width=\"10\" height=\"10\" viewBox=\"0 0 10 10\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M5.26444 0.25L6.35956 3.62042H9.90343L7.03638 5.70346L8.13149 9.07388L5.26444 6.99085L2.39739 9.07388L3.4925 5.70346L0.625452 3.62042H4.16932L5.26444 0.25Z\" fill=\"#FFBD00\"></path></svg><svg width=\"10\" height=\"10\" viewBox=\"0 0 10 10\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M5.26444 0.25L6.35956 3.62042H9.90343L7.03638 5.70346L8.13149 9.07388L5.26444 6.99085L2.39739 9.07388L3.4925 5.70346L0.625452 3.62042H4.16932L5.26444 0.25Z\" fill=\"#FFBD00\"></path></svg><svg width=\"10\" height=\"10\" viewBox=\"0 0 10 10\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M5.26444 0.25L6.35956 3.62042H9.90343L7.03638 5.70346L8.13149 9.07388L5.26444 6.99085L2.39739 9.07388L3.4925 5.70346L0.625452 3.62042H4.16932L5.26444 0.25Z\" fill=\"#FFBD00\"></path></svg></div><div class=\"card-reviews\">120 Reviews</div></div><span class=\"flex card-reviews my-2 py-6\"><svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M5.93408 6.64286H12.5357\" stroke=\"#222222\" stroke-width=\"1.35205\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M5.93408 9.31318H9.79123\" stroke=\"#222222\" stroke-width=\"1.35205\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M8.70742 20.25H3.71741C3.52714 20.25 3.34467 20.1744 3.21013 20.0399C3.07558 19.9053 3 19.7229 3 19.5326V4.46741C3 4.27714 3.07558 4.09467 3.21013 3.96013C3.34467 3.82558 3.52714 3.75 3.71741 3.75H20.2826C20.4729 3.75 20.6553 3.82558 20.7899 3.96013C20.9244 4.09467 21 4.27714 21 4.46741V12.6758\" stroke=\"#222222\" stroke-width=\"1.35205\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M12.8282 21.3916C13.4029 21.3916 13.8688 20.9257 13.8688 20.351C13.8688 19.7762 13.4029 19.3104 12.8282 19.3104C12.2535 19.3104 11.7876 19.7762 11.7876 20.351C11.7876 20.9257 12.2535 21.3916 12.8282 21.3916Z\" stroke=\"#222222\" stroke-width=\"1.35205\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M19.9689 21.3916C20.5436 21.3916 21.0095 20.9257 21.0095 20.351C21.0095 19.7762 20.5436 19.3104 19.9689 19.3104C19.3942 19.3104 18.9283 19.7762 18.9283 20.351C18.9283 20.9257 19.3942 21.3916 19.9689 21.3916Z\" stroke=\"#222222\" stroke-width=\"1.35205\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M11.788 20.3796H11.1921C11.1716 20.3796 11.152 20.3714 11.1375 20.357C11.123 20.3425 11.1148 20.3228 11.1148 20.3023V14.8242C11.1148 14.8037 11.123 14.7841 11.1375 14.7696C11.152 14.7551 11.1716 14.7469 11.1921 14.7469H19.4484C19.5066 14.7469 19.564 14.7601 19.6164 14.7854C19.6688 14.8107 19.7148 14.8475 19.7509 14.8931L21.7853 17.4579C21.8395 17.5261 21.869 17.6107 21.869 17.6979V20.3024C21.869 20.3125 21.867 20.3226 21.8631 20.332C21.8592 20.3413 21.8535 20.3498 21.8463 20.357C21.8392 20.3642 21.8306 20.3699 21.8213 20.3738C21.8119 20.3776 21.8018 20.3796 21.7917 20.3796H21.0097\" stroke=\"#222222\" stroke-width=\"1.35205\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M18.9286 20.3796H13.8688\" stroke=\"#222222\" stroke-width=\"1.35205\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M17.4836 14.747V20.3509\" stroke=\"#222222\" stroke-width=\"1.35205\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path></svg> 1 Day Delivery within Kano </span>", 2);
+var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"flex items-center\"><div class=\"flex mr-4\"><svg width=\"10\" height=\"10\" viewBox=\"0 0 10 10\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M5.26444 0.25L6.35956 3.62042H9.90343L7.03638 5.70346L8.13149 9.07388L5.26444 6.99085L2.39739 9.07388L3.4925 5.70346L0.625452 3.62042H4.16932L5.26444 0.25Z\" fill=\"#FFBD00\"></path></svg><svg width=\"10\" height=\"10\" viewBox=\"0 0 10 10\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M5.26444 0.25L6.35956 3.62042H9.90343L7.03638 5.70346L8.13149 9.07388L5.26444 6.99085L2.39739 9.07388L3.4925 5.70346L0.625452 3.62042H4.16932L5.26444 0.25Z\" fill=\"#FFBD00\"></path></svg><svg width=\"10\" height=\"10\" viewBox=\"0 0 10 10\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M5.26444 0.25L6.35956 3.62042H9.90343L7.03638 5.70346L8.13149 9.07388L5.26444 6.99085L2.39739 9.07388L3.4925 5.70346L0.625452 3.62042H4.16932L5.26444 0.25Z\" fill=\"#FFBD00\"></path></svg><svg width=\"10\" height=\"10\" viewBox=\"0 0 10 10\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M5.26444 0.25L6.35956 3.62042H9.90343L7.03638 5.70346L8.13149 9.07388L5.26444 6.99085L2.39739 9.07388L3.4925 5.70346L0.625452 3.62042H4.16932L5.26444 0.25Z\" fill=\"#FFBD00\"></path></svg><svg width=\"10\" height=\"10\" viewBox=\"0 0 10 10\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M5.26444 0.25L6.35956 3.62042H9.90343L7.03638 5.70346L8.13149 9.07388L5.26444 6.99085L2.39739 9.07388L3.4925 5.70346L0.625452 3.62042H4.16932L5.26444 0.25Z\" fill=\"#FFBD00\"></path></svg></div><div class=\"card-reviews\">120 Reviews</div></div><span class=\"flex card-reviews my-2 py-6\"><svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M5.93408 6.64286H12.5357\" stroke=\"#222222\" stroke-width=\"1.35205\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M5.93408 9.31318H9.79123\" stroke=\"#222222\" stroke-width=\"1.35205\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M8.70742 20.25H3.71741C3.52714 20.25 3.34467 20.1744 3.21013 20.0399C3.07558 19.9053 3 19.7229 3 19.5326V4.46741C3 4.27714 3.07558 4.09467 3.21013 3.96013C3.34467 3.82558 3.52714 3.75 3.71741 3.75H20.2826C20.4729 3.75 20.6553 3.82558 20.7899 3.96013C20.9244 4.09467 21 4.27714 21 4.46741V12.6758\" stroke=\"#222222\" stroke-width=\"1.35205\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M12.8282 21.3916C13.4029 21.3916 13.8688 20.9257 13.8688 20.351C13.8688 19.7762 13.4029 19.3104 12.8282 19.3104C12.2535 19.3104 11.7876 19.7762 11.7876 20.351C11.7876 20.9257 12.2535 21.3916 12.8282 21.3916Z\" stroke=\"#222222\" stroke-width=\"1.35205\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M19.9689 21.3916C20.5436 21.3916 21.0095 20.9257 21.0095 20.351C21.0095 19.7762 20.5436 19.3104 19.9689 19.3104C19.3942 19.3104 18.9283 19.7762 18.9283 20.351C18.9283 20.9257 19.3942 21.3916 19.9689 21.3916Z\" stroke=\"#222222\" stroke-width=\"1.35205\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M11.788 20.3796H11.1921C11.1716 20.3796 11.152 20.3714 11.1375 20.357C11.123 20.3425 11.1148 20.3228 11.1148 20.3023V14.8242C11.1148 14.8037 11.123 14.7841 11.1375 14.7696C11.152 14.7551 11.1716 14.7469 11.1921 14.7469H19.4484C19.5066 14.7469 19.564 14.7601 19.6164 14.7854C19.6688 14.8107 19.7148 14.8475 19.7509 14.8931L21.7853 17.4579C21.8395 17.5261 21.869 17.6107 21.869 17.6979V20.3024C21.869 20.3125 21.867 20.3226 21.8631 20.332C21.8592 20.3413 21.8535 20.3498 21.8463 20.357C21.8392 20.3642 21.8306 20.3699 21.8213 20.3738C21.8119 20.3776 21.8018 20.3796 21.7917 20.3796H21.0097\" stroke=\"#222222\" stroke-width=\"1.35205\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M18.9286 20.3796H13.8688\" stroke=\"#222222\" stroke-width=\"1.35205\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M17.4836 14.747V20.3509\" stroke=\"#222222\" stroke-width=\"1.35205\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path></svg> 1 Day Delivery within Kano </span>", 2);
 
-var _hoisted_13 = {
+var _hoisted_14 = {
   key: 0,
   "class": "mt-16 mb-8 flex justify-center"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.productsToShow, function (productIndex) {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.productsToShow, function (productIndex) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       key: productIndex.name,
       "class": ""
-    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
       href: "/item/".concat($data.products[productIndex].slug)
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
       "class": "w-64 mx-auto py-4",
@@ -21391,27 +21399,25 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       alt: $data.products[productIndex].name
     }, null, 8
     /* PROPS */
-    , _hoisted_4), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Product Details  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.products[productIndex].id), 1
+    , _hoisted_5), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Product Details  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.products[productIndex].id), 1
     /* TEXT */
-    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.products[productIndex].name), 1
+    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.products[productIndex].name), 1
     /* TEXT */
-    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("b", null, "N" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.products[productIndex].price), 1
+    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("b", null, "N" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.products[productIndex].price), 1
     /* TEXT */
-    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("b", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.products[productIndex].previous_price != '' ? "N".concat($data.products[productIndex].previous_price) : ''), 1
+    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("b", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.products[productIndex].previous_price != '' ? "N".concat($data.products[productIndex].previous_price) : ''), 1
     /* TEXT */
-    )])]), _hoisted_11])], 8
+    )])]), _hoisted_12])], 8
     /* PROPS */
-    , _hoisted_3)])]);
+    , _hoisted_4)])]);
   }), 128
   /* KEYED_FRAGMENT */
-  ))]), $data.productsToShow < $data.products.length || $data.products.length > $data.productsToShow ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    "class": "mx-auto btn-yus-conti-shopping rounded-full w-1/6 text-lg py-2 text-white focus:outline-none",
+  ))]), $data.productsToShow < $data.products.length || $data.products.length > $data.productsToShow ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    "class": "mx-auto btn-yus-conti-shopping rounded-full w-1/2 md:w-1/6 text-lg py-2 text-white focus:outline-none",
     onClick: _cache[0] || (_cache[0] = function ($event) {
       return $data.productsToShow += 8;
     })
-  }, "Shop More Items")])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 64
-  /* STABLE_FRAGMENT */
-  );
+  }, "Shop More Items")])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
 }
 
 /***/ }),
@@ -21502,7 +21508,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[0] || (_cache[0] = function ($event) {
       return $options.addToBag();
     }),
-    "class": "mx-auto relative top-8 btn-yus rounded-full w-2/3 flex flex-row justify-center items-center py-2 text-white"
+    "class": "mx-auto relative top-5 md:top-8 btn-yus rounded-full w-full md:w-2/3 flex flex-row justify-center items-center py-2 text-white"
   }, _hoisted_14)])]);
 }
 

@@ -29,7 +29,7 @@
         </a>
 
         <div>
-            <button @click="addToBag()" class="mx-auto relative top-8 btn-yus rounded-full w-2/3 flex flex-row justify-center items-center py-2 text-white">
+            <button @click="addToBag()" class="mx-auto relative top-5 md:top-8 btn-yus rounded-full w-full md:w-2/3 flex flex-row justify-center items-center py-2 text-white">
                 <div class="card-bag-label">
                     Add to Bag 
                 </div>
