@@ -6,6 +6,7 @@ use App\Http\Controllers\Front\FrontendController;
 use App\Http\Controllers\Front\CatalogController;
 use App\Http\Controllers\Front\CartController;
 use App\Http\Controllers\User\LoginController;
+use App\Http\Controllers\User\RegisterController;
 
 
 /*
@@ -25,8 +26,8 @@ use App\Http\Controllers\User\LoginController;
 Route::get('/', [FrontendController::class, 'index'])->name('front.index');
 
     // User Register
-    Route::post('/register', 'User\RegisterController@register')->name('user-register-submit');
-    Route::get('/register/verify/{token}', 'User\RegisterController@token')->name('user-register-token');
+    Route::post('/register', [RegisterController::class, 'register'])->name('user-register-submit');
+    Route::get('/register/verify/{token}', [RegisterController::class, 'token'])->name('user-register-token');
     // User Register End
     
     // User Login

@@ -77,7 +77,7 @@
                         </span>
                     </div>
                     <div class="my-8">
-                        <button class="mx-auto btn-yus rounded-full w-full py-2 text-white">
+                        <button @click="registerUser()" class="mx-auto btn-yus rounded-full w-full py-2 text-white">
                             Create account
                         </button>
                     </div>
@@ -146,43 +146,10 @@ export default {
             this.displaySignUpForm = false
             this.displayForgotPasswordForm = false
         },
-        async showSignUpForm(){
+        showSignUpForm(){
             this.displaySignUpForm = true 
             this.displayLoginForm = false 
             this.displayForgotPasswordForm = false
-            this.isLoading = true 
-
-                if(this.signUpName !== ''){
-                    if(this.signUpEmail !== ''){
-                        if(this.signUpPassword !== ''){
-                            axios.post('/register', {
-                                name: this.signUpName,
-                                email: this.signUpEmail,
-                                password: this.signUpPassword
-                            }).then(response => {
-                                this.signUpName = '',
-                                this.signUpEmail = '',
-                                this.signUpPassword = '',
-
-                                this.isLoading = false
-                                this.callback = response.data
-
-                                setTimeout(()=>{
-                                    window.location = '/'
-                                }, 3000)
-
-                            }).catch(error => {
-                                console.log(error)
-                            })
-                        }else{
-                            this.callback = 'Password field empty'
-                        }
-                    }else{
-                        this.callback = 'Email field empty'
-                    }
-                }else{
-                    this.callback = 'Name field empty'
-                }
         },
         showForgotPasswordForm(){
             this.displayForgotPasswordForm = true 
@@ -218,6 +185,43 @@ export default {
                 }
             }else{
                 this.callback = 'Email Address field empty'
+            }
+        },
+        async registerUser(){
+            this.isLoading = true 
+            if(this.signUpName !== ''){
+                if(this.signUpEmail !== ''){
+                    if(this.signUpPassword !== ''){
+                        axios.post('/register', {
+                            name: this.signUpName,
+                            email: this.signUpEmail,
+                            password: this.signUpPassword
+                        }).then(response => {
+                            this.signUpName = '',
+                            this.signUpEmail = '',
+                            this.signUpPassword = '',
+
+                            this.isLoading = false
+                            this.callback = response.data
+
+                            // setTimeout(()=>{
+                            //     window.location = '/'
+                            // }, 3000)
+
+                        }).catch(error => {
+                            console.log(error)
+                        })
+                    }else{
+                        this.isLoading = false
+                        this.callback = 'Password field empty'
+                    }
+                }else{
+                    this.isLoading = false
+                    this.callback = 'Email field empty'
+                }
+            }else{
+                this.isLoading = false
+                this.callback = 'Name field empty'
             }
         }
     }

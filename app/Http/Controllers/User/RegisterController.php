@@ -16,17 +16,10 @@ class RegisterController extends Controller
 {
     public function register(Request $request)
     {
+        // return response()->json('Hit');
+	        
 
     	$gs = Generalsetting::findOrFail(1);
-
-    	if($gs->is_capcha == 1)
-    	{
-	        $value = session('captcha_string');
-	        if ($request->codes != $value){
-	            return response()->json(array('errors' => [ 0 => 'Please enter Correct Capcha Code.' ]));    
-	        }    		
-    	}
-
 
         //--- Validation Section
 
@@ -45,7 +38,7 @@ class RegisterController extends Controller
         $validator = Validator::make($request->all(), $rules);
         
         if ($validator->fails()) {
-          return response()->json(array('errors' => $validator->getMessageBag()->toArray()));
+          return response()->json($validator->getMessageBag());
         }
         //--- Validation Section Ends
 
@@ -127,14 +120,20 @@ class RegisterController extends Controller
         	            'subject' => $subject,
         	            'body' => $msg,
         	        ];
-    
+                    
     	            $mailer = new GeniusMailer();
-    	            $mailer->sendCustomMail($data);
+    	            if($mailer->sendCustomMail($data)){
+                        return response()->json('We need to verify your email address. We have sent an email to '.$to.' to verify your email address. Please click link in that email to continue.');
+                    }
     	        }else{
-    	            $headers = "From: ".$gs->from_name."<".$gs->from_email.">";
-    	            mail($to,$subject,$msg,$headers);
+                    $headers = "From: ".$gs->from_name."<".$gs->from_email.">";
+                    if(mail($to, $subject, $msg, $headers)) {
+                        return response()->json('The email message was sent.');
+                    } else {
+                        return response()->json('The email message was not sent.');
+                    }
+    	            // mail($to,$subject,$msg,$headers);
     	        }
-          	return response()->json('We need to verify your email address. We have sent an email to '.$to.' to verify your email address. Please click link in that email to continue.');
 	        }else{
                 $user->email_verified = 'Yes';
                 $user->update();
