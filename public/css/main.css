@@ -496,6 +496,7 @@ body{
 
     .search_box{
         height: 50px;
+        margin-left: 7%;
     }
 
     .headings-yus{
@@ -538,6 +539,11 @@ body{
 
     .trust-label{
         font-size: 12px;
+    }
+
+    #search-bar-callback{
+        width: 67%;
+        left: 13%;
     }
     
 }

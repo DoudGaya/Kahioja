@@ -1,6 +1,6 @@
 <template>
     <!-- Search Box  -->
-    <div id="search_box" class="my-3 md:my-0 col-span-3 w-full text-center">
+    <div id="search_box" class="my-3 md:my-0 col-span-3 w-full text-center mx-auto">
         <div class="flex items-center">
             <input @keyup="searchProduct()" v-model="search_box" placeholder="Search products, brands and categories" class="search_box pr-14 pl-8 focus:outline-none" type="text" name="search" id="search">
             <button class="relative -left-12 p-2 rounded-full" style="background-color:#F37022;" type="submit">
