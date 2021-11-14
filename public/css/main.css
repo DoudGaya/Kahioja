@@ -488,7 +488,7 @@ body{
     cursor: pointer;
 }
 
-@media only screen and (max-width:736px)
+@media only screen and (max-width:768px)
 {
     body{
         font-size: 12px;
@@ -544,6 +544,33 @@ body{
     #search-bar-callback{
         width: 67%;
         left: 13%;
+    }
+
+    .cart-no{
+        position: relative;
+        top: 13px;
+        left: 50%;
+    }
+
+    #nav-bottom{
+        position: fixed;
+        width: 100%;
+        left: 0px;
+        bottom: 0px;
+        background: #FFFFFF;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.12);
+        z-index: 200;
+    }
+
+    #nav-bottom .title{
+        font-style: normal;
+        font-weight: 450;
+        font-size: 12px;
+        line-height: 20px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        color: #222222;
     }
     
 }
