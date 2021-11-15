@@ -21,14 +21,12 @@ export const store = new Vuex.Store({
     },
     actions:{
         allCartFromDatabase(context){
-            axios.get(`/cart`)
-                .then((response)=>{
-                    // console.log(response.data)
-                    context.commit("cart",response.data)
-                }).catch(()=>{
-                console.log("Error........")
+            axios.get(`/cart`).then(response => {
+                context.commit("cart",response.data)
+            }).catch(error => {
+                console.log(error)
             })
-        },
+        }
     },
     mutations: {
         cart(state, payload) {

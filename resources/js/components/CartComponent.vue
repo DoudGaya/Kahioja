@@ -86,7 +86,7 @@
                     </div>
                 </div>
                 <!-- Cart Total  -->
-                <div v-if="cartNo > 0" id="cart-total" class="px-16 py-5 my-5">
+                <div v-if="cartNo > 0" id="cart-total" class="px-4 md:px-16 py-5 my-5">
                     <div class="grid grid-cols-2 gap-6 py-1 w-full font-bold">
                         <div>Subtotal <span class="font-normal">(all products)</span></div>
                         <div class="text-right">N{{ subTotal }}</div>
