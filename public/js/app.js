@@ -20126,7 +20126,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'ProductComponent',
-  props: ['productid', 'productlink', 'productimage', 'productname', 'productcurrprice', 'productprevprice'],
+  props: ['productid', 'productlink', 'productimage', 'productname', 'productcurrprice', 'productprevprice', 'productdeliveryfee'],
   data: function data() {
     return {
       cart: []
@@ -21089,7 +21089,7 @@ var _hoisted_39 = {
   "class": "py-6 text-center px-4"
 };
 var _hoisted_40 = {
-  "class": "grid grid-cols-3 gap-6"
+  "class": "grid grid-cols-4 gap-6"
 };
 var _hoisted_41 = ["href"];
 var _hoisted_42 = ["src", "alt"];
@@ -21168,7 +21168,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
       "class": "mx-auto",
       style: {
-        "width": "65px"
+        "width": "55px"
       },
       src: "/images/categories/".concat(category.photo),
       alt: category.name
@@ -21615,10 +21615,15 @@ var _hoisted_10 = {
 var _hoisted_11 = {
   "class": "card-prev-price"
 };
+var _hoisted_12 = {
+  "class": "grid grid-cols-2 text-left md:flex md:flex-row card-reviews my-2"
+};
 
-var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"flex items-center\"><div class=\"flex mr-4\"><svg width=\"10\" height=\"10\" viewBox=\"0 0 10 10\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M5.26444 0.25L6.35956 3.62042H9.90343L7.03638 5.70346L8.13149 9.07388L5.26444 6.99085L2.39739 9.07388L3.4925 5.70346L0.625452 3.62042H4.16932L5.26444 0.25Z\" fill=\"#FFBD00\"></path></svg><svg width=\"10\" height=\"10\" viewBox=\"0 0 10 10\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M5.26444 0.25L6.35956 3.62042H9.90343L7.03638 5.70346L8.13149 9.07388L5.26444 6.99085L2.39739 9.07388L3.4925 5.70346L0.625452 3.62042H4.16932L5.26444 0.25Z\" fill=\"#FFBD00\"></path></svg><svg width=\"10\" height=\"10\" viewBox=\"0 0 10 10\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M5.26444 0.25L6.35956 3.62042H9.90343L7.03638 5.70346L8.13149 9.07388L5.26444 6.99085L2.39739 9.07388L3.4925 5.70346L0.625452 3.62042H4.16932L5.26444 0.25Z\" fill=\"#FFBD00\"></path></svg><svg width=\"10\" height=\"10\" viewBox=\"0 0 10 10\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M5.26444 0.25L6.35956 3.62042H9.90343L7.03638 5.70346L8.13149 9.07388L5.26444 6.99085L2.39739 9.07388L3.4925 5.70346L0.625452 3.62042H4.16932L5.26444 0.25Z\" fill=\"#FFBD00\"></path></svg><svg width=\"10\" height=\"10\" viewBox=\"0 0 10 10\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M5.26444 0.25L6.35956 3.62042H9.90343L7.03638 5.70346L8.13149 9.07388L5.26444 6.99085L2.39739 9.07388L3.4925 5.70346L0.625452 3.62042H4.16932L5.26444 0.25Z\" fill=\"#FFBD00\"></path></svg></div><div class=\"card-reviews\">120 Reviews</div></div><span class=\"flex card-reviews my-2 py-6\"><svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M5.93408 6.64286H12.5357\" stroke=\"#222222\" stroke-width=\"1.35205\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M5.93408 9.31318H9.79123\" stroke=\"#222222\" stroke-width=\"1.35205\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M8.70742 20.25H3.71741C3.52714 20.25 3.34467 20.1744 3.21013 20.0399C3.07558 19.9053 3 19.7229 3 19.5326V4.46741C3 4.27714 3.07558 4.09467 3.21013 3.96013C3.34467 3.82558 3.52714 3.75 3.71741 3.75H20.2826C20.4729 3.75 20.6553 3.82558 20.7899 3.96013C20.9244 4.09467 21 4.27714 21 4.46741V12.6758\" stroke=\"#222222\" stroke-width=\"1.35205\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M12.8282 21.3916C13.4029 21.3916 13.8688 20.9257 13.8688 20.351C13.8688 19.7762 13.4029 19.3104 12.8282 19.3104C12.2535 19.3104 11.7876 19.7762 11.7876 20.351C11.7876 20.9257 12.2535 21.3916 12.8282 21.3916Z\" stroke=\"#222222\" stroke-width=\"1.35205\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M19.9689 21.3916C20.5436 21.3916 21.0095 20.9257 21.0095 20.351C21.0095 19.7762 20.5436 19.3104 19.9689 19.3104C19.3942 19.3104 18.9283 19.7762 18.9283 20.351C18.9283 20.9257 19.3942 21.3916 19.9689 21.3916Z\" stroke=\"#222222\" stroke-width=\"1.35205\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M11.788 20.3796H11.1921C11.1716 20.3796 11.152 20.3714 11.1375 20.357C11.123 20.3425 11.1148 20.3228 11.1148 20.3023V14.8242C11.1148 14.8037 11.123 14.7841 11.1375 14.7696C11.152 14.7551 11.1716 14.7469 11.1921 14.7469H19.4484C19.5066 14.7469 19.564 14.7601 19.6164 14.7854C19.6688 14.8107 19.7148 14.8475 19.7509 14.8931L21.7853 17.4579C21.8395 17.5261 21.869 17.6107 21.869 17.6979V20.3024C21.869 20.3125 21.867 20.3226 21.8631 20.332C21.8592 20.3413 21.8535 20.3498 21.8463 20.357C21.8392 20.3642 21.8306 20.3699 21.8213 20.3738C21.8119 20.3776 21.8018 20.3796 21.7917 20.3796H21.0097\" stroke=\"#222222\" stroke-width=\"1.35205\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M18.9286 20.3796H13.8688\" stroke=\"#222222\" stroke-width=\"1.35205\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M17.4836 14.747V20.3509\" stroke=\"#222222\" stroke-width=\"1.35205\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path></svg> 1 Day Delivery within Kano </span>", 2);
+var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div><svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M5.93359 6.64258H12.5352\" stroke=\"#7E7E7E\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M5.93359 9.3125H9.79074\" stroke=\"#7E7E7E\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M8.70742 20.25H3.71741C3.52714 20.25 3.34467 20.1744 3.21013 20.0399C3.07558 19.9053 3 19.7229 3 19.5326V4.46741C3 4.27714 3.07558 4.09467 3.21013 3.96013C3.34467 3.82558 3.52714 3.75 3.71741 3.75H20.2826C20.4729 3.75 20.6553 3.82558 20.7899 3.96013C20.9244 4.09467 21 4.27714 21 4.46741V12.6758\" stroke=\"#7E7E7E\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M12.8297 21.3918C13.4044 21.3918 13.8703 20.9259 13.8703 20.3511C13.8703 19.7764 13.4044 19.3105 12.8297 19.3105C12.255 19.3105 11.7891 19.7764 11.7891 20.3511C11.7891 20.9259 12.255 21.3918 12.8297 21.3918Z\" stroke=\"#7E7E7E\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M19.9703 21.3918C20.545 21.3918 21.0109 20.9259 21.0109 20.3511C21.0109 19.7764 20.545 19.3105 19.9703 19.3105C19.3956 19.3105 18.9297 19.7764 18.9297 20.3511C18.9297 20.9259 19.3956 21.3918 19.9703 21.3918Z\" stroke=\"#7E7E7E\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M11.7865 20.3787H11.1905C11.17 20.3787 11.1504 20.3706 11.1359 20.3561C11.1214 20.3416 11.1133 20.322 11.1133 20.3015V14.8233C11.1133 14.8029 11.1214 14.7832 11.1359 14.7687C11.1504 14.7542 11.17 14.7461 11.1905 14.7461H19.4469C19.5051 14.7461 19.5625 14.7592 19.6149 14.7845C19.6672 14.8099 19.7132 14.8467 19.7494 14.8923L21.7838 17.457C21.8379 17.5253 21.8674 17.6099 21.8674 17.697V20.3015C21.8674 20.3117 21.8654 20.3217 21.8615 20.3311C21.8576 20.3405 21.8519 20.349 21.8448 20.3562C21.8376 20.3633 21.8291 20.369 21.8197 20.3729C21.8103 20.3768 21.8003 20.3788 21.7901 20.3788H21.0082\" stroke=\"#7E7E7E\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M18.9309 20.3789H13.8711\" stroke=\"#7E7E7E\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M17.4844 14.7461V20.3501\" stroke=\"#7E7E7E\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path></svg></div>  ", 2);
 
-var _hoisted_14 = {
+var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"grid grid-cols-2 text-left md:flex md:flex-row card-reviews my-2\"><div><svg width=\"25\" height=\"24\" viewBox=\"0 0 25 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M17.9157 22.0795C20.4602 22.0795 22.5229 20.0168 22.5229 17.4724C22.5229 14.9279 20.4602 12.8652 17.9157 12.8652C15.3713 12.8652 13.3086 14.9279 13.3086 17.4724C13.3086 20.0168 15.3713 22.0795 17.9157 22.0795Z\" stroke=\"#7E7E7E\" stroke-width=\"0.988223\" stroke-linecap=\"round\"></path><path d=\"M17.918 14.3809V17.4716L20.0307 18.7586\" stroke=\"#7E7E7E\" stroke-width=\"0.988223\" stroke-linecap=\"round\"></path><path d=\"M11.7867 20.5781H3.99866C3.80839 20.5781 3.62592 20.5025 3.49138 20.368C3.35683 20.2335 3.28125 20.051 3.28125 19.8607V4.79554C3.28125 4.60527 3.35683 4.42279 3.49138 4.28825C3.62592 4.15371 3.80839 4.07812 3.99866 4.07812H20.5638C20.7541 4.07812 20.9366 4.15371 21.0711 4.28825C21.2057 4.42279 21.2813 4.60527 21.2813 4.79554V11.8171\" stroke=\"#7E7E7E\" stroke-width=\"0.988223\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M6.21484 6.9707H12.8165\" stroke=\"#7E7E7E\" stroke-width=\"0.988223\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M6.21484 9.64062H10.072\" stroke=\"#7E7E7E\" stroke-width=\"0.988223\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path></svg></div>  <div>1 Day Delivery within Kano</div></div>", 1);
+
+var _hoisted_16 = {
   key: 0,
   "class": "mt-16 mb-8 flex justify-center"
 };
@@ -21643,12 +21648,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     /* TEXT */
     )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("b", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.products[productIndex].previous_price != '' ? "N".concat($data.products[productIndex].previous_price) : ''), 1
     /* TEXT */
-    )])]), _hoisted_12])], 8
+    )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [_hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.products[productIndex].ship_fee != null ? "N".concat($data.products[productIndex].ship_fee) : 'Free Delivery'), 1
+    /* TEXT */
+    )]), _hoisted_15])], 8
     /* PROPS */
     , _hoisted_4)])]);
   }), 128
   /* KEYED_FRAGMENT */
-  ))]), $data.productsToShow < $data.products.length || $data.products.length > $data.productsToShow ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  ))]), $data.productsToShow < $data.products.length || $data.products.length > $data.productsToShow ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": "mx-auto btn-yus-conti-shopping rounded-full w-1/2 md:w-1/6 text-lg py-2 text-white focus:outline-none",
     onClick: _cache[0] || (_cache[0] = function ($event) {
       return $data.productsToShow += 8;
@@ -21685,7 +21692,7 @@ var _hoisted_5 = {
   }
 };
 var _hoisted_6 = {
-  "class": "card-title"
+  "class": "card-title w-full"
 };
 var _hoisted_7 = {
   "class": "flex items-center"
@@ -21696,16 +21703,21 @@ var _hoisted_8 = {
 var _hoisted_9 = {
   "class": "card-prev-price"
 };
+var _hoisted_10 = {
+  "class": "grid grid-cols-2 text-left md:flex md:flex-row card-reviews my-2"
+};
 
-var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"flex items-center\"><div class=\"flex mr-4\"><svg width=\"10\" height=\"10\" viewBox=\"0 0 10 10\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M5.26444 0.25L6.35956 3.62042H9.90343L7.03638 5.70346L8.13149 9.07388L5.26444 6.99085L2.39739 9.07388L3.4925 5.70346L0.625452 3.62042H4.16932L5.26444 0.25Z\" fill=\"#FFBD00\"></path></svg><svg width=\"10\" height=\"10\" viewBox=\"0 0 10 10\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M5.26444 0.25L6.35956 3.62042H9.90343L7.03638 5.70346L8.13149 9.07388L5.26444 6.99085L2.39739 9.07388L3.4925 5.70346L0.625452 3.62042H4.16932L5.26444 0.25Z\" fill=\"#FFBD00\"></path></svg><svg width=\"10\" height=\"10\" viewBox=\"0 0 10 10\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M5.26444 0.25L6.35956 3.62042H9.90343L7.03638 5.70346L8.13149 9.07388L5.26444 6.99085L2.39739 9.07388L3.4925 5.70346L0.625452 3.62042H4.16932L5.26444 0.25Z\" fill=\"#FFBD00\"></path></svg><svg width=\"10\" height=\"10\" viewBox=\"0 0 10 10\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M5.26444 0.25L6.35956 3.62042H9.90343L7.03638 5.70346L8.13149 9.07388L5.26444 6.99085L2.39739 9.07388L3.4925 5.70346L0.625452 3.62042H4.16932L5.26444 0.25Z\" fill=\"#FFBD00\"></path></svg><svg width=\"10\" height=\"10\" viewBox=\"0 0 10 10\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M5.26444 0.25L6.35956 3.62042H9.90343L7.03638 5.70346L8.13149 9.07388L5.26444 6.99085L2.39739 9.07388L3.4925 5.70346L0.625452 3.62042H4.16932L5.26444 0.25Z\" fill=\"#FFBD00\"></path></svg></div><div class=\"card-reviews\">120 Reviews</div></div><span class=\"flex card-reviews my-2\"><svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M5.93408 6.64286H12.5357\" stroke=\"#222222\" stroke-width=\"1.35205\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M5.93408 9.31318H9.79123\" stroke=\"#222222\" stroke-width=\"1.35205\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M8.70742 20.25H3.71741C3.52714 20.25 3.34467 20.1744 3.21013 20.0399C3.07558 19.9053 3 19.7229 3 19.5326V4.46741C3 4.27714 3.07558 4.09467 3.21013 3.96013C3.34467 3.82558 3.52714 3.75 3.71741 3.75H20.2826C20.4729 3.75 20.6553 3.82558 20.7899 3.96013C20.9244 4.09467 21 4.27714 21 4.46741V12.6758\" stroke=\"#222222\" stroke-width=\"1.35205\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M12.8282 21.3916C13.4029 21.3916 13.8688 20.9257 13.8688 20.351C13.8688 19.7762 13.4029 19.3104 12.8282 19.3104C12.2535 19.3104 11.7876 19.7762 11.7876 20.351C11.7876 20.9257 12.2535 21.3916 12.8282 21.3916Z\" stroke=\"#222222\" stroke-width=\"1.35205\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M19.9689 21.3916C20.5436 21.3916 21.0095 20.9257 21.0095 20.351C21.0095 19.7762 20.5436 19.3104 19.9689 19.3104C19.3942 19.3104 18.9283 19.7762 18.9283 20.351C18.9283 20.9257 19.3942 21.3916 19.9689 21.3916Z\" stroke=\"#222222\" stroke-width=\"1.35205\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M11.788 20.3796H11.1921C11.1716 20.3796 11.152 20.3714 11.1375 20.357C11.123 20.3425 11.1148 20.3228 11.1148 20.3023V14.8242C11.1148 14.8037 11.123 14.7841 11.1375 14.7696C11.152 14.7551 11.1716 14.7469 11.1921 14.7469H19.4484C19.5066 14.7469 19.564 14.7601 19.6164 14.7854C19.6688 14.8107 19.7148 14.8475 19.7509 14.8931L21.7853 17.4579C21.8395 17.5261 21.869 17.6107 21.869 17.6979V20.3024C21.869 20.3125 21.867 20.3226 21.8631 20.332C21.8592 20.3413 21.8535 20.3498 21.8463 20.357C21.8392 20.3642 21.8306 20.3699 21.8213 20.3738C21.8119 20.3776 21.8018 20.3796 21.7917 20.3796H21.0097\" stroke=\"#222222\" stroke-width=\"1.35205\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M18.9286 20.3796H13.8688\" stroke=\"#222222\" stroke-width=\"1.35205\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M17.4836 14.747V20.3509\" stroke=\"#222222\" stroke-width=\"1.35205\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path></svg> 1 Day Delivery within Kano </span>", 2);
+var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div><svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M5.93359 6.64258H12.5352\" stroke=\"#7E7E7E\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M5.93359 9.3125H9.79074\" stroke=\"#7E7E7E\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M8.70742 20.25H3.71741C3.52714 20.25 3.34467 20.1744 3.21013 20.0399C3.07558 19.9053 3 19.7229 3 19.5326V4.46741C3 4.27714 3.07558 4.09467 3.21013 3.96013C3.34467 3.82558 3.52714 3.75 3.71741 3.75H20.2826C20.4729 3.75 20.6553 3.82558 20.7899 3.96013C20.9244 4.09467 21 4.27714 21 4.46741V12.6758\" stroke=\"#7E7E7E\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M12.8297 21.3918C13.4044 21.3918 13.8703 20.9259 13.8703 20.3511C13.8703 19.7764 13.4044 19.3105 12.8297 19.3105C12.255 19.3105 11.7891 19.7764 11.7891 20.3511C11.7891 20.9259 12.255 21.3918 12.8297 21.3918Z\" stroke=\"#7E7E7E\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M19.9703 21.3918C20.545 21.3918 21.0109 20.9259 21.0109 20.3511C21.0109 19.7764 20.545 19.3105 19.9703 19.3105C19.3956 19.3105 18.9297 19.7764 18.9297 20.3511C18.9297 20.9259 19.3956 21.3918 19.9703 21.3918Z\" stroke=\"#7E7E7E\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M11.7865 20.3787H11.1905C11.17 20.3787 11.1504 20.3706 11.1359 20.3561C11.1214 20.3416 11.1133 20.322 11.1133 20.3015V14.8233C11.1133 14.8029 11.1214 14.7832 11.1359 14.7687C11.1504 14.7542 11.17 14.7461 11.1905 14.7461H19.4469C19.5051 14.7461 19.5625 14.7592 19.6149 14.7845C19.6672 14.8099 19.7132 14.8467 19.7494 14.8923L21.7838 17.457C21.8379 17.5253 21.8674 17.6099 21.8674 17.697V20.3015C21.8674 20.3117 21.8654 20.3217 21.8615 20.3311C21.8576 20.3405 21.8519 20.349 21.8448 20.3562C21.8376 20.3633 21.8291 20.369 21.8197 20.3729C21.8103 20.3768 21.8003 20.3788 21.7901 20.3788H21.0082\" stroke=\"#7E7E7E\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M18.9309 20.3789H13.8711\" stroke=\"#7E7E7E\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M17.4844 14.7461V20.3501\" stroke=\"#7E7E7E\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path></svg></div>  ", 2);
 
-var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"grid grid-cols-2 text-left md:flex md:flex-row card-reviews my-2\"><div><svg width=\"25\" height=\"24\" viewBox=\"0 0 25 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M17.9157 22.0795C20.4602 22.0795 22.5229 20.0168 22.5229 17.4724C22.5229 14.9279 20.4602 12.8652 17.9157 12.8652C15.3713 12.8652 13.3086 14.9279 13.3086 17.4724C13.3086 20.0168 15.3713 22.0795 17.9157 22.0795Z\" stroke=\"#7E7E7E\" stroke-width=\"0.988223\" stroke-linecap=\"round\"></path><path d=\"M17.918 14.3809V17.4716L20.0307 18.7586\" stroke=\"#7E7E7E\" stroke-width=\"0.988223\" stroke-linecap=\"round\"></path><path d=\"M11.7867 20.5781H3.99866C3.80839 20.5781 3.62592 20.5025 3.49138 20.368C3.35683 20.2335 3.28125 20.051 3.28125 19.8607V4.79554C3.28125 4.60527 3.35683 4.42279 3.49138 4.28825C3.62592 4.15371 3.80839 4.07812 3.99866 4.07812H20.5638C20.7541 4.07812 20.9366 4.15371 21.0711 4.28825C21.2057 4.42279 21.2813 4.60527 21.2813 4.79554V11.8171\" stroke=\"#7E7E7E\" stroke-width=\"0.988223\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M6.21484 6.9707H12.8165\" stroke=\"#7E7E7E\" stroke-width=\"0.988223\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M6.21484 9.64062H10.072\" stroke=\"#7E7E7E\" stroke-width=\"0.988223\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path></svg></div>  <div>1 Day Delivery within Kano</div></div>", 1);
+
+var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "card-bag-label"
 }, " Add to Bag ", -1
 /* HOISTED */
 );
 
-var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "ml-2"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
   width: "21",
@@ -21720,7 +21732,7 @@ var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_14 = [_hoisted_12, _hoisted_13];
+var _hoisted_16 = [_hoisted_14, _hoisted_15];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
     href: $props.productlink
@@ -21738,14 +21750,16 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* TEXT */
   )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("b", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.productprevprice), 1
   /* TEXT */
-  )])]), _hoisted_10])], 8
+  )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [_hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.productdeliveryfee), 1
+  /* TEXT */
+  )]), _hoisted_13])], 8
   /* PROPS */
   , _hoisted_2), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     onClick: _cache[0] || (_cache[0] = function ($event) {
       return $options.addToBag();
     }),
     "class": "mx-auto relative top-5 md:top-8 btn-yus rounded-full w-full md:w-2/3 flex flex-row justify-center items-center py-2 text-white"
-  }, _hoisted_14)])]);
+  }, _hoisted_16)])]);
 }
 
 /***/ }),
@@ -21764,24 +21778,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "product-description grid grid-cols-3 mt-4 py-6 w-2/3 mx-auto"
+  "class": "product-description grid grid-cols-3 mt-4 py-6 w-full md:w-2/3 mx-auto"
 };
 var _hoisted_2 = {
-  "class": "w-2/3 mx-auto relative -top-5 p-4 border-1 shadow"
+  "class": "w-full md:w-2/3 mx-auto relative -top-5 p-4 border-1 shadow"
 };
 
 var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div>Description Our policy lasts 30 days. If 30 days have gone by since your purchase, unfortunately we can’t offer you a refund or exchange.</div><div><br></div><div>To be eligible for a return, your item must be unused and in the same condition that you received it. It must also be in the original packaging.</div><div><br></div><div>Several types of goods are exempt from being returned. Perishable goods such as food, flowers, newspapers or magazines cannot be returned. We also do not accept products that are intimate or sanitary goods, hazardous materials, or flammable liquids or gases.</div><div><br></div><div>Additional non-returnable items:</div><div>* Gift cards</div><div>* Downloadable software products</div><div>* Some health and personal care items</div><div><br></div><div>To complete your return, we require a receipt or proof of purchase.</div><div><br></div><div>Please do not send your purchase back to the manufacturer.</div><div><br></div><div>There are certain situations where only partial refunds are granted: (if applicable)</div><div>* Book with obvious signs of use</div><div>* CD, DVD, VHS tape, software, video game, cassette tape, or vinyl record that has been opened.</div><div>* Any item not in its original condition, is damaged or missing parts for reasons not due to our error.</div><div>* Any item that is returned more than 30 days after delivery</div><div><br></div><div>Refunds (if applicable)</div><div>Once your return is received and inspected, we will send you an email to notify you that we have received your returned item. We will also notify you of the approval or rejection of your refund.</div><div>If you are approved, then your refund will be processed, and a credit will automatically be applied to your credit card or original method of payment, within a certain amount of days.</div><div><br></div><div>Late or missing refunds (if applicable)</div><div>If you haven’t received a refund yet, first check your bank account again.</div><div>Then contact your credit card company, it may take some time before your refund is officially posted.</div><div>Next contact your bank. There is often some processing time before a refund is posted.</div><div>If you’ve done all of this and you still have not received your refund yet, please contact us at reversal@kahioja.com.</div><div><br></div><div>Sale items (if applicable)</div><div>Only regular priced items may be refunded, unfortunately sale items cannot be refunded.</div><div><br></div><div>Exchanges (if applicable)</div><div>We only replace items if they are defective or damaged.  If you need to exchange it for the same item, send us an email at replace@kahioja.com and send your item to: suite A1/A2 Hamisu Abba Sumaila plaza, Tarauni market rd. Tarauni, Kano., kano, KN, 700223, Nigeria.</div><div><br></div><div><br></div><div>Shipping</div><div>To return your product, you should mail your product to: suite A1/A2 Hamisu Abba Sumaila plaza, Tarauni market rd. Tarauni, Kano., kano, KN, 700223, Nigeria.</div><div><br></div><div>You will be responsible for paying for your own shipping costs for returning your item. Shipping costs are non-refundable. If you receive a refund, the cost of return shipping will be deducted from your refund.</div><div><br></div><div>Depending on where you live, the time it may take for your exchanged product to reach you, may vary.</div><div><br></div><div>If you are shipping an item over $75/NGN30,000, you should consider using a trackable shipping service or purchasing shipping insurance. We don’t guarantee that we will receive your returned item.</div>", 46);
 
 var _hoisted_49 = [_hoisted_3];
 var _hoisted_50 = {
-  "class": "w-2/3 mx-auto relative -top-5 p-4 border-1 shadow"
+  "class": "w-full md:w-2/3 mx-auto relative -top-5 p-4 border-1 shadow"
 };
 
 var _hoisted_51 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div>Buy Our policy lasts 30 days. If 30 days have gone by since your purchase, unfortunately we can’t offer you a refund or exchange.</div><div><br></div><div>To be eligible for a return, your item must be unused and in the same condition that you received it. It must also be in the original packaging.</div><div><br></div><div>Several types of goods are exempt from being returned. Perishable goods such as food, flowers, newspapers or magazines cannot be returned. We also do not accept products that are intimate or sanitary goods, hazardous materials, or flammable liquids or gases.</div><div><br></div><div>Additional non-returnable items:</div><div>* Gift cards</div><div>* Downloadable software products</div><div>* Some health and personal care items</div><div><br></div><div>To complete your return, we require a receipt or proof of purchase.</div><div><br></div><div>Please do not send your purchase back to the manufacturer.</div><div><br></div><div>There are certain situations where only partial refunds are granted: (if applicable)</div><div>* Book with obvious signs of use</div><div>* CD, DVD, VHS tape, software, video game, cassette tape, or vinyl record that has been opened.</div><div>* Any item not in its original condition, is damaged or missing parts for reasons not due to our error.</div><div>* Any item that is returned more than 30 days after delivery</div><div><br></div><div>Refunds (if applicable)</div><div>Once your return is received and inspected, we will send you an email to notify you that we have received your returned item. We will also notify you of the approval or rejection of your refund.</div><div>If you are approved, then your refund will be processed, and a credit will automatically be applied to your credit card or original method of payment, within a certain amount of days.</div><div><br></div><div>Late or missing refunds (if applicable)</div><div>If you haven’t received a refund yet, first check your bank account again.</div><div>Then contact your credit card company, it may take some time before your refund is officially posted.</div><div>Next contact your bank. There is often some processing time before a refund is posted.</div><div>If you’ve done all of this and you still have not received your refund yet, please contact us at reversal@kahioja.com.</div><div><br></div><div>Sale items (if applicable)</div><div>Only regular priced items may be refunded, unfortunately sale items cannot be refunded.</div><div><br></div><div>Exchanges (if applicable)</div><div>We only replace items if they are defective or damaged.  If you need to exchange it for the same item, send us an email at replace@kahioja.com and send your item to: suite A1/A2 Hamisu Abba Sumaila plaza, Tarauni market rd. Tarauni, Kano., kano, KN, 700223, Nigeria.</div><div><br></div><div><br></div><div>Shipping</div><div>To return your product, you should mail your product to: suite A1/A2 Hamisu Abba Sumaila plaza, Tarauni market rd. Tarauni, Kano., kano, KN, 700223, Nigeria.</div><div><br></div><div>You will be responsible for paying for your own shipping costs for returning your item. Shipping costs are non-refundable. If you receive a refund, the cost of return shipping will be deducted from your refund.</div><div><br></div><div>Depending on where you live, the time it may take for your exchanged product to reach you, may vary.</div><div><br></div><div>If you are shipping an item over $75/NGN30,000, you should consider using a trackable shipping service or purchasing shipping insurance. We don’t guarantee that we will receive your returned item.</div>", 46);
 
 var _hoisted_97 = [_hoisted_51];
 var _hoisted_98 = {
-  "class": "w-2/3 mx-auto relative -top-5 p-4 border-1 shadow"
+  "class": "w-full md:w-2/3 mx-auto relative -top-5 p-4 border-1 shadow"
 };
 
 var _hoisted_99 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div>Comment Our policy lasts 30 days. If 30 days have gone by since your purchase, unfortunately we can’t offer you a refund or exchange.</div><div><br></div><div>To be eligible for a return, your item must be unused and in the same condition that you received it. It must also be in the original packaging.</div><div><br></div><div>Several types of goods are exempt from being returned. Perishable goods such as food, flowers, newspapers or magazines cannot be returned. We also do not accept products that are intimate or sanitary goods, hazardous materials, or flammable liquids or gases.</div><div><br></div><div>Additional non-returnable items:</div><div>* Gift cards</div><div>* Downloadable software products</div><div>* Some health and personal care items</div><div><br></div><div>To complete your return, we require a receipt or proof of purchase.</div><div><br></div><div>Please do not send your purchase back to the manufacturer.</div><div><br></div><div>There are certain situations where only partial refunds are granted: (if applicable)</div><div>* Book with obvious signs of use</div><div>* CD, DVD, VHS tape, software, video game, cassette tape, or vinyl record that has been opened.</div><div>* Any item not in its original condition, is damaged or missing parts for reasons not due to our error.</div><div>* Any item that is returned more than 30 days after delivery</div><div><br></div><div>Refunds (if applicable)</div><div>Once your return is received and inspected, we will send you an email to notify you that we have received your returned item. We will also notify you of the approval or rejection of your refund.</div><div>If you are approved, then your refund will be processed, and a credit will automatically be applied to your credit card or original method of payment, within a certain amount of days.</div><div><br></div><div>Late or missing refunds (if applicable)</div><div>If you haven’t received a refund yet, first check your bank account again.</div><div>Then contact your credit card company, it may take some time before your refund is officially posted.</div><div>Next contact your bank. There is often some processing time before a refund is posted.</div><div>If you’ve done all of this and you still have not received your refund yet, please contact us at reversal@kahioja.com.</div><div><br></div><div>Sale items (if applicable)</div><div>Only regular priced items may be refunded, unfortunately sale items cannot be refunded.</div><div><br></div><div>Exchanges (if applicable)</div><div>We only replace items if they are defective or damaged.  If you need to exchange it for the same item, send us an email at replace@kahioja.com and send your item to: suite A1/A2 Hamisu Abba Sumaila plaza, Tarauni market rd. Tarauni, Kano., kano, KN, 700223, Nigeria.</div><div><br></div><div><br></div><div>Shipping</div><div>To return your product, you should mail your product to: suite A1/A2 Hamisu Abba Sumaila plaza, Tarauni market rd. Tarauni, Kano., kano, KN, 700223, Nigeria.</div><div><br></div><div>You will be responsible for paying for your own shipping costs for returning your item. Shipping costs are non-refundable. If you receive a refund, the cost of return shipping will be deducted from your refund.</div><div><br></div><div>Depending on where you live, the time it may take for your exchanged product to reach you, may vary.</div><div><br></div><div>If you are shipping an item over $75/NGN30,000, you should consider using a trackable shipping service or purchasing shipping insurance. We don’t guarantee that we will receive your returned item.</div>", 46);
@@ -21792,21 +21806,21 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[0] || (_cache[0] = function ($event) {
       return $options.productDescription();
     }),
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([$data.productDescriptionContent ? 'active' : 'not-active', 'py-3', 'px-8'])
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([$data.productDescriptionContent ? 'active' : 'not-active', 'py-3', 'md:px-8 px-4'])
   }, " Product Description ", 2
   /* CLASS */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     onClick: _cache[1] || (_cache[1] = function ($event) {
       return $options.buyAndReturnPolicy();
     }),
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([$data.buyAndReturnPolicyContent ? 'active' : 'not-active', 'py-3', 'px-8'])
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([$data.buyAndReturnPolicyContent ? 'active' : 'not-active', 'py-3', 'md:px-8 px-4'])
   }, " Buy and return policy ", 2
   /* CLASS */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     onClick: _cache[2] || (_cache[2] = function ($event) {
       return $options.commentAndReview();
     }),
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([$data.commentAndReviewContent ? 'active' : 'not-active', 'py-3', 'px-8'])
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([$data.commentAndReviewContent ? 'active' : 'not-active', 'py-3', 'md:px-8 px-4'])
   }, " Reviews and Comments ", 2
   /* CLASS */
   )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, _hoisted_49, 512
@@ -21837,7 +21851,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var _hoisted_1 = {
   id: "product-details",
-  "class": "grid grid-cols-5 gap-6 my-12"
+  "class": "grid grid-cols-1 md:grid-cols-5 gap-6 my-12"
 };
 
 var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
@@ -21853,11 +21867,11 @@ var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 );
 
 var _hoisted_3 = {
-  "class": "col-span-2 w-full border rounded-xl shadow"
+  "class": "md:col-span-2 w-full border rounded-xl shadow"
 };
 var _hoisted_4 = ["src"];
 var _hoisted_5 = {
-  "class": "rounded-xl px-10 py-8 border col-span-2 shadow"
+  "class": "rounded-xl px-10 py-8 border md:col-span-2 shadow"
 };
 var _hoisted_6 = {
   "class": "py-3"
@@ -21901,7 +21915,7 @@ var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticV
 
 var _hoisted_19 = {
   id: "cart-body-product-add",
-  "class": "flex justify-between w-1/4 py-2 px-4 rounded-full my-2"
+  "class": "flex justify-between w-full md:w-1/4 py-2 px-4 rounded-full my-2"
 };
 var _hoisted_20 = {
   "class": "cursor-pointer"

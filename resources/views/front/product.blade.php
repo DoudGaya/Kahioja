@@ -2,7 +2,7 @@
 
 @section('main')
     <!-- Banner -->
-    <div id="banner" class="mt-6 px-14">
+    <div id="banner" class="mt-6 md:px-14 px-4">
         <!-- Nav  -->
         <div id="product-details-nav">
             <ul class="flex">
@@ -39,9 +39,9 @@
             <product-description-component></product-description-component>
         </div>
         <!-- Similar Products -->
-        <div id="similar-product" class="px-14 mt-20 mb-8">
+        <div id="similar-product" class="mt-20 md:mb-8 mb-3">
             <h1 class="headings-yus">Similar product you may like</h1>
-            <div id="product" class="grid grid-cols-4 gap-6">
+            <div id="product" class="grid grid-cols-2 md:grid-cols-4 gap-6">
                 @foreach($productt->category->products()->where('status','=',1)->where('id','!=',$productt->id)->take(8)->get() as $prod)
                     @include('includes.productComponent')
                 @endforeach

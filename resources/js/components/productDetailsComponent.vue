@@ -1,16 +1,16 @@
 <template>
-    <div id="product-details" class="grid grid-cols-5 gap-6 my-12">
+    <div id="product-details" class="grid grid-cols-1 md:grid-cols-5 gap-6 my-12">
         <div class="col-span-1 my-auto">
             <div class="w-full border rounded-xl shadow h-40 mb-2 px-10 py-8">1</div>
             <div class="w-full border rounded-xl shadow h-40 mb-2 px-10 py-8">2</div>
             <div class="w-full border rounded-xl shadow h-40 mb-2 px-10 py-8">3</div>
         </div>
         <!-- Product Image  -->
-        <div class="col-span-2 w-full border rounded-xl shadow">
+        <div class="md:col-span-2 w-full border rounded-xl shadow">
             <img class="w-4/5 mx-auto py-6" :src="productimage" alt="">
         </div>
         <!-- Product Details  -->
-        <div class="rounded-xl px-10 py-8 border col-span-2 shadow">
+        <div class="rounded-xl px-10 py-8 border md:col-span-2 shadow">
             <div class="py-3">
                 <div v-if="isLoading" class="loader mx-auto mt-5"></div>
                 <h1 class="product-details-title">{{ productname }}</h1>
@@ -51,7 +51,7 @@
                         </span>
                     </div>
                 </div>
-                <div id="cart-body-product-add" class="flex justify-between w-1/4 py-2 px-4 rounded-full my-2">
+                <div id="cart-body-product-add" class="flex justify-between w-full md:w-1/4 py-2 px-4 rounded-full my-2">
                     <div class="cursor-pointer">
                         <button @click="minusProduct()"> - </button>
                     </div>

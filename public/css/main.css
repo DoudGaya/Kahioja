@@ -517,8 +517,8 @@ body{
     }
 
     .card-title{
-        font-size: 13px;
-        line-height: 18px;
+        font-size: 10px;
+        line-height: 15px;
     }
 
     .card-bag-label{
@@ -527,13 +527,19 @@ body{
         margin: 0px 8px;
     }
 
+    .product-description{
+        font-size: 12px;
+        line-height: 15px;
+    }
+
     .btn-yus, #cart-checkout, .btn-yus-conti-shopping{
-        height: 40px;
+        height: 52px;
         font-size: 12px;
     }
 
     .card-reviews{
         font-size: 10px;
+        line-height: 10px;
     }
 
     .trust-label{
@@ -628,6 +634,10 @@ body{
     #category-mobile-body{
         max-height: 100%;
         overflow: auto;
+    }
+
+    #footer{
+        margin-bottom: 50%;
     }
     
 }
