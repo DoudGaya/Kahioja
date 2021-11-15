@@ -6,12 +6,14 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Bag;
 use App\Models\Product;
+use App\Models\Generalsetting;
 use Auth;
 use DB;
 
 class CartController extends Controller
 {
-    public function index(Request $request){
+    public function index(Request $request)
+    {
         if(Auth::user()){
             $user_id = Auth::user()->id;
         }
@@ -20,7 +22,8 @@ class CartController extends Controller
         return $response = \Response::json($bag, 200);
     }
 
-    public function addtobag(Request $request){
+    public function addtobag(Request $request)
+    {
         if(Auth::user()){
             $user_id = Auth::user()->id;
         }
@@ -95,5 +98,11 @@ class CartController extends Controller
         $removeProduct = Bag::where('id', $bagId)->delete();          
         $bag = DB::select("SELECT DISTINCT bags.id as 'bagId', bags.quantity, products.name, products.price, products.ship_fee, products.photo, bags.quantity * products.price as 'subTotal' FROM bags, products, users WHERE bags.product_id = products.id && bags.user_id = '$user_id' && bags.paid = 'unpaid' ORDER BY bags.id DESC");
         return $response = \Response::json($bag, 200);
+    }
+
+    public function checkout()
+    {
+        $gs = Generalsetting::findOrFail(1);
+        return view('front.checkout', compact('gs'));
     }
 }

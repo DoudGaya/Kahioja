@@ -2,13 +2,13 @@
 
 @section('main')
     <!-- Banner -->
-    <div id="banner" class="mt-6 px-14">
+    <div id="banner" class="mt-6 px-4 md:px-14">
         <!-- Category Nav  -->
         <category-component></category-component>
         <!-- Category Content  -->
         <div id="cate-content" class="my-16">
             @if(count($products))
-            <div class="grid grid-cols-4 gap-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
                 @foreach($products as $prod)
                     @include('includes.productComponent')
                 @endforeach

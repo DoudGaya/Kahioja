@@ -107,7 +107,7 @@
                             Continue Shopping
                         </button>
                     </div>
-                    <div>
+                    <div @click="checkOut()">
                         <button class="mx-auto btn-yus rounded-full w-full py-2 text-white">
                             Checkout
                         </button>
@@ -186,6 +186,9 @@ export default {
             let cart = this.cart
             this.displayCart = !this.displayCart 
             this.$store.dispatch("allCartFromDatabase")
+        },
+        checkOut(){
+            window.location = '/checkout'
         }
     }
        
