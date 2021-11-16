@@ -204,9 +204,9 @@ export default {
                             this.isLoading = false
                             this.callback = response.data
 
-                            // setTimeout(()=>{
-                            //     window.location = '/'
-                            // }, 3000)
+                            setTimeout(()=>{
+                                window.location = '/'
+                            }, 3000)
 
                         }).catch(error => {
                             console.log(error)

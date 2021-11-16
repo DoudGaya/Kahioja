@@ -87,6 +87,7 @@
                             {{ checkOutPhone }}
                         </span>
                     </div>
+                    <div v-if="isLoading" class="loader mx-auto my-5"></div>
                     <div class="my-8">
                         <button @click="confirmPayment()" class="flex justify-center mx-auto btn-yus rounded-full w-full py-5 md:w-1/2 md:py-4 text-white">
                             Pay N{{ estimatedTotal }} 
@@ -265,6 +266,25 @@ export default {
         changeDeliveryInfo(){
             this.displayPaymentInfo = !this.displayPaymentInfo    
             this.displayDeliveryInfo = !this.displayDeliveryInfo
+        },
+        async confirmPayment(){
+            this.isLoading = true
+            axios.post('/flutterwave/submit', {
+                // name: this.signUpName,
+                // email: this.signUpEmail,
+                // password: this.signUpPassword
+            }).then(response => {
+                
+                this.isLoading = false
+                console.log(response.data)
+
+                // setTimeout(()=>{
+                //     window.location = '/'
+                // }, 3000)
+
+            }).catch(error => {
+                console.log(error)
+            })
         }
     }
        
