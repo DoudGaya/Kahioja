@@ -228,7 +228,7 @@ body{
     color: #FFFFFF;
 }
 
-#cart-body{
+#cart-body, #checkout-cart-body{
     max-height: 550px;
     overflow: auto;
 }
