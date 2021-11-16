@@ -3,8 +3,7 @@ import { store } from './store/index'
 import Flutterwave from  'flutterwave-vue-v3'
 
 window.axios = require('axios')
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-// window.axios.defaults.headers.common['X-CSRF-TOKEN'] = window.Laravel.csrfToken;
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
 
 let app = createApp({})
 app.component('nav-component', require('./components/NavComponent.vue').default)

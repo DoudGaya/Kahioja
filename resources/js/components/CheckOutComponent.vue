@@ -91,7 +91,7 @@
                     <div class="my-8">
                         <form action="/flutterwave/submit" method="POST">
                             <input type="hidden" name="_token" :value="csrf">
-                            <button class="flex justify-center mx-auto btn-yus rounded-full w-full py-5 md:w-1/2 md:py-4 text-white">
+                            <button type="submit" @click="confirmPayment()" class="flex justify-center mx-auto btn-yus rounded-full w-full py-5 md:w-1/2 md:py-4 text-white">
                                 Pay N{{ estimatedTotal }} 
                             </button>
                         </form>
