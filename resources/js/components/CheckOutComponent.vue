@@ -1,11 +1,11 @@
 <template>
     <div>
-        <div class="grid grid-cols-2 gap-12">
+        <div class="md:grid md:grid-cols-2 gap-12">
             <div>
                 <div class="py-4 px-4 bg-gray-900 text-white text-2xl rounded-lg font-extrabold">
                     Delivery Information
                 </div>
-                <div class="my-6 py-4 px-16 rounded-lg yus-shadow">
+                <div class="my-6 py-4 px-4 md:px-16 rounded-lg yus-shadow">
                     <div class="my-4">
                         <input required v-model="checkOutName" class="border border-gray-700 rounded py-3 px-6 w-full my-2 focus:outline-none" type="text" name="name" id="checkOutName" placeholder="Full Name">
                     </div>
@@ -24,7 +24,7 @@
                         <input required v-model="checkOutPhone" class="border border-gray-700 rounded py-3 px-6 w-full my-2 focus:outline-none" type="text" name="phone" id="checkOutPhone" placeholder="Phone">
                     </div>
                     <div class="my-8">
-                        <button class="flex justify-center mx-auto btn-yus rounded-full w-1/2 py-4 text-white">
+                        <button class="flex justify-center mx-auto btn-yus rounded-full w-full py-5 md:w-1/2 md:py-4 text-white">
                             Pay N{{ estimatedTotal }} 
                         </button>
                     </div>
@@ -33,7 +33,7 @@
                     </div>
                 </div>
             </div>
-            <div>
+            <div class="hidden md:block">
                 <div class="py-4 px-4 bg-gray-300 text-black text-2xl rounded-lg font-extrabold">
                     Your Order
                 </div>
