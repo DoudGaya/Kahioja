@@ -2,11 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\User\LoginController;
+use App\Http\Controllers\User\RegisterController;
 use App\Http\Controllers\Front\FrontendController;
 use App\Http\Controllers\Front\CatalogController;
 use App\Http\Controllers\Front\CartController;
-use App\Http\Controllers\User\LoginController;
-use App\Http\Controllers\User\RegisterController;
+use App\Http\Controllers\Front\FlutterwaveController;
 
 
 /*
@@ -61,16 +62,20 @@ Route::get('/', [FrontendController::class, 'index'])->name('front.index');
     // PRODCT SECTION ENDS
     
     // CATEGORY SECTION
-    Route::get('/category/{slug}/', [CatalogController::class, 'category'])->name('front.category');
-    Route::get('/store/{shop_name}/', [CatalogController::class, 'shop']);
     Route::get('/lastestproduct/', [CatalogController::class, 'lastestproduct']);
     Route::get('/oldestproduct/', [CatalogController::class, 'oldestproduct']);
     Route::get('/lowestproduct/', [CatalogController::class, 'lowestproduct']);
     Route::get('/highestproduct/', [CatalogController::class, 'highestproduct']);
-    Route::get('/category/{slug1}/{slug2}', [CatalogController::class, 'subcategory'])->name('front.subcat');
-    Route::get('/category/{slug1}/{slug2}/{slug3}', [CatalogController::class, 'childcategory'])->name('front.childcat');
     Route::get('/categories/', [CatalogController::class, 'categories'])->name('front.categories');
     Route::get('/allcategories/', [CatalogController::class, 'allcategories']);
     Route::get('/allstores/', [CatalogController::class, 'allstores']);
+    Route::get('/category/{slug}/', [CatalogController::class, 'category'])->name('front.category');
+    Route::get('/store/{shop_name}/', [CatalogController::class, 'shop']);
+    Route::get('/category/{slug1}/{slug2}', [CatalogController::class, 'subcategory'])->name('front.subcat');
+    Route::get('/category/{slug1}/{slug2}/{slug3}', [CatalogController::class, 'childcategory'])->name('front.childcat');
     Route::get('/childcategories/{slug}',  [CatalogController::class, 'childcategories'])->name('front.childcategories');
     // CATEGORY SECTION ENDS
+
+    // Payment Method 
+    Route::post('/flutterwave/submit', [FlutterwaveController::class, 'initialize'])->name('flutterwave.submit');
+    Route::get('/flutterwave/callback', [FlutterwaveController::class,'callback'])->name('callback');
