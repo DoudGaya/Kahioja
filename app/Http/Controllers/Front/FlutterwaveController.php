@@ -5,30 +5,35 @@ namespace App\Http\Controllers\Front;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use KingFlamez\Rave\Facades\Rave as Flutterwave;
+use Auth;
 
 class FlutterwaveController extends Controller
 {
     public function initialize(Request $request)
     {
+        if(Auth::user()){
+            $user_id = Auth::user()->id;
+        }
+
         $reference = Flutterwave::generateReference();
 
         // Enter the details of the payment
         $data = [
             'payment_options' => 'card,banktransfer',
-            'amount' => 500,
-            'email' => 'kabiryusufbashir@gmail.com',
+            'amount' => $request->amount,
+            'email' => $request->email,
             'tx_ref' => $reference,
             'currency' => "NGN",
             'redirect_url' => route('callback'),
             'customer' => [
-                'email' => 'kabiryusufbashir@gmail.com',
-                "phone_number" => '08068593127',
-                "name" => 'Yusuf Bashir'
+                'email' => $request->email,
+                "phone_number" => $request->phone,
+                "name" => $request->name
             ],
 
             "customizations" => [
-                "title" => 'Movie Ticket',
-                "description" => "20th October"
+                "title" => 'Checkout Payment',
+                "description" => "Payment for items purchased at Kahioja Stores"
             ]
         ];
 
