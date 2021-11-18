@@ -79,3 +79,4 @@ Route::get('/', [FrontendController::class, 'index'])->name('front.index');
     // Payment Method 
     Route::post('/flutterwave/submit', [FlutterwaveController::class, 'initialize'])->name('flutterwave.submit');
     Route::get('/flutterwave/callback', [FlutterwaveController::class,'callback'])->name('callback');
+    Route::get('/checkoutfailed', [FlutterwaveController::class, 'checkoutfailed'])->name('front.checkoutfailed');

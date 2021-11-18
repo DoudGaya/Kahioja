@@ -2,10 +2,27 @@
 
 namespace App\Http\Controllers\Front;
 
+use App\Classes\GeniusMailer;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use KingFlamez\Rave\Facades\Rave as Flutterwave;
+use App\Models\Cart;
+use App\Models\Coupon;
+use App\Models\Currency;
+use App\Models\Generalsetting;
+use App\Models\Notification;
+use App\Models\Order;
+use App\Models\OrderTrack;
+use App\Models\Pagesetting;
+use App\Models\PaymentGateway;
+use App\Models\Pickup;
+use App\Models\Product;
+use App\Models\User;
+use App\Models\UserNotification;
+use App\Models\VendorOrder;
 use Auth;
+use Illuminate\Http\Request;
+use Session;
+use KingFlamez\Rave\Facades\Rave as Flutterwave;
+use DB;
 
 class FlutterwaveController extends Controller
 {
@@ -14,6 +31,10 @@ class FlutterwaveController extends Controller
         if(Auth::user()){
             $user_id = Auth::user()->id;
         }
+
+        $gs = Generalsetting::findOrFail(1);
+        $bag = DB::select("SELECT DISTINCT bags.id as 'bagId', bags.quantity, products.id FROM bags, products, users WHERE bags.product_id = products.id && bags.user_id = '$user_id' && bags.paid = 'unpaid' ORDER BY bags.id DESC");
+        // return $response = \Response::json($bag, 200);
 
         $reference = Flutterwave::generateReference();
 
@@ -41,8 +62,7 @@ class FlutterwaveController extends Controller
 
 
         if ($payment['status'] !== 'success') {
-            // notify something went wrong
-            return;
+            return redirect()->route('front.checkoutfailed');
         }
 
         return redirect($payment['data']['link']);
@@ -81,6 +101,9 @@ class FlutterwaveController extends Controller
         // You can also redirect to your success page from here
 
     }
-        // return $response = \Response::json('Hit', 200);
-    // }
+    
+    public function checkoutfailed()
+    {
+        return view('front.checkoutfailed');
+    }
 }

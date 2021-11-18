@@ -19666,6 +19666,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     estimatedTotal: function estimatedTotal() {
       return this.subTotal + this.deliveryFee;
+    },
+    serviceFee: function serviceFee() {
+      return Math.ceil(parseFloat(1.4 / 100 * this.estimatedTotal).toFixed(2));
+    },
+    totalFee: function totalFee() {
+      return this.estimatedTotal + this.serviceFee;
     }
   },
   methods: {
@@ -21140,7 +21146,7 @@ var _hoisted_75 = {
   "class": "text-right"
 };
 
-var _hoisted_76 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, "Estimated Total", -1
+var _hoisted_76 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, "Service Fee", -1
 /* HOISTED */
 );
 
@@ -21148,7 +21154,15 @@ var _hoisted_77 = {
   "class": "text-right"
 };
 
-var _hoisted_78 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_78 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, "Estimated Total", -1
+/* HOISTED */
+);
+
+var _hoisted_79 = {
+  "class": "text-right"
+};
+
+var _hoisted_80 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "my-6 py-4 px-16 rounded-lg yus-shadow"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "my-4 text-2xl font-extrabold"
@@ -21236,7 +21250,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, null, 512
   /* NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.checkOutPhone]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    value: "Pay N".concat($options.estimatedTotal),
+    value: "Pay N".concat($options.totalFee),
     type: "button",
     onClick: _cache[6] || (_cache[6] = function ($event) {
       return $options.confirmOrder();
@@ -21294,11 +21308,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   , _hoisted_36), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "hidden",
     name: "amount",
-    value: $options.estimatedTotal
+    value: $options.totalFee
   }, null, 8
   /* PROPS */
   , _hoisted_37), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    value: "Pay N".concat($options.estimatedTotal),
+    value: "Pay N".concat($options.totalFee),
     type: "submit",
     onClick: _cache[8] || (_cache[8] = function ($event) {
       return $options.confirmPayment();
@@ -21379,11 +21393,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* KEYED_FRAGMENT */
   ))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), _hoisted_68, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_69, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Cart Total  "), $options.cartNo > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_70, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_71, [_hoisted_72, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_73, "N" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.subTotal), 1
   /* TEXT */
-  ), _hoisted_74, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_75, "N" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.deliveryFee), 1
+  ), _hoisted_74, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_75, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.deliveryFee != 0 ? "N".concat($options.deliveryFee) : 'Free Delivery'), 1
   /* TEXT */
-  ), _hoisted_76, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_77, "N" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.estimatedTotal), 1
+  ), _hoisted_76, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_77, "N" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.serviceFee), 1
   /* TEXT */
-  )])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), _hoisted_78])])]);
+  ), _hoisted_78, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_79, "N" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.totalFee), 1
+  /* TEXT */
+  )])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), _hoisted_80])])]);
 }
 
 /***/ }),
