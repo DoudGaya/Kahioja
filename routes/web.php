@@ -80,3 +80,4 @@ Route::get('/', [FrontendController::class, 'index'])->name('front.index');
     Route::post('/flutterwave/submit', [FlutterwaveController::class, 'initialize'])->name('flutterwave.submit');
     Route::get('/flutterwave/callback', [FlutterwaveController::class,'callback'])->name('callback');
     Route::get('/checkoutfailed', [FlutterwaveController::class, 'checkoutfailed'])->name('front.checkoutfailed');
+    Route::get('/checkoutsuccess', [FlutterwaveController::class, 'checkoutsuccess'])->name('front.checkoutsuccess');

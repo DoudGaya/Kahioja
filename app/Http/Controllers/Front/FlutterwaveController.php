@@ -16,6 +16,7 @@ use App\Models\PaymentGateway;
 use App\Models\Pickup;
 use App\Models\Product;
 use App\Models\User;
+use App\Models\Bag;
 use App\Models\UserNotification;
 use App\Models\VendorOrder;
 use Auth;
@@ -34,27 +35,18 @@ class FlutterwaveController extends Controller
             $user_id = Auth::user()->id;
         }
 
-        $gs = Generalsetting::findOrFail(1);
-        $bag = DB::select("SELECT DISTINCT bags.id as 'bagId', bags.quantity, products.id FROM bags, products, users WHERE bags.product_id = products.id && bags.user_id = '$user_id' && bags.paid = 'unpaid' ORDER BY bags.id DESC");
-        
-        foreach($bag as $prod){
-            $quantity_purchased = $prod->quantity;
-            if($quantity_purchased != null){
-                $product = Product::findOrFail($prod->id);
-                $quantity_left = $product->stock - $quantity_purchased;
-                $product->stock = $quantity_left;
-                $product->update();  
-                
-                if($product->stock <= 5){
-                    $notification = new Notification;
-                    $notification->product_id = $product->id;
-                    $notification->save();                    
-                }              
-            
-            }
+        if(Session::has('currency')) {
+            $curr = Currency::find(Session::get('currency'));
+            $currency_name = $curr->name;
+        }else{
+            $curr = Currency::where('is_default','=',1)->first();
+            $currency_name = $curr->name;
         }
 
-        return $response = \Response::json($bag, 200);
+        $gs = Generalsetting::findOrFail(1);
+        $bag = DB::select("SELECT DISTINCT bags.id as 'bagId', bags.quantity, bags.paid, products.id, products.user_id, products.ship_fee, products.price FROM bags, products, users WHERE bags.product_id = products.id && bags.user_id = '$user_id' && bags.paid = 'unpaid' ORDER BY bags.id DESC");
+        
+        // return $response = \Response::json($bag, 200);
         
         $reference = Flutterwave::generateReference();
 
@@ -92,14 +84,30 @@ class FlutterwaveController extends Controller
         
         $order['user_id'] = $request->user_id;
         $order['cart'] = utf8_encode(bzcompress(serialize($bag), 9)); 
-        $order['totalQty'] = $request->totalQty;
+        $order['totalQty'] = 1;
         $order['pay_amount'] = $request->amount;
         $order['customer_email'] = $request->email;
         $order['customer_name'] = $request->name;
+        $order['shipping_cost'] = 1;
+        $order['packing_cost'] = 1;
+        $order['tax'] = 1;
         $order['customer_phone'] = $request->phone;
         $order['order_number'] = Str::random(4).time();
         $order['customer_address'] = $request->address;
+        $order['customer_country'] = 'Nigeria';
         $order['customer_city'] = $request->city;
+        $order['customer_zip'] = $request->zip;
+        $order['shipping_email'] = $request->shipping_email;
+        $order['shipping_name'] = $request->shipping_name;
+        $order['shipping_phone'] = $request->shipping_phone;
+        $order['shipping_address'] = $request->shipping_address;
+        $order['shipping_country'] = $request->shipping_country;
+        $order['shipping_city'] = $request->shipping_city;
+        $order['shipping_zip'] = $request->shipping_zip;
+        $order['order_note'] = $request->order_notes;
+        $order['coupon_code'] = $request->coupon_code;
+        $order['coupon_discount'] = $request->coupon_discount;
+        $order['dp'] = 0;
         $order['payment_status'] = "Pending";
         $order['currency_sign'] = $curr->sign;
         $order['currency_value'] = $curr->value;
@@ -127,6 +135,63 @@ class FlutterwaveController extends Controller
         $notification = new Notification;
         $notification->order_id = $order->id;
         $notification->save();
+
+        //Substracting From Stock
+        foreach($bag as $prod){
+            $quantity_purchased = $prod->quantity;
+            if($quantity_purchased != null){
+                $product = Product::findOrFail($prod->id);
+                $quantity_left = $product->stock - $quantity_purchased;
+                $product->stock = $quantity_left;
+                $product->update();  
+                
+                if($product->stock <= 5){
+                    $notification = new Notification;
+                    $notification->product_id = $product->id;
+                    $notification->save();                    
+                }              
+            
+            }
+        }
+
+        //Sending vendor notification
+        foreach($bag as $prod){
+            if($prod->user_id != 0){
+                $vorder =  new VendorOrder;
+                $vorder->order_id = $order->id;
+                $vorder->user_id = $prod->user_id;
+                $notf[] = $prod->user_id;
+                $vorder->qty = $prod->quantity;
+                $vorder->price = $prod->price;
+                $vorder->ship_fee = $prod->ship_fee;
+                $vorder->order_number = $order->order_number;             
+                $vorder->save();
+            }
+        }
+
+
+        //Sending User Notification
+        if(!empty($notf)){
+            $users = array_unique($notf);
+            foreach ($users as $user) {
+                $notification = new UserNotification;
+                $notification->user_id = $user;
+                $notification->order_number = $order->order_number;
+                $notification->save();    
+            }
+        }
+
+        // Updating Bag 
+        foreach($bag as $prod){
+            $cart = Bag::findOrFail($prod->bagId);
+            $payment_status = 'paid';
+            $cart->paid = $payment_status;
+            $cart->update();
+        }
+
+        Session::put('temporder', $order);
+        Session::put('tempbag', $bag);
+        Session::put('orderNo', $order['order_number']);
             
         return redirect($payment['data']['link']);
     }
@@ -143,30 +208,62 @@ class FlutterwaveController extends Controller
         //if payment is successful
         if ($status ==  'successful') {
         
-        $transactionID = Flutterwave::getTransactionIDFromCallback();
-        $data = Flutterwave::verifyTransaction($transactionID);
+            $transactionID = Flutterwave::getTransactionIDFromCallback();
+            $data = Flutterwave::verifyTransaction($transactionID);
 
-        dd($data);
-        }
-        elseif ($status ==  'cancelled'){
-            //Put desired action/code after transaction has been cancelled here
-        }
-        else{
-            //Put desired action/code after transaction has failed here
-        }
-        // Get the transaction from your DB using the transaction reference (txref)
-        // Check if you have previously given value for the transaction. If you have, redirect to your successpage else, continue
-        // Confirm that the currency on your db transaction is equal to the returned currency
-        // Confirm that the db transaction amount is equal to the returned amount
-        // Update the db transaction record (including parameters that didn't exist before the transaction is completed. for audit purpose)
-        // Give value for the transaction
-        // Update the transaction to note that you have given value for the transaction
-        // You can also redirect to your success page from here
+            // $success_url = action('Front\FlutterwaveController@checkoutsuccess');
+            
+            $transactID = $data['data']['id'];
+            $tx_ref = $data['data']['tx_ref'];
+            $amount = $data['data']['amount'];
+            $charge_fee = $data['data']['app_fee'];
+            $amount_paid = $amount + $charge_fee;
+            $currency = $data['data']['currency'];
+            $date = date("D M j Y G:i:s",  strtotime($data['data']['created_at'])  + 1 * 3600);
+            
+            $payment_type = $data['data']['payment_type'];
+            
+            if($payment_type == 'card'){
+                $last_4digits = $data['data']['card']['last_4digits'];
+                $card_type = $data['data']['card']['type'];
+                $card_details = $payment_type.'-'.$card_type.'-'.$last_4digits;
+            }else{
+                $card_details = $payment_type;
+            }
+            
+            $customer_email = $data['data']['customer']['email'];
+            $customer_phone = $data['data']['customer']['phone_number'];
+            
+            
+            Session::put('transactID', $transactID);
+            Session::put('payment_type', $payment_type);
+            Session::put('customer_email', $customer_email);
+            Session::put('customer_phone', $customer_phone);
+            
+            $orderNo = Session::get('orderNo');
 
+            $order = Order::where('order_number', $orderNo)->update([
+                    'payment_status'=> 'completed',
+                    'method'=> $card_details,
+                    'txnid'=> $transactID]);
+            
+            return redirect()->route('front.checkoutsuccess');
+
+        }elseif ($status ==  'cancelled'){
+            return redirect()->route('front.checkout');
+        }else{
+            return redirect()->route('front.checkoutfailed');
+        }
     }
     
     public function checkoutfailed()
     {
         return view('front.checkoutfailed');
+    }
+
+    public function checkoutsuccess()
+    {
+        $gs = Generalsetting::findOrFail(1);
+        return view('front.checkoutsuccess', compact('gs'));
     }
 }
