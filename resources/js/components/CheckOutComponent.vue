@@ -91,6 +91,7 @@
                                 <input type="hidden" name="email" :value="checkOutEmail">
                                 <input type="hidden" name="phone" :value="checkOutPhone">
                                 <input type="hidden" name="address" :value="checkOutAddress">
+                                <input type="hidden" name="city" :value="checkOutCity">
                                 <input type="hidden" name="amount" :value="totalFee">
                                 <input :value="`Pay N${ totalFee }`" type="submit" @click="confirmPayment()" class="flex justify-center mx-auto btn-yus rounded-full w-full py-5 md:w-1/2 md:py-4 text-white">
                             </form>
