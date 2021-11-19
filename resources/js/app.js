@@ -12,4 +12,5 @@ app.component('product-description-component', require('./components/productDesc
 app.component('category-component', require('./components/categoryComponent.vue').default)
 app.component('load-component', require('./components/loadMoreComponent.vue').default)
 app.component('checkout-component', require('./components/CheckOutComponent.vue').default)
+app.component('transaction-successful-component', require('./components/TransactionSuccessfulComponent.vue').default)
 app.use(store).mount('#app')
