@@ -192,6 +192,8 @@ class FlutterwaveController extends Controller
         Session::put('temporder', $order);
         Session::put('tempbag', $bag);
         Session::put('orderNo', $order['order_number']);
+        Session::put('deliveryFee', $request->deliveryFee);
+        Session::put('serviceFee', $request->serviceFee);
             
         return redirect($payment['data']['link']);
     }
@@ -211,8 +213,6 @@ class FlutterwaveController extends Controller
             $transactionID = Flutterwave::getTransactionIDFromCallback();
             $data = Flutterwave::verifyTransaction($transactionID);
 
-            // $success_url = action('Front\FlutterwaveController@checkoutsuccess');
-            
             $transactID = $data['data']['id'];
             $tx_ref = $data['data']['tx_ref'];
             $amount = $data['data']['amount'];
@@ -264,6 +264,20 @@ class FlutterwaveController extends Controller
     public function checkoutsuccess()
     {
         $gs = Generalsetting::findOrFail(1);
-        return view('front.checkoutsuccess', compact('gs'));
+        
+        if(Session::has('tempbag')){
+            $transactID = Session::get('transactID');
+            $payment_type = Session::get('payment_type');
+            $deliveryFee = Session::get('deliveryFee');
+            $serviceFee = Session::get('serviceFee');
+            $oldBag = Session::get('tempbag');
+            $tempbag = new Bag($oldBag);
+            $order = Session::get('temporder');
+            // dd($order);
+            return view('front.checkoutsuccess', compact('gs', 'transactID', 'order', 'tempbag', 'deliveryFee', 'serviceFee'));
+        }else{
+            dd('no');
+        }
+
     }
 }
