@@ -23,6 +23,7 @@ export const store = new Vuex.Store({
         allCartFromDatabase(context){
             axios.get(`/cart`).then(response => {
                 context.commit("cart",response.data)
+                console.log(response.data)
             }).catch(error => {
                 console.log(error)
             })

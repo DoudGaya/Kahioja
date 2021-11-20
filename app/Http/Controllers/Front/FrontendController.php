@@ -10,6 +10,7 @@ use App\Models\Generalsetting;
 use DB;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class FrontendController extends Controller
 {
@@ -105,6 +106,7 @@ class FrontendController extends Controller
 
     public function index(Request $request)
 	{
+        // dd($macAddr = exec('getmac'));
         $gs = Generalsetting::findOrFail(1);
         $ps = DB::table('pagesettings')->find(1);
         $selectable = ['id','user_id','name','slug','features','colors','thumbnail','price','previous_price','attributes','size','size_price','discount_date'];

@@ -9,6 +9,8 @@ use App\Models\Product;
 use App\Models\Generalsetting;
 use Auth;
 use DB;
+use Illuminate\Support\Str;
+use Session;
 
 class CartController extends Controller
 {
@@ -16,16 +18,30 @@ class CartController extends Controller
     {
         if(Auth::user()){
             $user_id = Auth::user()->id;
+        }else if(Session::has('guest')){
+            $user_id = Session::get('guest');
+        }else{
+            $user_id = 'guest_'.Str::random(5).time();
+            Session::put('guest', $user_id);
         }
 
         $bag = DB::select("SELECT DISTINCT bags.id as 'bagId', bags.quantity, products.name, products.price, products.ship_fee, products.photo, bags.quantity * products.price as 'subTotal' FROM bags, products, users WHERE bags.product_id = products.id && bags.user_id = '$user_id' && bags.paid = 'unpaid' ORDER BY bags.id DESC");
         return $response = \Response::json($bag, 200);
+
     }
 
     public function addtobag(Request $request)
     {
         if(Auth::user()){
             $user_id = Auth::user()->id;
+            $user_type = 'user';
+        }else if(Session::has('guest')){
+            $user_id = Session::get('guest');
+            $user_type = 'guest';
+        }else{
+            $user_id = 'guest_'.Str::random(5).time();
+            $user_type = 'guest';
+            Session::put('guest', $user_id);
         }
 
         $product_id = $request->product_id;
@@ -37,6 +53,7 @@ class CartController extends Controller
                     Bag::create([
                         'product_id'=> $product_id,
                         'user_id'=> $user_id,
+                        'user_type'=> $user_type,
                         'quantity'=> ($quantity == 0) ? 1 : $quantity,
                         'paid'=> 'unpaid'
                     ]);
@@ -66,6 +83,14 @@ class CartController extends Controller
     {     
         if(Auth::user()){
             $user_id = Auth::user()->id;
+            $user_type = 'user';
+        }else if(Session::has('guest')){
+            $user_id = Session::get('guest');
+            $user_type = 'guest';
+        }else{
+            $user_id = 'guest_'.Str::random(5).time();
+            $user_type = 'guest';
+            Session::put('guest', $user_id);
         }
 
         $bagId = $request->id;
@@ -79,6 +104,14 @@ class CartController extends Controller
     {
         if(Auth::user()){
             $user_id = Auth::user()->id;
+            $user_type = 'user';
+        }else if(Session::has('guest')){
+            $user_id = Session::get('guest');
+            $user_type = 'guest';
+        }else{
+            $user_id = 'guest_'.Str::random(5).time();
+            $user_type = 'guest';
+            Session::put('guest', $user_id);
         }
 
         $bagId = $request->id;
@@ -92,6 +125,14 @@ class CartController extends Controller
     {
         if(Auth::user()){
             $user_id = Auth::user()->id;
+            $user_type = 'user';
+        }else if(Session::has('guest')){
+            $user_id = Session::get('guest');
+            $user_type = 'guest';
+        }else{
+            $user_id = 'guest_'.Str::random(5).time();
+            $user_type = 'guest';
+            Session::put('guest', $user_id);
         }
         
         $bagId = $request->id;

@@ -22,7 +22,6 @@ use App\Models\VendorOrder;
 use Auth;
 use Illuminate\Http\Request;
 use Session;
-
 use Illuminate\Support\Str;
 use KingFlamez\Rave\Facades\Rave as Flutterwave;
 use DB;
@@ -33,6 +32,14 @@ class FlutterwaveController extends Controller
     {
         if(Auth::user()){
             $user_id = Auth::user()->id;
+            $user_type = 'user';
+        }else if(Session::has('guest')){
+            $user_id = Session::get('guest');
+            $user_type = 'guest';
+        }else{
+            $user_id = 'guest_'.Str::random(5).time();
+            $user_type = 'guest';
+            Session::put('guest', $user_id);
         }
 
         if(Session::has('currency')) {

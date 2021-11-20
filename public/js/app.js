@@ -19641,13 +19641,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       displayDeliveryInfo: true,
       displayPaymentInfo: false,
       isLoading: false,
-      authUser: window.authUser,
-      checkOutName: window.authUser.name,
-      checkOutAddress: window.authUser.address,
-      checkOutEmail: window.authUser.email,
-      checkOutCity: window.authUser.city,
-      checkOutState: window.authUser.state,
-      checkOutPhone: window.authUser.phone,
+      authUser: '',
+      checkOutName: '',
+      checkOutAddress: '',
+      checkOutEmail: '',
+      checkOutCity: '',
+      checkOutState: '',
+      checkOutPhone: '',
       csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
     };
   },
@@ -21304,7 +21304,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[7] || (_cache[7] = function () {
       return $options.changeDeliveryInfo && $options.changeDeliveryInfo.apply($options, arguments);
     }),
-    "class": "btn-yus-conti-shopping rounded-full w-1/3 md:w-1/4 py-2 text-white"
+    "class": "btn-yus-conti-shopping rounded-full w-1/3 md:w-1/4 py-2"
   })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [_hoisted_22, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.checkOutName), 1
   /* TEXT */
   )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_23, [_hoisted_24, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.checkOutEmail), 1
@@ -21974,7 +21974,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* TEXT */
   ), $data.authUser ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_9, "N" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.estimatedTotal), 1
   /* TEXT */
-  )) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_10, "Bag"))])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Mobile Screen  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Caret  "), _hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" logo  "), _hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Cart  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  )) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_10, "N" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.estimatedTotal), 1
+  /* TEXT */
+  ))])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Mobile Screen  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Caret  "), _hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" logo  "), _hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Cart  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     onClick: _cache[2] || (_cache[2] = function ($event) {
       return $options.cartToggle();
     }),
@@ -21983,7 +21985,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* TEXT */
   ), _hoisted_17, $data.authUser ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_18, "N" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.estimatedTotal), 1
   /* TEXT */
-  )) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_19, "Bag Empty"))])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Search Box  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SearchBar)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Bottom Nav  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [_hoisted_22, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  )) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_19, "N" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.estimatedTotal), 1
+  /* TEXT */
+  ))])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Search Box  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SearchBar)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Bottom Nav  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [_hoisted_22, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     onClick: _cache[3] || (_cache[3] = function ($event) {
       return $options.categoryBottomToggle();
     }),
@@ -21997,7 +22001,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* TEXT */
   ), _hoisted_27, $data.authUser ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_28, "N" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.estimatedTotal), 1
   /* TEXT */
-  )) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_29, "Bag"))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  )) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_29, "N" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.estimatedTotal), 1
+  /* TEXT */
+  ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     onClick: _cache[5] || (_cache[5] = function ($event) {
       return $options.loginToggle();
     }),
@@ -23143,6 +23149,7 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_0__["default"].Store({
     allCartFromDatabase: function allCartFromDatabase(context) {
       axios.get("/cart").then(function (response) {
         context.commit("cart", response.data);
+        console.log(response.data);
       })["catch"](function (error) {
         console.log(error);
       });
