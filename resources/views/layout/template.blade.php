@@ -38,12 +38,7 @@
     <body>
         <!-- Nav  -->
         <div id="app">
-            <nav-component></nav-component>
-            @if(!Auth::guard('web')->check())
-                <script> window.authUser = null </script>    
-            @else
-                <script> window.authUser = {!! json_encode(Auth::user()); !!} </script>        
-            @endif 
+            <nav-component></nav-component> 
             @yield('main')
         </div>
         

@@ -33,6 +33,7 @@ Route::get('/', [FrontendController::class, 'index'])->name('front.index');
     
     // User Login
     Route::post('/login', [LoginController::class ,'login'])->name('user.login.submit');
+    Route::get('/user', [LoginController::class ,'user']);
     // User Login End
 
     // User Logout
@@ -48,6 +49,7 @@ Route::get('/', [FrontendController::class, 'index'])->name('front.index');
     Route::get('/cart', [CartController::class, 'index']);
     Route::get('/checkout', [CartController::class, 'checkout']);
     Route::post('/addtobag', [CartController::class,'addtobag']);
+    Route::post('/buynow', [CartController::class,'buynow']);
     Route::post('/addbyone/{id}/{quantity}', [CartController::class,'addbyone']);
     Route::post('/reducebyone/{id}/{quantity}', [CartController::class,'reducebyone']);
     Route::post('/removeproduct/{id}', [CartController::class,'removeproduct']);

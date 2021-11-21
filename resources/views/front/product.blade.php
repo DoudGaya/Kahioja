@@ -30,8 +30,7 @@
                 :productcurrprice="{{ json_encode($productt->showPrice()) }}" 
                 :productsku="{{ json_encode($productt->sku) }}" 
                 :productdeliveryfee="{{ json_encode($productt->showShippingFee()) }}" 
-            >
-            </product-details-component>    
+            ></product-details-component>    
         </div>
         <hr>
         <!-- Product Description & Reviews & Return Policy  -->

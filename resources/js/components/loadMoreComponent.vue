@@ -39,15 +39,15 @@ export default {
     data() {
         return {
             products: [
-                {name: 'Derek', description: 'Some comment'}, 
-                {name: 'Derek', description: 'Some comment'}, 
-                {name: 'Derek', description: 'Some comment'}, 
-                {name: 'Derek', description: 'Some comment'}, 
-                {name: 'Derek', description: 'Some comment'}, 
-                {name: 'Derek', description: 'Some comment'}, 
-                {name: 'Derek', description: 'Some comment'}, 
-                {name: 'Derek', description: 'Some comment'}, 
-                {name: 'Derek', description: 'Some comment'}, 
+                {name: 'Yusuf', description: '21st November 2021'}, 
+                {name: 'Yusuf', description: '21st November 2021'}, 
+                {name: 'Yusuf', description: '21st November 2021'}, 
+                {name: 'Yusuf', description: '21st November 2021'}, 
+                {name: 'Yusuf', description: '21st November 2021'}, 
+                {name: 'Yusuf', description: '21st November 2021'}, 
+                {name: 'Yusuf', description: '21st November 2021'}, 
+                {name: 'Yusuf', description: '21st November 2021'}, 
+                {name: 'Yusuf', description: '21st November 2021'}, 
             ],
             cart:[],
             productsToShow: 8,
@@ -59,7 +59,6 @@ export default {
             .then((response)=>{
                 this.products = response.data
                 this.totalProducts = this.products.length
-                console.log(response.data)
             }).catch((error)=>{
             console.log(error)
         })

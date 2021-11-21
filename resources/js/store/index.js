@@ -4,10 +4,14 @@ export const store = new Vuex.Store({
     strict:true,
     state:{
         cart: [],
+        user: []
     },
     getters:{
         getCart(state){
             return state.cart
+        },
+        getUser(state){
+            return state.user
         },
         addCart(state){
             return state.cart.length
@@ -23,7 +27,13 @@ export const store = new Vuex.Store({
         allCartFromDatabase(context){
             axios.get(`/cart`).then(response => {
                 context.commit("cart",response.data)
-                console.log(response.data)
+            }).catch(error => {
+                console.log(error)
+            })
+        },
+        loginUserFromDatabase(context){
+            axios.get(`/user`).then(response => {
+                context.commit('user', response.data)
             }).catch(error => {
                 console.log(error)
             })
@@ -32,6 +42,9 @@ export const store = new Vuex.Store({
     mutations: {
         cart(state, payload) {
             return state.cart = payload
+        },
+        user(state, payload){
+            return state.user = payload
         },
         addCart(state, payload){
             return state.cart.length = payload

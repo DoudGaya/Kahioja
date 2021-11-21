@@ -59,7 +59,6 @@ export default {
                 quantity: 1
             }).then(response => {
                 this.cart = response.data
-                console.log('Added')
                 this.cart = this.$store.dispatch("allCartFromDatabase")
             }).catch(error => {
                 console.log(error)

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Auth;
 use Session;
+use App\Models\User;
 use Illuminate\Support\Facades\Input;
 use Validator;
 
@@ -48,6 +49,16 @@ class LoginController extends Controller
 
         // if unsuccessful, then redirect back to the login with the form data
         return response()->json('Wrong Email and Password Combination');     
+    }
+
+    public function user(){
+      if(Auth::user()){
+        $user_id = Auth::user()->id;
+        $user = User::where('id', $user_id)->first();
+        return $response = \Response::json($user, 200);
+      }else{
+        return $response = \Response::json('', 200);
+      }
     }
 
     public function logout()

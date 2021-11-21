@@ -125,7 +125,6 @@ export default {
         return{
             displayCart: true,
             isLoading: false,
-            authUser: window.authUser,
         }
     },
     computed: {
