@@ -95,7 +95,8 @@ class CartController extends Controller
 
         $product_id = $request->product_id;
         $quantity = $request->quantity;
-        
+    
+
         $is_product_in_bag = Bag::where('product_id', $product_id)->where('user_id', $user_id)->count();
             if($is_product_in_bag == 0){
                 try{
@@ -108,7 +109,6 @@ class CartController extends Controller
                     ]);
                     
                     $product = DB::select("SELECT * FROM bags WHERE bags.product_id='$product_id' && bags.user_id='$user_id'");
-              
                     return view('front.buynow', compact('product'));
                 
                 }catch(Exception $e){
