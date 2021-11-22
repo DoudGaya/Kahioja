@@ -51,7 +51,20 @@ class FlutterwaveController extends Controller
         }
 
         $gs = Generalsetting::findOrFail(1);
-        $bag = DB::select("SELECT DISTINCT bags.id as 'bagId', bags.quantity, bags.paid, products.id, products.user_id, products.ship_fee, products.price FROM bags, products, users WHERE bags.product_id = products.id && bags.user_id = '$user_id' && bags.paid = 'unpaid' ORDER BY bags.id DESC");
+        
+        if($request->productid == null){
+            $bag = DB::select("SELECT DISTINCT bags.id as 'bagId', bags.quantity, bags.paid, products.id, products.user_id, products.ship_fee, products.price FROM bags, products, users WHERE bags.product_id = products.id && bags.user_id = '$user_id' && bags.paid = 'unpaid' ORDER BY bags.id DESC");
+            dd($bag);
+        }else{
+            Bag::create([
+                'product_id'=> $request->productid,
+                'user_id'=> $user_id,
+                'user_type'=> $user_type,
+                'quantity'=> $request->productquantity,
+                'paid'=> 'unpaid'
+            ]);
+            $bag = DB::select("SELECT DISTINCT bags.id as 'bagId', bags.quantity, bags.paid, products.id, products.user_id, products.ship_fee, products.price FROM bags, products, users WHERE bags.product_id = products.id && bags.user_id = '$user_id' && bags.paid = 'unpaid' ORDER BY bags.id DESC LIMIT 1");
+        }
         
         // return $response = \Response::json($bag, 200);
         

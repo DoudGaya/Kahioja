@@ -81,6 +81,8 @@ class CartController extends Controller
 
     public function buynow(Request $request)
     {
+        $gs = Generalsetting::findOrFail(1);
+
         if(Auth::user()){
             $user_id = Auth::user()->id;
             $user_type = 'user';
@@ -92,41 +94,18 @@ class CartController extends Controller
             $user_type = 'guest';
             Session::put('guest', $user_id);
         }
-
+        
         $product_id = $request->product_id;
         $quantity = $request->quantity;
-    
-
-        $is_product_in_bag = Bag::where('product_id', $product_id)->where('user_id', $user_id)->count();
-            if($is_product_in_bag == 0){
-                try{
-                    Bag::create([
-                        'product_id'=> $product_id,
-                        'user_id'=> $user_id,
-                        'user_type'=> $user_type,
-                        'quantity'=> ($quantity == 0) ? 1 : $quantity,
-                        'paid'=> 'unpaid'
-                    ]);
-                    
-                    $product = DB::select("SELECT * FROM bags WHERE bags.product_id='$product_id' && bags.user_id='$user_id'");
-                    return view('front.buynow', compact('product'));
-                
-                }catch(Exception $e){
-                    return $response = \Response::json($e, 500);                    
-                }
-            }else{
-                $quantity_check = DB::select("SELECT `quantity` FROM bags WHERE bags.product_id='$product_id' && bags.user_id='$user_id'");
-                $quantity_add = $quantity_check[0]->quantity + $quantity;
-                    try{
-                        Bag::where('product_id', $product_id)->where('user_id', $user_id)->update(['quantity' => $quantity_add]);
-                        
-                        $product = DB::select("SELECT * FROM bags WHERE bags.product_id='$product_id' && bags.user_id='$user_id'");
-                        return view('front.buynow', compact('product'));
-                    
-                    }catch(Exception $e){
-                        return $response = \Response::json($e, 500);                    
-                    }                    
-            }
+        
+        
+        try{
+            $product = Product::where('id', $product_id)->first();
+            // dd($product);
+            return view('front.buynow', compact('product', 'gs', 'quantity'));
+        }catch(Exception $e){
+            return $response = \Response::json($e, 500);                    
+        }
     }
 
     public function addbyone(Request $request)

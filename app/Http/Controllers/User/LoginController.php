@@ -26,7 +26,7 @@ class LoginController extends Controller
           return response()->json(array($validator->getMessageBag()->toArray()));
         }
         //--- Validation Section Ends
-
+      $request->session()->invalidate();
       // Attempt to log the user in
       if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
         // if successful, then redirect to their intended location
@@ -61,9 +61,10 @@ class LoginController extends Controller
       }
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
         Auth::guard('web')->logout();
+        $request->session()->invalidate();
         return redirect('/');
     }
 }

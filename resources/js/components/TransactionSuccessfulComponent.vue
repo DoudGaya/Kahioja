@@ -33,7 +33,7 @@
                         <div>Subtotal <span class="font-normal">(all products)</span></div>
                         <div class="text-right">N{{ subtotal - deliveryfee - servicefee}}</div>
                         <div>Delivery Fee</div>
-                        <div class="text-right">N{{ deliveryfee }}</div>
+                        <div class="text-right">{{ (deliveryfee != null) ? `N${deliveryfee}` : 'Free Delivery' }}</div>
                         <div>Service Fee</div>
                         <div class="text-right">N{{ servicefee  }}</div>
                     </div>
