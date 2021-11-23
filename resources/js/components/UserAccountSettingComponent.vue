@@ -23,10 +23,5 @@
 <script>
 export default {
     name: 'UserAccountSettingsComponent',
-    data(){
-        return{
-            
-        }
-    }
 }
 </script>
