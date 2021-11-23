@@ -1,13 +1,32 @@
 <template>
     <div id="product-details" class="grid grid-cols-1 md:grid-cols-5 gap-6 my-12">
-        <div class="col-span-1 my-auto">
-            <div class="w-full border rounded-xl shadow h-40 mb-2 px-10 py-8">1</div>
-            <div class="w-full border rounded-xl shadow h-40 mb-2 px-10 py-8">2</div>
-            <div class="w-full border rounded-xl shadow h-40 mb-2 px-10 py-8">3</div>
+        <div id="slide-wrapper" class="col-span-1 my-auto flex flex-col">
+            <i id="slideLeft" class="arrow down-arrow"></i>
+            <div id="slider" class="flex flex-col">
+                <div class="w-full border rounded-xl shadow mb-2 px-10 py-8">
+                    <img class="object-cover product-gallery product-active" src="/images/phone-1.png" alt="">
+                </div>
+                <div class="w-full border rounded-xl shadow mb-2 px-10 py-8">
+                    <img class="object-cover product-gallery" src="/images/phone-2.png" alt="">
+                </div>
+                <div class="w-full border rounded-xl shadow mb-2 px-10 py-8">
+                    <img class="object-cover product-gallery" src="/images/phone-3.png" alt="">
+                </div>
+                <div class="w-full border rounded-xl shadow mb-2 px-10 py-8">
+                    <img class="object-cover product-gallery" src="/images/phone-4.png" alt="">
+                </div>
+                <div class="w-full border rounded-xl shadow mb-2 px-10 py-8">
+                    <img class="object-cover product-gallery product-active" src="/images/phone-1.png" alt="">
+                </div>
+                <div class="w-full border rounded-xl shadow mb-2 px-10 py-8">
+                    <img class="object-cover product-gallery" src="/images/phone-2.png" alt="">
+                </div>
+            </div>
+            <i id="slideRight" class="arrow up-arrow"></i>
         </div>
         <!-- Product Image  -->
         <div class="md:col-span-2 w-full border rounded-xl shadow">
-            <img class="w-4/5 mx-auto py-6" :src="productimage" alt="">
+            <img id="featured-product" class="w-4/5 mx-auto py-6" :src="productimage" alt="">
         </div>
         <!-- Product Details  -->
         <div class="rounded-xl px-10 py-8 border md:col-span-2 shadow">

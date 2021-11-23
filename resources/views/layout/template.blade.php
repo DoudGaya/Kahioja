@@ -94,5 +94,6 @@
         </div>
         <script src="{{ mix('/js/app.js') }}"></script>
         <script src="{{ asset('/js/main.js') }}"></script>
+        <script src="{{ asset('/js/slider.js') }}"></script>
     </body>
 </html>

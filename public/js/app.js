@@ -23606,17 +23606,7 @@ var _hoisted_1 = {
   "class": "grid grid-cols-1 md:grid-cols-5 gap-6 my-12"
 };
 
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "col-span-1 my-auto"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "w-full border rounded-xl shadow h-40 mb-2 px-10 py-8"
-}, "1"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "w-full border rounded-xl shadow h-40 mb-2 px-10 py-8"
-}, "2"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "w-full border rounded-xl shadow h-40 mb-2 px-10 py-8"
-}, "3")], -1
-/* HOISTED */
-);
+var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div id=\"slide-wrapper\" class=\"col-span-1 my-auto flex flex-col\"><i id=\"slideLeft\" class=\"arrow down-arrow\"></i><div id=\"slider\" class=\"flex flex-col\"><div class=\"w-full border rounded-xl shadow mb-2 px-10 py-8\"><img class=\"object-cover product-gallery product-active\" src=\"/images/phone-1.png\" alt=\"\"></div><div class=\"w-full border rounded-xl shadow mb-2 px-10 py-8\"><img class=\"object-cover product-gallery\" src=\"/images/phone-2.png\" alt=\"\"></div><div class=\"w-full border rounded-xl shadow mb-2 px-10 py-8\"><img class=\"object-cover product-gallery\" src=\"/images/phone-3.png\" alt=\"\"></div><div class=\"w-full border rounded-xl shadow mb-2 px-10 py-8\"><img class=\"object-cover product-gallery\" src=\"/images/phone-4.png\" alt=\"\"></div><div class=\"w-full border rounded-xl shadow mb-2 px-10 py-8\"><img class=\"object-cover product-gallery product-active\" src=\"/images/phone-1.png\" alt=\"\"></div><div class=\"w-full border rounded-xl shadow mb-2 px-10 py-8\"><img class=\"object-cover product-gallery\" src=\"/images/phone-2.png\" alt=\"\"></div></div><i id=\"slideRight\" class=\"arrow up-arrow\"></i></div>", 1);
 
 var _hoisted_3 = {
   "class": "md:col-span-2 w-full border rounded-xl shadow"
@@ -23754,6 +23744,7 @@ var _hoisted_39 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticV
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Product Image  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+    id: "featured-product",
     "class": "w-4/5 mx-auto py-6",
     src: $props.productimage,
     alt: ""

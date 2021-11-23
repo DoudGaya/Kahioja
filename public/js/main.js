@@ -1,19 +1,19 @@
-var slideIndex = 0;
-showSlides();
+//Product Slideshow
+const buttonLeft = document.getElementById('slideLeft')
+const buttonRight = document.getElementById('slideRight')
 
-function showSlides() {
-  var i;
-  var slides = document.getElementsByClassName("mySlides");
-  var dots = document.getElementsByClassName("dot");
-  for (i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";  
-  }
-  slideIndex++;
-  if (slideIndex > slides.length) {slideIndex = 1}    
-  for (i = 0; i < dots.length; i++) {
-    dots[i].className = dots[i].className.replace(" active", "");
-  }
-  slides[slideIndex-1].style.display = "block";  
-  dots[slideIndex-1].className += " active";
-  setTimeout(showSlides, 5000);
+buttonLeft.addEventListener('click', function(){
+  document.getElementById('slider').scrollTop += 400
+})
+
+buttonRight.addEventListener('click', function(){
+  document.getElementById('slider').scrollTop -= 400
+})
+
+let  productGallery = document.getElementsByClassName('product-gallery')
+
+for(var i=0; i < productGallery.length; i++){
+  productGallery[i].addEventListener('click', function(){
+    document.getElementById('featured-product').src = this.src
+  })
 }

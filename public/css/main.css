@@ -19,51 +19,14 @@ body{
 img {vertical-align: middle;}
 
 /* Slideshow container */
-.slideshow-container {
+.slideshow-container{
   max-width: 90%;
   position: relative;
   margin: auto;
 }
 
-/* Caption text */
-.text {
-  color: #f2f2f2;
-  font-size: 15px;
-  padding: 8px 12px;
-  position: absolute;
-  bottom: 8px;
-  width: 100%;
-  text-align: center;
-}
-
-/* Next & previous buttons */
-.prev, .next {
-    cursor: pointer;
-    position: absolute;
-    width: auto;
-    padding: 16px;
-    color: white;
-    font-weight: bold;
-    font-size: 18px;
-    transition: 0.6s ease;
-    border-radius: 0 3px 3px 0;
-    user-select: none;
-  }
-  
-  /* Position the "next button" to the right */
-  .next {
-    right: 0;
-    border-radius: 3px 0 0 3px;
-  }
-  
-  /* On hover, add a grey background color */
-  .prev:hover, .next:hover {
-    background-color: #f1f1f1;
-    color: black;
-  }
-
 /* The dots/bullets/indicators */
-.dot {
+.dot{
   height: 15px;
   width: 15px;
   margin: 0 0.5%;
@@ -73,7 +36,7 @@ img {vertical-align: middle;}
   transition: background-color 0.6s ease;
 }
 
-.active {
+.slider .active{
     border: 1px solid #FEF7F3;
     background: #F37022;
     width: 20px;
@@ -103,7 +66,6 @@ img {vertical-align: middle;}
   .text {font-size: 11px}
 }
 /* //END OF Slider  */
-
 
 #nav{
     position: fixed;
@@ -444,6 +406,49 @@ img {vertical-align: middle;}
     background-color: #FFFFFF;
     border: 1px solid orange;
     color: #222222;
+}
+
+#slide-wrapper{
+    max-width: 100%;
+    display: flex;
+    min-height: 100px;
+    align-items: center;
+}
+
+#slider{
+    width: 100%;
+    display: flex;
+    max-height: 460px;
+    flex-wrap: nowrap;
+    overflow: hidden;
+}
+
+.arrow{
+    margin: 4% 0px;
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+    transition: .3s;
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+}
+
+.arrow:hover{
+    opacity: .5;
+    width: 25px;
+    height: 25px;
+}
+
+.up-arrow{
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+}
+
+.down-arrow{
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
 }
 
 #product-details-nav{
