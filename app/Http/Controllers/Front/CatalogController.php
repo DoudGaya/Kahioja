@@ -173,6 +173,7 @@ class CatalogController extends Controller
         {
             $vendors = Product::where('status','=',1)->where('user_id','=',0)->take(8)->get();
         }
+        
         return view('front.product',compact('productt','curr','vendors','gs'));
 
     }

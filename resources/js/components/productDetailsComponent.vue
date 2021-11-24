@@ -1,32 +1,23 @@
 <template>
     <div id="product-details" class="grid grid-cols-1 md:grid-cols-5 gap-6 my-12">
-        <div id="slide-wrapper" class="col-span-1 my-auto flex flex-col">
-            <i id="slideLeft" class="arrow down-arrow"></i>
-            <div id="slider" class="flex flex-col">
+        <div id="slide-wrapper" class="hidden col-span-1 my-auto md:flex flex-col">
+            <svg id="slideLeft" class="arrow" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="16" cy="16" r="15" transform="rotate(-90 16 16)" stroke="#222222" stroke-width="2"/><path d="M14.657 19.586L10.707 15.636C10.5184 15.4538 10.2658 15.353 10.0036 15.3553C9.7414 15.3576 9.49058 15.4628 9.30518 15.6482C9.11977 15.8336 9.0146 16.0844 9.01232 16.3466C9.01004 16.6088 9.11084 16.8614 9.293 17.05L14.95 22.707C15.0426 22.8002 15.1528 22.8741 15.2741 22.9246C15.3955 22.9751 15.5256 23.001 15.657 23.001C15.7884 23.001 15.9185 22.9751 16.0398 22.9246C16.1612 22.8741 16.2713 22.8002 16.364 22.707L22.021 17.05C22.1165 16.9578 22.1927 16.8474 22.2451 16.7254C22.2975 16.6034 22.3251 16.4722 22.3262 16.3394C22.3274 16.2066 22.3021 16.0749 22.2518 15.952C22.2015 15.8291 22.1273 15.7175 22.0334 15.6236C21.9395 15.5297 21.8278 15.4555 21.7049 15.4052C21.5821 15.3549 21.4504 15.3296 21.3176 15.3307C21.1848 15.3319 21.0536 15.3595 20.9316 15.4119C20.8096 15.4643 20.6992 15.5405 20.607 15.636L16.657 19.586V10C16.657 9.73478 16.5516 9.48043 16.3641 9.29289C16.1766 9.10536 15.9222 9 15.657 9C15.3918 9 15.1374 9.10536 14.9499 9.29289C14.7624 9.48043 14.657 9.73478 14.657 10V19.586V19.586Z" fill="#222222"/></svg>
+
+            <div id="slider" class="hidden md:flex flex-col">
                 <div class="w-full border rounded-xl shadow mb-2 px-10 py-8">
-                    <img class="object-cover product-gallery product-active" src="/images/phone-1.png" alt="">
+                    <img class="object-cover product-gallery product-active" :src="productimage" :alt="`${ productname }`">
                 </div>
-                <div class="w-full border rounded-xl shadow mb-2 px-10 py-8">
-                    <img class="object-cover product-gallery" src="/images/phone-2.png" alt="">
-                </div>
-                <div class="w-full border rounded-xl shadow mb-2 px-10 py-8">
-                    <img class="object-cover product-gallery" src="/images/phone-3.png" alt="">
-                </div>
-                <div class="w-full border rounded-xl shadow mb-2 px-10 py-8">
-                    <img class="object-cover product-gallery" src="/images/phone-4.png" alt="">
-                </div>
-                <div class="w-full border rounded-xl shadow mb-2 px-10 py-8">
-                    <img class="object-cover product-gallery product-active" src="/images/phone-1.png" alt="">
-                </div>
-                <div class="w-full border rounded-xl shadow mb-2 px-10 py-8">
-                    <img class="object-cover product-gallery" src="/images/phone-2.png" alt="">
+                <div :key="productphoto" v-for="productphoto in productgallery">    
+                    <div class="w-full border rounded-xl shadow mb-2 px-10 py-8">
+                        <img class="object-cover product-gallery product-active" :src="`/images/galleries/${productphoto.photo}`" :alt="`${ productname }`">
+                    </div>
                 </div>
             </div>
-            <i id="slideRight" class="arrow up-arrow"></i>
+            <svg id="slideRight" class="arrow" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="16" cy="16" r="15" transform="rotate(-90 16 16)" stroke="#222222" stroke-width="2"/><path d="M14.657 19.586L10.707 15.636C10.5184 15.4538 10.2658 15.353 10.0036 15.3553C9.7414 15.3576 9.49058 15.4628 9.30518 15.6482C9.11977 15.8336 9.0146 16.0844 9.01232 16.3466C9.01004 16.6088 9.11084 16.8614 9.293 17.05L14.95 22.707C15.0426 22.8002 15.1528 22.8741 15.2741 22.9246C15.3955 22.9751 15.5256 23.001 15.657 23.001C15.7884 23.001 15.9185 22.9751 16.0398 22.9246C16.1612 22.8741 16.2713 22.8002 16.364 22.707L22.021 17.05C22.1165 16.9578 22.1927 16.8474 22.2451 16.7254C22.2975 16.6034 22.3251 16.4722 22.3262 16.3394C22.3274 16.2066 22.3021 16.0749 22.2518 15.952C22.2015 15.8291 22.1273 15.7175 22.0334 15.6236C21.9395 15.5297 21.8278 15.4555 21.7049 15.4052C21.5821 15.3549 21.4504 15.3296 21.3176 15.3307C21.1848 15.3319 21.0536 15.3595 20.9316 15.4119C20.8096 15.4643 20.6992 15.5405 20.607 15.636L16.657 19.586V10C16.657 9.73478 16.5516 9.48043 16.3641 9.29289C16.1766 9.10536 15.9222 9 15.657 9C15.3918 9 15.1374 9.10536 14.9499 9.29289C14.7624 9.48043 14.657 9.73478 14.657 10V19.586V19.586Z" fill="#222222"/></svg>
         </div>
         <!-- Product Image  -->
         <div class="md:col-span-2 w-full border rounded-xl shadow">
-            <img id="featured-product" class="w-4/5 mx-auto py-6" :src="productimage" alt="">
+            <img id="featured-product" class="w-4/5 mx-auto py-6" :src="productimage" :alt="productname">
         </div>
         <!-- Product Details  -->
         <div class="rounded-xl px-10 py-8 border md:col-span-2 shadow">
@@ -136,6 +127,7 @@ export default {
     props:[
         'productid',
         'productimage',
+        'productgallery',
         'productname',
         'productcurrprice',
         'productprevprice',

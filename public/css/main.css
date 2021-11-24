@@ -425,30 +425,19 @@ img {vertical-align: middle;}
 
 .arrow{
     margin: 4% 0px;
-    width: 15px;
-    height: 15px;
     cursor: pointer;
     transition: .3s;
-    border: solid black;
-    border-width: 0 3px 3px 0;
     display: inline-block;
     padding: 3px;
+    width: 30px;
+    height: 30px;
+    opacity: .8;
 }
 
 .arrow:hover{
     opacity: .5;
     width: 25px;
     height: 25px;
-}
-
-.up-arrow{
-    transform: rotate(-135deg);
-    -webkit-transform: rotate(-135deg);
-}
-
-.down-arrow{
-    transform: rotate(45deg);
-    -webkit-transform: rotate(45deg);
 }
 
 #product-details-nav{

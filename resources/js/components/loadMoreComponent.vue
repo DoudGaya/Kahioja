@@ -28,7 +28,7 @@
             </div>
         </div>
         <div v-if="productsToShow < products.length || products.length > productsToShow"  class="mt-16 mb-8 flex justify-center">
-            <button  class="mx-auto btn-yus-conti-shopping rounded-full w-1/2 md:w-1/6 text-lg py-2 text-white focus:outline-none" @click="productsToShow += 8">Shop More Items</button>
+            <button class="mx-auto btn-yus-conti-shopping rounded-full w-1/2 md:w-1/6 text-lg py-2 focus:outline-none" @click="productsToShow += 8">Shop More Items</button>
         </div>
     </div>
 </template>
