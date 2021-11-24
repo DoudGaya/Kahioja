@@ -48,7 +48,7 @@ class LoginController extends Controller
       }
 
         // if unsuccessful, then redirect back to the login with the form data
-        return response()->json('Wrong Email and Password Combination');     
+      return response()->json('Wrong Email and Password Combination');     
     }
 
     public function user(){
