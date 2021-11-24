@@ -97,11 +97,11 @@
                     </div>
                     <div class="my-4">
                         <div>
-                            <input class="border border-gray-300 rounded py-2 px-6 w-full my-2 focus:outline-none" type="text" name="email" id="ForgotPasswordEmail" placeholder="Email Address">
+                            <input required v-model="forgotPasswordEmail" class="border border-gray-300 rounded py-2 px-6 w-full my-2 focus:outline-none" type="text" name="forgotPasswordEmail" id="ForgotPasswordEmail" placeholder="Email Address">
                         </div>
                     </div>
                     <div class="my-8">
-                        <button class="mx-auto btn-yus rounded-full w-full py-2 text-white">
+                        <button @click="forgotPassword()" class="mx-auto btn-yus rounded-full w-full py-2 text-white">
                             Submit
                         </button>
                     </div>
@@ -129,6 +129,7 @@ export default {
             signUpName: '',
             signUpEmail: '',
             signUpPassword: '',
+            forgotPasswordEmail: '',
             callback: '',
             isLoading: false
         }
@@ -222,6 +223,29 @@ export default {
             }else{
                 this.isLoading = false
                 this.callback = 'Name field empty'
+            }
+        },
+        async forgotPassword(){
+            this.isLoading = true
+            
+            if(this.forgotPasswordEmail != ''){
+                axios.post('/forgot', {
+                    email: this.forgotPasswordEmail,
+                }).then(response => {
+                    this.forgotPasswordEmail = '',
+
+                    this.isLoading = false
+                    this.callback = response.data
+
+                    setTimeout(()=>{
+                        window.location = '/'
+                    }, 3000)
+
+                }).catch(error => {
+                    console.log(error)
+                })
+            }else{
+                this.callback = 'Email Address field empty'
             }
         }
     }

@@ -32,8 +32,9 @@ Route::get('/', [FrontendController::class, 'index'])->name('front.index');
     // User Register End
     
     // User Login
-    Route::post('/login', [LoginController::class ,'login'])->name('user.login.submit');
     Route::get('/user', [LoginController::class ,'user']);
+    Route::post('/login', [LoginController::class ,'login'])->name('user.login.submit');
+    Route::post('/forgot', [LoginController::class, 'forgot']);
     // User Login End
 
     // User Logout

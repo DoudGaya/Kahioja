@@ -8,7 +8,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Http\Request;
 
-class verifyEmail extends Mailable
+class forgotPassword extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -29,6 +29,6 @@ class verifyEmail extends Mailable
      */
     public function build(request $request)
     {
-        return $this->subject('Verify Email Address')->view('mails.verifyemail', ['request'=>$request]);
+        return $this->subject('Password Reset')->view('mails.forgotpassword', ['request'=>$request]);
     }
 }

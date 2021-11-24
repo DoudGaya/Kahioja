@@ -19962,6 +19962,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       signUpName: '',
       signUpEmail: '',
       signUpPassword: '',
+      forgotPasswordEmail: '',
       callback: '',
       isLoading: false
     };
@@ -20073,6 +20074,40 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             }
           }
         }, _callee2);
+      }))();
+    },
+    forgotPassword: function forgotPassword() {
+      var _this3 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _this3.isLoading = true;
+
+                if (_this3.forgotPasswordEmail != '') {
+                  axios.post('/forgot', {
+                    email: _this3.forgotPasswordEmail
+                  }).then(function (response) {
+                    _this3.forgotPasswordEmail = '', _this3.isLoading = false;
+                    _this3.callback = response.data;
+                    setTimeout(function () {
+                      window.location = '/';
+                    }, 3000);
+                  })["catch"](function (error) {
+                    console.log(error);
+                  });
+                } else {
+                  _this3.callback = 'Email Address field empty';
+                }
+
+              case 2:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
       }))();
     }
   }
@@ -22295,7 +22330,18 @@ var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 
 var _hoisted_22 = [_hoisted_21];
 
-var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"my-8\"> Enter the email address your register your account. We will send you a verification link to reset your account. </div><div class=\"my-4\"><div><input class=\"border border-gray-300 rounded py-2 px-6 w-full my-2 focus:outline-none\" type=\"text\" name=\"email\" id=\"ForgotPasswordEmail\" placeholder=\"Email Address\"></div></div><div class=\"my-8\"><button class=\"mx-auto btn-yus rounded-full w-full py-2 text-white\"> Submit </button></div>", 3);
+var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "my-8"
+}, " Enter the email address your register your account. We will send you a verification link to reset your account. ", -1
+/* HOISTED */
+);
+
+var _hoisted_24 = {
+  "class": "my-4"
+};
+var _hoisted_25 = {
+  "class": "my-8"
+};
 
 var _hoisted_26 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, "Remember your password?", -1
 /* HOISTED */
@@ -22415,8 +22461,25 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "my-8"
   }, _hoisted_22)], 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.displaySignUpForm]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Forgot Password Form  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_23, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    onClick: _cache[13] || (_cache[13] = function ($event) {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.displaySignUpForm]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Forgot Password Form  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_23, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    required: "",
+    "onUpdate:modelValue": _cache[13] || (_cache[13] = function ($event) {
+      return $data.forgotPasswordEmail = $event;
+    }),
+    "class": "border border-gray-300 rounded py-2 px-6 w-full my-2 focus:outline-none",
+    type: "text",
+    name: "forgotPasswordEmail",
+    id: "ForgotPasswordEmail",
+    placeholder: "Email Address"
+  }, null, 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.forgotPasswordEmail]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_25, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    onClick: _cache[14] || (_cache[14] = function ($event) {
+      return $options.forgotPassword();
+    }),
+    "class": "mx-auto btn-yus rounded-full w-full py-2 text-white"
+  }, " Submit ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    onClick: _cache[15] || (_cache[15] = function ($event) {
       return $options.showLoginForm();
     }),
     "class": "my-4 cursor-pointer"

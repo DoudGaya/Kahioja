@@ -93,7 +93,6 @@ class RegisterController extends Controller
 					return response()->json('Please check your mail to verify your account');  
 				}
 			}
-
     }
 
     public function token($token)
