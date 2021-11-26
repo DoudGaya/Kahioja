@@ -40,7 +40,7 @@
                 <div>
                     <a href="{{ route('front.category', $category->slug) }}">
                         <div class="cate-yus rounded-full border-8 md:border-24">
-                            <img class="mx-auto" src="{{ asset('/images/categories/'.$category->photo) }}" alt="{{ $category->name }}">
+                            <img class="mx-auto" src="https://dashboard.kahioja.com/assets/images/categories/{{$category->photo}}" alt="{{ $category->name }}">
                         </div>
                         <span class="cate-title-yus">{{ $category->name }}</span>
                     </a>

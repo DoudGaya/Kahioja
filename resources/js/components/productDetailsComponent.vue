@@ -5,11 +5,11 @@
 
             <div id="slider" class="hidden md:flex flex-col">
                 <div class="w-full border rounded-xl shadow mb-2 px-10 py-8">
-                    <img class="object-cover product-gallery product-active" :src="productimage" :alt="`${ productname }`">
+                    <img class="object-cover product-gallery product-active" :src="`https://dashboard.kahioja.com/assets/images/products/${productimage}`" :alt="`${ productname }`">
                 </div>
                 <div :key="productphoto" v-for="productphoto in productgallery">    
                     <div class="w-full border rounded-xl shadow mb-2 px-10 py-8">
-                        <img class="object-cover product-gallery product-active" :src="`/images/galleries/${productphoto.photo}`" :alt="`${ productname }`">
+                        <img class="object-cover product-gallery product-active" :src="`https://dashboard.kahioja.com/assets/images/galleries/${productphoto.photo}`" :alt="`${ productname }`">
                     </div>
                 </div>
             </div>
@@ -17,7 +17,7 @@
         </div>
         <!-- Product Image  -->
         <div class="md:col-span-2 w-full border rounded-xl shadow">
-            <img id="featured-product" class="w-4/5 mx-auto py-6" :src="productimage" :alt="productname">
+            <img id="featured-product" class="w-4/5 mx-auto py-6" :src="`https://dashboard.kahioja.com/assets/images/products/${productimage}`" :alt="productname">
         </div>
         <!-- Product Details  -->
         <div class="rounded-xl px-10 py-8 border md:col-span-2 shadow">

@@ -25,7 +25,7 @@
         <div id="productDetails">
             <product-details-component 
                 :productid="{{ json_encode($productt->id) }}" 
-                :productimage="{{ json_encode(asset('images/products/'.$productt->photo)) }}" 
+                :productimage="{{ json_encode($productt->photo) }}" 
                 :productgallery="{{ json_encode($productt->galleries) }}" 
                 :productname="{{ json_encode($productt->name) }}" 
                 :productcurrprice="{{ json_encode($productt->showPrice()) }}" 

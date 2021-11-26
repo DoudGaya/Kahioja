@@ -100,7 +100,7 @@
                 <div class="grid grid-cols-4 gap-6">
                     <div :key="category.slug" v-for="category in categories">
                         <a :href="`/category/${category.slug}`" class="items-center">
-                            <span><img class="mx-auto" style="width:55px;" :src="`/images/categories/${category.photo}`" :alt="category.name"></span>
+                            <span><img class="mx-auto" style="width:55px;" :src="`https://dashboard.kahioja.com/assets/images/categories/${category.photo}`" :alt="category.name"></span>
                             <span class="text-sm">{{ category.name }}</span>
                         </a>
                     </div>

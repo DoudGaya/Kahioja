@@ -17,7 +17,7 @@
                     <div :key="product.product_id" v-for="product in getAllCart" id="cart-body-products" class="p-4">
                         <div class="grid grid-cols-3 gap-6 items-center">
                             <div id="cart-body-product-image">
-                                <img :src="`/images/products/${product.photo}`" :alt="`${ product.name }`">
+                                <img :src="`https://dashboard.kahioja.com/assets/images/products/${product.photo}`" :alt="`${ product.name }`">
                             </div>
                             <div>
                                 <div id="cart-body-product-title">{{ product.name }} x {{product.quantity}}</div>

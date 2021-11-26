@@ -5,7 +5,7 @@
                 <div class="bg-white rounded-lg px-4 my-4 cursor-pointer yus-shadow">
                     <a :href="`/item/${products[productIndex].slug}`">
 
-                        <img class="w-64 mx-auto py-4" :src="`/images/thumbnails/${products[productIndex].thumbnail}`" :alt="products[productIndex].name">
+                        <img class="w-64 mx-auto py-4" :src="`https://dashboard.kahioja.com/assets/images/thumbnails/${products[productIndex].thumbnail}`" :alt="products[productIndex].name">
                         <!-- Product Details  -->
                         <div class="py-3">
                             <h1 style="display:none;">{{ products[productIndex].id }}</h1>

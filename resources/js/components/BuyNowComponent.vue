@@ -119,7 +119,7 @@
                         <div id="cart-body-products" class="p-4">
                             <div class="grid grid-cols-3 gap-6 items-center">
                                 <div id="cart-body-product-image">
-                                    <img :src="`/images/products/${productphoto}`" :alt="`${ productname }`">
+                                    <img :src="`https://dashboard.kahioja.com/assets/images/products/${productphoto}`" :alt="`${ productname }`">
                                 </div>
                                 <div>
                                     <div id="cart-body-product-title">{{ productname }} x {{productquantity}}</div>

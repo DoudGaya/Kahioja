@@ -30,7 +30,7 @@
             <ul>
                 <div :key="category.id" v-for="category in categories" class="flex justify-between border-b p-4 items-center">
                     <a :href="`/category/${category.slug}`" class="flex justify-between w-full items-center">
-                        <span><img style="width:35px;" :src="`/images/categories/${category.photo}`" :alt="category.name"></span>
+                        <span><img style="width:35px;" :src="`https://dashboard.kahioja.com/assets/images/categories/${category.photo}`" :alt="category.name"></span>
                         <span><li class="text-sm">{{ category.name }}</li></span>
                     </a>
                 </div>
