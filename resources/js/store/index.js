@@ -17,10 +17,10 @@ export const store = new Vuex.Store({
             return state.cart.length
         },
         subTotal(state){
-            return state.cart.reduce((sum, {subTotal}) => parseInt(sum + subTotal), 0)
+            return state.cart.reduce((sum, {subTotal}) => (+(sum + subTotal)), 0)
         },
         deliveryFee(state){
-            return state.cart.reduce((sum, {ship_fee}) => parseInt(sum + ship_fee), 0)
+            return state.cart.reduce((sum, {ship_fee}) => (+(sum + ship_fee)), 0)
         }
     },
     actions:{

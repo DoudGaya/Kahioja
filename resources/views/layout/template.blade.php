@@ -33,7 +33,7 @@
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 	    <link rel="icon"  type="image/x-icon" href="{{ asset('images/favicon.ico')}}"/>
         <link href="{{ asset('css/main.css') }}" rel="stylesheet">
-    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js" integrity="sha512-n/4gHW3atM3QqRcbCn6ewmpxcLAHGaDjpEBu4xZd47N0W2oQ+6q7oc3PXstrJYXcbNU1OHdQ1T7pAP+gi5Yu8g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>    
     </head>
     <body>
         <!-- Nav  -->
@@ -92,6 +92,7 @@
                 </p>
             </div>
         </div>
+        <script src="{{ asset('/js/sandbox.js') }}"></script>
         <script src="{{ mix('/js/app.js') }}"></script>
         <script src="{{ asset('/js/main.js') }}"></script>
         <script src="{{ asset('/js/slider.js') }}"></script>

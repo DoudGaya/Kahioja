@@ -51,9 +51,9 @@ Route::get('/', [FrontendController::class, 'index'])->name('front.index');
     Route::get('/checkout', [CartController::class, 'checkout']);
     Route::post('/addtobag', [CartController::class,'addtobag']);
     Route::post('/buynow', [CartController::class,'buynow']);
+    Route::get('/removeproduct/{id}', [CartController::class,'removeproduct']);
     Route::post('/addbyone/{id}/{quantity}', [CartController::class,'addbyone']);
     Route::post('/reducebyone/{id}/{quantity}', [CartController::class,'reducebyone']);
-    Route::post('/removeproduct/{id}', [CartController::class,'removeproduct']);
     // CART ENDS
 
     // PRODCT SECTION

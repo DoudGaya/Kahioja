@@ -685,6 +685,10 @@ img {vertical-align: middle;}
         overflow: auto;
     }
 
+    #cart-body-empty{
+        max-height: 100vh;
+    }
+
     #cart-checkout{
         height: 25vh;
     }

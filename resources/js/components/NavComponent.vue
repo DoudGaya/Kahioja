@@ -188,7 +188,7 @@ export default {
             return this.$store.getters.deliveryFee    
         },
         estimatedTotal(){
-            return this.subTotal + this.deliveryFee
+            return parseInt(this.subTotal) + parseInt(this.deliveryFee)
         }
     }
 }
