@@ -299,7 +299,7 @@
                 </p>
             </div>
             <!-- Link to Home Page  -->
-            <div class="md:w-1/6 mx-auto">
+            <div class="w-1/2 md:w-1/6 mx-auto">
                 <a href="/">
                     <button class="mx-auto btn-yus rounded-full w-full py-2 text-white">
                         Go to Homepage

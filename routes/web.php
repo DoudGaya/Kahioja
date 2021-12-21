@@ -26,6 +26,7 @@ use App\Http\Controllers\Front\FlutterwaveController;
 
 Route::get('/', [FrontendController::class, 'index'])->name('front.index');
 Route::get('/404', [FrontendController::class, 'pagenotfound']);
+Route::get('/500', [FrontendController::class, 'serveerror']);
 
 // User Register
 Route::post('/register', [RegisterController::class, 'register'])->name('user-register-submit');

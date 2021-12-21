@@ -128,6 +128,12 @@ class FrontendController extends Controller
         $gs = Generalsetting::findOrFail(1);
         return view('errors.404', compact('gs'));
     }
+    
+    public function serveerror()
+    {
+        $gs = Generalsetting::findOrFail(1);
+        return view('errors.500', compact('gs'));
+    }
 
     public function autosearch($slug)
     {
