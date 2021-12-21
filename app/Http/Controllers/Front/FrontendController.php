@@ -123,6 +123,12 @@ class FrontendController extends Controller
         return view('welcome',compact('best_products','top_products','hot_products','sale_products','ps','gs','categories'));
 	}
 
+    public function pagenotfound()
+    {
+        $gs = Generalsetting::findOrFail(1);
+        return view('errors.404', compact('gs'));
+    }
+
     public function autosearch($slug)
     {
         if(mb_strlen($slug,'utf-8') > 1){
