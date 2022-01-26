@@ -36,7 +36,9 @@
         <hr>
         <!-- Product Description & Reviews & Return Policy  -->
         <div id="productDescription">
-            <product-description-component></product-description-component>
+            <product-description-component
+                :productdetails="{{ json_encode($productt->details) }}"
+            ></product-description-component>
         </div>
         <!-- Similar Products -->
         <div id="similar-product" class="mt-20 md:mb-8 mb-3">
