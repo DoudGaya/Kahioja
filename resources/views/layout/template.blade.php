@@ -60,16 +60,16 @@
                     <div class="mt-3">
                         <ul id="footer-nav">
                             <li class="py-4">
-                                <a href="#">All Categories</a>
+                                <a href="{{ route('front.categories') }}">All Categories</a>
                             </li>
                             <li class="py-4">
-                               <a href="">Track Orders</a>
+                                <a href="">Track Orders</a>
                             </li>
                             <li class="py-4">
-                                <a href="">Privacy &amp; Security</a>
+                                <a href="{{ route('front.privacyandsecurity') }}">Privacy &amp; Security</a>
                             </li>
                             <li class="py-4">
-                               <a href="">Terms &amp; Policy</a>
+                                <a href="{{ route('front.termsandpolicy') }}">Terms &amp; Policy</a>
                             </li>
                         </ul>
                     </div>

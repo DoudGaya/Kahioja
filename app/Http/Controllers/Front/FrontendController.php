@@ -7,6 +7,7 @@ use App\Models\Counter;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Generalsetting;
+use App\Models\Page;
 use DB;
 
 use Illuminate\Http\Request;
@@ -133,6 +134,20 @@ class FrontendController extends Controller
     {
         $gs = Generalsetting::findOrFail(1);
         return view('errors.500', compact('gs'));
+    }
+
+    public function privacyandsecurity()
+    {
+        $gs = Generalsetting::findOrFail(1);
+        $privacyandsecuritypage = Page::where('slug', 'privacy')->first();
+        return view('front.privacyandsecurity', compact('gs', 'privacyandsecuritypage'));
+    }
+
+    public function termsandpolicy()
+    {
+        $gs = Generalsetting::findOrFail(1);
+        $termsandpolicypage = Page::where('slug', 'terms')->first();
+        return view('front.termsandpolicy', compact('gs', 'termsandpolicypage'));
     }
 
     public function autosearch($slug)
