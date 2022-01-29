@@ -51,16 +51,23 @@ class FlutterwaveController extends Controller
         }
 
         $gs = Generalsetting::findOrFail(1);
+        $orderId = Str::random(4).time();
         
+
         if($request->productid == null){
+            //Checkout from cart
+            $update_order_id = DB::select("UPDATE `bags` SET `order_no`='$orderId' WHERE `user_id`='$user_id' && `paid`='unpaid'");
             $bag = DB::select("SELECT DISTINCT bags.id as 'bagId', bags.quantity, bags.paid, products.id, products.user_id, products.ship_fee, products.price FROM bags, products, users WHERE bags.product_id = products.id && bags.user_id = '$user_id' && bags.paid = 'unpaid' ORDER BY bags.id DESC");
+        
         }else{
+            //Buy Now
             Bag::create([
                 'product_id'=> $request->productid,
                 'user_id'=> $user_id,
                 'user_type'=> $user_type,
                 'quantity'=> $request->productquantity,
-                'paid'=> 'unpaid'
+                'paid'=> 'unpaid',
+                'order_no'=> $orderId
             ]);
             $bag = DB::select("SELECT DISTINCT bags.id as 'bagId', bags.quantity, bags.paid, products.id, products.user_id, products.ship_fee, products.price FROM bags, products, users WHERE bags.product_id = products.id && bags.user_id = '$user_id' && bags.paid = 'unpaid' ORDER BY bags.id DESC LIMIT 1");
         }
@@ -102,7 +109,7 @@ class FlutterwaveController extends Controller
         $item_number = Str::random(4).time();
         
         $order['user_id'] = $request->user_id;
-        $order['cart'] = utf8_encode(bzcompress(serialize($bag), 9)); 
+        $order['cart'] = ''; 
         $order['totalQty'] = 1;
         $order['pay_amount'] = $request->amount;
         $order['customer_email'] = $request->email;
@@ -111,7 +118,7 @@ class FlutterwaveController extends Controller
         $order['packing_cost'] = 1;
         $order['tax'] = 1;
         $order['customer_phone'] = $request->phone;
-        $order['order_number'] = Str::random(4).time();
+        $order['order_number'] = $orderId;
         $order['customer_address'] = $request->address;
         $order['customer_country'] = 'Nigeria';
         $order['customer_city'] = $request->city;
