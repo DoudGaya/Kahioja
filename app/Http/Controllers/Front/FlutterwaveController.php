@@ -299,10 +299,17 @@ class FlutterwaveController extends Controller
             $oldBag = Session::get('tempbag');
             $tempbag = new Bag($oldBag);
             $order = Session::get('temporder');
-            // dd($order);
-            return view('front.checkoutsuccess', compact('gs', 'transactID', 'order', 'tempbag', 'deliveryFee', 'serviceFee'));
-        }else{
-            dd('no');
+            
+            $order_no = $order->order_number;
+
+            //Getting the items in the bag
+            $bags = DB::select("SELECT DISTINCT bags.id as 'bagId', bags.quantity, bags.order_no, bags.paid, products.id, products.name, products.photo, products.price, orders.status 
+                FROM bags, products, orders
+                WHERE bags.order_no = '$order_no' && bags.product_id = products.id 
+                ORDER BY bags.id DESC");
+        
+            // dd($bags);
+            return view('front.checkoutsuccess', compact('gs', 'transactID', 'order', 'tempbag', 'deliveryFee', 'serviceFee', 'bags'));
         }
 
     }

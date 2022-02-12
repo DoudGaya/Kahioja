@@ -9,6 +9,7 @@
             :servicefee="{{ json_encode($serviceFee) }}" 
             :transactionid="{{ json_encode($transactID) }}" 
             :orderid="{{ json_encode($order->order_number) }}" 
+            :bags="{{ json_encode($bags) }}" 
         >
         </transaction-successful-component>
     </div>
