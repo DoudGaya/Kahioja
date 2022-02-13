@@ -21654,7 +21654,7 @@ var _hoisted_13 = {
 
 var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "py-4 px-4 bg-gray-900 text-white text-2xl rounded-lg font-extrabold"
-}, " Delivery Information ", -1
+}, " Confirm Delivery Information ", -1
 /* HOISTED */
 );
 
@@ -21662,60 +21662,13 @@ var _hoisted_15 = {
   "class": "my-6 py-4 px-4 md:px-16 rounded-lg yus-shadow"
 };
 var _hoisted_16 = {
-  "class": "my-4"
+  "class": "mt-4 flex justify-end"
 };
 var _hoisted_17 = {
   "class": "my-4"
 };
-var _hoisted_18 = {
-  "class": "my-4"
-};
-var _hoisted_19 = {
-  "class": "my-4 grid grid-cols-2 gap-6"
-};
-var _hoisted_20 = {
-  "class": "my-4"
-};
-var _hoisted_21 = {
-  "class": "my-8"
-};
-var _hoisted_22 = ["value"];
 
-var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "my-8 flex justify-center"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
-  width: "129",
-  height: "24",
-  viewBox: "0 0 129 24",
-  fill: "none",
-  xmlns: "http://www.w3.org/2000/svg"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
-  d: "M7 14V20H17V14H7ZM17 12C17.5304 12 18.0391 12.2107 18.4142 12.5858C18.7893 12.9609 19 13.4696 19 14V20C19 20.5304 18.7893 21.0391 18.4142 21.4142C18.0391 21.7893 17.5304 22 17 22H7C6.46957 22 5.96086 21.7893 5.58579 21.4142C5.21071 21.0391 5 20.5304 5 20V14C5 13.4696 5.21071 12.9609 5.58579 12.5858C5.96086 12.2107 6.46957 12 7 12V7C7 5.67392 7.52678 4.40215 8.46447 3.46447C9.40215 2.52678 10.6739 2 12 2C13.3261 2 14.5979 2.52678 15.5355 3.46447C16.4732 4.40215 17 5.67392 17 7V12ZM15 12V7C15 6.60603 14.9224 6.21593 14.7716 5.85195C14.6209 5.48797 14.3999 5.15726 14.1213 4.87868C13.8427 4.6001 13.512 4.37913 13.1481 4.22836C12.7841 4.0776 12.394 4 12 4C11.606 4 11.2159 4.0776 10.8519 4.22836C10.488 4.37913 10.1573 4.6001 9.87868 4.87868C9.6001 5.15726 9.37913 5.48797 9.22836 5.85195C9.0776 6.21593 9 6.60603 9 7V12H15ZM12 19C11.4696 19 10.9609 18.7893 10.5858 18.4142C10.2107 18.0391 10 17.5304 10 17C10 16.4696 10.2107 15.9609 10.5858 15.5858C10.9609 15.2107 11.4696 15 12 15C12.5304 15 13.0391 15.2107 13.4142 15.5858C13.7893 15.9609 14 16.4696 14 17C14 17.5304 13.7893 18.0391 13.4142 18.4142C13.0391 18.7893 12.5304 19 12 19Z",
-  fill: "black"
-}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
-  d: "M40.5724 10.424C40.3804 9.5 39.6124 8.312 37.6924 8.312C36.1204 8.312 34.8844 9.512 34.8844 10.844C34.8844 12.116 35.7484 12.908 36.9604 13.172L38.1724 13.436C39.0244 13.616 39.4444 14.144 39.4444 14.756C39.4444 15.5 38.8684 16.112 37.6924 16.112C36.4084 16.112 35.7364 15.236 35.6524 14.288L34.5244 14.648C34.6804 15.86 35.6524 17.18 37.7044 17.18C39.5164 17.18 40.6444 15.98 40.6444 14.66C40.6444 13.472 39.8524 12.584 38.4364 12.272L37.1644 11.996C36.4444 11.84 36.0724 11.372 36.0724 10.76C36.0724 9.968 36.7564 9.344 37.7164 9.344C38.9044 9.344 39.4204 10.184 39.5164 10.796L40.5724 10.424ZM42.7565 13.52C42.8045 12.776 43.3805 12.044 44.3285 12.044C45.3485 12.044 45.8885 12.692 45.9125 13.52H42.7565ZM46.0805 15.02C45.8645 15.668 45.3965 16.184 44.4605 16.184C43.4885 16.184 42.7445 15.464 42.7205 14.432H47.0645C47.0765 14.36 47.0885 14.216 47.0885 14.072C47.0885 12.272 46.0925 11.048 44.3165 11.048C42.8645 11.048 41.5565 12.284 41.5565 14.096C41.5565 16.052 42.9125 17.18 44.4605 17.18C45.8045 17.18 46.7285 16.376 47.0525 15.356L46.0805 15.02ZM50.9524 12.092C51.9364 12.092 52.3564 12.752 52.5004 13.316L53.5204 12.884C53.2804 12.008 52.4884 11.048 50.9524 11.048C49.3084 11.048 48.0484 12.308 48.0484 14.108C48.0484 15.86 49.2844 17.18 50.9644 17.18C52.4644 17.18 53.2924 16.208 53.5684 15.38L52.5724 14.948C52.4404 15.404 52.0444 16.136 50.9644 16.136C50.0284 16.136 49.2004 15.428 49.2004 14.108C49.2004 12.764 50.0404 12.092 50.9524 12.092ZM58.637 16.304C58.637 16.544 58.661 16.868 58.685 17H59.765C59.741 16.796 59.705 16.388 59.705 15.932V11.228H58.577V14.708C58.577 15.584 58.121 16.184 57.209 16.184C56.261 16.184 55.901 15.488 55.901 14.696V11.228H54.773V14.864C54.773 16.172 55.589 17.18 56.933 17.18C57.605 17.18 58.325 16.904 58.637 16.304ZM64.8339 11.168C64.7739 11.156 64.6179 11.132 64.4619 11.132C63.8739 11.132 63.1539 11.348 62.7339 12.236V11.228H61.6299V17H62.7579V14.108C62.7579 12.836 63.3939 12.332 64.3419 12.332C64.4979 12.332 64.6659 12.344 64.8339 12.368V11.168ZM66.7096 13.52C66.7576 12.776 67.3336 12.044 68.2816 12.044C69.3016 12.044 69.8416 12.692 69.8656 13.52H66.7096ZM70.0336 15.02C69.8176 15.668 69.3496 16.184 68.4136 16.184C67.4416 16.184 66.6976 15.464 66.6736 14.432H71.0176C71.0296 14.36 71.0416 14.216 71.0416 14.072C71.0416 12.272 70.0456 11.048 68.2696 11.048C66.8176 11.048 65.5096 12.284 65.5096 14.096C65.5096 16.052 66.8656 17.18 68.4136 17.18C69.7576 17.18 70.6816 16.376 71.0056 15.356L70.0336 15.02ZM73.1535 14.096C73.1535 12.908 73.8255 12.068 74.8575 12.068C75.8895 12.068 76.5135 12.884 76.5135 14.072C76.5135 15.26 75.8775 16.16 74.8455 16.16C73.7655 16.16 73.1535 15.284 73.1535 14.096ZM76.5255 16.22C76.5255 16.568 76.5615 16.868 76.5855 17H77.6775C77.6655 16.904 77.6175 16.484 77.6175 15.932V8.312H76.5015V12.044C76.3095 11.576 75.7575 11.072 74.7375 11.072C73.1055 11.072 72.0015 12.464 72.0015 14.096C72.0015 15.812 73.0455 17.156 74.7375 17.156C75.6375 17.156 76.2495 16.676 76.5255 16.124V16.22ZM83.6522 19.28V16.22C83.9642 16.736 84.6362 17.156 85.5242 17.156C87.2162 17.156 88.2122 15.824 88.2122 14.108C88.2122 12.428 87.2882 11.096 85.5602 11.096C84.6242 11.096 83.9402 11.552 83.6282 12.128V11.228H82.5362V19.28H83.6522ZM87.0602 14.108C87.0602 15.296 86.4002 16.148 85.3562 16.148C84.3242 16.148 83.6402 15.296 83.6402 14.108C83.6402 12.956 84.3242 12.092 85.3562 12.092C86.4122 12.092 87.0602 12.956 87.0602 14.108ZM89.2895 15.452C89.2895 16.364 90.0455 17.18 91.2215 17.18C92.2535 17.18 92.8295 16.628 93.0815 16.22C93.0815 16.64 93.1175 16.856 93.1415 17H94.2455C94.2215 16.856 94.1735 16.556 94.1735 16.052V13.16C94.1735 12.032 93.5015 11.048 91.7735 11.048C90.5255 11.048 89.5295 11.816 89.4095 12.92L90.4895 13.172C90.5615 12.5 91.0055 12.008 91.7975 12.008C92.6735 12.008 93.0455 12.476 93.0455 13.04C93.0455 13.244 92.9495 13.424 92.6015 13.472L91.0415 13.7C90.0455 13.844 89.2895 14.42 89.2895 15.452ZM91.3775 16.232C90.8015 16.232 90.4415 15.824 90.4415 15.392C90.4415 14.876 90.8015 14.6 91.2815 14.528L93.0455 14.264V14.528C93.0455 15.788 92.3015 16.232 91.3775 16.232ZM97.2535 19.412L101.01 11.228H99.7975L98.0695 15.212L96.2695 11.228H94.9735L97.4575 16.364L96.0175 19.412H97.2535ZM103.211 17V13.52C103.211 12.656 103.751 12.056 104.555 12.056C105.419 12.056 105.779 12.632 105.779 13.376V17H106.907V13.508C106.907 12.68 107.447 12.056 108.239 12.056C109.091 12.056 109.463 12.62 109.463 13.376V17H110.579V13.256C110.579 11.744 109.595 11.06 108.587 11.06C107.855 11.06 107.111 11.324 106.655 12.152C106.343 11.408 105.647 11.06 104.927 11.06C104.255 11.06 103.535 11.36 103.175 11.996V11.228H102.095V17H103.211ZM113.116 13.52C113.164 12.776 113.74 12.044 114.688 12.044C115.708 12.044 116.248 12.692 116.272 13.52H113.116ZM116.44 15.02C116.224 15.668 115.756 16.184 114.82 16.184C113.848 16.184 113.104 15.464 113.08 14.432H117.424C117.436 14.36 117.448 14.216 117.448 14.072C117.448 12.272 116.452 11.048 114.676 11.048C113.224 11.048 111.916 12.284 111.916 14.096C111.916 16.052 113.272 17.18 114.82 17.18C116.164 17.18 117.088 16.376 117.412 15.356L116.44 15.02ZM120.016 13.664C120.016 12.788 120.472 12.08 121.36 12.08C122.368 12.08 122.704 12.728 122.704 13.532V17H123.832V13.34C123.832 12.056 123.148 11.06 121.768 11.06C121.096 11.06 120.412 11.336 119.992 12.056V11.228H118.888V17H120.016V13.664ZM127.138 9.404H126.106V10.34C126.106 10.844 125.842 11.228 125.218 11.228H124.906V12.248H126.01V15.416C126.01 16.46 126.634 17.06 127.618 17.06C128.002 17.06 128.29 16.988 128.386 16.952V15.992C128.29 16.016 128.086 16.04 127.942 16.04C127.354 16.04 127.138 15.776 127.138 15.248V12.248H128.386V11.228H127.138V9.404Z",
-  fill: "black"
-})])], -1
-/* HOISTED */
-);
-
-var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "py-4 px-4 bg-gray-900 text-white text-2xl rounded-lg font-extrabold"
-}, " Confirm Delivery Information ", -1
-/* HOISTED */
-);
-
-var _hoisted_25 = {
-  "class": "my-6 py-4 px-4 md:px-16 rounded-lg yus-shadow"
-};
-var _hoisted_26 = {
-  "class": "mt-4 flex justify-end"
-};
-var _hoisted_27 = {
-  "class": "my-4"
-};
-
-var _hoisted_28 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
+var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
   width: "24",
   height: "24",
   viewBox: "0 0 24 24",
@@ -21737,11 +21690,11 @@ var _hoisted_28 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_29 = {
+var _hoisted_19 = {
   "class": "my-4"
 };
 
-var _hoisted_30 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
+var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
   width: "24",
   height: "24",
   viewBox: "0 0 24 24",
@@ -21763,11 +21716,11 @@ var _hoisted_30 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_31 = {
+var _hoisted_21 = {
   "class": "my-4"
 };
 
-var _hoisted_32 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
+var _hoisted_22 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
   width: "24",
   height: "24",
   viewBox: "0 0 24 24",
@@ -21789,11 +21742,11 @@ var _hoisted_32 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_33 = {
+var _hoisted_23 = {
   "class": "my-4"
 };
 
-var _hoisted_34 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
+var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
   width: "24",
   height: "24",
   viewBox: "0 0 24 24",
@@ -21809,26 +21762,73 @@ var _hoisted_34 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_35 = {
+var _hoisted_25 = {
   key: 0,
   "class": "loader mx-auto my-5"
 };
-var _hoisted_36 = {
+var _hoisted_26 = {
   "class": "my-8"
 };
-var _hoisted_37 = {
+var _hoisted_27 = {
   action: "/flutterwave/submit",
   method: "POST"
 };
-var _hoisted_38 = ["value"];
-var _hoisted_39 = ["value"];
-var _hoisted_40 = ["value"];
-var _hoisted_41 = ["value"];
-var _hoisted_42 = ["value"];
-var _hoisted_43 = ["value"];
-var _hoisted_44 = ["value"];
-var _hoisted_45 = ["value"];
-var _hoisted_46 = ["value"];
+var _hoisted_28 = ["value"];
+var _hoisted_29 = ["value"];
+var _hoisted_30 = ["value"];
+var _hoisted_31 = ["value"];
+var _hoisted_32 = ["value"];
+var _hoisted_33 = ["value"];
+var _hoisted_34 = ["value"];
+var _hoisted_35 = ["value"];
+var _hoisted_36 = ["value"];
+var _hoisted_37 = ["value"];
+
+var _hoisted_38 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "my-8 flex justify-center"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
+  width: "129",
+  height: "24",
+  viewBox: "0 0 129 24",
+  fill: "none",
+  xmlns: "http://www.w3.org/2000/svg"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
+  d: "M7 14V20H17V14H7ZM17 12C17.5304 12 18.0391 12.2107 18.4142 12.5858C18.7893 12.9609 19 13.4696 19 14V20C19 20.5304 18.7893 21.0391 18.4142 21.4142C18.0391 21.7893 17.5304 22 17 22H7C6.46957 22 5.96086 21.7893 5.58579 21.4142C5.21071 21.0391 5 20.5304 5 20V14C5 13.4696 5.21071 12.9609 5.58579 12.5858C5.96086 12.2107 6.46957 12 7 12V7C7 5.67392 7.52678 4.40215 8.46447 3.46447C9.40215 2.52678 10.6739 2 12 2C13.3261 2 14.5979 2.52678 15.5355 3.46447C16.4732 4.40215 17 5.67392 17 7V12ZM15 12V7C15 6.60603 14.9224 6.21593 14.7716 5.85195C14.6209 5.48797 14.3999 5.15726 14.1213 4.87868C13.8427 4.6001 13.512 4.37913 13.1481 4.22836C12.7841 4.0776 12.394 4 12 4C11.606 4 11.2159 4.0776 10.8519 4.22836C10.488 4.37913 10.1573 4.6001 9.87868 4.87868C9.6001 5.15726 9.37913 5.48797 9.22836 5.85195C9.0776 6.21593 9 6.60603 9 7V12H15ZM12 19C11.4696 19 10.9609 18.7893 10.5858 18.4142C10.2107 18.0391 10 17.5304 10 17C10 16.4696 10.2107 15.9609 10.5858 15.5858C10.9609 15.2107 11.4696 15 12 15C12.5304 15 13.0391 15.2107 13.4142 15.5858C13.7893 15.9609 14 16.4696 14 17C14 17.5304 13.7893 18.0391 13.4142 18.4142C13.0391 18.7893 12.5304 19 12 19Z",
+  fill: "black"
+}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
+  d: "M40.5724 10.424C40.3804 9.5 39.6124 8.312 37.6924 8.312C36.1204 8.312 34.8844 9.512 34.8844 10.844C34.8844 12.116 35.7484 12.908 36.9604 13.172L38.1724 13.436C39.0244 13.616 39.4444 14.144 39.4444 14.756C39.4444 15.5 38.8684 16.112 37.6924 16.112C36.4084 16.112 35.7364 15.236 35.6524 14.288L34.5244 14.648C34.6804 15.86 35.6524 17.18 37.7044 17.18C39.5164 17.18 40.6444 15.98 40.6444 14.66C40.6444 13.472 39.8524 12.584 38.4364 12.272L37.1644 11.996C36.4444 11.84 36.0724 11.372 36.0724 10.76C36.0724 9.968 36.7564 9.344 37.7164 9.344C38.9044 9.344 39.4204 10.184 39.5164 10.796L40.5724 10.424ZM42.7565 13.52C42.8045 12.776 43.3805 12.044 44.3285 12.044C45.3485 12.044 45.8885 12.692 45.9125 13.52H42.7565ZM46.0805 15.02C45.8645 15.668 45.3965 16.184 44.4605 16.184C43.4885 16.184 42.7445 15.464 42.7205 14.432H47.0645C47.0765 14.36 47.0885 14.216 47.0885 14.072C47.0885 12.272 46.0925 11.048 44.3165 11.048C42.8645 11.048 41.5565 12.284 41.5565 14.096C41.5565 16.052 42.9125 17.18 44.4605 17.18C45.8045 17.18 46.7285 16.376 47.0525 15.356L46.0805 15.02ZM50.9524 12.092C51.9364 12.092 52.3564 12.752 52.5004 13.316L53.5204 12.884C53.2804 12.008 52.4884 11.048 50.9524 11.048C49.3084 11.048 48.0484 12.308 48.0484 14.108C48.0484 15.86 49.2844 17.18 50.9644 17.18C52.4644 17.18 53.2924 16.208 53.5684 15.38L52.5724 14.948C52.4404 15.404 52.0444 16.136 50.9644 16.136C50.0284 16.136 49.2004 15.428 49.2004 14.108C49.2004 12.764 50.0404 12.092 50.9524 12.092ZM58.637 16.304C58.637 16.544 58.661 16.868 58.685 17H59.765C59.741 16.796 59.705 16.388 59.705 15.932V11.228H58.577V14.708C58.577 15.584 58.121 16.184 57.209 16.184C56.261 16.184 55.901 15.488 55.901 14.696V11.228H54.773V14.864C54.773 16.172 55.589 17.18 56.933 17.18C57.605 17.18 58.325 16.904 58.637 16.304ZM64.8339 11.168C64.7739 11.156 64.6179 11.132 64.4619 11.132C63.8739 11.132 63.1539 11.348 62.7339 12.236V11.228H61.6299V17H62.7579V14.108C62.7579 12.836 63.3939 12.332 64.3419 12.332C64.4979 12.332 64.6659 12.344 64.8339 12.368V11.168ZM66.7096 13.52C66.7576 12.776 67.3336 12.044 68.2816 12.044C69.3016 12.044 69.8416 12.692 69.8656 13.52H66.7096ZM70.0336 15.02C69.8176 15.668 69.3496 16.184 68.4136 16.184C67.4416 16.184 66.6976 15.464 66.6736 14.432H71.0176C71.0296 14.36 71.0416 14.216 71.0416 14.072C71.0416 12.272 70.0456 11.048 68.2696 11.048C66.8176 11.048 65.5096 12.284 65.5096 14.096C65.5096 16.052 66.8656 17.18 68.4136 17.18C69.7576 17.18 70.6816 16.376 71.0056 15.356L70.0336 15.02ZM73.1535 14.096C73.1535 12.908 73.8255 12.068 74.8575 12.068C75.8895 12.068 76.5135 12.884 76.5135 14.072C76.5135 15.26 75.8775 16.16 74.8455 16.16C73.7655 16.16 73.1535 15.284 73.1535 14.096ZM76.5255 16.22C76.5255 16.568 76.5615 16.868 76.5855 17H77.6775C77.6655 16.904 77.6175 16.484 77.6175 15.932V8.312H76.5015V12.044C76.3095 11.576 75.7575 11.072 74.7375 11.072C73.1055 11.072 72.0015 12.464 72.0015 14.096C72.0015 15.812 73.0455 17.156 74.7375 17.156C75.6375 17.156 76.2495 16.676 76.5255 16.124V16.22ZM83.6522 19.28V16.22C83.9642 16.736 84.6362 17.156 85.5242 17.156C87.2162 17.156 88.2122 15.824 88.2122 14.108C88.2122 12.428 87.2882 11.096 85.5602 11.096C84.6242 11.096 83.9402 11.552 83.6282 12.128V11.228H82.5362V19.28H83.6522ZM87.0602 14.108C87.0602 15.296 86.4002 16.148 85.3562 16.148C84.3242 16.148 83.6402 15.296 83.6402 14.108C83.6402 12.956 84.3242 12.092 85.3562 12.092C86.4122 12.092 87.0602 12.956 87.0602 14.108ZM89.2895 15.452C89.2895 16.364 90.0455 17.18 91.2215 17.18C92.2535 17.18 92.8295 16.628 93.0815 16.22C93.0815 16.64 93.1175 16.856 93.1415 17H94.2455C94.2215 16.856 94.1735 16.556 94.1735 16.052V13.16C94.1735 12.032 93.5015 11.048 91.7735 11.048C90.5255 11.048 89.5295 11.816 89.4095 12.92L90.4895 13.172C90.5615 12.5 91.0055 12.008 91.7975 12.008C92.6735 12.008 93.0455 12.476 93.0455 13.04C93.0455 13.244 92.9495 13.424 92.6015 13.472L91.0415 13.7C90.0455 13.844 89.2895 14.42 89.2895 15.452ZM91.3775 16.232C90.8015 16.232 90.4415 15.824 90.4415 15.392C90.4415 14.876 90.8015 14.6 91.2815 14.528L93.0455 14.264V14.528C93.0455 15.788 92.3015 16.232 91.3775 16.232ZM97.2535 19.412L101.01 11.228H99.7975L98.0695 15.212L96.2695 11.228H94.9735L97.4575 16.364L96.0175 19.412H97.2535ZM103.211 17V13.52C103.211 12.656 103.751 12.056 104.555 12.056C105.419 12.056 105.779 12.632 105.779 13.376V17H106.907V13.508C106.907 12.68 107.447 12.056 108.239 12.056C109.091 12.056 109.463 12.62 109.463 13.376V17H110.579V13.256C110.579 11.744 109.595 11.06 108.587 11.06C107.855 11.06 107.111 11.324 106.655 12.152C106.343 11.408 105.647 11.06 104.927 11.06C104.255 11.06 103.535 11.36 103.175 11.996V11.228H102.095V17H103.211ZM113.116 13.52C113.164 12.776 113.74 12.044 114.688 12.044C115.708 12.044 116.248 12.692 116.272 13.52H113.116ZM116.44 15.02C116.224 15.668 115.756 16.184 114.82 16.184C113.848 16.184 113.104 15.464 113.08 14.432H117.424C117.436 14.36 117.448 14.216 117.448 14.072C117.448 12.272 116.452 11.048 114.676 11.048C113.224 11.048 111.916 12.284 111.916 14.096C111.916 16.052 113.272 17.18 114.82 17.18C116.164 17.18 117.088 16.376 117.412 15.356L116.44 15.02ZM120.016 13.664C120.016 12.788 120.472 12.08 121.36 12.08C122.368 12.08 122.704 12.728 122.704 13.532V17H123.832V13.34C123.832 12.056 123.148 11.06 121.768 11.06C121.096 11.06 120.412 11.336 119.992 12.056V11.228H118.888V17H120.016V13.664ZM127.138 9.404H126.106V10.34C126.106 10.844 125.842 11.228 125.218 11.228H124.906V12.248H126.01V15.416C126.01 16.46 126.634 17.06 127.618 17.06C128.002 17.06 128.29 16.988 128.386 16.952V15.992C128.29 16.016 128.086 16.04 127.942 16.04C127.354 16.04 127.138 15.776 127.138 15.248V12.248H128.386V11.228H127.138V9.404Z",
+  fill: "black"
+})])], -1
+/* HOISTED */
+);
+
+var _hoisted_39 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "py-4 px-4 bg-gray-900 text-white text-2xl rounded-lg font-extrabold"
+}, " Delivery Information ", -1
+/* HOISTED */
+);
+
+var _hoisted_40 = {
+  "class": "my-6 py-4 px-4 md:px-16 rounded-lg yus-shadow"
+};
+var _hoisted_41 = {
+  "class": "my-4"
+};
+var _hoisted_42 = {
+  "class": "my-4"
+};
+var _hoisted_43 = {
+  "class": "my-4"
+};
+var _hoisted_44 = {
+  "class": "my-4 grid grid-cols-2 gap-6"
+};
+var _hoisted_45 = {
+  "class": "my-4"
+};
+var _hoisted_46 = {
+  "class": "my-8"
+};
 var _hoisted_47 = ["value"];
 
 var _hoisted_48 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
@@ -21996,9 +21996,89 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* NEED_PATCH */
   )), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.displayDeliveryInfo]]) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $options.cartNo > 0 ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_10, _hoisted_12, 512
   /* NEED_PATCH */
-  )), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.displayPaymentInfo]]) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $options.cartNo > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Delivery Info  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  )), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.displayPaymentInfo]]) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $options.cartNo > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Payment Info  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    value: "Change",
+    type: "button",
+    onClick: _cache[1] || (_cache[1] = function () {
+      return $options.changeDeliveryInfo && $options.changeDeliveryInfo.apply($options, arguments);
+    }),
+    "class": "btn-yus-conti-shopping rounded-full w-1/3 md:w-1/4 py-2"
+  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [_hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.checkoutname), 1
+  /* TEXT */
+  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [_hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.checkoutemail), 1
+  /* TEXT */
+  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [_hoisted_22, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.checkoutaddress), 1
+  /* TEXT */
+  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_23, [_hoisted_24, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.checkoutphone), 1
+  /* TEXT */
+  )]), $data.isLoading ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_25)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_26, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", _hoisted_27, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    type: "hidden",
+    name: "_token",
+    value: $data.csrf
+  }, null, 8
+  /* PROPS */
+  , _hoisted_28), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    type: "hidden",
+    name: "name",
+    value: $data.checkoutname
+  }, null, 8
+  /* PROPS */
+  , _hoisted_29), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    type: "hidden",
+    name: "email",
+    value: $data.checkoutemail
+  }, null, 8
+  /* PROPS */
+  , _hoisted_30), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    type: "hidden",
+    name: "phone",
+    value: $data.checkoutphone
+  }, null, 8
+  /* PROPS */
+  , _hoisted_31), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    type: "hidden",
+    name: "address",
+    value: $data.checkoutaddress
+  }, null, 8
+  /* PROPS */
+  , _hoisted_32), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    type: "hidden",
+    name: "city",
+    value: $data.checkoutcity
+  }, null, 8
+  /* PROPS */
+  , _hoisted_33), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    type: "hidden",
+    name: "amount",
+    value: $options.totalFee
+  }, null, 8
+  /* PROPS */
+  , _hoisted_34), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    type: "hidden",
+    name: "deliveryFee",
+    value: $options.deliveryFee
+  }, null, 8
+  /* PROPS */
+  , _hoisted_35), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    type: "hidden",
+    name: "serviceFee",
+    value: $options.serviceFee
+  }, null, 8
+  /* PROPS */
+  , _hoisted_36), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    value: "Pay N".concat($options.totalFee),
+    type: "submit",
+    onClick: _cache[2] || (_cache[2] = function ($event) {
+      return $options.confirmPayment();
+    }),
+    "class": "flex justify-center mx-auto btn-yus rounded-full w-full py-5 md:w-1/2 md:py-4 text-white"
+  }, null, 8
+  /* PROPS */
+  , _hoisted_37)])]), _hoisted_38])], 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.displayPaymentInfo]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Delivery Info  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_39, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_40, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_41, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     required: "",
-    "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
+    "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
       return $data.checkoutname = $event;
     }),
     "class": "border border-gray-700 rounded py-3 px-6 w-full my-2 focus:outline-none",
@@ -22008,9 +22088,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     placeholder: "Full Name"
   }, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.checkoutname]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.checkoutname]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_42, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     required: "",
-    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+    "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
       return $data.checkoutemail = $event;
     }),
     "class": "border border-gray-700 rounded py-3 px-6 w-full my-2 focus:outline-none",
@@ -22020,9 +22100,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     placeholder: "Email Address"
   }, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.checkoutemail]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.checkoutemail]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_43, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     required: "",
-    "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
+    "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
       return $data.checkoutaddress = $event;
     }),
     "class": "border border-gray-700 rounded py-3 px-6 w-full my-2 focus:outline-none",
@@ -22032,9 +22112,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     placeholder: "Street Address"
   }, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.checkoutaddress]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.checkoutaddress]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_44, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     required: "",
-    "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
+    "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
       return $data.checkoutcity = $event;
     }),
     "class": "border border-gray-700 rounded py-3 px-6 w-full my-2 focus:outline-none",
@@ -22046,7 +22126,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.checkoutcity]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     required: "",
-    "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
+    "onUpdate:modelValue": _cache[7] || (_cache[7] = function ($event) {
       return $data.checkoutstate = $event;
     }),
     "class": "border border-gray-700 rounded py-3 px-6 w-full my-2 focus:outline-none",
@@ -22056,9 +22136,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     placeholder: "State"
   }, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.checkoutstate]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.checkoutstate]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_45, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     required: "",
-    "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
+    "onUpdate:modelValue": _cache[8] || (_cache[8] = function ($event) {
       return $data.checkoutphone = $event;
     }),
     "class": "border border-gray-700 rounded py-3 px-6 w-full my-2 focus:outline-none",
@@ -22068,100 +22148,20 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     placeholder: "Phone"
   }, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.checkoutphone]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.checkoutphone]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_46, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     value: "Pay N".concat($options.totalFee),
     type: "button",
-    onClick: _cache[7] || (_cache[7] = function ($event) {
+    onClick: _cache[9] || (_cache[9] = function ($event) {
       return $options.confirmOrder();
     }),
     "class": "flex justify-center mx-auto btn-yus rounded-full w-full py-5 md:w-1/2 md:py-4 text-white"
   }, null, 8
   /* PROPS */
-  , _hoisted_22)], 512
+  , _hoisted_47)], 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.checkoutname != null && $data.checkoutemail != null && $data.checkoutaddress != null && $data.checkoutphone != null]]), _hoisted_23])], 512
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.checkoutname != null && $data.checkoutemail != null && $data.checkoutaddress != null && $data.checkoutphone != null]]), _hoisted_48])], 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.displayDeliveryInfo]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Payment Info  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_24, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_25, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_26, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    value: "Change",
-    type: "button",
-    onClick: _cache[8] || (_cache[8] = function () {
-      return $options.changeDeliveryInfo && $options.changeDeliveryInfo.apply($options, arguments);
-    }),
-    "class": "btn-yus-conti-shopping rounded-full w-1/3 md:w-1/4 py-2"
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_27, [_hoisted_28, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.checkoutname), 1
-  /* TEXT */
-  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_29, [_hoisted_30, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.checkoutemail), 1
-  /* TEXT */
-  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_31, [_hoisted_32, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.checkoutaddress), 1
-  /* TEXT */
-  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_33, [_hoisted_34, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.checkoutphone), 1
-  /* TEXT */
-  )]), $data.isLoading ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_35)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_36, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", _hoisted_37, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    type: "hidden",
-    name: "_token",
-    value: $data.csrf
-  }, null, 8
-  /* PROPS */
-  , _hoisted_38), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    type: "hidden",
-    name: "name",
-    value: $data.checkoutname
-  }, null, 8
-  /* PROPS */
-  , _hoisted_39), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    type: "hidden",
-    name: "email",
-    value: $data.checkoutemail
-  }, null, 8
-  /* PROPS */
-  , _hoisted_40), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    type: "hidden",
-    name: "phone",
-    value: $data.checkoutphone
-  }, null, 8
-  /* PROPS */
-  , _hoisted_41), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    type: "hidden",
-    name: "address",
-    value: $data.checkoutaddress
-  }, null, 8
-  /* PROPS */
-  , _hoisted_42), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    type: "hidden",
-    name: "city",
-    value: $data.checkoutcity
-  }, null, 8
-  /* PROPS */
-  , _hoisted_43), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    type: "hidden",
-    name: "amount",
-    value: $options.totalFee
-  }, null, 8
-  /* PROPS */
-  , _hoisted_44), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    type: "hidden",
-    name: "deliveryFee",
-    value: $options.deliveryFee
-  }, null, 8
-  /* PROPS */
-  , _hoisted_45), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    type: "hidden",
-    name: "serviceFee",
-    value: $options.serviceFee
-  }, null, 8
-  /* PROPS */
-  , _hoisted_46), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    value: "Pay N".concat($options.totalFee),
-    type: "submit",
-    onClick: _cache[9] || (_cache[9] = function ($event) {
-      return $options.confirmPayment();
-    }),
-    "class": "flex justify-center mx-auto btn-yus rounded-full w-full py-5 md:w-1/2 md:py-4 text-white"
-  }, null, 8
-  /* PROPS */
-  , _hoisted_47)])]), _hoisted_48])], 512
-  /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.displayPaymentInfo]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Cart Details  "), $options.cartNo > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_49, [_hoisted_50, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_51, [$options.cartNo > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_52, [$data.isLoading ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_53)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($options.getAllCart, function (product) {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.displayDeliveryInfo]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Cart Details  "), $options.cartNo > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_49, [_hoisted_50, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_51, [$options.cartNo > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_52, [$data.isLoading ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_53)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($options.getAllCart, function (product) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       key: product.product_id,
       id: "cart-body-products",
@@ -23165,10 +23165,10 @@ var _hoisted_37 = {
 var _hoisted_38 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div><svg class=\"md:mx-auto md:w-1/3 mx-2\" viewBox=\"0 0 444 52\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M77 12H227\" stroke=\"#B1B1B1\"></path><path d=\"M252.937 22.9262C254.219 22.9262 255.248 21.8853 255.248 20.6144C255.248 19.3435 254.208 18.3027 252.937 18.3027C251.655 18.3027 250.625 19.3435 250.625 20.6144C250.625 21.8853 251.655 22.9262 252.937 22.9262Z\" fill=\"#27AE60\"></path><path d=\"M242.683 24.0004C243.965 24.0004 244.995 22.9596 244.995 21.6887C244.995 20.4068 243.954 19.377 242.683 19.377C241.412 19.377 240.371 20.4178 240.371 21.6887C240.371 22.9596 241.412 24.0004 242.683 24.0004Z\" fill=\"#27AE60\"></path><path d=\"M252.993 17.5477L241.226 18.7857C238.881 19.0267 236.789 17.3286 236.537 14.995L236 9.92234L256.247 7.79688L256.783 12.8695C257.046 15.2141 255.337 17.3067 252.993 17.5477Z\" fill=\"#27AE60\"></path><path d=\"M239.002 7.67568C238.629 3.87396 241.434 0.433778 245.236 0.0393631C249.038 -0.366008 252.489 2.40585 252.916 6.21853L250.495 6.48147C250.221 3.99447 247.964 2.18673 245.477 2.46063C242.99 2.72357 241.16 4.95859 241.401 7.4456L239.002 7.67568Z\" fill=\"#27AE60\"></path><path d=\"M224.256 35.464V32.548H225.96C226.98 32.548 227.604 33.124 227.604 34.024C227.604 34.9 226.98 35.464 225.96 35.464H224.256ZM226.176 36.52C227.748 36.52 228.804 35.452 228.804 34.012C228.804 32.584 227.748 31.492 226.176 31.492H223.08V40H224.256V36.52H226.176ZM229.397 38.452C229.397 39.364 230.153 40.18 231.329 40.18C232.361 40.18 232.937 39.628 233.189 39.22C233.189 39.64 233.225 39.856 233.249 40H234.353C234.329 39.856 234.281 39.556 234.281 39.052V36.16C234.281 35.032 233.609 34.048 231.881 34.048C230.633 34.048 229.637 34.816 229.517 35.92L230.597 36.172C230.669 35.5 231.113 35.008 231.905 35.008C232.781 35.008 233.153 35.476 233.153 36.04C233.153 36.244 233.057 36.424 232.709 36.472L231.149 36.7C230.153 36.844 229.397 37.42 229.397 38.452ZM231.485 39.232C230.909 39.232 230.549 38.824 230.549 38.392C230.549 37.876 230.909 37.6 231.389 37.528L233.153 37.264V37.528C233.153 38.788 232.409 39.232 231.485 39.232ZM237.361 42.412L241.117 34.228H239.905L238.177 38.212L236.377 34.228H235.081L237.565 39.364L236.125 42.412H237.361ZM243.318 40V36.52C243.318 35.656 243.858 35.056 244.662 35.056C245.526 35.056 245.886 35.632 245.886 36.376V40H247.014V36.508C247.014 35.68 247.554 35.056 248.346 35.056C249.198 35.056 249.57 35.62 249.57 36.376V40H250.686V36.256C250.686 34.744 249.702 34.06 248.694 34.06C247.962 34.06 247.218 34.324 246.762 35.152C246.45 34.408 245.754 34.06 245.034 34.06C244.362 34.06 243.642 34.36 243.282 34.996V34.228H242.202V40H243.318ZM253.223 36.52C253.271 35.776 253.847 35.044 254.795 35.044C255.815 35.044 256.355 35.692 256.379 36.52H253.223ZM256.547 38.02C256.331 38.668 255.863 39.184 254.927 39.184C253.955 39.184 253.211 38.464 253.187 37.432H257.531C257.543 37.36 257.555 37.216 257.555 37.072C257.555 35.272 256.559 34.048 254.783 34.048C253.331 34.048 252.023 35.284 252.023 37.096C252.023 39.052 253.379 40.18 254.927 40.18C256.271 40.18 257.195 39.376 257.519 38.356L256.547 38.02ZM260.123 36.664C260.123 35.788 260.579 35.08 261.467 35.08C262.475 35.08 262.811 35.728 262.811 36.532V40H263.939V36.34C263.939 35.056 263.255 34.06 261.875 34.06C261.203 34.06 260.519 34.336 260.099 35.056V34.228H258.995V40H260.123V36.664ZM267.245 32.404H266.213V33.34C266.213 33.844 265.949 34.228 265.325 34.228H265.013V35.248H266.117V38.416C266.117 39.46 266.741 40.06 267.725 40.06C268.109 40.06 268.397 39.988 268.493 39.952V38.992C268.397 39.016 268.193 39.04 268.049 39.04C267.461 39.04 267.245 38.776 267.245 38.248V35.248H268.493V34.228H267.245V32.404Z\" fill=\"#27AE60\"></path><path d=\"M263 12H396\" stroke=\"#B1B1B1\"></path><path d=\"M61.9367 22.9262C63.2186 22.9262 64.2484 21.8853 64.2484 20.6144C64.2484 19.3435 63.2076 18.3027 61.9367 18.3027C60.6549 18.3027 59.625 19.3435 59.625 20.6144C59.625 21.8853 60.6549 22.9262 61.9367 22.9262Z\" fill=\"#27AE60\"></path><path d=\"M51.6828 24.0004C52.9647 24.0004 53.9945 22.9596 53.9945 21.6887C53.9945 20.4068 52.9537 19.377 51.6828 19.377C50.4119 19.377 49.3711 20.4178 49.3711 21.6887C49.3711 22.9596 50.4119 24.0004 51.6828 24.0004Z\" fill=\"#27AE60\"></path><path d=\"M61.9927 17.5477L50.226 18.7857C47.8814 19.0267 45.7888 17.3286 45.5368 14.995L45 9.92234L65.2466 7.79688L65.7835 12.8695C66.0464 15.2141 64.3373 17.3067 61.9927 17.5477Z\" fill=\"#27AE60\"></path><path d=\"M48.002 7.67568C47.6295 3.87396 50.4342 0.433778 54.2359 0.0393631C58.0376 -0.366008 61.4888 2.40585 61.916 6.21853L59.4948 6.48147C59.2209 3.99447 56.9639 2.18673 54.4769 2.46063C51.9899 2.72357 50.1603 4.95859 50.4013 7.4456L48.002 7.67568Z\" fill=\"#27AE60\"></path><path d=\"M2.256 44.956V38.536H4.02C5.592 38.536 6.888 39.616 6.888 41.764C6.888 43.9 5.568 44.956 3.996 44.956H2.256ZM4.032 46C6.192 46 8.1 44.548 8.1 41.764C8.1 38.968 6.216 37.492 4.056 37.492H1.08V46H4.032ZM10.3287 42.52C10.3767 41.776 10.9527 41.044 11.9007 41.044C12.9207 41.044 13.4607 41.692 13.4847 42.52H10.3287ZM13.6527 44.02C13.4367 44.668 12.9687 45.184 12.0327 45.184C11.0607 45.184 10.3167 44.464 10.2927 43.432H14.6367C14.6487 43.36 14.6607 43.216 14.6607 43.072C14.6607 41.272 13.6647 40.048 11.8887 40.048C10.4367 40.048 9.12872 41.284 9.12872 43.096C9.12872 45.052 10.4847 46.18 12.0327 46.18C13.3767 46.18 14.3007 45.376 14.6247 44.356L13.6527 44.02ZM17.2286 46V37.312H16.1006V46H17.2286ZM20.2635 46V40.228H19.1475V46H20.2635ZM18.8955 38.044C18.8955 38.488 19.2555 38.848 19.6995 38.848C20.1555 38.848 20.5155 38.488 20.5155 38.044C20.5155 37.588 20.1555 37.228 19.6995 37.228C19.2555 37.228 18.8955 37.588 18.8955 38.044ZM27.1267 40.228H25.9147L24.2587 44.68L22.6147 40.228H21.3427L23.6827 46H24.8227L27.1267 40.228ZM28.7623 42.52C28.8103 41.776 29.3863 41.044 30.3343 41.044C31.3543 41.044 31.8943 41.692 31.9183 42.52H28.7623ZM32.0863 44.02C31.8703 44.668 31.4023 45.184 30.4663 45.184C29.4943 45.184 28.7503 44.464 28.7263 43.432H33.0703C33.0823 43.36 33.0943 43.216 33.0943 43.072C33.0943 41.272 32.0983 40.048 30.3223 40.048C28.8703 40.048 27.5623 41.284 27.5623 43.096C27.5623 45.052 28.9183 46.18 30.4663 46.18C31.8103 46.18 32.7343 45.376 33.0583 44.356L32.0863 44.02ZM37.7382 40.168C37.6782 40.156 37.5222 40.132 37.3662 40.132C36.7782 40.132 36.0582 40.348 35.6382 41.236V40.228H34.5342V46H35.6622V43.108C35.6622 41.836 36.2982 41.332 37.2462 41.332C37.4022 41.332 37.5702 41.344 37.7382 41.368V40.168ZM40.5563 48.412L44.3123 40.228H43.1003L41.3723 44.212L39.5723 40.228H38.2763L40.7603 45.364L39.3203 48.412H40.5563ZM49.5135 46V40.228H48.3975V46H49.5135ZM48.1455 38.044C48.1455 38.488 48.5055 38.848 48.9495 38.848C49.4055 38.848 49.7655 38.488 49.7655 38.044C49.7655 37.588 49.4055 37.228 48.9495 37.228C48.5055 37.228 48.1455 37.588 48.1455 38.044ZM52.5607 42.664C52.5607 41.788 53.0167 41.08 53.9047 41.08C54.9127 41.08 55.2487 41.728 55.2487 42.532V46H56.3767V42.34C56.3767 41.056 55.6927 40.06 54.3127 40.06C53.6407 40.06 52.9567 40.336 52.5367 41.056V40.228H51.4327V46H52.5607V42.664ZM61.0749 41.248V40.228H59.6829V39.316C59.6829 38.524 60.1989 38.332 60.5949 38.332C60.8829 38.332 61.0269 38.38 61.0869 38.404V37.396C61.0389 37.36 60.7989 37.276 60.4149 37.276C59.3709 37.276 58.5189 37.972 58.5189 39.256V40.228H57.4509V41.248H58.5189V46H59.6829V41.248H61.0749ZM64.5218 45.172C63.5618 45.172 62.7218 44.452 62.7218 43.108C62.7218 41.776 63.5618 41.056 64.5218 41.056C65.4818 41.056 66.3218 41.776 66.3218 43.108C66.3218 44.452 65.4818 45.172 64.5218 45.172ZM64.5218 40.048C62.7938 40.048 61.5698 41.356 61.5698 43.108C61.5698 44.872 62.7938 46.18 64.5218 46.18C66.2498 46.18 67.4738 44.872 67.4738 43.108C67.4738 41.356 66.2498 40.048 64.5218 40.048ZM72.121 40.168C72.061 40.156 71.905 40.132 71.749 40.132C71.161 40.132 70.441 40.348 70.021 41.236V40.228H68.917V46H70.045V43.108C70.045 41.836 70.681 41.332 71.629 41.332C71.785 41.332 71.953 41.344 72.121 41.368V40.168ZM74.4393 46V42.52C74.4393 41.656 74.9793 41.056 75.7833 41.056C76.6473 41.056 77.0073 41.632 77.0073 42.376V46H78.1353V42.508C78.1353 41.68 78.6753 41.056 79.4673 41.056C80.3193 41.056 80.6913 41.62 80.6913 42.376V46H81.8073V42.256C81.8073 40.744 80.8233 40.06 79.8153 40.06C79.0833 40.06 78.3393 40.324 77.8833 41.152C77.5713 40.408 76.8753 40.06 76.1553 40.06C75.4833 40.06 74.7633 40.36 74.4033 40.996V40.228H73.3233V46H74.4393ZM83.2523 44.452C83.2523 45.364 84.0083 46.18 85.1843 46.18C86.2163 46.18 86.7923 45.628 87.0443 45.22C87.0443 45.64 87.0803 45.856 87.1043 46H88.2083C88.1843 45.856 88.1363 45.556 88.1363 45.052V42.16C88.1363 41.032 87.4643 40.048 85.7363 40.048C84.4883 40.048 83.4923 40.816 83.3723 41.92L84.4523 42.172C84.5243 41.5 84.9683 41.008 85.7603 41.008C86.6363 41.008 87.0083 41.476 87.0083 42.04C87.0083 42.244 86.9123 42.424 86.5643 42.472L85.0043 42.7C84.0083 42.844 83.2523 43.42 83.2523 44.452ZM85.3403 45.232C84.7643 45.232 84.4043 44.824 84.4043 44.392C84.4043 43.876 84.7643 43.6 85.2443 43.528L87.0083 43.264V43.528C87.0083 44.788 86.2643 45.232 85.3403 45.232ZM91.4056 38.404H90.3736V39.34C90.3736 39.844 90.1096 40.228 89.4856 40.228H89.1736V41.248H90.2776V44.416C90.2776 45.46 90.9016 46.06 91.8856 46.06C92.2696 46.06 92.5576 45.988 92.6536 45.952V44.992C92.5576 45.016 92.3536 45.04 92.2096 45.04C91.6216 45.04 91.4056 44.776 91.4056 44.248V41.248H92.6536V40.228H91.4056V38.404ZM95.2752 46V40.228H94.1592V46H95.2752ZM93.9072 38.044C93.9072 38.488 94.2672 38.848 94.7112 38.848C95.1672 38.848 95.5272 38.488 95.5272 38.044C95.5272 37.588 95.1672 37.228 94.7112 37.228C94.2672 37.228 93.9072 37.588 93.9072 38.044ZM99.6664 45.172C98.7064 45.172 97.8664 44.452 97.8664 43.108C97.8664 41.776 98.7064 41.056 99.6664 41.056C100.626 41.056 101.466 41.776 101.466 43.108C101.466 44.452 100.626 45.172 99.6664 45.172ZM99.6664 40.048C97.9384 40.048 96.7144 41.356 96.7144 43.108C96.7144 44.872 97.9384 46.18 99.6664 46.18C101.394 46.18 102.618 44.872 102.618 43.108C102.618 41.356 101.394 40.048 99.6664 40.048ZM105.19 42.664C105.19 41.788 105.646 41.08 106.534 41.08C107.542 41.08 107.878 41.728 107.878 42.532V46H109.006V42.34C109.006 41.056 108.322 40.06 106.942 40.06C106.27 40.06 105.586 40.336 105.166 41.056V40.228H104.062V46H105.19V42.664Z\" fill=\"#27AE60\"></path><path d=\"M419.937 22.9262C421.219 22.9262 422.248 21.8853 422.248 20.6144C422.248 19.3435 421.208 18.3027 419.937 18.3027C418.655 18.3027 417.625 19.3435 417.625 20.6144C417.625 21.8853 418.655 22.9262 419.937 22.9262Z\" fill=\"#F37022\"></path><path d=\"M409.683 24.0004C410.965 24.0004 411.995 22.9596 411.995 21.6887C411.995 20.4068 410.954 19.377 409.683 19.377C408.412 19.377 407.371 20.4178 407.371 21.6887C407.371 22.9596 408.412 24.0004 409.683 24.0004Z\" fill=\"#F37022\"></path><path d=\"M419.993 17.5477L408.226 18.7857C405.881 19.0267 403.789 17.3286 403.537 14.995L403 9.92234L423.247 7.79688L423.783 12.8695C424.046 15.2141 422.337 17.3067 419.993 17.5477Z\" fill=\"#F37022\"></path><path d=\"M406.004 7.67568C405.631 3.87396 408.436 0.433778 412.238 0.0393631C416.04 -0.366008 419.491 2.40585 419.918 6.21853L417.497 6.48147C417.223 3.99447 414.966 2.18673 412.479 2.46063C409.992 2.72357 408.162 4.95859 408.403 7.4456L406.004 7.67568Z\" fill=\"#F37022\"></path><path d=\"M388.984 32.584V31.492H382.12V32.584H384.964V40H386.14V32.584H388.984ZM392.551 34.168C392.491 34.156 392.335 34.132 392.179 34.132C391.591 34.132 390.871 34.348 390.451 35.236V34.228H389.347V40H390.475V37.108C390.475 35.836 391.111 35.332 392.059 35.332C392.215 35.332 392.383 35.344 392.551 35.368V34.168ZM393.393 38.452C393.393 39.364 394.149 40.18 395.325 40.18C396.357 40.18 396.933 39.628 397.185 39.22C397.185 39.64 397.221 39.856 397.245 40H398.349C398.325 39.856 398.277 39.556 398.277 39.052V36.16C398.277 35.032 397.605 34.048 395.877 34.048C394.629 34.048 393.633 34.816 393.513 35.92L394.593 36.172C394.665 35.5 395.109 35.008 395.901 35.008C396.777 35.008 397.149 35.476 397.149 36.04C397.149 36.244 397.053 36.424 396.705 36.472L395.145 36.7C394.149 36.844 393.393 37.42 393.393 38.452ZM395.481 39.232C394.905 39.232 394.545 38.824 394.545 38.392C394.545 37.876 394.905 37.6 395.385 37.528L397.149 37.264V37.528C397.149 38.788 396.405 39.232 395.481 39.232ZM402.458 35.092C403.442 35.092 403.862 35.752 404.006 36.316L405.026 35.884C404.786 35.008 403.994 34.048 402.458 34.048C400.814 34.048 399.554 35.308 399.554 37.108C399.554 38.86 400.79 40.18 402.47 40.18C403.97 40.18 404.798 39.208 405.074 38.38L404.078 37.948C403.946 38.404 403.55 39.136 402.47 39.136C401.534 39.136 400.706 38.428 400.706 37.108C400.706 35.764 401.546 35.092 402.458 35.092ZM411.57 34.228H410.01L407.514 36.784V31.312H406.398V40H407.514V38.26L408.318 37.456L410.202 40H411.618L409.11 36.664L411.57 34.228ZM418.174 39.172C417.214 39.172 416.374 38.452 416.374 37.108C416.374 35.776 417.214 35.056 418.174 35.056C419.134 35.056 419.974 35.776 419.974 37.108C419.974 38.452 419.134 39.172 418.174 39.172ZM418.174 34.048C416.446 34.048 415.222 35.356 415.222 37.108C415.222 38.872 416.446 40.18 418.174 40.18C419.902 40.18 421.126 38.872 421.126 37.108C421.126 35.356 419.902 34.048 418.174 34.048ZM425.773 34.168C425.713 34.156 425.557 34.132 425.401 34.132C424.813 34.132 424.093 34.348 423.673 35.236V34.228H422.569V40H423.697V37.108C423.697 35.836 424.333 35.332 425.281 35.332C425.437 35.332 425.605 35.344 425.773 35.368V34.168ZM427.589 37.096C427.589 35.908 428.261 35.068 429.293 35.068C430.325 35.068 430.949 35.884 430.949 37.072C430.949 38.26 430.313 39.16 429.281 39.16C428.201 39.16 427.589 38.284 427.589 37.096ZM430.961 39.22C430.961 39.568 430.997 39.868 431.021 40H432.113C432.101 39.904 432.053 39.484 432.053 38.932V31.312H430.937V35.044C430.745 34.576 430.193 34.072 429.173 34.072C427.541 34.072 426.437 35.464 426.437 37.096C426.437 38.812 427.481 40.156 429.173 40.156C430.073 40.156 430.685 39.676 430.961 39.124V39.22ZM434.704 36.52C434.752 35.776 435.328 35.044 436.276 35.044C437.296 35.044 437.836 35.692 437.86 36.52H434.704ZM438.028 38.02C437.812 38.668 437.344 39.184 436.408 39.184C435.436 39.184 434.692 38.464 434.668 37.432H439.012C439.024 37.36 439.036 37.216 439.036 37.072C439.036 35.272 438.04 34.048 436.264 34.048C434.812 34.048 433.504 35.284 433.504 37.096C433.504 39.052 434.86 40.18 436.408 40.18C437.752 40.18 438.676 39.376 439 38.356L438.028 38.02ZM443.68 34.168C443.62 34.156 443.464 34.132 443.308 34.132C442.72 34.132 442 34.348 441.58 35.236V34.228H440.476V40H441.604V37.108C441.604 35.836 442.24 35.332 443.188 35.332C443.344 35.332 443.512 35.344 443.68 35.368V34.168Z\" fill=\"#F37022\"></path></svg></div>", 1);
 
 var _hoisted_39 = {
-  "class": "grid grid-cols-3 gap-3 w-2/3"
+  "class": "md:grid grid-cols-3 gap-3 md:w-2/3 w-full"
 };
 
-var _hoisted_40 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"col-span-1\"><svg width=\"163\" height=\"223\" viewBox=\"0 0 163 223\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"16.8677\" cy=\"16.0469\" r=\"16\" fill=\"#27AE60\"></circle><path d=\"M17.8173 10.4105H16.1071L13.2037 12.3082V13.9901L15.9877 12.1719H16.0559V22.0469H17.8173V10.4105Z\" fill=\"white\"></path><path d=\"M47.5077 16.3669C47.5077 13.6309 49.3957 12.2709 51.2997 12.2709C53.2197 12.2709 55.1077 13.6309 55.1077 16.3669C55.1077 19.1029 53.2197 20.4629 51.2997 20.4629C49.3957 20.4629 47.5077 19.1029 47.5077 16.3669ZM45.5397 16.3669C45.5397 20.0949 48.3237 22.2869 51.2997 22.2869C54.2757 22.2869 57.0757 20.0949 57.0757 16.3669C57.0757 12.6549 54.2757 10.4629 51.2997 10.4629C48.3237 10.4629 45.5397 12.6549 45.5397 16.3669ZM63.5027 14.2069C63.4227 14.1909 63.2307 14.1589 63.0067 14.1589C61.9827 14.1589 61.1187 14.6549 60.7507 15.5029V14.2549H58.9427V22.0469H60.7987V18.3349C60.7987 16.8789 61.4547 16.0469 62.8947 16.0469C63.0867 16.0469 63.2947 16.0629 63.5027 16.0949V14.2069ZM66.2219 18.1269C66.2219 16.6389 67.1179 15.6949 68.3339 15.6949C69.5499 15.6949 70.3819 16.6229 70.3819 18.1109C70.3819 19.5989 69.5339 20.6069 68.3179 20.6069C67.0539 20.6069 66.2219 19.6149 66.2219 18.1269ZM72.1739 10.4629H70.3659V15.1669C70.1259 14.6709 69.4379 14.0469 68.0779 14.0469C65.8859 14.0469 64.3659 15.8869 64.3659 18.1269C64.3659 20.4789 65.8699 22.2389 68.1099 22.2389C69.2139 22.2389 70.0299 21.6949 70.3979 21.0389C70.3979 21.3589 70.4459 21.8709 70.4779 22.0469H72.2539C72.2379 21.9189 72.1739 21.3269 72.1739 20.6229V10.4629ZM75.8949 17.2949C75.9589 16.4629 76.6309 15.5669 77.7989 15.5669C79.0789 15.5669 79.6869 16.3829 79.7189 17.2949H75.8949ZM79.9269 19.3269C79.6709 20.0949 79.0949 20.6869 77.9749 20.6869C76.8229 20.6869 75.8949 19.8389 75.8469 18.6549H81.5429C81.5589 18.6229 81.5909 18.3669 81.5909 18.0629C81.5909 15.5989 80.1829 14.0149 77.7829 14.0149C75.8149 14.0149 73.9909 15.6469 73.9909 18.1109C73.9909 20.7509 75.8629 22.2869 77.9749 22.2869C79.8469 22.2869 81.0789 21.1829 81.4949 19.8229L79.9269 19.3269ZM87.9246 14.2069C87.8446 14.1909 87.6526 14.1589 87.4286 14.1589C86.4046 14.1589 85.5406 14.6549 85.1726 15.5029V14.2549H83.3646V22.0469H85.2206V18.3349C85.2206 16.8789 85.8766 16.0469 87.3166 16.0469C87.5086 16.0469 87.7166 16.0629 87.9246 16.0949V14.2069ZM95.4914 15.9189V12.3989H97.4914C98.7074 12.3989 99.4434 13.0869 99.4434 14.1749C99.4434 15.2469 98.7074 15.9189 97.4914 15.9189H95.4914ZM97.7794 17.6149C99.9554 17.6149 101.395 16.1589 101.395 14.1589C101.395 12.1749 99.9554 10.7029 97.7794 10.7029H93.5714V22.0469H95.4914V17.6149H97.7794ZM104.767 22.0469V10.4629H102.911V22.0469H104.767ZM106.65 19.9349C106.65 21.1669 107.658 22.2869 109.29 22.2869C110.554 22.2869 111.322 21.6469 111.69 21.0549C111.69 21.6789 111.754 21.9989 111.77 22.0469H113.498C113.482 21.9669 113.402 21.5029 113.402 20.7989V16.9269C113.402 15.3749 112.49 14.0149 110.09 14.0149C108.17 14.0149 106.954 15.2149 106.81 16.5589L108.506 16.9429C108.586 16.1589 109.13 15.5349 110.106 15.5349C111.13 15.5349 111.578 16.0629 111.578 16.7189C111.578 16.9909 111.45 17.2149 111.002 17.2789L109.002 17.5829C107.674 17.7749 106.65 18.5429 106.65 19.9349ZM109.642 20.8309C108.906 20.8309 108.506 20.3509 108.506 19.8229C108.506 19.1829 108.97 18.8629 109.546 18.7669L111.578 18.4629V18.8149C111.578 20.3349 110.682 20.8309 109.642 20.8309ZM119.022 15.7269C120.206 15.7269 120.734 16.4949 120.91 17.1829L122.574 16.5749C122.254 15.3269 121.102 14.0149 119.006 14.0149C116.766 14.0149 115.022 15.7429 115.022 18.1429C115.022 20.5109 116.766 22.2869 119.054 22.2869C121.102 22.2869 122.27 20.9589 122.638 19.7429L121.006 19.1509C120.83 19.7429 120.27 20.5909 119.054 20.5909C117.886 20.5909 116.878 19.7109 116.878 18.1429C116.878 16.5749 117.886 15.7269 119.022 15.7269ZM125.504 17.2949C125.568 16.4629 126.24 15.5669 127.408 15.5669C128.688 15.5669 129.296 16.3829 129.328 17.2949H125.504ZM129.536 19.3269C129.28 20.0949 128.704 20.6869 127.584 20.6869C126.432 20.6869 125.504 19.8389 125.456 18.6549H131.152C131.168 18.6229 131.2 18.3669 131.2 18.0629C131.2 15.5989 129.792 14.0149 127.392 14.0149C125.424 14.0149 123.6 15.6469 123.6 18.1109C123.6 20.7509 125.472 22.2869 127.584 22.2869C129.456 22.2869 130.688 21.1829 131.104 19.8229L129.536 19.3269ZM134.222 18.1269C134.222 16.6389 135.118 15.6949 136.334 15.6949C137.55 15.6949 138.382 16.6229 138.382 18.1109C138.382 19.5989 137.534 20.6069 136.318 20.6069C135.054 20.6069 134.222 19.6149 134.222 18.1269ZM140.174 10.4629H138.366V15.1669C138.126 14.6709 137.438 14.0469 136.078 14.0469C133.886 14.0469 132.366 15.8869 132.366 18.1269C132.366 20.4789 133.87 22.2389 136.11 22.2389C137.214 22.2389 138.03 21.6949 138.398 21.0389C138.398 21.3589 138.446 21.8709 138.478 22.0469H140.254C140.238 21.9189 140.174 21.3269 140.174 20.6229V10.4629Z\" fill=\"black\"></path><circle cx=\"16.8677\" cy=\"111.047\" r=\"15\" stroke=\"black\" stroke-width=\"2\"></circle><path d=\"M12.2775 117.047H19.9366V115.541H14.698V115.456L17.0105 113.036C19.1412 110.882 19.7491 109.854 19.7491 108.553C19.7491 106.683 18.2264 105.251 16.0332 105.251C13.8571 105.251 12.2662 106.661 12.2662 108.786H13.9423C13.9366 107.536 14.7434 106.717 15.9991 106.717C17.1809 106.717 18.0787 107.445 18.0787 108.604C18.0787 109.632 17.465 110.371 16.215 111.695L12.2775 115.774V117.047Z\" fill=\"black\"></path><path d=\"M47.5077 111.367C47.5077 108.631 49.3957 107.271 51.2997 107.271C53.2197 107.271 55.1077 108.631 55.1077 111.367C55.1077 114.103 53.2197 115.463 51.2997 115.463C49.3957 115.463 47.5077 114.103 47.5077 111.367ZM45.5397 111.367C45.5397 115.095 48.3237 117.287 51.2997 117.287C54.2757 117.287 57.0757 115.095 57.0757 111.367C57.0757 107.655 54.2757 105.463 51.2997 105.463C48.3237 105.463 45.5397 107.655 45.5397 111.367ZM64.0147 116.183C64.0147 116.503 64.0467 116.871 64.0787 117.047H65.8547C65.8227 116.759 65.7747 116.263 65.7747 115.623V109.255H63.9187V113.863C63.9187 114.887 63.3587 115.607 62.2867 115.607C61.1667 115.607 60.7187 114.791 60.7187 113.831V109.255H58.8627V114.167C58.8627 115.895 59.9507 117.271 61.8067 117.271C62.7187 117.271 63.6307 116.887 64.0147 116.183ZM70.5291 106.871H68.8491V108.039C68.8491 108.727 68.4811 109.255 67.6491 109.255H67.2491V110.903H68.6891V114.823C68.6891 116.279 69.5851 117.143 71.0251 117.143C71.6971 117.143 72.0491 117.015 72.1611 116.967V115.431C72.0811 115.447 71.7771 115.495 71.5211 115.495C70.8331 115.495 70.5291 115.207 70.5291 114.519V110.903H72.1451V109.255H70.5291V106.871ZM81.4456 107.047C81.7976 107.047 82.0056 107.095 82.1176 107.127V105.543C81.9896 105.479 81.6056 105.383 81.1416 105.383C79.5416 105.383 78.4216 106.439 78.4216 108.183V109.255H77.0616V110.871H78.4216V117.047H80.2936V110.871H82.1016V109.255H80.2936V108.231C80.2936 107.271 80.9496 107.047 81.4456 107.047ZM86.7729 115.623C85.6369 115.623 84.5969 114.759 84.5969 113.143C84.5969 111.527 85.6369 110.695 86.7729 110.695C87.9249 110.695 88.9489 111.527 88.9489 113.143C88.9489 114.775 87.9249 115.623 86.7729 115.623ZM86.7729 109.015C84.4529 109.015 82.7409 110.759 82.7409 113.143C82.7409 115.543 84.4529 117.287 86.7729 117.287C89.1089 117.287 90.8209 115.543 90.8209 113.143C90.8209 110.759 89.1089 109.015 86.7729 109.015ZM97.1746 109.207C97.0946 109.191 96.9026 109.159 96.6786 109.159C95.6546 109.159 94.7906 109.655 94.4226 110.503V109.255H92.6146V117.047H94.4706V113.335C94.4706 111.879 95.1266 111.047 96.5666 111.047C96.7586 111.047 96.9666 111.063 97.1746 111.095V109.207ZM104.741 115.287V107.463H106.773C108.741 107.463 110.357 108.743 110.357 111.399C110.357 114.023 108.725 115.287 106.757 115.287H104.741ZM106.821 117.047C109.893 117.047 112.357 115.031 112.357 111.399C112.357 107.751 109.925 105.703 106.837 105.703H102.821V117.047H106.821ZM115.536 112.295C115.6 111.463 116.272 110.567 117.44 110.567C118.72 110.567 119.328 111.383 119.36 112.295H115.536ZM119.568 114.327C119.312 115.095 118.736 115.687 117.616 115.687C116.464 115.687 115.536 114.839 115.488 113.655H121.184C121.2 113.623 121.232 113.367 121.232 113.063C121.232 110.599 119.824 109.015 117.424 109.015C115.456 109.015 113.632 110.647 113.632 113.111C113.632 115.751 115.504 117.287 117.616 117.287C119.488 117.287 120.72 116.183 121.136 114.823L119.568 114.327ZM124.861 117.047V105.463H123.005V117.047H124.861ZM129.095 117.047V109.255H127.255V117.047H129.095ZM126.967 106.519C126.967 107.191 127.511 107.719 128.167 107.719C128.839 107.719 129.383 107.191 129.383 106.519C129.383 105.847 128.839 105.303 128.167 105.303C127.511 105.303 126.967 105.847 126.967 106.519ZM138.53 109.255H136.578L134.562 114.823L132.498 109.255H130.45L133.618 117.047H135.474L138.53 109.255ZM140.957 112.295C141.021 111.463 141.693 110.567 142.861 110.567C144.141 110.567 144.749 111.383 144.781 112.295H140.957ZM144.989 114.327C144.733 115.095 144.157 115.687 143.037 115.687C141.885 115.687 140.957 114.839 140.909 113.655H146.605C146.621 113.623 146.653 113.367 146.653 113.063C146.653 110.599 145.245 109.015 142.845 109.015C140.877 109.015 139.053 110.647 139.053 113.111C139.053 115.751 140.925 117.287 143.037 117.287C144.909 117.287 146.141 116.183 146.557 114.823L144.989 114.327ZM152.987 109.207C152.907 109.191 152.715 109.159 152.491 109.159C151.467 109.159 150.603 109.655 150.235 110.503V109.255H148.427V117.047H150.283V113.335C150.283 111.879 150.939 111.047 152.379 111.047C152.571 111.047 152.779 111.063 152.987 111.095V109.207ZM157.186 120.199L162.146 109.255H160.178L158.082 114.183L155.842 109.255H153.746L157.074 116.119L155.202 120.199H157.186Z\" fill=\"black\"></path><circle cx=\"16.8672\" cy=\"206.047\" r=\"15\" stroke=\"black\" stroke-width=\"2\"></circle><path d=\"M16.5782 212.206C18.9532 212.206 20.6975 210.786 20.6918 208.854C20.6975 207.382 19.8054 206.325 18.26 206.087V205.996C19.4759 205.683 20.2657 204.729 20.26 203.422C20.2657 201.712 18.8623 200.251 16.6236 200.251C14.4873 200.251 12.7714 201.541 12.7145 203.433H14.4134C14.4532 202.365 15.4589 201.717 16.6009 201.717C17.7884 201.717 18.5668 202.439 18.5611 203.513C18.5668 204.638 17.6634 205.376 16.3736 205.376H15.3907V206.808H16.3736C17.9873 206.808 18.9191 207.626 18.9191 208.797C18.9191 209.928 17.9361 210.695 16.5668 210.695C15.3054 210.695 14.3225 210.047 14.2543 209.013H12.4702C12.5441 210.911 14.2259 212.206 16.5782 212.206Z\" fill=\"black\"></path><path d=\"M48.1472 210.287V202.463H50.1792C52.1472 202.463 53.7632 203.743 53.7632 206.399C53.7632 209.023 52.1312 210.287 50.1632 210.287H48.1472ZM50.2272 212.047C53.2992 212.047 55.7632 210.031 55.7632 206.399C55.7632 202.751 53.3312 200.703 50.2432 200.703H46.2272V212.047H50.2272ZM58.9413 207.295C59.0053 206.463 59.6773 205.567 60.8453 205.567C62.1253 205.567 62.7333 206.383 62.7653 207.295H58.9413ZM62.9733 209.327C62.7173 210.095 62.1413 210.687 61.0213 210.687C59.8693 210.687 58.9413 209.839 58.8933 208.655H64.5893C64.6053 208.623 64.6373 208.367 64.6373 208.063C64.6373 205.599 63.2293 204.015 60.8293 204.015C58.8613 204.015 57.0373 205.647 57.0373 208.111C57.0373 210.751 58.9093 212.287 61.0213 212.287C62.8933 212.287 64.1253 211.183 64.5413 209.823L62.9733 209.327ZM68.2669 212.047V200.463H66.4109V212.047H68.2669ZM72.5009 212.047V204.255H70.6609V212.047H72.5009ZM70.3729 201.519C70.3729 202.191 70.9169 202.719 71.5729 202.719C72.2449 202.719 72.7889 202.191 72.7889 201.519C72.7889 200.847 72.2449 200.303 71.5729 200.303C70.9169 200.303 70.3729 200.847 70.3729 201.519ZM81.9353 204.255H79.9833L77.9673 209.823L75.9033 204.255H73.8553L77.0233 212.047H78.8793L81.9353 204.255ZM84.3632 207.295C84.4272 206.463 85.0992 205.567 86.2672 205.567C87.5472 205.567 88.1552 206.383 88.1872 207.295H84.3632ZM88.3952 209.327C88.1392 210.095 87.5632 210.687 86.4432 210.687C85.2912 210.687 84.3632 209.839 84.3152 208.655H90.0112C90.0272 208.623 90.0592 208.367 90.0592 208.063C90.0592 205.599 88.6512 204.015 86.2512 204.015C84.2832 204.015 82.4592 205.647 82.4592 208.111C82.4592 210.751 84.3312 212.287 86.4432 212.287C88.3152 212.287 89.5472 211.183 89.9632 209.823L88.3952 209.327ZM96.3928 204.207C96.3128 204.191 96.1208 204.159 95.8968 204.159C94.8728 204.159 94.0088 204.655 93.6408 205.503V204.255H91.8328V212.047H93.6888V208.335C93.6888 206.879 94.3448 206.047 95.7848 206.047C95.9768 206.047 96.1848 206.063 96.3928 206.095V204.207ZM99.1601 207.295C99.2241 206.463 99.8961 205.567 101.064 205.567C102.344 205.567 102.952 206.383 102.984 207.295H99.1601ZM103.192 209.327C102.936 210.095 102.36 210.687 101.24 210.687C100.088 210.687 99.1601 209.839 99.1121 208.655H104.808C104.824 208.623 104.856 208.367 104.856 208.063C104.856 205.599 103.448 204.015 101.048 204.015C99.0801 204.015 97.2561 205.647 97.2561 208.111C97.2561 210.751 99.1281 212.287 101.24 212.287C103.112 212.287 104.344 211.183 104.76 209.823L103.192 209.327ZM107.878 208.127C107.878 206.639 108.774 205.695 109.99 205.695C111.206 205.695 112.038 206.623 112.038 208.111C112.038 209.599 111.19 210.607 109.974 210.607C108.71 210.607 107.878 209.615 107.878 208.127ZM113.83 200.463H112.022V205.167C111.782 204.671 111.094 204.047 109.734 204.047C107.542 204.047 106.022 205.887 106.022 208.127C106.022 210.479 107.526 212.239 109.766 212.239C110.87 212.239 111.686 211.695 112.054 211.039C112.054 211.359 112.102 211.871 112.134 212.047H113.91C113.894 211.919 113.83 211.327 113.83 210.623V200.463Z\" fill=\"black\"></path><path d=\"M16.0645 36.471V90.6227\" stroke=\"black\" stroke-width=\"2\"></path><path d=\"M16.0645 131.471V185.623\" stroke=\"black\" stroke-width=\"2\"></path></svg></div>", 1);
+var _hoisted_40 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"col-span-1 hidden md:block\"><svg width=\"163\" height=\"223\" viewBox=\"0 0 163 223\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"16.8677\" cy=\"16.0469\" r=\"16\" fill=\"#27AE60\"></circle><path d=\"M17.8173 10.4105H16.1071L13.2037 12.3082V13.9901L15.9877 12.1719H16.0559V22.0469H17.8173V10.4105Z\" fill=\"white\"></path><path d=\"M47.5077 16.3669C47.5077 13.6309 49.3957 12.2709 51.2997 12.2709C53.2197 12.2709 55.1077 13.6309 55.1077 16.3669C55.1077 19.1029 53.2197 20.4629 51.2997 20.4629C49.3957 20.4629 47.5077 19.1029 47.5077 16.3669ZM45.5397 16.3669C45.5397 20.0949 48.3237 22.2869 51.2997 22.2869C54.2757 22.2869 57.0757 20.0949 57.0757 16.3669C57.0757 12.6549 54.2757 10.4629 51.2997 10.4629C48.3237 10.4629 45.5397 12.6549 45.5397 16.3669ZM63.5027 14.2069C63.4227 14.1909 63.2307 14.1589 63.0067 14.1589C61.9827 14.1589 61.1187 14.6549 60.7507 15.5029V14.2549H58.9427V22.0469H60.7987V18.3349C60.7987 16.8789 61.4547 16.0469 62.8947 16.0469C63.0867 16.0469 63.2947 16.0629 63.5027 16.0949V14.2069ZM66.2219 18.1269C66.2219 16.6389 67.1179 15.6949 68.3339 15.6949C69.5499 15.6949 70.3819 16.6229 70.3819 18.1109C70.3819 19.5989 69.5339 20.6069 68.3179 20.6069C67.0539 20.6069 66.2219 19.6149 66.2219 18.1269ZM72.1739 10.4629H70.3659V15.1669C70.1259 14.6709 69.4379 14.0469 68.0779 14.0469C65.8859 14.0469 64.3659 15.8869 64.3659 18.1269C64.3659 20.4789 65.8699 22.2389 68.1099 22.2389C69.2139 22.2389 70.0299 21.6949 70.3979 21.0389C70.3979 21.3589 70.4459 21.8709 70.4779 22.0469H72.2539C72.2379 21.9189 72.1739 21.3269 72.1739 20.6229V10.4629ZM75.8949 17.2949C75.9589 16.4629 76.6309 15.5669 77.7989 15.5669C79.0789 15.5669 79.6869 16.3829 79.7189 17.2949H75.8949ZM79.9269 19.3269C79.6709 20.0949 79.0949 20.6869 77.9749 20.6869C76.8229 20.6869 75.8949 19.8389 75.8469 18.6549H81.5429C81.5589 18.6229 81.5909 18.3669 81.5909 18.0629C81.5909 15.5989 80.1829 14.0149 77.7829 14.0149C75.8149 14.0149 73.9909 15.6469 73.9909 18.1109C73.9909 20.7509 75.8629 22.2869 77.9749 22.2869C79.8469 22.2869 81.0789 21.1829 81.4949 19.8229L79.9269 19.3269ZM87.9246 14.2069C87.8446 14.1909 87.6526 14.1589 87.4286 14.1589C86.4046 14.1589 85.5406 14.6549 85.1726 15.5029V14.2549H83.3646V22.0469H85.2206V18.3349C85.2206 16.8789 85.8766 16.0469 87.3166 16.0469C87.5086 16.0469 87.7166 16.0629 87.9246 16.0949V14.2069ZM95.4914 15.9189V12.3989H97.4914C98.7074 12.3989 99.4434 13.0869 99.4434 14.1749C99.4434 15.2469 98.7074 15.9189 97.4914 15.9189H95.4914ZM97.7794 17.6149C99.9554 17.6149 101.395 16.1589 101.395 14.1589C101.395 12.1749 99.9554 10.7029 97.7794 10.7029H93.5714V22.0469H95.4914V17.6149H97.7794ZM104.767 22.0469V10.4629H102.911V22.0469H104.767ZM106.65 19.9349C106.65 21.1669 107.658 22.2869 109.29 22.2869C110.554 22.2869 111.322 21.6469 111.69 21.0549C111.69 21.6789 111.754 21.9989 111.77 22.0469H113.498C113.482 21.9669 113.402 21.5029 113.402 20.7989V16.9269C113.402 15.3749 112.49 14.0149 110.09 14.0149C108.17 14.0149 106.954 15.2149 106.81 16.5589L108.506 16.9429C108.586 16.1589 109.13 15.5349 110.106 15.5349C111.13 15.5349 111.578 16.0629 111.578 16.7189C111.578 16.9909 111.45 17.2149 111.002 17.2789L109.002 17.5829C107.674 17.7749 106.65 18.5429 106.65 19.9349ZM109.642 20.8309C108.906 20.8309 108.506 20.3509 108.506 19.8229C108.506 19.1829 108.97 18.8629 109.546 18.7669L111.578 18.4629V18.8149C111.578 20.3349 110.682 20.8309 109.642 20.8309ZM119.022 15.7269C120.206 15.7269 120.734 16.4949 120.91 17.1829L122.574 16.5749C122.254 15.3269 121.102 14.0149 119.006 14.0149C116.766 14.0149 115.022 15.7429 115.022 18.1429C115.022 20.5109 116.766 22.2869 119.054 22.2869C121.102 22.2869 122.27 20.9589 122.638 19.7429L121.006 19.1509C120.83 19.7429 120.27 20.5909 119.054 20.5909C117.886 20.5909 116.878 19.7109 116.878 18.1429C116.878 16.5749 117.886 15.7269 119.022 15.7269ZM125.504 17.2949C125.568 16.4629 126.24 15.5669 127.408 15.5669C128.688 15.5669 129.296 16.3829 129.328 17.2949H125.504ZM129.536 19.3269C129.28 20.0949 128.704 20.6869 127.584 20.6869C126.432 20.6869 125.504 19.8389 125.456 18.6549H131.152C131.168 18.6229 131.2 18.3669 131.2 18.0629C131.2 15.5989 129.792 14.0149 127.392 14.0149C125.424 14.0149 123.6 15.6469 123.6 18.1109C123.6 20.7509 125.472 22.2869 127.584 22.2869C129.456 22.2869 130.688 21.1829 131.104 19.8229L129.536 19.3269ZM134.222 18.1269C134.222 16.6389 135.118 15.6949 136.334 15.6949C137.55 15.6949 138.382 16.6229 138.382 18.1109C138.382 19.5989 137.534 20.6069 136.318 20.6069C135.054 20.6069 134.222 19.6149 134.222 18.1269ZM140.174 10.4629H138.366V15.1669C138.126 14.6709 137.438 14.0469 136.078 14.0469C133.886 14.0469 132.366 15.8869 132.366 18.1269C132.366 20.4789 133.87 22.2389 136.11 22.2389C137.214 22.2389 138.03 21.6949 138.398 21.0389C138.398 21.3589 138.446 21.8709 138.478 22.0469H140.254C140.238 21.9189 140.174 21.3269 140.174 20.6229V10.4629Z\" fill=\"black\"></path><circle cx=\"16.8677\" cy=\"111.047\" r=\"15\" stroke=\"black\" stroke-width=\"2\"></circle><path d=\"M12.2775 117.047H19.9366V115.541H14.698V115.456L17.0105 113.036C19.1412 110.882 19.7491 109.854 19.7491 108.553C19.7491 106.683 18.2264 105.251 16.0332 105.251C13.8571 105.251 12.2662 106.661 12.2662 108.786H13.9423C13.9366 107.536 14.7434 106.717 15.9991 106.717C17.1809 106.717 18.0787 107.445 18.0787 108.604C18.0787 109.632 17.465 110.371 16.215 111.695L12.2775 115.774V117.047Z\" fill=\"black\"></path><path d=\"M47.5077 111.367C47.5077 108.631 49.3957 107.271 51.2997 107.271C53.2197 107.271 55.1077 108.631 55.1077 111.367C55.1077 114.103 53.2197 115.463 51.2997 115.463C49.3957 115.463 47.5077 114.103 47.5077 111.367ZM45.5397 111.367C45.5397 115.095 48.3237 117.287 51.2997 117.287C54.2757 117.287 57.0757 115.095 57.0757 111.367C57.0757 107.655 54.2757 105.463 51.2997 105.463C48.3237 105.463 45.5397 107.655 45.5397 111.367ZM64.0147 116.183C64.0147 116.503 64.0467 116.871 64.0787 117.047H65.8547C65.8227 116.759 65.7747 116.263 65.7747 115.623V109.255H63.9187V113.863C63.9187 114.887 63.3587 115.607 62.2867 115.607C61.1667 115.607 60.7187 114.791 60.7187 113.831V109.255H58.8627V114.167C58.8627 115.895 59.9507 117.271 61.8067 117.271C62.7187 117.271 63.6307 116.887 64.0147 116.183ZM70.5291 106.871H68.8491V108.039C68.8491 108.727 68.4811 109.255 67.6491 109.255H67.2491V110.903H68.6891V114.823C68.6891 116.279 69.5851 117.143 71.0251 117.143C71.6971 117.143 72.0491 117.015 72.1611 116.967V115.431C72.0811 115.447 71.7771 115.495 71.5211 115.495C70.8331 115.495 70.5291 115.207 70.5291 114.519V110.903H72.1451V109.255H70.5291V106.871ZM81.4456 107.047C81.7976 107.047 82.0056 107.095 82.1176 107.127V105.543C81.9896 105.479 81.6056 105.383 81.1416 105.383C79.5416 105.383 78.4216 106.439 78.4216 108.183V109.255H77.0616V110.871H78.4216V117.047H80.2936V110.871H82.1016V109.255H80.2936V108.231C80.2936 107.271 80.9496 107.047 81.4456 107.047ZM86.7729 115.623C85.6369 115.623 84.5969 114.759 84.5969 113.143C84.5969 111.527 85.6369 110.695 86.7729 110.695C87.9249 110.695 88.9489 111.527 88.9489 113.143C88.9489 114.775 87.9249 115.623 86.7729 115.623ZM86.7729 109.015C84.4529 109.015 82.7409 110.759 82.7409 113.143C82.7409 115.543 84.4529 117.287 86.7729 117.287C89.1089 117.287 90.8209 115.543 90.8209 113.143C90.8209 110.759 89.1089 109.015 86.7729 109.015ZM97.1746 109.207C97.0946 109.191 96.9026 109.159 96.6786 109.159C95.6546 109.159 94.7906 109.655 94.4226 110.503V109.255H92.6146V117.047H94.4706V113.335C94.4706 111.879 95.1266 111.047 96.5666 111.047C96.7586 111.047 96.9666 111.063 97.1746 111.095V109.207ZM104.741 115.287V107.463H106.773C108.741 107.463 110.357 108.743 110.357 111.399C110.357 114.023 108.725 115.287 106.757 115.287H104.741ZM106.821 117.047C109.893 117.047 112.357 115.031 112.357 111.399C112.357 107.751 109.925 105.703 106.837 105.703H102.821V117.047H106.821ZM115.536 112.295C115.6 111.463 116.272 110.567 117.44 110.567C118.72 110.567 119.328 111.383 119.36 112.295H115.536ZM119.568 114.327C119.312 115.095 118.736 115.687 117.616 115.687C116.464 115.687 115.536 114.839 115.488 113.655H121.184C121.2 113.623 121.232 113.367 121.232 113.063C121.232 110.599 119.824 109.015 117.424 109.015C115.456 109.015 113.632 110.647 113.632 113.111C113.632 115.751 115.504 117.287 117.616 117.287C119.488 117.287 120.72 116.183 121.136 114.823L119.568 114.327ZM124.861 117.047V105.463H123.005V117.047H124.861ZM129.095 117.047V109.255H127.255V117.047H129.095ZM126.967 106.519C126.967 107.191 127.511 107.719 128.167 107.719C128.839 107.719 129.383 107.191 129.383 106.519C129.383 105.847 128.839 105.303 128.167 105.303C127.511 105.303 126.967 105.847 126.967 106.519ZM138.53 109.255H136.578L134.562 114.823L132.498 109.255H130.45L133.618 117.047H135.474L138.53 109.255ZM140.957 112.295C141.021 111.463 141.693 110.567 142.861 110.567C144.141 110.567 144.749 111.383 144.781 112.295H140.957ZM144.989 114.327C144.733 115.095 144.157 115.687 143.037 115.687C141.885 115.687 140.957 114.839 140.909 113.655H146.605C146.621 113.623 146.653 113.367 146.653 113.063C146.653 110.599 145.245 109.015 142.845 109.015C140.877 109.015 139.053 110.647 139.053 113.111C139.053 115.751 140.925 117.287 143.037 117.287C144.909 117.287 146.141 116.183 146.557 114.823L144.989 114.327ZM152.987 109.207C152.907 109.191 152.715 109.159 152.491 109.159C151.467 109.159 150.603 109.655 150.235 110.503V109.255H148.427V117.047H150.283V113.335C150.283 111.879 150.939 111.047 152.379 111.047C152.571 111.047 152.779 111.063 152.987 111.095V109.207ZM157.186 120.199L162.146 109.255H160.178L158.082 114.183L155.842 109.255H153.746L157.074 116.119L155.202 120.199H157.186Z\" fill=\"black\"></path><circle cx=\"16.8672\" cy=\"206.047\" r=\"15\" stroke=\"black\" stroke-width=\"2\"></circle><path d=\"M16.5782 212.206C18.9532 212.206 20.6975 210.786 20.6918 208.854C20.6975 207.382 19.8054 206.325 18.26 206.087V205.996C19.4759 205.683 20.2657 204.729 20.26 203.422C20.2657 201.712 18.8623 200.251 16.6236 200.251C14.4873 200.251 12.7714 201.541 12.7145 203.433H14.4134C14.4532 202.365 15.4589 201.717 16.6009 201.717C17.7884 201.717 18.5668 202.439 18.5611 203.513C18.5668 204.638 17.6634 205.376 16.3736 205.376H15.3907V206.808H16.3736C17.9873 206.808 18.9191 207.626 18.9191 208.797C18.9191 209.928 17.9361 210.695 16.5668 210.695C15.3054 210.695 14.3225 210.047 14.2543 209.013H12.4702C12.5441 210.911 14.2259 212.206 16.5782 212.206Z\" fill=\"black\"></path><path d=\"M48.1472 210.287V202.463H50.1792C52.1472 202.463 53.7632 203.743 53.7632 206.399C53.7632 209.023 52.1312 210.287 50.1632 210.287H48.1472ZM50.2272 212.047C53.2992 212.047 55.7632 210.031 55.7632 206.399C55.7632 202.751 53.3312 200.703 50.2432 200.703H46.2272V212.047H50.2272ZM58.9413 207.295C59.0053 206.463 59.6773 205.567 60.8453 205.567C62.1253 205.567 62.7333 206.383 62.7653 207.295H58.9413ZM62.9733 209.327C62.7173 210.095 62.1413 210.687 61.0213 210.687C59.8693 210.687 58.9413 209.839 58.8933 208.655H64.5893C64.6053 208.623 64.6373 208.367 64.6373 208.063C64.6373 205.599 63.2293 204.015 60.8293 204.015C58.8613 204.015 57.0373 205.647 57.0373 208.111C57.0373 210.751 58.9093 212.287 61.0213 212.287C62.8933 212.287 64.1253 211.183 64.5413 209.823L62.9733 209.327ZM68.2669 212.047V200.463H66.4109V212.047H68.2669ZM72.5009 212.047V204.255H70.6609V212.047H72.5009ZM70.3729 201.519C70.3729 202.191 70.9169 202.719 71.5729 202.719C72.2449 202.719 72.7889 202.191 72.7889 201.519C72.7889 200.847 72.2449 200.303 71.5729 200.303C70.9169 200.303 70.3729 200.847 70.3729 201.519ZM81.9353 204.255H79.9833L77.9673 209.823L75.9033 204.255H73.8553L77.0233 212.047H78.8793L81.9353 204.255ZM84.3632 207.295C84.4272 206.463 85.0992 205.567 86.2672 205.567C87.5472 205.567 88.1552 206.383 88.1872 207.295H84.3632ZM88.3952 209.327C88.1392 210.095 87.5632 210.687 86.4432 210.687C85.2912 210.687 84.3632 209.839 84.3152 208.655H90.0112C90.0272 208.623 90.0592 208.367 90.0592 208.063C90.0592 205.599 88.6512 204.015 86.2512 204.015C84.2832 204.015 82.4592 205.647 82.4592 208.111C82.4592 210.751 84.3312 212.287 86.4432 212.287C88.3152 212.287 89.5472 211.183 89.9632 209.823L88.3952 209.327ZM96.3928 204.207C96.3128 204.191 96.1208 204.159 95.8968 204.159C94.8728 204.159 94.0088 204.655 93.6408 205.503V204.255H91.8328V212.047H93.6888V208.335C93.6888 206.879 94.3448 206.047 95.7848 206.047C95.9768 206.047 96.1848 206.063 96.3928 206.095V204.207ZM99.1601 207.295C99.2241 206.463 99.8961 205.567 101.064 205.567C102.344 205.567 102.952 206.383 102.984 207.295H99.1601ZM103.192 209.327C102.936 210.095 102.36 210.687 101.24 210.687C100.088 210.687 99.1601 209.839 99.1121 208.655H104.808C104.824 208.623 104.856 208.367 104.856 208.063C104.856 205.599 103.448 204.015 101.048 204.015C99.0801 204.015 97.2561 205.647 97.2561 208.111C97.2561 210.751 99.1281 212.287 101.24 212.287C103.112 212.287 104.344 211.183 104.76 209.823L103.192 209.327ZM107.878 208.127C107.878 206.639 108.774 205.695 109.99 205.695C111.206 205.695 112.038 206.623 112.038 208.111C112.038 209.599 111.19 210.607 109.974 210.607C108.71 210.607 107.878 209.615 107.878 208.127ZM113.83 200.463H112.022V205.167C111.782 204.671 111.094 204.047 109.734 204.047C107.542 204.047 106.022 205.887 106.022 208.127C106.022 210.479 107.526 212.239 109.766 212.239C110.87 212.239 111.686 211.695 112.054 211.039C112.054 211.359 112.102 211.871 112.134 212.047H113.91C113.894 211.919 113.83 211.327 113.83 210.623V200.463Z\" fill=\"black\"></path><path d=\"M16.0645 36.471V90.6227\" stroke=\"black\" stroke-width=\"2\"></path><path d=\"M16.0645 131.471V185.623\" stroke=\"black\" stroke-width=\"2\"></path></svg></div>", 1);
 
 var _hoisted_41 = {
   "class": "col-span-2"
@@ -23177,43 +23177,69 @@ var _hoisted_42 = {
   "class": "my-4 mx-auto yus-shadow p-6 rounded-lg"
 };
 var _hoisted_43 = {
-  "class": "grid grid-cols-2 gap-1 items-center"
+  "class": "items-center grid grid-cols-3 gap-8 py-2"
 };
 var _hoisted_44 = {
   "class": "col-span-1"
 };
 var _hoisted_45 = ["src", "alt"];
 var _hoisted_46 = {
-  "class": "col-span-1"
+  "class": "col-span-2"
 };
 var _hoisted_47 = {
-  "class": "text-lg"
+  "class": "text-xl font-medium my-1"
+};
+var _hoisted_48 = {
+  "class": "my-1"
 };
 
-var _hoisted_48 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div id=\"cart-body-product-delivery-time\" class=\"flex my-4\"><span><svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M5.93408 6.64286H12.5357\" stroke=\"#222222\" stroke-width=\"1.35205\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M5.93408 9.31318H9.79123\" stroke=\"#222222\" stroke-width=\"1.35205\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M8.70742 20.25H3.71741C3.52714 20.25 3.34467 20.1744 3.21013 20.0399C3.07558 19.9053 3 19.7229 3 19.5326V4.46741C3 4.27714 3.07558 4.09467 3.21013 3.96013C3.34467 3.82558 3.52714 3.75 3.71741 3.75H20.2826C20.4729 3.75 20.6553 3.82558 20.7899 3.96013C20.9244 4.09467 21 4.27714 21 4.46741V12.6758\" stroke=\"#222222\" stroke-width=\"1.35205\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M12.8282 21.3916C13.4029 21.3916 13.8688 20.9257 13.8688 20.351C13.8688 19.7762 13.4029 19.3104 12.8282 19.3104C12.2535 19.3104 11.7876 19.7762 11.7876 20.351C11.7876 20.9257 12.2535 21.3916 12.8282 21.3916Z\" stroke=\"#222222\" stroke-width=\"1.35205\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M19.9689 21.3916C20.5436 21.3916 21.0095 20.9257 21.0095 20.351C21.0095 19.7762 20.5436 19.3104 19.9689 19.3104C19.3942 19.3104 18.9283 19.7762 18.9283 20.351C18.9283 20.9257 19.3942 21.3916 19.9689 21.3916Z\" stroke=\"#222222\" stroke-width=\"1.35205\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M11.788 20.3796H11.1921C11.1716 20.3796 11.152 20.3714 11.1375 20.357C11.123 20.3425 11.1148 20.3228 11.1148 20.3023V14.8242C11.1148 14.8037 11.123 14.7841 11.1375 14.7696C11.152 14.7551 11.1716 14.7469 11.1921 14.7469H19.4484C19.5066 14.7469 19.564 14.7601 19.6164 14.7854C19.6688 14.8107 19.7148 14.8475 19.7509 14.8931L21.7853 17.4579C21.8395 17.5261 21.869 17.6107 21.869 17.6979V20.3024C21.869 20.3125 21.867 20.3226 21.8631 20.332C21.8592 20.3413 21.8535 20.3498 21.8463 20.357C21.8392 20.3642 21.8306 20.3699 21.8213 20.3738C21.8119 20.3776 21.8018 20.3796 21.7917 20.3796H21.0097\" stroke=\"#222222\" stroke-width=\"1.35205\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M18.9286 20.3796H13.8688\" stroke=\"#222222\" stroke-width=\"1.35205\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M17.4836 14.747V20.3509\" stroke=\"#222222\" stroke-width=\"1.35205\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path></svg></span><span class=\"relative -top-1 left-1\">1 day within Kano</span></div>", 1);
+var _hoisted_49 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"my-1 flex items-center\"><div><svg width=\"33\" height=\"33\" viewBox=\"0 0 53 53\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M13.3445 14.8259H27.4883\" stroke=\"#7E7E7E\" stroke-width=\"2.14247\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M13.3445 20.5469H21.6083\" stroke=\"#7E7E7E\" stroke-width=\"2.14247\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M19.2863 43.9787H8.59537C8.18772 43.9787 7.79677 43.8168 7.50852 43.5285C7.22027 43.2403 7.05833 42.8493 7.05833 42.4417V10.165C7.05833 9.75738 7.22027 9.36643 7.50852 9.07818C7.79677 8.78993 8.18772 8.62799 8.59537 8.62799H44.0857C44.4934 8.62799 44.8843 8.78993 45.1726 9.07818C45.4608 9.36643 45.6228 9.75738 45.6228 10.165V27.7513\" stroke=\"#7E7E7E\" stroke-width=\"2.14247\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M28.1149 46.4245C29.3462 46.4245 30.3444 45.4263 30.3444 44.195C30.3444 42.9637 29.3462 41.9656 28.1149 41.9656C26.8837 41.9656 25.8855 42.9637 25.8855 44.195C25.8855 45.4263 26.8837 46.4245 28.1149 46.4245Z\" stroke=\"#7E7E7E\" stroke-width=\"2.14247\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M43.4138 46.4245C44.6451 46.4245 45.6432 45.4263 45.6432 44.195C45.6432 42.9637 44.6451 41.9656 43.4138 41.9656C42.1825 41.9656 41.1843 42.9637 41.1843 44.195C41.1843 45.4263 42.1825 46.4245 43.4138 46.4245Z\" stroke=\"#7E7E7E\" stroke-width=\"2.14247\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M25.8865 44.2564H24.6097C24.5658 44.2564 24.5237 44.239 24.4927 44.2079C24.4616 44.1769 24.4442 44.1348 24.4442 44.0909V32.3542C24.4442 32.3103 24.4616 32.2682 24.4927 32.2371C24.5237 32.2061 24.5658 32.1887 24.6097 32.1887H42.2987C42.4233 32.1887 42.5463 32.2168 42.6585 32.271C42.7708 32.3253 42.8693 32.4042 42.9467 32.5018L47.3054 37.9967C47.4214 38.143 47.4845 38.3242 47.4845 38.5109V44.091C47.4845 44.1128 47.4802 44.1343 47.4719 44.1544C47.4636 44.1745 47.4514 44.1927 47.4361 44.2081C47.4207 44.2234 47.4024 44.2356 47.3824 44.2439C47.3623 44.2523 47.3408 44.2565 47.319 44.2565H45.6437\" stroke=\"#7E7E7E\" stroke-width=\"2.14247\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M41.1848 44.2564H30.3444\" stroke=\"#7E7E7E\" stroke-width=\"2.14247\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path><path d=\"M38.0891 32.1887V44.195\" stroke=\"#7E7E7E\" stroke-width=\"2.14247\" stroke-miterlimit=\"10\" stroke-linecap=\"round\"></path></svg></div><div class=\"ml-2\"> 1 Day Delivery within Kano </div></div>", 1);
 
-var _hoisted_49 = {
+var _hoisted_50 = {
+  "class": "my-1 flex items-center"
+};
+
+var _hoisted_51 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
+  width: "114",
+  height: "29",
+  viewBox: "0 0 114 29",
+  fill: "none",
+  xmlns: "http://www.w3.org/2000/svg"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
+  d: "M0.63092 14.4609C0.63092 6.72895 6.89893 0.460938 14.6309 0.460938H99.6309C107.363 0.460938 113.631 6.72895 113.631 14.4609V14.4609C113.631 22.1929 107.363 28.4609 99.6309 28.4609H14.6309C6.89893 28.4609 0.63092 22.1929 0.63092 14.4609V14.4609Z",
+  fill: "#1D63BC"
+}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
+  d: "M22.8709 14.2009C22.8709 11.9809 24.3589 10.8529 25.9429 10.8529C27.5269 10.8529 29.0149 11.9809 29.0149 14.2009C29.0149 16.4209 27.5269 17.5609 25.9429 17.5609C24.3589 17.5609 22.8709 16.4209 22.8709 14.2009ZM21.6709 14.2009C21.6709 17.0449 23.8069 18.6409 25.9429 18.6409C28.0789 18.6409 30.2149 17.0449 30.2149 14.2009C30.2149 11.3569 28.0789 9.77294 25.9429 9.77294C23.8069 9.77294 21.6709 11.3569 21.6709 14.2009ZM34.916 12.6289C34.856 12.6169 34.7 12.5929 34.544 12.5929C33.956 12.5929 33.236 12.8089 32.816 13.6969V12.6889H31.712V18.4609H32.84V15.5689C32.84 14.2969 33.476 13.7929 34.424 13.7929C34.58 13.7929 34.748 13.8049 34.916 13.8289V12.6289ZM36.7317 15.5569C36.7317 14.3689 37.4037 13.5289 38.4357 13.5289C39.4677 13.5289 40.0917 14.3449 40.0917 15.5329C40.0917 16.7209 39.4557 17.6209 38.4237 17.6209C37.3437 17.6209 36.7317 16.7449 36.7317 15.5569ZM40.1037 17.6809C40.1037 18.0289 40.1397 18.3289 40.1637 18.4609H41.2557C41.2437 18.3649 41.1957 17.9449 41.1957 17.3929V9.77294H40.0797V13.5049C39.8877 13.0369 39.3357 12.5329 38.3157 12.5329C36.6837 12.5329 35.5797 13.9249 35.5797 15.5569C35.5797 17.2729 36.6237 18.6169 38.3157 18.6169C39.2157 18.6169 39.8277 18.1369 40.1037 17.5849V17.6809ZM43.8464 14.9809C43.8944 14.2369 44.4704 13.5049 45.4184 13.5049C46.4384 13.5049 46.9784 14.1529 47.0024 14.9809H43.8464ZM47.1704 16.4809C46.9544 17.1289 46.4864 17.6449 45.5504 17.6449C44.5784 17.6449 43.8344 16.9249 43.8104 15.8929H48.1544C48.1664 15.8209 48.1784 15.6769 48.1784 15.5329C48.1784 13.7329 47.1824 12.5089 45.4064 12.5089C43.9544 12.5089 42.6464 13.7449 42.6464 15.5569C42.6464 17.5129 44.0024 18.6409 45.5504 18.6409C46.8944 18.6409 47.8184 17.8369 48.1424 16.8169L47.1704 16.4809ZM52.8223 12.6289C52.7623 12.6169 52.6063 12.5929 52.4503 12.5929C51.8623 12.5929 51.1423 12.8089 50.7223 13.6969V12.6889H49.6183V18.4609H50.7463V15.5689C50.7463 14.2969 51.3823 13.7929 52.3303 13.7929C52.4863 13.7929 52.6543 13.8049 52.8223 13.8289V12.6289ZM58.1405 20.7409V17.6809C58.4525 18.1969 59.1245 18.6169 60.0125 18.6169C61.7045 18.6169 62.7005 17.2849 62.7005 15.5689C62.7005 13.8889 61.7765 12.5569 60.0485 12.5569C59.1125 12.5569 58.4285 13.0129 58.1165 13.5889V12.6889H57.0245V20.7409H58.1405ZM61.5485 15.5689C61.5485 16.7569 60.8885 17.6089 59.8445 17.6089C58.8125 17.6089 58.1285 16.7569 58.1285 15.5689C58.1285 14.4169 58.8125 13.5529 59.8445 13.5529C60.9005 13.5529 61.5485 14.4169 61.5485 15.5689ZM65.2658 18.4609V9.77294H64.1378V18.4609H65.2658ZM66.8247 16.9129C66.8247 17.8249 67.5807 18.6409 68.7567 18.6409C69.7887 18.6409 70.3647 18.0889 70.6167 17.6809C70.6167 18.1009 70.6527 18.3169 70.6767 18.4609H71.7807C71.7567 18.3169 71.7087 18.0169 71.7087 17.5129V14.6209C71.7087 13.4929 71.0367 12.5089 69.3087 12.5089C68.0607 12.5089 67.0647 13.2769 66.9447 14.3809L68.0247 14.6329C68.0967 13.9609 68.5407 13.4689 69.3327 13.4689C70.2087 13.4689 70.5807 13.9369 70.5807 14.5009C70.5807 14.7049 70.4847 14.8849 70.1367 14.9329L68.5767 15.1609C67.5807 15.3049 66.8247 15.8809 66.8247 16.9129ZM68.9127 17.6929C68.3367 17.6929 67.9767 17.2849 67.9767 16.8529C67.9767 16.3369 68.3367 16.0609 68.8167 15.9889L70.5807 15.7249V15.9889C70.5807 17.2489 69.8367 17.6929 68.9127 17.6929ZM75.8899 13.5529C76.8739 13.5529 77.2939 14.2129 77.4379 14.7769L78.4579 14.3449C78.2179 13.4689 77.4259 12.5089 75.8899 12.5089C74.2459 12.5089 72.9859 13.7689 72.9859 15.5689C72.9859 17.3209 74.2219 18.6409 75.9019 18.6409C77.4019 18.6409 78.2299 17.6689 78.5059 16.8409L77.5099 16.4089C77.3779 16.8649 76.9819 17.5969 75.9019 17.5969C74.9659 17.5969 74.1379 16.8889 74.1379 15.5689C74.1379 14.2249 74.9779 13.5529 75.8899 13.5529ZM80.5026 14.9809C80.5506 14.2369 81.1266 13.5049 82.0746 13.5049C83.0946 13.5049 83.6346 14.1529 83.6586 14.9809H80.5026ZM83.8266 16.4809C83.6106 17.1289 83.1426 17.6449 82.2066 17.6449C81.2346 17.6449 80.4906 16.9249 80.4666 15.8929H84.8106C84.8226 15.8209 84.8346 15.6769 84.8346 15.5329C84.8346 13.7329 83.8386 12.5089 82.0626 12.5089C80.6106 12.5089 79.3026 13.7449 79.3026 15.5569C79.3026 17.5129 80.6586 18.6409 82.2066 18.6409C83.5506 18.6409 84.4746 17.8369 84.7986 16.8169L83.8266 16.4809ZM86.9465 15.5569C86.9465 14.3689 87.6185 13.5289 88.6505 13.5289C89.6825 13.5289 90.3065 14.3449 90.3065 15.5329C90.3065 16.7209 89.6705 17.6209 88.6385 17.6209C87.5585 17.6209 86.9465 16.7449 86.9465 15.5569ZM90.3185 17.6809C90.3185 18.0289 90.3545 18.3289 90.3785 18.4609H91.4705C91.4585 18.3649 91.4105 17.9449 91.4105 17.3929V9.77294H90.2945V13.5049C90.1025 13.0369 89.5505 12.5329 88.5305 12.5329C86.8985 12.5329 85.7945 13.9249 85.7945 15.5569C85.7945 17.2729 86.8385 18.6169 88.5305 18.6169C89.4305 18.6169 90.0425 18.1369 90.3185 17.5849V17.6809Z",
+  fill: "white"
+})])], -1
+/* HOISTED */
+);
+
+var _hoisted_52 = {
+  "class": "ml-2"
+};
+var _hoisted_53 = {
   "class": "my-4 mx-auto yus-shadow p-6 rounded-lg"
 };
 
-var _hoisted_50 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_54 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "text-2xl font-extrabold my-6"
 }, " Payment Information ", -1
 /* HOISTED */
 );
 
-var _hoisted_51 = {
+var _hoisted_55 = {
   "class": "mb-6"
 };
-var _hoisted_52 = {
+var _hoisted_56 = {
   "class": "grid grid-cols-2 gap-6 py-1 w-full font-bold"
 };
 
-var _hoisted_53 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, "Payment Status", -1
+var _hoisted_57 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, "Payment Status", -1
 /* HOISTED */
 );
 
-var _hoisted_54 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_58 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "text-right"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
   width: "82",
@@ -23234,25 +23260,7 @@ var _hoisted_54 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_55 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, "Amount Paid", -1
-/* HOISTED */
-);
-
-var _hoisted_56 = {
-  "class": "text-right"
-};
-
-var _hoisted_57 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, "Payment Method", -1
-/* HOISTED */
-);
-
-var _hoisted_58 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "text-right"
-}, "Flutterwave", -1
-/* HOISTED */
-);
-
-var _hoisted_59 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, "Transaction ID", -1
+var _hoisted_59 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, "Amount Paid", -1
 /* HOISTED */
 );
 
@@ -23260,11 +23268,29 @@ var _hoisted_60 = {
   "class": "text-right"
 };
 
-var _hoisted_61 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, "Order ID", -1
+var _hoisted_61 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, "Payment Method", -1
 /* HOISTED */
 );
 
-var _hoisted_62 = {
+var _hoisted_62 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "text-right"
+}, "Flutterwave", -1
+/* HOISTED */
+);
+
+var _hoisted_63 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, "Transaction ID", -1
+/* HOISTED */
+);
+
+var _hoisted_64 = {
+  "class": "text-right"
+};
+
+var _hoisted_65 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, "Order ID", -1
+/* HOISTED */
+);
+
+var _hoisted_66 = {
   "class": "text-right"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -23297,21 +23323,27 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       id: "cart-body-products",
       "class": "p-4"
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_43, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_44, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
-      "class": "w-1/2",
+      "class": "w-full border-2 rounded-md border-green-400",
       src: "https://dashboard.kahioja.com/assets/images/products/".concat(bag.photo),
       alt: "".concat(bag.name)
     }, null, 8
     /* PROPS */
-    , _hoisted_45)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_46, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_47, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(bag.name) + " x " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(bag.quantity), 1
+    , _hoisted_45)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_46, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Product Name  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_47, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("b", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(bag.name), 1
     /* TEXT */
-    ), _hoisted_48])])]);
+    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" x " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(bag.quantity), 1
+    /* TEXT */
+    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Order ID  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_48, " Order ID: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.orderid), 1
+    /* TEXT */
+    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Delivery  "), _hoisted_49, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Order date  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_50, [_hoisted_51, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_52, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(new Date(bag.created_at).getDate() + '/' + (new Date(bag.created_at).getMonth() + 1) + '/' + new Date(bag.created_at).getFullYear()), 1
+    /* TEXT */
+    )])])])]);
   }), 128
   /* KEYED_FRAGMENT */
-  ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Payment Information  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_49, [_hoisted_50, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_51, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_52, [_hoisted_53, _hoisted_54, _hoisted_55, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_56, "N" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.subtotal), 1
+  ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Payment Information  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_53, [_hoisted_54, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_55, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_56, [_hoisted_57, _hoisted_58, _hoisted_59, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_60, "N" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.subtotal), 1
   /* TEXT */
-  ), _hoisted_57, _hoisted_58, _hoisted_59, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_60, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.transactionid), 1
+  ), _hoisted_61, _hoisted_62, _hoisted_63, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_64, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.transactionid), 1
   /* TEXT */
-  ), _hoisted_61, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_62, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.orderid), 1
+  ), _hoisted_65, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_66, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.orderid), 1
   /* TEXT */
   )])])])])])], 512
   /* NEED_PATCH */

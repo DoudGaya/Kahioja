@@ -303,9 +303,9 @@ class FlutterwaveController extends Controller
             $order_no = $order->order_number;
 
             //Getting the items in the bag
-            $bags = DB::select("SELECT DISTINCT bags.id as 'bagId', bags.quantity, bags.order_no, bags.paid, products.id, products.name, products.photo, products.price, orders.status 
+            $bags = DB::select("SELECT DISTINCT bags.id as 'bagId', bags.quantity, bags.order_no, bags.paid, products.id, products.name, products.photo, products.price, orders.status, orders.created_at 
                 FROM bags, products, orders
-                WHERE bags.order_no = '$order_no' && bags.product_id = products.id 
+                WHERE bags.order_no = '$order_no' && bags.product_id = products.id && orders.order_number = bags.order_no
                 ORDER BY bags.id DESC");
         
             // dd($bags);
