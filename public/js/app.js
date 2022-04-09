@@ -20431,6 +20431,7 @@ __webpack_require__.r(__webpack_exports__);
     });
     axios.get("/allstores/").then(function (response) {
       _this.stores = response.data;
+      console.log(_this.stores);
     })["catch"](function (error) {
       console.log(error);
     });

@@ -23,6 +23,7 @@ use Illuminate\Support\Collection;
 use Session;
 use Illuminate\Support\Facades\Input;
 use Validator;
+use Response;
 
 
 class CatalogController extends Controller
@@ -38,12 +39,15 @@ class CatalogController extends Controller
     }
 
     public function allcategories(){
-      $category = Category::select('name', 'photo', 'slug')->where('status', 1)->orderBy('name', 'asc')->get();
-      return $response = \Response::json($category, 200);
+        $category = Category::select('name', 'photo', 'slug')->where('status', 1)->orderBy('name', 'asc')->get();
+      
+        return $response = \Response::json($category, 200);
     }
 
     public function allstores(){
+
       $stores = User::select('shop_name')->where('is_vendor', 1)->orderBy('shop_name', 'asc')->get();
+      
       return $response = \Response::json($stores, 200);
     }
 
@@ -61,9 +65,11 @@ class CatalogController extends Controller
     public function category(Request $request)
     {
       $gs = Generalsetting::findOrFail(1);
+
       $category_slug = $request->slug;
       $category_id = Category::select('id')->where('slug', $category_slug)->first();
       $products = Product::where('category_id', $category_id->id)->where('status', 1)->orderBy('id','desc')->paginate(12);
+      
       return view('front.category', compact('products','gs'));
     }
 

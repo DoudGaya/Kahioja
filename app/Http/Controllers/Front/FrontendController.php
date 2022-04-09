@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\Generalsetting;
 use App\Models\Page;
 use DB;
+use Response;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -107,7 +108,6 @@ class FrontendController extends Controller
 
     public function index(Request $request)
 	{
-        // dd($macAddr = exec('getmac'));
         $gs = Generalsetting::findOrFail(1);
         $ps = DB::table('pagesettings')->find(1);
         $selectable = ['id','user_id','name','slug','features','colors','thumbnail','price','previous_price','attributes','size','size_price','discount_date'];
@@ -120,7 +120,7 @@ class FrontendController extends Controller
         $trending_products =  Product::where('trending','=',1)->where('status','=',1)->select($selectable)->orderBy('id','desc')->take(8)->get();
         $sale_products =  Product::where('sale','=',1)->where('status','=',1)->select($selectable)->orderBy('id','desc')->take(8)->get();
         $categories = Category::select('name', 'photo', 'slug')->where('status', 1)->orderBy('id', 'desc')->take(6)->get();
-      
+        
         return view('welcome',compact('best_products','top_products','hot_products','sale_products','ps','gs','categories'));
 	}
 

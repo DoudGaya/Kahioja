@@ -116,6 +116,7 @@ export default {
         })
         axios.get(`/allstores/`).then(response => {
             this.stores = response.data
+            console.log(this.stores)
         }).catch(error => {
             console.log(error)
         })
