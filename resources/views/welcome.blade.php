@@ -132,7 +132,7 @@
         </div>
     </div>
     <!-- More items -->
-    <load-component></load-component>
+    <!-- <load-component></load-component> -->
     <!-- Trust  -->
     <div class="relative top-36 md:top-0 mt-16 md:px-14 px-4">
         <div class="grid md:grid-cols-4 grid-cols-2 gap-6">
