@@ -67,6 +67,7 @@ img {vertical-align: middle;}
 }
 /* //END OF Slider  */
 
+/* NavBAR */
 #nav{
     position: fixed;
     width: 100%;
@@ -113,6 +114,7 @@ img {vertical-align: middle;}
 #logo-icon{
     width: 150px;
 }
+/* End of NavBar */
 
 #banner, #main-cate{
     position: relative;
@@ -172,6 +174,12 @@ img {vertical-align: middle;}
     display: flex;
     align-items: flex-end;
     color: #3B3B3B;
+}
+
+.card-title, .card-curr-price, .card-prev-price{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .card-curr-price{
@@ -594,12 +602,32 @@ img {vertical-align: middle;}
     #logo-icon{
         width: 120px;
     }
+
+    .card-bag-label{
+        font-size: 10px;
+    }
+
+    #bag-icon{
+        width: 12px;
+    }
+
+    .btn-yus{
+        height: 46px;
+    }
 }
 
 @media only screen and (max-width:768px)
 {
     body{
         font-size: 12px;
+    }
+
+    .card-bag-label{
+        font-size: 10px;
+    }
+
+    #bag-icon{
+        width: 18px;
     }
 
     .search_box{
@@ -754,4 +782,22 @@ img {vertical-align: middle;}
         font-size: 12px;
     }
     
+}
+
+
+@media only screen and (max-width:320px)
+{
+    
+    .card-bag-label{
+        font-size: 10px;
+    }
+
+    #bag-icon{
+        width: 12px;
+    }
+
+    .btn-yus{
+        height: 36px;
+    }
+
 }
