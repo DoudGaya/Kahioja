@@ -622,6 +622,11 @@ img {vertical-align: middle;}
         font-size: 12px;
     }
 
+    .dot{
+        height: 10px;
+        width: 10px;
+    }
+
     .card-bag-label{
         font-size: 10px;
     }
