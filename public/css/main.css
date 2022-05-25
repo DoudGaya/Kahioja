@@ -595,6 +595,11 @@ img {vertical-align: middle;}
 
 @media only screen and (max-width:1024px)
 {
+
+    #banner{
+        margin-top: 15%;
+    }
+
     #category-icon{
         width: 85px;
     }
@@ -644,6 +649,10 @@ img {vertical-align: middle;}
 {
     body{
         font-size: 12px;
+    }
+
+    #banner{
+        margin-top: 5%;
     }
 
     #cate-content{
@@ -818,10 +827,12 @@ img {vertical-align: middle;}
     
 }
 
-
 @media only screen and (max-width:320px)
 {
-    
+    #banner{
+        margin-top: 10%;
+    }
+
     .card-bag-label{
         font-size: 10px;
     }
