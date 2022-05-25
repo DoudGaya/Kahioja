@@ -571,7 +571,7 @@ img {vertical-align: middle;}
 
 #cate-btn, #store-btn, #sort-btn{
     position: absolute;
-    top: 2%;
+    top: 3%;
     left: 5%;
     z-index: 320;
     max-height: 340px;
@@ -584,7 +584,7 @@ img {vertical-align: middle;}
 }
 
 #sort-btn{
-    left: 77%;
+    left: 76%;
 }
 
 #cate-btn div:hover, #store-btn div:hover, #sort-btn div:hover{
@@ -601,6 +601,30 @@ img {vertical-align: middle;}
 
     #logo-icon{
         width: 120px;
+    }
+
+    #category-nav button{
+        margin-top: 10%;
+        padding: 2px 24px;
+    }
+
+    #cate-btn, #store-btn, #sort-btn{
+        position: absolute;
+        top: 8%;
+        left: 8%;
+    }
+    
+    #store-btn{
+        left: 30%;
+    }
+    
+    #sort-btn{
+        left: 70%;
+    }
+
+    #cate-content{
+        position: relative;
+        top: -50px;
     }
 
     .card-bag-label{
@@ -620,6 +644,11 @@ img {vertical-align: middle;}
 {
     body{
         font-size: 12px;
+    }
+
+    #cate-content{
+        position: relative;
+        top: 100px;
     }
 
     .dot{

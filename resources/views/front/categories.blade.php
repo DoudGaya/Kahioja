@@ -6,8 +6,8 @@
         <!-- Category Nav  -->
         <category-component></category-component>
         <!-- Category Content  -->
-        <div id="cate-content" class="my-16">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div id="cate-content" class="lg:my-16">
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
                 @foreach($products as $prod)
                     @include('includes.productComponent')
                 @endforeach

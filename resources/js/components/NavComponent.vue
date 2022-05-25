@@ -40,7 +40,7 @@
     <div id="nav" class="lg:hidden px-4 py-2 mb-4 text-sm fixed">
         <div class="grid grid-cols-4 gap-2 items-center mb-4">
             <!-- Caret  -->
-            <div class="col-span-1">
+            <div @click="drawerToggle()" class="col-span-1">
                 <svg width="30" height="20" viewBox="0 0 36 26" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M34 2H2" stroke="black" stroke-width="3" stroke-linecap="round"/><path d="M34 13L2 13" stroke="black" stroke-width="3" stroke-linecap="round"/><path d="M34 24H2" stroke="black" stroke-width="3" stroke-linecap="round"/></svg>
             </div>
             <!-- logo  -->
@@ -64,7 +64,7 @@
         <SearchBar />
     </div>
     <!-- Bottom Nav  -->
-    <div id="nav-bottom" class="md:hidden">
+    <div id="nav-bottom" class="lg:hidden">
         <div class="grid grid-cols-4 gap-4 text-center py-4">
             <div class="mx-auto cursor-pointer">
                 <a href="/">
@@ -153,6 +153,9 @@ export default {
         })
     },
     methods:{
+        drawerToggle(){
+            alert('clicked')
+        },
         cartToggle(){ 
             this.displayCart = !this.displayCart 
             this.cart = this.$store.dispatch("allCartFromDatabase")
