@@ -654,6 +654,10 @@ img {vertical-align: middle;}
     #banner{
         margin-top: 5%;
     }
+    
+    #checkoutModal{
+        margin-top: 28%;
+    }
 
     #cate-content{
         position: relative;
@@ -831,6 +835,10 @@ img {vertical-align: middle;}
 {
     #banner{
         margin-top: 10%;
+    }
+
+    #checkoutModal{
+        margin-top: 15%;
     }
 
     .card-bag-label{
