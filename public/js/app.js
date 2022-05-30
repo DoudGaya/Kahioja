@@ -19619,7 +19619,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     return {
       displayCart: true,
       isLoading: false,
-      bags: []
+      cart: []
     };
   },
   computed: {
@@ -19701,18 +19701,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     },
     removeProduct: function removeProduct(id) {
+      var _this3 = this;
+
       //Filtering The Products
+      // this.isLoading = true
+      // this.getAllCart = this.getAllCart.filter((product) => product.bagId !== id)   
+      // this.isLoading = false
       this.isLoading = true;
-      this.bags = this.bags.filter(function (bag) {
-        return bag.bagId !== id;
+      axios.get("/removeproduct/".concat(id, "/")).then(function (response) {
+        _this3.cart = response.data;
+
+        _this3.$store.dispatch("allCartFromDatabase");
+
+        _this3.isLoading = false;
+      })["catch"](function (error) {
+        console.log(error);
       });
-      this.isLoading = false; // axios.get(`/removeproduct/${id}/`).then(response => {
-      //     this.cart = response.data
-      //     this.$store.dispatch("allCartFromDatabase")
-      //     this.isLoading = false
-      // }).catch(error => {
-      //     console.log(error)
-      // })
     },
     closeCart: function closeCart() {
       var cart = this.cart;
@@ -19842,7 +19846,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   axios.post("/reducebyone/".concat(id, "/").concat(quantity)).then(function (response) {
                     var cart = _this2.cart = response.data;
 
-                    _this2.$store.dispatch("allCartFrolgatabase");
+                    _this2.$store.dispatch("allCartFromDatabase");
 
                     _this2.isLoading = false;
                   })["catch"](function (error) {
@@ -19872,7 +19876,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   axios.post("/addbyone/".concat(id, "/").concat(quantity)).then(function (response) {
                     _this3.cart = response.data;
 
-                    _this3.$store.dispatch("allCartFrolgatabase");
+                    _this3.$store.dispatch("allCartFromDatabase");
 
                     _this3.isLoading = false;
                   })["catch"](function (error) {
@@ -19900,7 +19904,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 axios.get("/removeproduct/".concat(id, "/")).then(function (response) {
                   _this4.cart = response.data;
 
-                  _this4.$store.dispatch("allCartFrolgatabase");
+                  _this4.$store.dispatch("allCartFromDatabase");
 
                   _this4.isLoading = false;
                 })["catch"](function (error) {
@@ -21389,11 +21393,11 @@ var _hoisted_8 = {
   id: "cart-body"
 };
 var _hoisted_9 = {
-  key: 0,
-  "class": "loader mx-auto mt-5"
+  "class": "my-5"
 };
 var _hoisted_10 = {
-  "class": "my-5"
+  key: 0,
+  "class": "loader mx-auto mt-5"
 };
 var _hoisted_11 = {
   "class": "grid grid-cols-3 gap-6 items-center"
@@ -21449,7 +21453,7 @@ var _hoisted_32 = {
 };
 var _hoisted_33 = ["onClick"];
 var _hoisted_34 = {
-  key: 1,
+  key: 0,
   id: "cart-total",
   "class": "px-4 md:px-16 py-5 my-5"
 };
@@ -21536,7 +21540,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return $options.closeCart();
     }),
     "class": "cursor-pointer"
-  }, _hoisted_7)]), $options.cartNo > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_8, [$data.isLoading ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_9)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.bags, function (product) {
+  }, _hoisted_7)]), $options.cartNo > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [$data.isLoading ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_10)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($options.getAllCart, function (product) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       key: product.product_id,
       id: "cart-body-products",

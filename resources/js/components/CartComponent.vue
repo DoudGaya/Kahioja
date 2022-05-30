@@ -9,9 +9,9 @@
                 </span> 
             </div>
             <div v-if="cartNo > 0" id="cart-body">
-                <div v-if="isLoading" class="loader mx-auto mt-5"></div>
                 <div class="my-5">
-                    <div :key="product.product_id" v-for="product in bags" id="cart-body-products" class="p-4">
+                    <div v-if="isLoading" class="loader mx-auto mt-5"></div>
+                    <div :key="product.product_id" v-for="product in getAllCart" id="cart-body-products" class="p-4">
                         <div class="grid grid-cols-3 gap-6 items-center">
                             <div id="cart-body-product-image">
                                 <img :src="`https://dashboard.kahioja.com/assets/images/products/${product.photo}`" :alt="`${ product.name }`">
@@ -122,7 +122,7 @@ export default {
         return{
             displayCart: true,
             isLoading: false,
-            bags: []
+            cart: []
         }
     },
     computed: {
@@ -171,17 +171,18 @@ export default {
         },
         removeProduct(id){
             //Filtering The Products
-            this.isLoading = true
-            this.bags = this.bags.filter((bag) => bag.bagId !== id)   
-            this.isLoading = false
+            // this.isLoading = true
+            // this.getAllCart = this.getAllCart.filter((product) => product.bagId !== id)   
+            // this.isLoading = false
             
-            // axios.get(`/removeproduct/${id}/`).then(response => {
-            //     this.cart = response.data
-            //     this.$store.dispatch("allCartFromDatabase")
-            //     this.isLoading = false
-            // }).catch(error => {
-            //     console.log(error)
-            // })
+            this.isLoading = true
+            axios.get(`/removeproduct/${id}/`).then(response => {
+                this.cart = response.data
+                this.$store.dispatch("allCartFromDatabase")
+                this.isLoading = false
+            }).catch(error => {
+                console.log(error)
+            })
         },
         closeCart(){
             let cart = this.cart

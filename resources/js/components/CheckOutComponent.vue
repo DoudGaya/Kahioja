@@ -273,7 +273,7 @@ export default {
                 quantity--
                 axios.post(`/reducebyone/${id}/${quantity}`).then(response => {
                     let cart = this.cart = response.data
-                    this.$store.dispatch("allCartFrolgatabase")
+                    this.$store.dispatch("allCartFromDatabase")
                     this.isLoading = false
                 }).catch(error => {
                     console.log(error)
@@ -286,7 +286,7 @@ export default {
                 quantity++
                 axios.post(`/addbyone/${id}/${quantity}`).then(response => {
                     this.cart = response.data
-                    this.$store.dispatch("allCartFrolgatabase")
+                    this.$store.dispatch("allCartFromDatabase")
                     this.isLoading = false
                 }).catch(error => {
                     console.log(error)
@@ -297,7 +297,7 @@ export default {
             this.isLoading = true
             axios.get(`/removeproduct/${id}/`).then(response => {
                 this.cart = response.data
-                this.$store.dispatch("allCartFrolgatabase")
+                this.$store.dispatch("allCartFromDatabase")
                 this.isLoading = false
             }).catch(error => {
                 console.log(error)
