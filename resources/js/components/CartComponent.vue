@@ -9,12 +9,9 @@
                 </span> 
             </div>
             <div v-if="cartNo > 0" id="cart-body">
-                <!-- <div id="cart-body-time-arrived" class="p-4 my-5">
-                    This product arrives by 6th Oct, 2pm
-                </div> -->
                 <div v-if="isLoading" class="loader mx-auto mt-5"></div>
                 <div class="my-5">
-                    <div :key="product.product_id" v-for="product in getAllCart" id="cart-body-products" class="p-4">
+                    <div :key="product.product_id" v-for="product in bags" id="cart-body-products" class="p-4">
                         <div class="grid grid-cols-3 gap-6 items-center">
                             <div id="cart-body-product-image">
                                 <img :src="`https://dashboard.kahioja.com/assets/images/products/${product.photo}`" :alt="`${ product.name }`">
@@ -125,6 +122,7 @@ export default {
         return{
             displayCart: true,
             isLoading: false,
+            bags: []
         }
     },
     computed: {
@@ -172,14 +170,18 @@ export default {
             }
         },
         removeProduct(id){
+            //Filtering The Products
             this.isLoading = true
-            axios.get(`/removeproduct/${id}/`).then(response => {
-                this.cart = response.data
-                this.$store.dispatch("allCartFromDatabase")
-                this.isLoading = false
-            }).catch(error => {
-                console.log(error)
-            })
+            this.bags = this.bags.filter((bag) => bag.bagId !== id)   
+            this.isLoading = false
+            
+            // axios.get(`/removeproduct/${id}/`).then(response => {
+            //     this.cart = response.data
+            //     this.$store.dispatch("allCartFromDatabase")
+            //     this.isLoading = false
+            // }).catch(error => {
+            //     console.log(error)
+            // })
         },
         closeCart(){
             let cart = this.cart
@@ -189,6 +191,38 @@ export default {
         checkOut(){
             window.location = '/checkout'
         }
+    },
+    created(){
+        this.bags = [
+            {
+                bagId: 104,
+                quantity: "1",
+                name: "SO KILN 90G",
+                price: 55.0,
+                ship_fee: "0",
+                photo: "1605186163NTwNOMvr.jpg",
+                subTotal: 55.0
+            },
+            {
+                bagId: 103,
+                quantity: "1",
+                name: "SEPTOL WITH LEMON",
+                price: 250.0,
+                ship_fee: "0",
+                photo: "1605185784KJFVxRFY.jpg",
+                subTotal: 250.0
+            },
+            {
+                bagId: 102,
+                quantity: "1",
+                name: "SO KILN",
+                price: 50.0,
+                ship_fee: "0",
+                photo: "1605186098PrgL9KyR.jpg",
+                subTotal: 50.0
+            }
+
+        ]
     }
        
 }

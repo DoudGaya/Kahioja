@@ -19618,7 +19618,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       displayCart: true,
-      isLoading: false
+      isLoading: false,
+      bags: []
     };
   },
   computed: {
@@ -19700,18 +19701,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     },
     removeProduct: function removeProduct(id) {
-      var _this3 = this;
-
+      //Filtering The Products
       this.isLoading = true;
-      axios.get("/removeproduct/".concat(id, "/")).then(function (response) {
-        _this3.cart = response.data;
-
-        _this3.$store.dispatch("allCartFromDatabase");
-
-        _this3.isLoading = false;
-      })["catch"](function (error) {
-        console.log(error);
+      this.bags = this.bags.filter(function (bag) {
+        return bag.bagId !== id;
       });
+      this.isLoading = false; // axios.get(`/removeproduct/${id}/`).then(response => {
+      //     this.cart = response.data
+      //     this.$store.dispatch("allCartFromDatabase")
+      //     this.isLoading = false
+      // }).catch(error => {
+      //     console.log(error)
+      // })
     },
     closeCart: function closeCart() {
       var cart = this.cart;
@@ -19721,6 +19722,33 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     checkOut: function checkOut() {
       window.location = '/checkout';
     }
+  },
+  created: function created() {
+    this.bags = [{
+      bagId: 104,
+      quantity: "1",
+      name: "SO KILN 90G",
+      price: 55.0,
+      ship_fee: "0",
+      photo: "1605186163NTwNOMvr.jpg",
+      subTotal: 55.0
+    }, {
+      bagId: 103,
+      quantity: "1",
+      name: "SEPTOL WITH LEMON",
+      price: 250.0,
+      ship_fee: "0",
+      photo: "1605185784KJFVxRFY.jpg",
+      subTotal: 250.0
+    }, {
+      bagId: 102,
+      quantity: "1",
+      name: "SO KILN",
+      price: 50.0,
+      ship_fee: "0",
+      photo: "1605186098PrgL9KyR.jpg",
+      subTotal: 50.0
+    }];
   }
 });
 
@@ -21508,7 +21536,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return $options.closeCart();
     }),
     "class": "cursor-pointer"
-  }, _hoisted_7)]), $options.cartNo > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div id=\"cart-body-time-arrived\" class=\"p-4 my-5\">\r\n                    This product arrives by 6th Oct, 2pm\r\n                </div> "), $data.isLoading ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_9)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($options.getAllCart, function (product) {
+  }, _hoisted_7)]), $options.cartNo > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_8, [$data.isLoading ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_9)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.bags, function (product) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       key: product.product_id,
       id: "cart-body-products",
