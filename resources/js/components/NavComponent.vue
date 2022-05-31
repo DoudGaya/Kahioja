@@ -64,7 +64,7 @@
         <SearchBar />
     </div>
     <!-- Bottom Nav  -->
-    <div id="nav-bottom" class="lg:hidden">
+    <div v-show="displayBottomNav" id="nav-bottom" class="lg:hidden">
         <div class="grid grid-cols-4 gap-4 text-center py-4">
             <div class="mx-auto cursor-pointer">
                 <a href="/">
@@ -142,6 +142,7 @@ export default {
             displayProduct: false,
             displayAccountSettings: false,
             displayCategoryMobile: false,
+            displayBottomNav: true,
             categories: []
         }
     },
@@ -154,7 +155,7 @@ export default {
     },
     methods:{
         drawerToggle(){
-            alert('clicked')
+            this.displayBottomNav = !this.displayBottomNav 
         },
         cartToggle(){ 
             this.displayCart = !this.displayCart 

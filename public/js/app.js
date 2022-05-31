@@ -20200,6 +20200,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       displayProduct: false,
       displayAccountSettings: false,
       displayCategoryMobile: false,
+      displayBottomNav: true,
       categories: []
     };
   },
@@ -20227,7 +20228,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   methods: {
     drawerToggle: function drawerToggle() {
-      alert('clicked');
+      this.displayBottomNav = !this.displayBottomNav;
     },
     cartToggle: function cartToggle() {
       this.displayCart = !this.displayCart;
@@ -22842,7 +22843,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* TEXT */
   ), _hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.estimatedTotal != 0 ? "N".concat($options.estimatedTotal) : 'Empty Bag'), 1
   /* TEXT */
-  )])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Search Box  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SearchBar)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Bottom Nav  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [_hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  )])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Search Box  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_SearchBar)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Bottom Nav  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [_hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     onClick: _cache[4] || (_cache[4] = function ($event) {
       return $options.categoryBottomToggle();
     }),
@@ -22863,7 +22864,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "mx-auto cursor-pointer"
   }, [_hoisted_27, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_28, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.getUser != '' ? $options.getUser.name.split(' ')[0] : 'Login'), 1
   /* TEXT */
-  )])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Category Mobile  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_29, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_30, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_31, [_hoisted_32, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  )])])], 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.displayBottomNav]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Category Mobile  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_29, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_30, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_31, [_hoisted_32, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
     onClick: _cache[7] || (_cache[7] = function ($event) {
       return $options.closeCategory();
     }),
