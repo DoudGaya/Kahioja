@@ -40,8 +40,8 @@
     <div id="nav" class="lg:hidden px-4 py-2 mb-4 text-sm fixed">
         <div class="grid grid-cols-4 gap-2 items-center mb-4">
             <!-- Caret  -->
-            <div @click="drawerToggle()" class="col-span-1">
-                <svg width="30" height="20" viewBox="0 0 36 26" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M34 2H2" stroke="black" stroke-width="3" stroke-linecap="round"/><path d="M34 13L2 13" stroke="black" stroke-width="3" stroke-linecap="round"/><path d="M34 24H2" stroke="black" stroke-width="3" stroke-linecap="round"/></svg>
+            <div class="col-span-1">
+                <svg @click="drawerToggle()" id="three-lines" class="hover:text-2xl" width="30" height="20" viewBox="0 0 36 26" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M34 2H2" stroke="black" stroke-width="3" stroke-linecap="round"/><path d="M34 13L2 13" stroke="black" stroke-width="3" stroke-linecap="round"/><path d="M34 24H2" stroke="black" stroke-width="3" stroke-linecap="round"/></svg>
             </div>
             <!-- logo  -->
             <div class="col-span-2 mx-auto">
@@ -62,6 +62,36 @@
         </div>
         <!-- Search Box  -->
         <SearchBar />
+    </div>
+    <!-- Drawer  -->
+    <div v-show="displayDrawerContent" id="drawer" class="lg:hidden">
+        <div id="drawer-content">
+            <!-- Categories  -->
+            <div>
+                <div class="p-3 border-b border-black flex justify-between items-center bg-gray-800 text-white">
+                    <h1 class="text-lg">Shop by Category</h1>
+                    <svg width="20" height="13" viewBox="0 0 36 26" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M34 2H2" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M34 13L2 13" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M34 24H2" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>
+                </div>
+                <div id="drawer-content-category" class="bg-gray-700 text-white">
+                    <div class="border-b border-black p-2" :key="category.slug" v-for="category in categories">
+                        <a :href="`/category/${category.slug}`" class="items-center flex justify-between">
+                            <span><img class="mx-auto" style="width:25px;" :src="`https://dashboard.kahioja.com/assets/images/categories/${category.photo}`"></span>
+                            <span class="text-sm">{{ category.name }}</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- Cart  -->
+            <div @click="cartToggle()" class="cursor-pointer p-3 border-b border-black flex justify-between items-center bg-gray-800 text-white">
+                <div class="relative -top-3">
+                    <span class="cart-no bg-yus px-1 text-xs text-white rounded-full">{{ cartNo }}</span>
+                    <svg width="20" height="20" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.66666 14C4.31303 14 3.9739 14.1405 3.72385 14.3905C3.4738 14.6406 3.33332 14.9797 3.33332 15.3333V19.3333C3.33332 20.7478 3.89523 22.1044 4.89542 23.1046C5.89561 24.1048 7.25217 24.6667 8.66666 24.6667H19.3333C20.7478 24.6667 22.1044 24.1048 23.1046 23.1046C24.1048 22.1044 24.6667 20.7478 24.6667 19.3333V15.3333C24.6667 14.9797 24.5262 14.6406 24.2761 14.3905C24.0261 14.1405 23.6869 14 23.3333 14H4.66666ZM7.33332 11.3333V7.33333C7.33332 5.56522 8.0357 3.86953 9.28594 2.61929C10.5362 1.36904 12.2319 0.666664 14 0.666664C15.7681 0.666664 17.4638 1.36904 18.714 2.61929C19.9643 3.86953 20.6667 5.56522 20.6667 7.33333V11.3333H23.3333C24.3942 11.3333 25.4116 11.7548 26.1617 12.5049C26.9119 13.255 27.3333 14.2725 27.3333 15.3333V19.3333C27.3333 21.4551 26.4905 23.4899 24.9902 24.9902C23.4899 26.4905 21.4551 27.3333 19.3333 27.3333H8.66666C6.54492 27.3333 4.51009 26.4905 3.0098 24.9902C1.50951 23.4899 0.666656 21.4551 0.666656 19.3333L0.666656 15.3333C0.666656 14.2725 1.08808 13.255 1.83823 12.5049C2.58837 11.7548 3.60579 11.3333 4.66666 11.3333H7.33332ZM9.99999 11.3333H18V7.33333C18 6.27246 17.5786 5.25505 16.8284 4.5049C16.0783 3.75476 15.0609 3.33333 14 3.33333C12.9391 3.33333 11.9217 3.75476 11.1716 4.5049C10.4214 5.25505 9.99999 6.27246 9.99999 7.33333V11.3333Z" fill="#ffffff"/></svg>
+                </div>
+                <div>
+                    <h1 class="text-lg">Cart</h1>
+                </div>
+            </div>
+        </div>
     </div>
     <!-- Bottom Nav  -->
     <div v-show="displayBottomNav" id="nav-bottom" class="lg:hidden">
@@ -142,6 +172,7 @@ export default {
             displayProduct: false,
             displayAccountSettings: false,
             displayCategoryMobile: false,
+            displayDrawerContent: false,
             displayBottomNav: true,
             categories: []
         }
@@ -156,6 +187,7 @@ export default {
     methods:{
         drawerToggle(){
             this.displayBottomNav = !this.displayBottomNav 
+            this.displayDrawerContent = !this.displayDrawerContent 
         },
         cartToggle(){ 
             this.displayCart = !this.displayCart 
