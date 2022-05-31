@@ -33,7 +33,7 @@
     <!-- Popular Category -->
     <div id="popular-cat" class="relative top-36 lg:top-0 lg:px-14 px-4 mt-8">
         <h1 class="headings-yus">
-            Popular Product Categories
+            Popular Categories
         </h1>
         <div class="grid lg:grid-cols-6 grid-cols-3 gap-6 my-8 text-center">
             @foreach($categories as $category)

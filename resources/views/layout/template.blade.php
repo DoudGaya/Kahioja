@@ -88,7 +88,7 @@
             </div>
             <div class="mt-6 w-full md:px-14 px-4">
                 <p>
-                    Copyright &copy; 2021. All Rights Reserved By Kahioja
+                    Copyright &copy; 2022. All Rights Reserved By Kahioja
                 </p>
             </div>
         </div>
