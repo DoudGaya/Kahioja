@@ -22041,7 +22041,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       id: "cart-body-products",
       "class": "p-4"
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <img :src=\"`/images/products/${product.photo}`\" :alt=\"`${ product.name }`\"> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
-      src: "https://dashboard.kahioja.com/assets/images/thumbnails/".concat(_ctx.productimage),
+      src: "https://dashboard.kahioja.com/assets/images/products/".concat(product.photo),
       alt: "".concat(product.name)
     }, null, 8
     /* PROPS */

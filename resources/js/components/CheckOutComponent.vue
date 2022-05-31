@@ -37,7 +37,7 @@
                             <div class="gap-6 items-center">
                                 <div id="cart-body-product-image">
                                     <!-- <img :src="`/images/products/${product.photo}`" :alt="`${ product.name }`"> -->
-                                    <img :src="`https://dashboard.kahioja.com/assets/images/thumbnails/${productimage}`" :alt="`${ product.name }`">
+                                    <img :src="`https://dashboard.kahioja.com/assets/images/products/${product.photo}`" :alt="`${ product.name }`">
                                 </div>
                                 <div>
                                     <div id="cart-body-product-title" class="w-full">{{ product.name }} x {{product.quantity}}</div>
