@@ -754,11 +754,10 @@ img {vertical-align: middle;}
     
     #drawer-content{
         width: 80%;
-        height: 100vh;
+        height: 75vh;
         background: #ddd;
         color: #333;
-        position: absolute;
-        top: 0px; 
+        overflow: auto; 
     }
 
     #drawer-content h1{
@@ -768,6 +767,13 @@ img {vertical-align: middle;}
     #drawer-content-category{
         height: 30vh;
         overflow: auto;
+    }
+
+    #drawer-trademark{
+        position: fixed;
+        bottom: 0px;
+        background-color: #FFFFFF;
+        width: 80%;
     }
 
     #nav-bottom{
