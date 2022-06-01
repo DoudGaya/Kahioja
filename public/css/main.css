@@ -275,10 +275,19 @@ img {vertical-align: middle;}
     right: 0px; 
 }
 
-#account-settings{
+/* #account-settings{
     position: fixed;
     left: 78%;
     z-index: 320;
+} */
+
+#account-settings-content{
+    width: 12%;
+    position: absolute;
+    top: 11%;
+    right: 0;
+    overflow: auto; 
+    z-index: 400;
 }
 
 #search-bar-callback{

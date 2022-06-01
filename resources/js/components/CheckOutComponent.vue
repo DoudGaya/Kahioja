@@ -59,12 +59,12 @@
                                         N{{ product.subTotal }}
                                     </div>
                                     <div class="hidden lg:block">
-                                        <div id="cart-body-product-add" class="flex justify-between w-full py-2 px-4 rounded-full mt-11">
-                                            <div class="cursor-pointer">
+                                        <div id="cart-body-product-add" class="flex justify-between lg:w-1/2 rounded-full mt-11 lg:mt-6">
+                                            <div class="cursor-pointer w-1/2 bg-yus rounded-l-full py-2 text-white border">
                                                 <div @click="minusProduct(product.bagId, product.quantity)"> - </div>
                                             </div>
                                             <input class="w-1/3 text-center bg-white" :value="product.quantity" disabled>
-                                            <div class="cursor-pointer">
+                                            <div class="cursor-pointer w-1/2 bg-yus rounded-r-full py-2 text-white border">
                                                 <div @click="addProduct(product.bagId, product.quantity)">+</div>
                                             </div>
                                         </div>

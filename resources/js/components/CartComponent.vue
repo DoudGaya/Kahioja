@@ -36,12 +36,12 @@
                                     N{{ product.subTotal }}
                                 </div>
                                 <div class="hidden md:block">
-                                    <div id="cart-body-product-add" class="flex justify-between w-3/4 py-2 px-4 rounded-full mt-11">
-                                        <div class="cursor-pointer">
-                                        <button @click="minusProduct(product.bagId, product.quantity)"> - </button>
+                                    <div id="cart-body-product-add" class="flex justify-between w-3/4 rounded-full mt-11">
+                                        <div class="cursor-pointer w-1/2 bg-yus rounded-l-full py-1 text-white border">
+                                            <button @click="minusProduct(product.bagId, product.quantity)"> - </button>
                                         </div>
                                         <input class="w-1/3 text-center bg-white" :value="product.quantity" disabled>
-                                        <div class="cursor-pointer">
+                                        <div class="cursor-pointer w-1/2 bg-yus rounded-r-full py-1 text-white border">
                                             <button @click="addProduct(product.bagId, product.quantity)">+</button>
                                         </div>
                                     </div>
@@ -53,12 +53,12 @@
                             <div class="cursor-pointer mx-auto" @click="removeProduct(product.bagId)" id="cart-body-product-remove">
                                 Remove Product
                             </div>
-                            <div id="cart-body-product-add" class=" flex justify-between w-3/4 py-2 px-4 rounded-full my-auto">
-                                <div class="cursor-pointer">
+                            <div id="cart-body-product-add" class=" flex justify-between w-3/4 rounded-full my-auto">
+                                <div class="cursor-pointer w-1/2 bg-yus rounded-l-full py-1 text-white border">
                                 <button @click="minusProduct(product.bagId, product.quantity)"> - </button>
                                 </div>
                                 <input class="w-1/3 text-center bg-white" :value="product.quantity" disabled>
-                                <div class="cursor-pointer">
+                                <div class="cursor-pointer w-1/2 bg-yus rounded-r-full py-1 text-white border">
                                     <button @click="addProduct(product.bagId, product.quantity)">+</button>
                                 </div>
                             </div>
