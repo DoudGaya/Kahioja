@@ -22,12 +22,6 @@ class UserController extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
-    {
-        $user = Auth::user();  
-        return view('user.dashboard',compact('user'));
-    }
-
     public function profile()
     {
         $user = Auth::user();  
@@ -100,7 +94,7 @@ class UserController extends Controller
         $user = Auth::user();
         $subs = Subscription::all();
         $package = $user->subscribes()->where('status',1)->orderBy('id','desc')->first();
-        return view('user.package.index',compact('user','subs','package'));
+        return response()->json(['subs'=>$subs, 'package'=>$package]);
     }
 
 
