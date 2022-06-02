@@ -88,3 +88,14 @@ Route::post('/flutterwave/submit', [FlutterwaveController::class, 'initialize'])
 Route::get('/flutterwave/callback', [FlutterwaveController::class,'callback'])->name('callback');
 Route::get('/checkoutfailed', [FlutterwaveController::class, 'checkoutfailed'])->name('front.checkoutfailed');
 Route::get('/checkoutsuccess', [FlutterwaveController::class, 'checkoutsuccess'])->name('front.checkoutsuccess');
+
+// User Subscription
+Route::get('/package', 'User\UserController@package')->name('user-package');
+Route::get('/subscription/{id}', 'User\UserController@vendorrequest')->name('user-vendor-request');
+Route::post('/vendor-request', 'User\UserController@vendorrequestsub')->name('user-vendor-request-submit');
+
+Route::get('/flutterwave/check', 'User\FlutterwaveController@check')->name('user.flutterwave.check');
+Route::post('/flutterwave/initialize', 'User\FlutterwaveController@initialize')->name('user.flutterwave.initialize');
+Route::get('/flutterwave/submit', 'User\FlutterwaveController@callback')->name('user.flutterwave.submit');
+
+// User Subscription Ends

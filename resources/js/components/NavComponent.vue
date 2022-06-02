@@ -69,12 +69,12 @@
         <div id="drawer-content">
             <!-- Categories  -->
             <div class="border-b border-white-2">
-                <div @click="drawerCategory" class="p-3 border-b border-black flex justify-between items-center bg-gray-800 text-white">
+                <div @click="drawerCategory" class="p-3 border-b border-black flex justify-between items-center bg-gray-800 text-white hover:bg-gray-700">
                     <h1 class="text-lg">Shop by Category</h1>
                     <svg width="20" height="13" viewBox="0 0 36 26" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M34 2H2" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M34 13L2 13" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M34 24H2" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>
                 </div>
                 <div v-show="displayDrawerCategory" id="drawer-content-category" class="bg-gray-700 text-white">
-                    <div class="border-b border-black p-2" :key="category.slug" v-for="category in categories">
+                    <div class="border-b border-black p-2 hover:bg-gray-800" :key="category.slug" v-for="category in categories">
                         <a :href="`/category/${category.slug}`" class="items-center flex justify-between">
                             <span><img class="mx-auto" style="width:25px;" :src="`https://dashboard.kahioja.com/assets/images/categories/${category.photo}`"></span>
                             <span class="text-sm">{{ category.name }}</span>
