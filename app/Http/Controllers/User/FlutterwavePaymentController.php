@@ -19,9 +19,8 @@ use Validator;
 
 use KingFlamez\Rave\Facades\Rave as Flutterwave;
 
-class FlutterwaveController extends Controller
+class FlutterwavePaymentController extends Controller
 {
-
 
     public function check(Request $request){
 
@@ -42,23 +41,14 @@ class FlutterwaveController extends Controller
 
     public function initialize(Request $request)
     {
+        // $this->validate($request, [
+        //     'shop_name'   => 'unique:users',
+        //     ],[ 
+        //         'shop_name.unique' => 'This shop name has already been taken.'
+        //     ]
+        // );
 
-        $this->validate($request, [
-            'shop_name'   => 'unique:users',
-            ],[ 
-                'shop_name.unique' => 'This shop name has already been taken.'
-            ]
-        );
-
-        if(Session::has('currency')) {
-            $curr = Currency::find(Session::get('currency'));
-            $currency_name = $curr->name;
-        }else{
-            $curr = Currency::where('is_default','=',1)->first();
-            $currency_name = $curr->name;
-        }
-
-        $input = $request->all();
+        // $input = $request->all();
         $user = Auth::user();
         $subs = Subscription::findOrFail($request->subs_id);
         
@@ -75,10 +65,10 @@ class FlutterwaveController extends Controller
         $sub['days'] = $subs->days;
         $sub['allowed_products'] = $subs->allowed_products;
         $sub['details'] = $subs->details;
-        // dd($sub['price']);
         
         Session::put('subTitle', $sub['title']);
-
+        return response()->json($request->total_amount);
+        
         try{
             //This generates a payment reference
             $reference = Flutterwave::generateReference();
@@ -86,7 +76,7 @@ class FlutterwaveController extends Controller
             // Enter the details of the payment
             $data = [
                 'payment_options' => 'card,banktransfer',
-                'amount' => round($sub['price'] / $curr->value, 2),
+                'amount' => $request->total_amount,
                 'email' => $user->email,
                 'tx_ref' => $reference,
                 'currency' => $currency_name,
@@ -107,7 +97,7 @@ class FlutterwaveController extends Controller
 
 
             if($payment['status'] !== 'success') {
-                return redirect()->route('user-dashboard')->with('unsuccess','Payment Failed. Please try again later');
+                return redirect()->route('front.index')->with('unsuccess','Payment Failed. Please try again later');
             }else if($payment['status'] == 'success'){
                 $package = $user->subscribes()->where('status',1)->orderBy('id','desc')->first();
                 $subs = Subscription::findOrFail($request->subs_id);
@@ -282,7 +272,7 @@ class FlutterwaveController extends Controller
                 mail($to,$subject,$msg,$headers);
             }
 
-            return redirect()->route('user-dashboard')->with('success','Vendor Account Activated Successfully');
+            return redirect()->route('front.index')->with('success','Vendor Account Activated Successfully');
 
         }       
 

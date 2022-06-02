@@ -9,6 +9,7 @@ use App\Http\Controllers\Front\CatalogController;
 use App\Http\Controllers\Front\CartController;
 use App\Http\Controllers\Front\FlutterwaveController;
 use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\User\FlutterwavePaymentController;
 
 
 /*
@@ -95,8 +96,8 @@ Route::get('/package', [UserController::class, 'package'])->name('user-package')
 Route::get('/subscription/{id}', [UserController::class, 'vendorrequest'])->name('user-vendor-request');
 Route::post('/vendor-request', [UserController::class, 'vendorrequestsub'])->name('user-vendor-request-submit');
 
-// Route::get('/flutterwave/check', [FlutterwaveController::class, 'check'])->name('user.flutterwave.check');
-// Route::post('/flutterwave/initialize', [FlutterwaveController::class, 'initialize'])->name('user.flutterwave.initialize');
-// Route::get('/flutterwave/submit', [FlutterwaveController::class, 'callback'])->name('user.flutterwave.submit');
+Route::get('/vendor/subscription/check', [FlutterwavePaymentController::class, 'check'])->name('user.flutterwave.check');
+Route::post('/vendor/subscription/initialize', [FlutterwavePaymentController::class, 'initialize'])->name('user.flutterwave.initialize');
+Route::get('/vendor/subscription/submit', [FlutterwavePaymentController::class, 'callback'])->name('user.flutterwave.submit');
 
 // User Subscription Ends

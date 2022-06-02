@@ -22,6 +22,12 @@ class UserController extends Controller
         $this->middleware('auth');
     }
 
+    public function index()
+    {
+        $user = Auth::user();  
+        return view('front.index',compact('user'));
+    }
+
     public function profile()
     {
         $user = Auth::user();  
@@ -200,7 +206,7 @@ class UserController extends Controller
     	            mail($to,$subject,$msg,$headers);
                     }
 
-                    return redirect()->route('user-dashboard')->with('success','Vendor Account Activated Successfully');
+        return redirect()->route('front-index')->with('success','Vendor Account Activated Successfully');
 
     }
 

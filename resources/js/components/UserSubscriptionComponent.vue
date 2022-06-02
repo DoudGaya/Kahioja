@@ -25,38 +25,55 @@
                     </div>
                 </div>
                 <div v-show="subscribe" id="subscribe" class="text-center">
-                    <div class="grid grid-cols-2 gap-4 p-4 border-b items-center">
-                        <div class="text-lg text-right">Plan:</div>
-                        <div><input disabled class="bg-white focus:outline-none text-left" v-model="title" /></div>
+                    <div class="mt-4 font-bold">
+                        {{ callback }}
                     </div>
-                    <div class="grid grid-cols-2 gap-4 p-4 border-b items-center">
-                        <div class="text-lg text-right">Price:</div>
-                        <div class="flex items-center">
-                            {{currency}}
-                            <input disabled class="bg-white focus:outline-none text-left" v-model="price" />
+                    
+                    <!-- <form action="/vendor/subscription/initialize/" method="POST"> -->
+                        <input type="hidden" name="_token" v-model="csrf">
+                        <input type="hidden" name="subs_id" v-model="subs_id">
+                        <!-- <input type="hidden" name="title" :value="title"> -->
+                        <!-- <input type="hidden" name="price" :value="price"> -->
+                        <!-- <input type="hidden" name="days" :value="days"> -->
+                        <input type="hidden" name="currency" v-model="currency">
+                        <!-- <input type="hidden" name="products" :value="products"> -->
+                        <input type="hidden" name="service_fee" v-model="service_fee">
+                        <input type="hidden" name="total_amount" v-model="total_amount">
+                        
+                        <div class="grid grid-cols-2 gap-4 p-4 border-b items-center">
+                            <div class="text-lg text-right">Plan:</div>
+                            <div><input disabled class="bg-white focus:outline-none text-left" v-model="title" /></div>
                         </div>
-                    </div>
-                    <div class="grid grid-cols-2 gap-4 p-4 border-b items-center">
-                        <div class="text-lg text-right">Duration:</div>
-                        <div><input disabled class="bg-white focus:outline-none text-left" v-model="days" /></div>
-                    </div>
-                    <div class="grid grid-cols-2 gap-4 p-4 border-b items-center">
-                        <div class="text-lg text-right">Product(s) Allowed:</div>
-                        <div>
-                            <input v-if="products > 0" disabled class="bg-white focus:outline-none text-left" v-model="products" />
-                            <input v-else disabled class="bg-white focus:outline-none text-left" value="Unlimited" />
+                        <div class="grid grid-cols-2 gap-4 p-4 border-b items-center">
+                            <div class="text-lg text-right">Price:</div>
+                            <div class="flex items-center">
+                                {{currency}}
+                                <input disabled class="bg-white focus:outline-none text-left" v-model="price" />
+                            </div>
                         </div>
-                    </div>
-                    <div class="grid grid-cols-2 gap-4 p-4 border-b items-center">
-                        <div class="text-lg text-right">Service Fee:</div>
-                        <div class="flex items-center">
-                            {{currency}}
-                            <input disabled class="bg-white focus:outline-none text-left" :value="Math.ceil(parseFloat((1.4 / 100) * parseInt(price)).toFixed(2))" />
+                        <div class="grid grid-cols-2 gap-4 p-4 border-b items-center">
+                            <div class="text-lg text-right">Duration:</div>
+                            <div><input disabled class="bg-white focus:outline-none text-left" v-model="days" /></div>
                         </div>
-                    </div>
-                    <div class="my-8">
-                        <input value="Subscribe" type="button" @click="confirmOrder()" class="flex justify-center mx-auto btn-yus rounded-full w-full py-5 lg:w-1/2 lg:py-4 text-white"> 
-                    </div>
+                        <div class="grid grid-cols-2 gap-4 p-4 border-b items-center">
+                            <div class="text-lg text-right">Product(s) Allowed:</div>
+                            <div>
+                                <input v-if="products > 0" disabled class="bg-white focus:outline-none text-left" v-model="products" />
+                                <input v-else disabled class="bg-white focus:outline-none text-left" value="Unlimited" />
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4 p-4 border-b items-center">
+                            <div class="text-lg text-right">Service Fee:</div>
+                            <div class="flex items-center">
+                                {{currency}}
+                                <input disabled class="bg-white focus:outline-none text-left" :value="service_fee" />
+                            </div>
+                        </div>
+                        <div class="my-8">
+                            <input v-if="price > 0" :value="`Pay ${ currency }${ total_amount}`" type="button" @click="confirmPayment()" class="flex justify-center mx-auto btn-yus rounded-full w-full py-5 lg:w-1/2 lg:py-4 text-white">
+                            <input v-else value="Free Subscription" type="submit" @click="confirmPayment()" class="flex justify-center mx-auto btn-yus rounded-full w-full py-5 lg:w-1/2 lg:py-4 text-white">
+                        </div>
+                    <!-- </form> -->
                 </div>
             </div>
         </div>
@@ -71,14 +88,18 @@ export default {
             displayUserSubscription: false,
             subscriptionList: true,
             subscribe: false,
-            isLoading: Boolean,
+            isLoading: false,
+            callback: '',
             packages: [],
-            id: '',
+            subs_id: '',
             title: '',
             currency: '',
             price: '',
             days: '',
-            products: ''
+            products: '',
+            service_fee: '',
+            total_amount: '',
+            csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
         }
     },
     async created(){
@@ -91,13 +112,15 @@ export default {
         })
     },
     methods:{
-        getStarted(id, title, currency, price, days, products){
-            this.id = id 
+        getStarted(subs_id, title, currency, price, days, products){
+            this.subs_id = subs_id 
             this.title = title 
             this.currency = currency 
             this.price = price
             this.days = days+' days' 
             this.products = products
+            this.service_fee = Math.ceil(parseFloat((1.4 / 100) * parseInt(price)).toFixed(2))
+            this.total_amount = price + this.service_fee
             this.subscriptionList = !this.subscriptionList
             this.subscribe = !this.subscribe
         },
@@ -106,6 +129,39 @@ export default {
             this.subscriptionList = !this.subscriptionList
             this.displayUserSubscription = !this.displayUserSubscription 
         },
+        async confirmPayment(){
+            this.isLoading = true
+            // axios.post('/vendor/subscription/initialize', {
+            // }).then(response => {
+            //     this.isLoading = false
+            //     console.log(response.data)
+            // }).catch(error => {
+            //     console.log(error)
+            // })
+            axios.post('/vendor/subscription/initialize', {
+                subs_id: this.subs_id,
+                price: this.title,
+                currency: this.currency,
+                price: this.price,
+                days: this.days,
+                products: this.products,
+                service_fee: this.service_fee,
+                total_amount: this.total_amount,
+                csrf: this.csrf,
+            }).then(response => {
+                
+                this.isLoading = false
+                this.callback = response.data
+
+                // setTimeout(()=>{
+                //     window.location = '/'
+                // }, 3000)
+
+            }).catch(error => {
+                console.log(error)
+            })
+        },
+        
     }
 }
 </script>
