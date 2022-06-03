@@ -41,33 +41,26 @@ class FlutterwavePaymentController extends Controller
 
     public function initialize(Request $request)
     {
-        // $this->validate($request, [
-        //     'shop_name'   => 'unique:users',
-        //     ],[ 
-        //         'shop_name.unique' => 'This shop name has already been taken.'
-        //     ]
-        // );
-
-        // $input = $request->all();
+        
         $user = Auth::user();
         $subs = Subscription::findOrFail($request->subs_id);
         
-        $order['item_name'] = $subs->title." Plan";
-        $order['item_number'] = str_random(4).time();
-        $order['item_amount'] = $subs->price;
+        // $order['item_name'] = $subs->title." Plan";
+        // $order['item_number'] = str_random(4).time();
+        // $order['item_amount'] = $subs->price;
 
-        $sub['user_id'] = $user->id;
-        $sub['subscription_id'] = $subs->id;
-        $sub['title'] = $subs->title;
-        $sub['currency'] = $subs->currency;
-        $sub['currency_code'] = $subs->currency_code;
-        $sub['price'] = $subs->price;
-        $sub['days'] = $subs->days;
-        $sub['allowed_products'] = $subs->allowed_products;
-        $sub['details'] = $subs->details;
+        // $sub['user_id'] = $user->id;
+        // $sub['subscription_id'] = $subs->id;
+        // $sub['title'] = $subs->title;
+        // $sub['currency'] = $subs->currency;
+        // $sub['currency_code'] = $subs->currency_code;
+        // $sub['price'] = $subs->price;
+        // $sub['days'] = $subs->days;
+        // $sub['allowed_products'] = $subs->allowed_products;
+        // $sub['details'] = $subs->details;
         
-        Session::put('subTitle', $sub['title']);
-        return response()->json($request->total_amount);
+        // Session::put('subTitle', $sub['title']);
+        // return response()->json($request->total_amount);
         
         try{
             //This generates a payment reference
@@ -79,7 +72,7 @@ class FlutterwavePaymentController extends Controller
                 'amount' => $request->total_amount,
                 'email' => $user->email,
                 'tx_ref' => $reference,
-                'currency' => $currency_name,
+                'currency' => 'NGN',
                 'redirect_url' => route('user.flutterwave.submit'),
                 'customer' => [
                     'email' => $user->email,
@@ -88,8 +81,8 @@ class FlutterwavePaymentController extends Controller
                 ],
 
                 "customizations" => [
-                    "title" => $sub['title'],
-                    "description" => $sub['details']
+                    "title" => $request->title,
+                    // "description" => $sub['details']
                 ]
             ];
 
@@ -97,56 +90,25 @@ class FlutterwavePaymentController extends Controller
 
 
             if($payment['status'] !== 'success') {
-                return redirect()->route('front.index')->with('unsuccess','Payment Failed. Please try again later');
+                return response()->json('Payment Failed. Please try again later');
             }else if($payment['status'] == 'success'){
-                $package = $user->subscribes()->where('status',1)->orderBy('id','desc')->first();
-                $subs = Subscription::findOrFail($request->subs_id);
-                $settings = Generalsetting::findOrFail(1);
-                $success_url = action('User\UserController@index');
-                $item_name = $subs->title." Plan";
-                $item_number = str_random(4).time();
-                $item_amount = $subs->price;
-                $item_currency = $subs->currency_code;
-
-                $today = Carbon::now()->format('Y-m-d');
-                $date = date('Y-m-d', strtotime($today.' + '.$subs->days.' days'));
-                $input = $request->all();  
-                $user->is_vendor = 2;
+                // $sub = new UserSubscription;
+                // $sub->user_id = $user->id;
+                // $sub->subscription_id = $request->subs_id;
+                // $sub->title = $request->title;
+                // $sub->currency = $request->currency;
+                // $sub->currency_code = $subs->currency_code;
+                // $sub->price = $request->total_amount;
+                // $sub->days = $subs->days;
+                // $sub->allowed_products = $subs->allowed_products;
+                // $sub->details = $subs->details;
+                // $sub->method = 'Flutterwave';
+                // // $sub->txnid = $tx_ref;
                 
-                if(!empty($package)){
-                    if($package->subscription_id == $request->subs_id){
-                        $newday = strtotime($today);
-                        $lastday = strtotime($user->date);
-                        $secs = $lastday-$newday;
-                        $days = $secs / 86400;
-                        $total = $days+$subs->days;
-                        $user->date = date('Y-m-d', strtotime($today.' + '.$total.' days'));
-                    }else{
-                        $user->date = date('Y-m-d', strtotime($today.' + '.$subs->days.' days'));
-                    }
-                }else{
-                    $user->date = date('Y-m-d', strtotime($today.' + '.$subs->days.' days'));
-                }
-
-                $user->mail_sent = 1;     
-                $user->update($input);
+                // $sub->status = 1;
+                // $sub->save();
                 
-                $sub = new UserSubscription;
-                $sub->user_id = $user->id;
-                $sub->subscription_id = $subs->id;
-                $sub->title = $subs->title;
-                $sub->currency = $subs->currency;
-                $sub->currency_code = $subs->currency_code;
-                $sub->price = $subs->price;
-                $sub->days = $subs->days;
-                $sub->allowed_products = $subs->allowed_products;
-                $sub->details = $subs->details;
-                $sub->method = 'Flutterwave';
-                // $sub->txnid = $tx_ref;
-
-                $sub->status = 1;
-                $sub->save();
-
+                return response()->json('Success');
 
             }
 
@@ -272,7 +234,7 @@ class FlutterwavePaymentController extends Controller
                 mail($to,$subject,$msg,$headers);
             }
 
-            return redirect()->route('front.index')->with('success','Vendor Account Activated Successfully');
+            return response()->json('Vendor Account Activated Successfully');
 
         }       
 

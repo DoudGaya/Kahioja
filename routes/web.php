@@ -10,6 +10,7 @@ use App\Http\Controllers\Front\CartController;
 use App\Http\Controllers\Front\FlutterwaveController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\User\FlutterwavePaymentController;
+use App\Http\Controllers\User\OrderController;
 
 
 /*
@@ -95,9 +96,15 @@ Route::get('/checkoutsuccess', [FlutterwaveController::class, 'checkoutsuccess']
 Route::get('/package', [UserController::class, 'package'])->name('user-package');
 Route::get('/subscription/{id}', [UserController::class, 'vendorrequest'])->name('user-vendor-request');
 Route::post('/vendor-request', [UserController::class, 'vendorrequestsub'])->name('user-vendor-request-submit');
-
 Route::get('/vendor/subscription/check', [FlutterwavePaymentController::class, 'check'])->name('user.flutterwave.check');
 Route::post('/vendor/subscription/initialize', [FlutterwavePaymentController::class, 'initialize'])->name('user.flutterwave.initialize');
 Route::get('/vendor/subscription/submit', [FlutterwavePaymentController::class, 'callback'])->name('user.flutterwave.submit');
-
 // User Subscription Ends
+
+// User Orders 
+Route::get('/orders',  [OrderController::class, 'orders'])->name('user-orders');
+Route::get('/order/tracking',  [OrderController::class, 'ordertrack'])->name('user-order-track');
+Route::get('/order/trackings/{id}', [OrderController::class, 'trackload'])->name('user-order-track-search');
+Route::get('/order/{id}',  [OrderController::class, 'order'])->name('user-order');
+Route::post('/order/confirm/', [OrderController::class, 'orderconfirm'])->name('user-order-confirm');
+// User Orders Ends 

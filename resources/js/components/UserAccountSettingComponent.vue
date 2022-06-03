@@ -12,7 +12,7 @@
                 <span><li class="text-sm list-none">Start Selling</li></span>
             </div>
             <!-- My Orders  -->
-            <div class="flex border-b p-3 items-center cursor-pointer hover:bg-gray-100">
+            <div @click="openMyOrders()" class="flex border-b p-3 items-center cursor-pointer hover:bg-gray-100">
                 <span><li class="text-sm list-none">My Orders</li></span>
             </div>
             <!-- Track Order  -->
@@ -35,16 +35,19 @@
             </div>
         </div>
         <UserSubscription v-show="displayUserSubscription" />
+        <UserOrder v-show="displayUserOrder" />
     </div>
 </template>
 
 <script>
 import UserSubscription from './UserSubscriptionComponent'
+import UserOrder from './UserOrdersComponent'
 
 export default {
     name: 'UserAccountSettingsComponent',
     components:{
         UserSubscription,
+        UserOrder
     },
     mounted() {
         this.$store.dispatch('loginUserFromDatabase')
@@ -53,6 +56,7 @@ export default {
         return{
             displayAcountContent: true,
             displayUserSubscription: false,
+            displayUserOrder: false,
         }
     },
     methods:{
@@ -60,12 +64,16 @@ export default {
             // this.displayAcountContent = !this.displayAcountContent 
         },
         openSubscription(){
+            this.displayUserOrder = !this.displayUserOrder 
             this.displayUserSubscription = !this.displayUserSubscription 
         },
         closeSubscription(){
             this.displayUserSubscription = !this.displayUserSubscription 
             this.displayAcountContent = !this.displayAcountContent 
         },
+        openMyOrders(){
+            this.displayUserOrder = !this.displayUserOrder
+        }
     },
     computed: {
         getUser(){
