@@ -20440,14 +20440,11 @@ __webpack_require__.r(__webpack_exports__);
     hideAccountContent: function hideAccountContent() {// this.displayAcountContent = !this.displayAcountContent 
     },
     openSubscription: function openSubscription() {
-      this.displayUserOrder = !this.displayUserOrder;
+      this.displayUserOrder = false;
       this.displayUserSubscription = !this.displayUserSubscription;
-    },
-    closeSubscription: function closeSubscription() {
-      this.displayUserSubscription = !this.displayUserSubscription;
-      this.displayAcountContent = !this.displayAcountContent;
     },
     openMyOrders: function openMyOrders() {
+      this.displayUserSubscription = false;
       this.displayUserOrder = !this.displayUserOrder;
     }
   },
@@ -20473,34 +20470,35 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'UserOrder',
   data: function data() {
-    return {
+    var _ref;
+
+    return _ref = {
       displayUserOrders: false,
       orderList: true,
-      subscribe: false,
+      vieworder: false,
       isLoading: false,
       callback: '',
-      packages: [],
-      subs_id: '',
+      orders: [],
+      order_id: '',
       title: '',
       currency: '',
       price: '',
       days: '',
       products: '',
       service_fee: '',
-      total_amount: '',
-      csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-    };
+      total_amount: ''
+    }, _defineProperty(_ref, "orders", []), _defineProperty(_ref, "bags", []), _ref;
   },
   created: function created() {
     var _this = this;
@@ -20511,9 +20509,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           switch (_context.prev = _context.next) {
             case 0:
               _this.isLoading = true;
-              axios.get("/package").then(function (response) {
+              axios.get("/orders").then(function (response) {
                 _this.isLoading = false;
-                _this.packages = response.data;
+                _this.orders = response.data.orders;
+                _this.bags = response.data.bags;
               })["catch"](function (error) {
                 console.log(error);
               });
@@ -20527,8 +20526,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }))();
   },
   methods: {
-    getStarted: function getStarted(subs_id, title, currency, price, days, products) {
-      this.subs_id = subs_id;
+    viewOrder: function viewOrder(order_id, title, currency, price, days, products) {
+      this.order_id = order_id;
       this.title = title;
       this.currency = currency;
       this.price = price;
@@ -20537,51 +20536,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.service_fee = Math.ceil(parseFloat(1.4 / 100 * parseInt(price)).toFixed(2));
       this.total_amount = price + this.service_fee;
       this.orderList = !this.orderList;
-      this.subscribe = !this.subscribe;
+      this.vieworder = !this.vieworder;
     },
     closeOrders: function closeOrders() {
-      this.subscribe = !this.subscribe;
-      this.orderList = !this.orderList;
       this.displayUserOrders = !this.displayUserOrders;
-    },
-    confirmPayment: function confirmPayment() {
-      var _this2 = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-        var _axios$post;
-
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                _this2.isLoading = true; // axios.post('/vendor/subscription/initialize', {
-                // }).then(response => {
-                //     this.isLoading = false
-                //     console.log(response.data)
-                // }).catch(error => {
-                //     console.log(error)
-                // })
-
-                axios.post('/vendor/subscription/initialize', (_axios$post = {
-                  subs_id: _this2.subs_id,
-                  price: _this2.title,
-                  currency: _this2.currency
-                }, _defineProperty(_axios$post, "price", _this2.price), _defineProperty(_axios$post, "days", _this2.days), _defineProperty(_axios$post, "products", _this2.products), _defineProperty(_axios$post, "service_fee", _this2.service_fee), _defineProperty(_axios$post, "total_amount", _this2.total_amount), _defineProperty(_axios$post, "csrf", _this2.csrf), _axios$post)).then(function (response) {
-                  _this2.isLoading = false;
-                  _this2.callback = response.data; // setTimeout(()=>{
-                  //     window.location = '/'
-                  // }, 3000)
-                })["catch"](function (error) {
-                  console.log(error);
-                });
-
-              case 2:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2);
-      }))();
+      this.vieworder = !this.vieworder;
+      this.orderList = !this.orderList;
     }
   }
 });
@@ -20668,9 +20628,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.subscribe = !this.subscribe;
     },
     closeSubscription: function closeSubscription() {
-      this.subscribe = !this.subscribe;
-      this.subscriptionList = !this.subscriptionList;
-      this.displayUserSubscription = !this.displayUserSubscription;
+      this.displayUserSubscription = !this.displayUserSubscription; // this.subscribe = !this.subscribe
+      // this.subscriptionList = !this.subscriptionList
     },
     confirmPayment: function confirmPayment() {
       var _this2 = this;
@@ -24034,12 +23993,6 @@ var _hoisted_3 = {
 };
 
 var _hoisted_4 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, "My Orders", -1
-  /* HOISTED */
-  );
-});
-
-var _hoisted_5 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
     width: "22",
     height: "22",
@@ -24054,78 +24007,120 @@ var _hoisted_5 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_6 = [_hoisted_5];
-var _hoisted_7 = {
+var _hoisted_5 = [_hoisted_4];
+var _hoisted_6 = {
   id: "cart-body"
 };
-var _hoisted_8 = {
+var _hoisted_7 = {
   key: 0,
   "class": "loader mx-auto my-5"
 };
+var _hoisted_8 = {
+  key: 1
+};
 var _hoisted_9 = {
-  "class": "text-2xl font-semibold"
+  "class": "grid grid-cols-2 gap-4 p-4 border-b items-center"
 };
-var _hoisted_10 = {
-  key: 0,
-  "class": "text-xl font-bold"
-};
+
+var _hoisted_10 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    "class": "text-lg text-right"
+  }, "Order No:", -1
+  /* HOISTED */
+  );
+});
+
 var _hoisted_11 = {
-  key: 1,
-  "class": "text-xl font-bold"
+  "class": "grid grid-cols-2 gap-4 p-4 border-b items-center"
 };
-var _hoisted_12 = {
-  "class": "text-lg font-normal"
+
+var _hoisted_12 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    "class": "text-lg text-right"
+  }, "Payment Status:", -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_13 = {
+  "class": "grid grid-cols-2 gap-4 p-4 border-b items-center"
 };
-var _hoisted_13 = ["innerHTML"];
-var _hoisted_14 = {
+
+var _hoisted_14 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    "class": "text-lg text-right"
+  }, "Total Amount:", -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_15 = {
+  "class": "grid grid-cols-2 gap-4 p-4 border-b items-center"
+};
+
+var _hoisted_16 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    "class": "text-lg text-right"
+  }, "Date:", -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_17 = {
   "class": "my-3"
 };
-var _hoisted_15 = ["onClick"];
-var _hoisted_16 = {
-  id: "subscribe",
+var _hoisted_18 = ["onClick"];
+var _hoisted_19 = {
+  key: 2,
+  "class": "text-center text-2xl p-4"
+};
+var _hoisted_20 = {
+  id: "vieworder",
   "class": "text-center"
 };
-var _hoisted_17 = {
+var _hoisted_21 = {
   "class": "mt-4 font-bold"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" User Subscription  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [_hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" User ordercription  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, "My Orders (" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.orders.length) + ")", 1
+  /* TEXT */
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
     onClick: _cache[0] || (_cache[0] = function ($event) {
       return $options.closeOrders();
     }),
     "class": "cursor-pointer"
-  }, _hoisted_6)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [$data.isLoading ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_8)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.packages.subs, function (subs) {
+  }, _hoisted_5)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [$data.isLoading ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_7)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.orders.length > 0 ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_8, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.orders, function (order) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
-      key: subs.id,
+      key: order.id,
       id: "cart-body-products",
-      "class": "p-4 text-center"
-    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(subs.title), 1
+      "class": "p-4 text-center border-b-2"
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [_hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(order.order_number), 1
     /* TEXT */
-    ), subs.price == 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_10, "Free Subscription")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(subs.currency) + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(subs.price), 1
+    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [_hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(order.payment_status), 1
     /* TEXT */
-    )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(subs.days) + " Days", 1
+    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [_hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(order.currency_sign) + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(order.pay_amount), 1
     /* TEXT */
-    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-      innerHTML: subs.details
+    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [_hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(new Date(order.created_at).toLocaleString()), 1
+    /* TEXT */
+    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+      value: "View Order",
+      type: "submit",
+      onClick: function onClick($event) {
+        return $options.viewOrder(order.id, order.number);
+      },
+      "class": "flex justify-center mx-auto btn-yus rounded-full w-full py-5 lg:w-1/2 lg:py-4 text-white"
     }, null, 8
     /* PROPS */
-    , _hoisted_13), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-      onClick: function onClick($event) {
-        return $options.getStarted(subs.id, subs.title, subs.currency, subs.price, subs.days, subs.allowed_products);
-      },
-      "class": "mx-auto btn-yus rounded-full lg:w-1/2 w-full py-2 text-white"
-    }, " Get Started ", 8
-    /* PROPS */
-    , _hoisted_15)])]);
+    , _hoisted_18)])]);
   }), 128
   /* KEYED_FRAGMENT */
   ))], 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.orderList]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.callback), 1
+  )), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.orderList]]) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_19, " Order Empty ")), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.callback), 1
   /* TEXT */
   )], 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.subscribe]])])])], 512
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.vieworder]])])])], 512
   /* NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.displayUserOrders]])], 2112
   /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */
@@ -25334,7 +25329,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#subscribe[data-v-5caf17b2]{\r\n        margin: 10vh auto;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#vieworder[data-v-5caf17b2]{\r\n        margin: 2vh auto;\n}\n#cart-body[data-v-5caf17b2]{\r\n        max-height: 100vh;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -25358,7 +25353,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#subscribe[data-v-1cd35a0c]{\r\n        margin: 10vh auto;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#subscribe[data-v-1cd35a0c]{\r\n        margin: 10vh auto;\n}\n#cart-body[data-v-1cd35a0c]{\r\n        max-height: 100vh;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

@@ -64,14 +64,11 @@ export default {
             // this.displayAcountContent = !this.displayAcountContent 
         },
         openSubscription(){
-            this.displayUserOrder = !this.displayUserOrder 
+            this.displayUserOrder = false 
             this.displayUserSubscription = !this.displayUserSubscription 
-        },
-        closeSubscription(){
-            this.displayUserSubscription = !this.displayUserSubscription 
-            this.displayAcountContent = !this.displayAcountContent 
         },
         openMyOrders(){
+            this.displayUserSubscription = false
             this.displayUserOrder = !this.displayUserOrder
         }
     },

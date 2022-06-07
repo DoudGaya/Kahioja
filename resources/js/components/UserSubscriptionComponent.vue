@@ -125,9 +125,9 @@ export default {
             this.subscribe = !this.subscribe
         },
         closeSubscription(){
-            this.subscribe = !this.subscribe
-            this.subscriptionList = !this.subscriptionList
             this.displayUserSubscription = !this.displayUserSubscription 
+            // this.subscribe = !this.subscribe
+            // this.subscriptionList = !this.subscriptionList
         },
         async confirmPayment(){
             this.isLoading = true
@@ -169,5 +169,8 @@ export default {
 <style scoped>
     #subscribe{
         margin: 10vh auto;
+    }
+    #cart-body{
+        max-height: 100vh;
     }
 </style>

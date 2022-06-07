@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Auth;
 use App\Models\Order;
+use App\Models\Bag;
 use DB;
 use App\Models\User;
 use App\Models\Product;
@@ -18,16 +19,13 @@ use Illuminate\Support\Facades\Input;
 class OrderController extends Controller
 {
 
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     public function orders()
     {
         $user = Auth::user();;
         $orders = Order::where('user_id','=',$user->id)->orderBy('id','desc')->get();
-        return response()->json($orders);
+        $bag = Bag::where('user_id', $user->id)->orderBy('id', 'desc')->get();
+        return response()->json(['orders'=>$orders, 'bag'=>$bag]);
+        // return response()->json($orders);
     }
 
     public function ordertrack()
