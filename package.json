@@ -29,6 +29,7 @@
     "dependencies": {
         "flutterwave-vue-v3": "^1.0.5",
         "vue-product-zoomer": "^3.0.1",
+        "vue-router": "^4.0.15",
         "vuex": "^4.0.2"
     }
 }
