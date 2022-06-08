@@ -8,7 +8,7 @@
         <!-- Category Content  -->
         <div id="cate-content" class="my-16">
             @if(count($products))
-            <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="grid grid-cols-2 lg:grid-cols-4 md:grid-cols-3 gap-6">
                 @foreach($products as $prod)
                     @include('includes.productComponent')
                 @endforeach
