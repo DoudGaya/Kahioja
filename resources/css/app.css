@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.input-box{
+    @apply border border-gray-300 rounded py-3 px-6 w-full my-2 focus:outline-none;
+}

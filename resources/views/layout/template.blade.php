@@ -51,7 +51,7 @@
                     </div>
                     <div class="w-full md:w-1/2 mt-12">
                         <p>
-                            Kahioja is an ecommerce platform that serve local market across Africa. We aim to give access to myriad of products on our platform and help businesses grow whilst making sales and delivery as ease. 
+                            Kahioja is an ecommerce platform that serve local market across Africa. We aim to give access to myriad of products on our platform and help businesses grow whilst making sales and delivery as ease 
                         </p>
                     </div>
                 </div>
@@ -88,7 +88,7 @@
             </div>
             <div class="mt-6 w-full md:px-14 px-4">
                 <p>
-                    Copyright &copy; 2022. All Rights Reserved By Kahioja
+                    Copyright &copy; 2022 <br>All Rights Reserved By Kahioja
                 </p>
             </div>
         </div>

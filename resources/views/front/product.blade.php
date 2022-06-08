@@ -5,7 +5,7 @@
     <div id="banner" class="mt-6 md:px-14 px-4">
         <!-- Nav  -->
         <div id="product-details-nav" class="mt-40 md:mt-32 lg:mt-0">
-            <ul class="flex sm:text-xs text-base">
+            <ul class="flex sm:text-xs">
                 <li class="ml-1"><a href="{{route('front.index')}}">Home/ </a></li>
                 <li class="ml-1"><a href="{{route('front.category',$productt->category->slug)}}">{{$productt->category->name}}/ </a></li>
                 @if($productt->subcategory_id != null)

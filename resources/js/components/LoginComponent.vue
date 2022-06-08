@@ -21,10 +21,10 @@
                     </div>
                     <div class="my-4">
                         <div>
-                            <input required v-model="loginEmail" class="border border-gray-300 rounded py-2 px-6 w-full my-2 focus:outline-none" type="email" name="email" id="loginEmail" placeholder="Email Address">
+                            <input required v-model="loginEmail" class="input-box" type="email" name="email" id="loginEmail" placeholder="Email Address">
                         </div>
                         <div>
-                            <input required v-model="loginPassword" class="border border-gray-300 rounded py-2 px-6 w-full my-2 focus:outline-none" type="password" name="password" id="loginPassword" placeholder="Password">
+                            <input @keydown.enter="loginUser()" required v-model="loginPassword" class="input-box" type="password" name="password" id="loginPassword" placeholder="Password">
                         </div>
                     </div>
                     <div @click="showForgotPasswordForm()" class="cursor-pointer flex justify-end my-4">
@@ -47,7 +47,7 @@
                         Do not have an account?
                     </div>
                     <div @click="showSignUpForm()" class="my-8">
-                        <button class="mx-auto btn-yus-conti-shopping rounded-full w-full py-2 text-black">
+                        <button class="mx-auto btn-yus-conti-shopping rounded-full w-full py-3 text-black">
                             Create account
                         </button>
                     </div>
@@ -59,13 +59,13 @@
                     </div>
                     <div class="my-4">
                         <div>
-                            <input required v-model="signUpName" class="border border-gray-300 rounded py-2 px-6 w-full my-2 focus:outline-none" type="text" name="name" id="signUpName" placeholder="Full Name">
+                            <input required v-model="signUpName" class="input-box" type="text" name="name" id="signUpName" placeholder="Full Name">
                         </div>
                         <div>
-                            <input required v-model="signUpEmail" class="border border-gray-300 rounded py-2 px-6 w-full my-2 focus:outline-none" type="email" name="email" id="signUpEmail" placeholder="Email Address">
+                            <input required v-model="signUpEmail" class="input-box" type="email" name="email" id="signUpEmail" placeholder="Email Address">
                         </div>
                         <div>
-                            <input required v-model="signUpPassword" class="border border-gray-300 rounded py-2 px-6 w-full my-2 focus:outline-none" type="password" name="password" id="signUpPassword" placeholder="Password">
+                            <input required v-model="signUpPassword" class="input-box" type="password" name="password" id="signUpPassword" placeholder="Password">
                         </div>
                     </div>
                     <div class="text-left my-4">
@@ -97,7 +97,7 @@
                     </div>
                     <div class="my-4">
                         <div>
-                            <input required v-model="forgotPasswordEmail" class="border border-gray-300 rounded py-2 px-6 w-full my-2 focus:outline-none" type="text" name="forgotPasswordEmail" id="ForgotPasswordEmail" placeholder="Email Address">
+                            <input required v-model="forgotPasswordEmail" class="input-box" type="text" name="forgotPasswordEmail" id="ForgotPasswordEmail" placeholder="Email Address">
                         </div>
                     </div>
                     <div class="my-8">
