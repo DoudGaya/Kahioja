@@ -20476,29 +20476,16 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'UserOrder',
   data: function data() {
-    var _ref;
-
-    return _ref = {
-      displayUserOrders: false,
+    return {
+      displayUserOrders: true,
       orderList: true,
-      vieworder: false,
       isLoading: false,
       callback: '',
-      orders: [],
-      order_id: '',
-      title: '',
-      currency: '',
-      price: '',
-      days: '',
-      products: '',
-      service_fee: '',
-      total_amount: ''
-    }, _defineProperty(_ref, "orders", []), _defineProperty(_ref, "bags", []), _ref;
+      orders: []
+    };
   },
   created: function created() {
     var _this = this;
@@ -20511,8 +20498,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
               _this.isLoading = true;
               axios.get("/orders").then(function (response) {
                 _this.isLoading = false;
-                _this.orders = response.data.orders;
-                _this.bags = response.data.bags;
+                _this.orders = response.data;
               })["catch"](function (error) {
                 console.log(error);
               });
@@ -20526,22 +20512,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }))();
   },
   methods: {
-    viewOrder: function viewOrder(order_id, title, currency, price, days, products) {
-      this.order_id = order_id;
-      this.title = title;
-      this.currency = currency;
-      this.price = price;
-      this.days = days + ' days';
-      this.products = products;
-      this.service_fee = Math.ceil(parseFloat(1.4 / 100 * parseInt(price)).toFixed(2));
-      this.total_amount = price + this.service_fee;
-      this.orderList = !this.orderList;
-      this.vieworder = !this.vieworder;
-    },
     closeOrders: function closeOrders() {
       this.displayUserOrders = !this.displayUserOrders;
-      this.vieworder = !this.vieworder;
-      this.orderList = !this.orderList;
     }
   }
 });
@@ -24064,7 +24036,8 @@ var _hoisted_4 = /*#__PURE__*/_withScopeId(function () {
 
 var _hoisted_5 = [_hoisted_4];
 var _hoisted_6 = {
-  id: "cart-body"
+  id: "cart-body",
+  "class": "bg-gray-200 text-sm"
 };
 var _hoisted_7 = {
   key: 0,
@@ -24074,67 +24047,111 @@ var _hoisted_8 = {
   key: 1
 };
 var _hoisted_9 = {
-  "class": "grid grid-cols-2 gap-4 p-4 border-b items-center"
+  "class": "py-2"
 };
 
 var _hoisted_10 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    "class": "text-lg text-right"
-  }, "Order No:", -1
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("b", null, "Order ID", -1
   /* HOISTED */
   );
 });
 
 var _hoisted_11 = {
-  "class": "grid grid-cols-2 gap-4 p-4 border-b items-center"
+  "class": "py-2"
 };
 
 var _hoisted_12 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    "class": "text-lg text-right"
-  }, "Payment Status:", -1
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("b", null, "Order Time", -1
   /* HOISTED */
   );
 });
 
 var _hoisted_13 = {
-  "class": "grid grid-cols-2 gap-4 p-4 border-b items-center"
+  "class": "grid grid-cols-3 gap-3 py-2 items-center"
+};
+var _hoisted_14 = {
+  "class": "col-span-1"
+};
+var _hoisted_15 = ["src"];
+var _hoisted_16 = {
+  "class": "col-span-2"
 };
 
-var _hoisted_14 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    "class": "text-lg text-right"
-  }, "Total Amount:", -1
+var _hoisted_17 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("b", null, "Product:"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("   ")], -1
   /* HOISTED */
   );
 });
 
-var _hoisted_15 = {
-  "class": "grid grid-cols-2 gap-4 p-4 border-b items-center"
+var _hoisted_18 = {
+  "class": "flex"
 };
 
-var _hoisted_16 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    "class": "text-lg text-right"
-  }, "Date:", -1
+var _hoisted_19 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("b", null, "Shop:"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("   ")], -1
   /* HOISTED */
   );
 });
 
-var _hoisted_17 = {
+var _hoisted_20 = {
+  "class": "flex"
+};
+
+var _hoisted_21 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("b", null, "Shop Address:"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("   ")], -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_22 = {
+  "class": "flex"
+};
+
+var _hoisted_23 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("b", null, "Shop Phone:"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("   ")], -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_24 = {
+  "class": "flex justify-between py-2"
+};
+
+var _hoisted_25 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("b", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, "Quantity")], -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_26 = {
+  "class": "flex justify-between py-2"
+};
+
+var _hoisted_27 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("b", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, "Total Amount")], -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_28 = {
+  key: 0,
   "class": "my-3"
 };
-var _hoisted_18 = ["onClick"];
-var _hoisted_19 = {
+
+var _hoisted_29 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    value: "Pay Now",
+    type: "submit",
+    "class": "flex justify-center mx-auto btn-yus w-full py-5 lg:w-1/2 lg:py-4 text-white"
+  }, null, -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_30 = [_hoisted_29];
+var _hoisted_31 = {
   key: 2,
   "class": "text-center text-2xl p-4"
-};
-var _hoisted_20 = {
-  id: "vieworder",
-  "class": "text-center"
-};
-var _hoisted_21 = {
-  "class": "mt-4 font-bold"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" User ordercription  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, "My Orders (" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.orders.length) + ")", 1
@@ -24148,34 +24165,38 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       key: order.id,
       id: "cart-body-products",
-      "class": "p-4 text-center border-b-2"
-    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [_hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(order.order_number), 1
+      "class": "py-4 lg:px-8 px-5 border-b-2 bg-white my-3"
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [_hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(": " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(order.order_no), 1
     /* TEXT */
-    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [_hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(order.payment_status), 1
+    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [_hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(": " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(new Date(order.time_ordered).toLocaleString()), 1
     /* TEXT */
-    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [_hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(order.currency_sign) + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(order.pay_amount), 1
-    /* TEXT */
-    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [_hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(new Date(order.created_at).toLocaleString()), 1
-    /* TEXT */
-    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-      value: "View Order",
-      type: "submit",
-      onClick: function onClick($event) {
-        return $options.viewOrder(order.id, order.number);
+    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+      style: {
+        "width": "100px",
+        "height": "100px",
+        "border": "1px solid #ddd"
       },
-      "class": "flex justify-center mx-auto btn-yus rounded-full w-full py-5 lg:w-1/2 lg:py-4 text-white"
+      src: "https://dashboard.kahioja.com/assets/images/products/".concat(order.photo)
     }, null, 8
     /* PROPS */
-    , _hoisted_18)])]);
+    , _hoisted_15)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(order.product_name), 1
+    /* TEXT */
+    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [_hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(order.shop_name), 1
+    /* TEXT */
+    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [_hoisted_21, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(order.shop_address), 1
+    /* TEXT */
+    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [_hoisted_23, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(order.shop_number), 1
+    /* TEXT */
+    )])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_24, [_hoisted_25, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, "X" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(order.quantity), 1
+    /* TEXT */
+    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_26, [_hoisted_27, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, "N" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(order.amount), 1
+    /* TEXT */
+    )]), order.paid == 'unpaid' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_28, _hoisted_30)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
   }), 128
   /* KEYED_FRAGMENT */
   ))], 512
   /* NEED_PATCH */
-  )), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.orderList]]) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_19, " Order Empty ")), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.callback), 1
-  /* TEXT */
-  )], 512
-  /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.vieworder]])])])], 512
+  )), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.orderList]]) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_31, " Order Empty "))])])], 512
   /* NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.displayUserOrders]])], 2112
   /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */
@@ -24237,7 +24258,7 @@ var _hoisted_5 = /*#__PURE__*/_withScopeId(function () {
 
 var _hoisted_6 = [_hoisted_5];
 var _hoisted_7 = {
-  id: "cart-body"
+  id: "cart-body text-sm"
 };
 var _hoisted_8 = {
   key: 0,

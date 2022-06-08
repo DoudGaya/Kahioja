@@ -22,10 +22,17 @@ class OrderController extends Controller
     public function orders()
     {
         $user = Auth::user();;
-        $orders = Order::where('user_id','=',$user->id)->orderBy('id','desc')->get();
-        $bag = Bag::where('user_id', $user->id)->orderBy('id', 'desc')->get();
-        return response()->json(['orders'=>$orders, 'bag'=>$bag]);
-        // return response()->json($orders);
+        $bags = DB::table('bags')
+                ->join('products', 'bags.product_id','=','products.id')
+                ->join('users', 'products.user_id', '=', 'users.id')
+                ->select(
+                    ['products.name AS product_name', 'products.photo AS product_photo', 'products.name AS product_name',
+                    'bags.quantity AS quantity', 'bags.amount AS amount', 'bags.paid AS paid', 'bags.order_no AS order_no', 'bags.created_at AS time_ordered', 
+                    'users.shop_name AS shop_name', 'users.shop_address AS shop_address', 'users.shop_number AS shop_number' 
+                ])
+                ->where('bags.user_id','=',$user->id)
+                ->get();
+        return response()->json($bags);
     }
 
     public function ordertrack()
