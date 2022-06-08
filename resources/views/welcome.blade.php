@@ -86,7 +86,7 @@
     <!-- Best Product  -->
     <div id="best-product" class="relative top-36 lg:top-0 lg:px-14 px-4 my-8">
         <h1 class="headings-yus">Best Products</h1>
-        <div class="grid lg:grid-cols-4 grid-cols-2 gap-6">
+        <div class="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-6">
             @foreach($best_products as $prod)
                 @include('includes.productComponent')
             @endforeach
@@ -95,7 +95,7 @@
     <!-- Top Rated -->
     <div id="top-product" class="relative top-36 lg:top-0 lg:px-14 px-4 mt-20 mb-8">
         <h1 class="headings-yus">Top Rated</h1>
-        <div class="grid lg:grid-cols-4 grid-cols-2 gap-6">
+        <div class="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-6">
             @foreach($top_products as $prod)
                 @include('includes.productComponent')
             @endforeach
@@ -110,7 +110,7 @@
     <!-- Hot Products -->
     <div id="hot-product" class="relative top-36 lg:top-0 lg:px-14 px-4 mt-20 mb-8">
         <h1 class="headings-yus">Hot Products</h1>
-        <div class="grid lg:grid-cols-4 grid-cols-2 gap-6">
+        <div class="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-6">
             @foreach($hot_products as $prod)
                 @include('includes.productComponent')
             @endforeach
@@ -125,7 +125,7 @@
     <!-- Sale Products -->
     <div id="hot-product" class="relative top-36 lg:top-0 lg:px-14 px-4 mt-20 mb-8">
         <h1 class="headings-yus">Sale Products</h1>
-        <div class="grid lg:grid-cols-4 grid-cols-2 gap-6">
+        <div class="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-6">
             @foreach($sale_products as $prod)
                 @include('includes.productComponent')
             @endforeach
@@ -135,7 +135,7 @@
     <!-- <load-component></load-component> -->
     <!-- Trust  -->
     <div class="relative top-36 lg:top-0 mt-16 lg:px-14 px-4">
-        <div class="grid lg:grid-cols-4 grid-cols-2 gap-6">
+        <div class="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-6">
             <div class="flex justify-center items-center">
                 <svg width="90" height="90" viewBox="0 0 132 132" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M74.7815 111.222H20.4176C19.3726 111.222 18.3703 110.806 17.6314 110.068C16.8924 109.329 16.4773 108.326 16.4773 107.281V24.537C16.4773 23.4919 16.8924 22.4897 17.6314 21.7507C18.3703 21.0118 19.3726 20.5966 20.4176 20.5966H111.401C112.446 20.5966 113.448 21.0118 114.187 21.7507C114.926 22.4897 115.341 23.4919 115.341 24.537V63.1025" stroke="black" stroke-width="5.06993" stroke-miterlimit="10" stroke-linecap="round"/><path d="M32.5924 36.4865H68.8515" stroke="black" stroke-width="5.06993" stroke-miterlimit="10" stroke-linecap="round"/><path d="M32.5924 51.1534H53.7775" stroke="black" stroke-width="5.06993" stroke-miterlimit="10" stroke-linecap="round"/><path d="M102.869 75.1246L102.107 74.6867L101.344 75.1246C98.6841 76.6529 95.727 77.5931 92.6726 77.8819C89.6181 78.1707 86.5372 77.8014 83.6375 76.7989V94.7634C83.6375 97.0465 84.0872 99.3071 84.9609 101.416C85.8346 103.526 87.1152 105.442 88.7295 107.056L98.1021 116.429C98.628 116.955 99.2522 117.372 99.9393 117.657C100.626 117.942 101.363 118.088 102.106 118.088V118.088C102.85 118.088 103.587 117.942 104.274 117.657C104.961 117.372 105.585 116.955 106.111 116.429L115.483 107.057C118.744 103.796 120.575 99.3743 120.575 94.7634V76.7991C117.676 77.8016 114.595 78.1709 111.54 77.882C108.486 77.5932 105.529 76.6529 102.869 75.1246V75.1246Z" stroke="#F37022" stroke-width="5.06993" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 <div class="ml-3">
