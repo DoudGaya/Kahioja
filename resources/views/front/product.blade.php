@@ -4,21 +4,21 @@
     <!-- Banner -->
     <div id="banner" class="mt-6 md:px-14 px-4">
         <!-- Nav  -->
-        <div id="product-details-nav">
-            <ul class="flex">
-                <li class="ml-1"><a href="{{route('front.index')}}">Home / </a></li>
-                <li class="ml-1"><a href="{{route('front.category',$productt->category->slug)}}">{{$productt->category->name}}  / </a></li>
+        <div id="product-details-nav" class="mt-40 md:mt-32 lg:mt-0">
+            <ul class="flex sm:text-xs text-base">
+                <li class="ml-1"><a href="{{route('front.index')}}">Home/ </a></li>
+                <li class="ml-1"><a href="{{route('front.category',$productt->category->slug)}}">{{$productt->category->name}}/ </a></li>
                 @if($productt->subcategory_id != null)
                 <li class="ml-1">
-                    <a href="{{ route('front.subcat',['slug1' => $productt->category->slug, 'slug2' => $productt->subcategory->slug]) }}">{{$productt->subcategory->name}}  / </a>
+                    <a href="{{ route('front.subcat',['slug1' => $productt->category->slug, 'slug2' => $productt->subcategory->slug]) }}">{{$productt->subcategory->name}}/ </a>
                 </li class="ml-1">
                 @endif
                 @if($productt->childcategory_id != null)
                 <li class="ml-1">
-                    <a href="{{ route('front.childcat',['slug1' => $productt->category->slug, 'slug2' => $productt->subcategory->slug, 'slug3' => $productt->childcategory->slug]) }}">{{$productt->childcategory->name}} / </a>
+                    <a href="{{ route('front.childcat',['slug1' => $productt->category->slug, 'slug2' => $productt->subcategory->slug, 'slug3' => $productt->childcategory->slug]) }}">{{$productt->childcategory->name}}/ </a>
                 </li>
                 @endif
-                <li class="ml-1"><a href="{{ route('front.product', $productt->slug) }}">{{ $productt->name }} / </a>
+                <li class="ml-1"><a href="{{ route('front.product', $productt->slug) }}">{{ $productt->name }}/ </a>
             </ul>
         </div>
         <!-- Product  -->

@@ -468,7 +468,7 @@ img {vertical-align: middle;}
 #product-details-nav{
     font-style: normal;
     font-weight: 450;
-    font-size: 14px;
+    /* font-size: 14px; */
     line-height: 21px;
     display: flex;
     align-items: flex-end;
