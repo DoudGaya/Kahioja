@@ -126,8 +126,6 @@ export default {
         },
         closeSubscription(){
             this.displayUserSubscription = !this.displayUserSubscription 
-            // this.subscribe = !this.subscribe
-            // this.subscriptionList = !this.subscriptionList
         },
         async confirmPayment(){
             this.isLoading = true

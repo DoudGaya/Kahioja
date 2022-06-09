@@ -12,45 +12,61 @@
                 <div v-if="isLoading" class="loader mx-auto my-5"></div>
                 <div v-if="orders.length > 0" v-show="orderList">
                     <div :key="order.id" v-for="order in orders" id="cart-body-products" class="py-4 lg:px-8 px-5 border-b-2 bg-white my-3">
-                        <div class="py-2">
-                            <b>Order ID</b>: {{ order.order_no}}
+                        <div class="border-b">
+                            <div v-if="(order.order_no != null)" class="py-1">
+                                <b>Order ID</b>: {{ order.order_no}}
+                            </div>
+                            <div class="py-1">
+                                <b>Order Time</b>: {{ new Date(order.time_ordered).toLocaleString() }}
+                            </div>
                         </div>
-                        <div class="py-2">
-                            <b>Order Time</b>: {{ new Date(order.time_ordered).toLocaleString() }}
-                        </div>
-                        <div class="grid grid-cols-3 gap-3 py-2 items-center">
+                        <div class="grid grid-cols-3 gap-3 items-center border-b py-3">
                             <div class="col-span-1">
                                 <img style="width: 100px; height: 100px; border: 1px solid #ddd;" :src="`https://dashboard.kahioja.com/assets/images/products/${order.photo}`">
                             </div>
                             <div class="col-span-2">
-                                <div>
-                                    <span><b>Product:</b> &nbsp; </span>
-                                    <span>{{ order.product_name }}</span>
+                                <div class="grid grid-cols-3 gap-2">
+                                    <span class="col-span-1"><b>Product:</b></span>
+                                    <span class="col-span-2">{{ order.product_name }}</span>
                                 </div>
-                                <div class="flex">
-                                    <span><b>Shop:</b> &nbsp; </span>
-                                    <span>{{ order.shop_name }}</span>
+                                <div class="grid grid-cols-3 gap-2">
+                                    <span class="col-span-1"><b>Shop:</b></span>
+                                    <span class="col-span-2">{{ order.shop_name }}</span>
                                 </div>
-                                <div class="flex">
-                                    <span><b>Shop Address:</b> &nbsp; </span>
-                                    <span>{{ order.shop_address }}</span>
+                                <div class="grid grid-cols-3 gap-2">
+                                    <span class="col-span-1"><b>Shop Address:</b></span>
+                                    <span class="col-span-2">{{ order.shop_address }}</span>
                                 </div>
-                                <div class="flex">
-                                    <span><b>Shop Phone:</b> &nbsp; </span>
-                                    <span>{{ order.shop_number }}</span>
+                                <div class="grid grid-cols-3 gap-2">
+                                    <span class="col-span-1"><b>Shop Phone:</b></span>
+                                    <span class="col-span-2">{{ order.shop_number }}</span>
                                 </div>
                             </div>
                         </div>
-                        <div class="flex justify-between py-2">
-                            <b><span>Quantity</span></b>
-                            <span>X{{ order.quantity }}</span>
-                        </div>
-                        <div class="flex justify-between py-2">
-                            <b><span>Total Amount</span></b>
-                            <span>N{{ order.amount }}</span>
+                        <div class="py-2">
+                            <div class="flex justify-between py-1">
+                                <b><span>Quantity</span></b>
+                                <span>X{{ order.quantity }}</span>
+                            </div>
+                            <div class="flex justify-between py-1">
+                                <b><span>Total Amount</span></b>
+                                <span>N{{ order.amount }}</span>
+                            </div>
+                            <div v-if="(order.paid == 'paid')" class="flex justify-between py-1">
+                                <b><span>Delivery Status</span></b>
+                                <span v-if="(order.order_status == 'pending' || order.order_status == 'processing' || order.order_status == 'completed')">Processing</span>
+                                <span v-if="(order.order_status == 'accept delivery' || order.order_status == 'pick up for delivery' || order.order_status == 'on delivery')">On Delivery</span>
+                                <span v-if="(order.order_status == 'delivered')">Deliveried</span>
+                                <span v-if="(order.order_status == 'declined')">Declined</span>
+                            </div>
                         </div>
                         <div v-if="(order.paid == 'unpaid')" class="my-3">
-                            <input value="Pay Now" type="submit" class="flex justify-center mx-auto btn-yus w-full py-5 lg:w-1/2 lg:py-4 text-white">
+                            <form action="/buynow" method="POST">
+                                <input type="hidden" name="_token" :value="csrf">
+                                <input type="hidden" name="product_id" :value="order.product_id">
+                                <input type="hidden" name="quantity" :value="order.quantity">
+                                <input @click="payNow()" value="Pay Now" type="submit" class="rounded-full flex justify-center mx-auto btn-yus w-full py-3 lg:w-1/2 lg:py-4 text-white">
+                            </form>
                         </div>
                      </div>
                 </div>
@@ -72,6 +88,7 @@ export default {
             isLoading: false,
             callback: '',
             orders: [],
+            csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
         }
     },
     async created(){
@@ -84,8 +101,23 @@ export default {
         })
     },
     methods:{
+        async payNow(){
+            axios.post('/buynow', {
+                product_id: this.productid,
+                quantity: this.quantity
+            }).then(response => {
+                this.$store.dispatch("allCartFromDatabase")
+            }).catch(error => {
+                console.log(error)
+            })
+        },
+
         closeOrders(){
-            this.displayUserOrders = !this.displayUserOrders 
+            if(this.displayUserOrders == true){
+                this.displayUserOrders = false 
+            }else{
+                this.displayUserOrders = true
+            }
         }
         
     }

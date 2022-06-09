@@ -39,6 +39,7 @@
                 </div> 
             </button>
         </div>
+        
     </div>
 </template>
 
@@ -63,6 +64,8 @@ export default {
         async addToBag(){
             axios.post('/addtobag', {
                 product_id: this.productid,
+                product_price: this.productcurrprice,
+                product_delivery_fee: this.productdeliveryfee,
                 quantity: 1
             }).then(response => {
                 this.cart = response.data

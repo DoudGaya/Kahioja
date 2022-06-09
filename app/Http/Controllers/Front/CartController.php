@@ -45,13 +45,20 @@ class CartController extends Controller
         }
 
         $product_id = $request->product_id;
+        
+        $product_delivery_fee = $request->product_delivery_fee;
         $quantity = $request->quantity;
+
+        $product_price = Product::select('price')->where('id', $product_id)->pluck('price')->first();
+        $product_delivery_fee = Product::select('ship_fee')->where('id', $product_id)->pluck('ship_fee')->first();
         
         $is_product_in_bag = Bag::where('product_id', $product_id)->where('user_id', $user_id)->count();
             if($is_product_in_bag == 0){
                 try{
                     Bag::create([
                         'product_id'=> $product_id,
+                        'amount'=> $product_price,
+                        'ship_fee'=> $product_delivery_fee,
                         'user_id'=> $user_id,
                         'user_type'=> $user_type,
                         'quantity'=> ($quantity == 0) ? 1 : $quantity,

@@ -41,7 +41,9 @@
             <nav-component></nav-component> 
             @yield('main')
         </div>
-        
+        <!-- <div id="addCartNotification" class=" bg-gray-500 text-white p-4 text-center rounded-full">
+            Adding Product to Cart
+        </div> -->
         <!-- Footer  -->
         <div id="footer" class="relative top-36 md:top-0 mt-16 py-12">
             <div class="grid md:grid-cols-4 grid-cols-2 gap-6 md:px-14 px-4">

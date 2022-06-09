@@ -10,7 +10,7 @@ class Bag extends Model
     use HasFactory;
 
     protected $fillable = [
-        'product_id', 'user_id', 'user_type', 'quantity', 'paid', 'order_no'
+        'product_id', 'user_id', 'user_type', 'quantity', 'paid', 'order_no', 'amount','ship_fee','logistics_id','status'
     ];
     
 }
