@@ -21,7 +21,7 @@ class OrderController extends Controller
 
     public function orders()
     {
-        $user = Auth::user();;
+        $user = Auth::user();
         $bags = DB::table('bags')
                 ->join('products', 'bags.product_id','=','products.id')
                 ->join('users', 'products.user_id', '=', 'users.id')
@@ -35,10 +35,28 @@ class OrderController extends Controller
         return response()->json($bags);
     }
 
-    public function ordertrack()
+    public function trackorder($slug)
     {
-        $user = Auth::guard('web')->user();
-        return view('user.order-track',compact('user'));
+        $user = Auth::user();
+
+        if(mb_strlen($slug,'utf-8') > 1){
+            $search = '%'.$slug.'%';
+            $order = Bag::where('user_id','=',$user->id)->where('order_no', 'like', $search)->count();
+            if($order > 0){
+                $bags = DB::table('bags')
+                        ->join('products', 'bags.product_id','=','products.id')
+                        ->join('users', 'products.user_id', '=', 'users.id')
+                        ->select(
+                            ['products.id AS product_id', 'products.name AS product_name', 'products.photo AS product_photo', 'products.name AS product_name',
+                            'bags.quantity AS quantity', 'bags.amount AS amount', 'bags.ship_fee AS ship_fee', 'bags.status AS order_status', 'bags.paid AS paid', 'bags.order_no AS order_no', 'bags.created_at AS time_ordered', 
+                            'users.shop_name AS shop_name', 'users.shop_address AS shop_address', 'users.shop_number AS shop_number' 
+                        ])
+                        ->where('bags.order_no','=',$slug)
+                        ->get();
+                return response()->json($bags);
+            }
+        }
+        return "";
     }
 
     public function trackload($id)

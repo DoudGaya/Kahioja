@@ -8,7 +8,9 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Models\Generalsetting;
 use App\Models\Page;
+use App\Models\Bag;
 use DB;
+use Auth;
 use Response;
 
 use Illuminate\Http\Request;

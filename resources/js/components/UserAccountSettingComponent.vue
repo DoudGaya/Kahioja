@@ -16,7 +16,7 @@
                 <span><li class="text-sm list-none">My Orders</li></span>
             </div>
             <!-- Track Order  -->
-            <div class="flex border-b p-3 items-center cursor-pointer hover:bg-gray-100">
+            <div @click="openTrackOrder()" class="flex border-b p-3 items-center cursor-pointer hover:bg-gray-100">
                 <span><li class="text-sm list-none">Track Order</li></span>
             </div>
             <!-- Edit Profile  -->
@@ -36,18 +36,21 @@
         </div>
         <UserSubscription v-show="displayUserSubscription" />
         <UserOrder v-show="displayUserOrder" />
+        <UserTrackOrder v-show="displayTrackOrder" />
     </div>
 </template>
 
 <script>
 import UserSubscription from './UserSubscriptionComponent'
 import UserOrder from './UserOrdersComponent'
+import UserTrackOrder from './UserTrackOrderComponent'
 
 export default {
     name: 'UserAccountSettingsComponent',
     components:{
         UserSubscription,
-        UserOrder
+        UserOrder,
+        UserTrackOrder,
     },
     mounted() {
         this.$store.dispatch('loginUserFromDatabase')
@@ -57,6 +60,7 @@ export default {
             displayAcountContent: true,
             displayUserSubscription: false,
             displayUserOrder: false,
+            displayTrackOrder: false,
         }
     },
     methods:{
@@ -65,11 +69,18 @@ export default {
         },
         openSubscription(){
             this.displayUserOrder = false 
+            this.displayTrackOrder = false 
             this.displayUserSubscription = !this.displayUserSubscription 
         },
         openMyOrders(){
             this.displayUserSubscription = false
+            this.displayTrackOrder = false
             this.displayUserOrder = !this.displayUserOrder
+        },
+        openTrackOrder(){
+            this.displayUserSubscription = false
+            this.displayUserOrder = false
+            this.displayTrackOrder = !this.displayTrackOrder
         }
     },
     computed: {
