@@ -24,7 +24,7 @@
                 <span><li class="text-sm list-none">Edit Profile</li></span>
             </div>
             <!-- Reset Password  -->
-            <div class="flex border-b p-3 items-center cursor-pointer hover:bg-gray-100">
+            <div @click="openResetPassword()" class="flex border-b p-3 items-center cursor-pointer hover:bg-gray-100">
                 <span><li class="text-sm list-none">Reset Password</li></span>
             </div>
             <!-- Logout  -->
@@ -38,6 +38,7 @@
         <UserOrder v-show="displayUserOrder" />
         <UserTrackOrder v-show="displayTrackOrder" />
         <UserProfile v-show="displayUserProfile" />
+        <UserResetPassword v-show="displayUserResetPassword " />
     </div>
 </template>
 
@@ -46,6 +47,7 @@ import UserSubscription from './UserSubscriptionComponent'
 import UserOrder from './UserOrdersComponent'
 import UserTrackOrder from './UserTrackOrderComponent'
 import UserProfile from './UserProfileComponent'
+import UserResetPassword from './UserResetPasswordComponent'
 
 export default {
     name: 'UserAccountSettingsComponent',
@@ -54,6 +56,7 @@ export default {
         UserOrder,
         UserTrackOrder,
         UserProfile,
+        UserResetPassword
     },
     mounted() {
         this.$store.dispatch('loginUserFromDatabase')
@@ -65,6 +68,7 @@ export default {
             displayUserOrder: false,
             displayTrackOrder: false,
             displayUserProfile: false,
+            displayUserResetPassword: false,
         }
     },
     methods:{
@@ -75,25 +79,36 @@ export default {
             this.displayUserOrder = false 
             this.displayTrackOrder = false 
             this.displayUserProfile = false 
+            this.displayUserResetPassword = false 
             this.displayUserSubscription = !this.displayUserSubscription 
         },
         openMyOrders(){
             this.displayUserSubscription = false
             this.displayTrackOrder = false
             this.displayUserProfile = false
+            this.displayUserResetPassword = false
             this.displayUserOrder = !this.displayUserOrder
         },
         openTrackOrder(){
             this.displayUserSubscription = false
             this.displayUserOrder = false
             this.displayUserProfile = false
+            this.displayUserResetPassword = false
             this.displayTrackOrder = !this.displayTrackOrder
         },
         openEditProfile(){
             this.displayUserSubscription = false
             this.displayUserOrder = false
             this.displayTrackOrder = false
+            this.displayUserResetPassword = false
             this.displayUserProfile = !this.displayUserProfile
+        },
+        openResetPassword(){
+            this.displayUserSubscription = false
+            this.displayUserOrder = false
+            this.displayTrackOrder = false
+            this.displayUserProfile = false
+            this.displayUserResetPassword = !this.displayUserResetPassword
         }
     },
     computed: {

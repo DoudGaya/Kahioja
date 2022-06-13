@@ -94,6 +94,9 @@ export default {
                 address: this.userAddress,
             }).then(response => {
                 this.callback = response.data
+                setTimeout(()=>{
+                    this.callback = ''
+                }, 3000)
                 this.isLoading = false
             }).catch(error => {
                 console.log(error)

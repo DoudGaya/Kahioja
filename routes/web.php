@@ -116,6 +116,5 @@ Route::post('/profile', [UserController::class, 'profileupdate'])->name('user-pr
 // User Profile Ends
 
 // User Reset
-Route::get('/reset', [UserController::class, 'resetform'])->name('user-reset');
 Route::post('/reset', [UserController::class, 'reset'])->name('user-reset-submit');
 // User Reset End

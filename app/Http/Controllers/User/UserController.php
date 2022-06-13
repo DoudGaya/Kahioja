@@ -92,7 +92,7 @@ class UserController extends Controller
             }
         }
         $user->update($input);
-        $msg = 'Successfully change your password';
+        $msg = 'Password Changed Successfully!';
         return response()->json($msg);
     }
 
