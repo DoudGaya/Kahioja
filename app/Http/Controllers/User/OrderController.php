@@ -48,7 +48,7 @@ class OrderController extends Controller
                         ->join('users', 'products.user_id', '=', 'users.id')
                         ->select(
                             ['products.id AS product_id', 'products.name AS product_name', 'products.photo AS product_photo', 'products.name AS product_name',
-                            'bags.quantity AS quantity', 'bags.amount AS amount', 'bags.ship_fee AS ship_fee', 'bags.status AS order_status', 'bags.paid AS paid', 'bags.order_no AS order_no', 'bags.created_at AS time_ordered', 
+                            'bags.id AS bag_id', 'bags.quantity AS quantity', 'bags.amount AS amount', 'bags.ship_fee AS ship_fee', 'bags.status AS order_status', 'bags.paid AS paid', 'bags.order_no AS order_no', 'bags.created_at AS time_ordered', 
                             'users.shop_name AS shop_name', 'users.shop_address AS shop_address', 'users.shop_number AS shop_number' 
                         ])
                         ->where('bags.order_no','=',$slug)
