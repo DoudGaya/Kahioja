@@ -87,12 +87,12 @@
         <div id="drawer-content" class="relative top-32 md:top-14">
             <!-- Categories  -->
             <div class="border-b border-gray-400">
-                <div @click="drawerCategory" class="p-3 border-b border-black flex justify-between items-center bg-white text-black">
+                <div @click="drawerCategory" class="p-3 border-b border-gray-400 flex justify-between items-center bg-white text-black">
                     <h1 class="text-lg">Shop by Category</h1>
                     <svg width="20" height="13" viewBox="0 0 36 26" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M34 2H2" stroke="black" stroke-width="3" stroke-linecap="round"/><path d="M34 13L2 13" stroke="black" stroke-width="3" stroke-linecap="round"/><path d="M34 24H2" stroke="black" stroke-width="3" stroke-linecap="round"/></svg>
                 </div>
                 <div v-show="displayDrawerCategory" id="drawer-content-category" class="bg-gray-300 text-black">
-                    <div class="border-b border-black p-2 hover:bg-white" :key="category.slug" v-for="category in categories">
+                    <div class="border-b border-gray-400 p-2 hover:bg-white" :key="category.slug" v-for="category in categories">
                         <a :href="`/category/${category.slug}`" class="items-center flex justify-between">
                             <span><img class="mx-auto" style="width:25px;" :src="`https://dashboard.kahioja.com/assets/images/categories/${category.photo}`"></span>
                             <span class="text-sm">{{ category.name }}</span>
@@ -111,13 +111,64 @@
                 </div>
             </div>
             <!-- Login  -->
-            <div @click="loginToggle()" class="cursor-pointer p-3 border-b border-gray-400 flex justify-between items-center bg-white text-black">
-                <div class="title">
-                    <h1 class="text-sm">
-                        {{ (getUser != '') ? getUser.name.split(' ')[0] : 'Login' }}
-                    </h1>
+            <div>
+                <div v-if="(getUser == '')" @click="loginToggle()" class="p-3 border-b border-gray-400 flex justify-between items-center bg-white text-black">
+                    <div class="title">
+                        <h1 class="text-sm">
+                            {{ 'Login' }}
+                        </h1>
+                    </div>
+                    <div><svg class="mx-auto" width="20" height="20" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 27.3333C6.63602 27.3333 0.666687 21.364 0.666687 14C0.666687 6.63601 6.63602 0.666672 14 0.666672C21.364 0.666672 27.3334 6.63601 27.3334 14C27.3334 21.364 21.364 27.3333 14 27.3333ZM14 24.6667C16.829 24.6667 19.5421 23.5429 21.5425 21.5425C23.5429 19.5421 24.6667 16.829 24.6667 14C24.6667 11.171 23.5429 8.45792 21.5425 6.45753C19.5421 4.45714 16.829 3.33334 14 3.33334C11.171 3.33334 8.45794 4.45714 6.45755 6.45753C4.45716 8.45792 3.33335 11.171 3.33335 14C3.33335 16.829 4.45716 19.5421 6.45755 21.5425C8.45794 23.5429 11.171 24.6667 14 24.6667ZM14 6.00001C15.4145 6.00001 16.7711 6.56191 17.7713 7.5621C18.7715 8.5623 19.3334 9.91885 19.3334 11.3333V14C19.3334 15.4145 18.7715 16.771 17.7713 17.7712C16.7711 18.7714 15.4145 19.3333 14 19.3333C12.5855 19.3333 11.229 18.7714 10.2288 17.7712C9.22859 16.771 8.66669 15.4145 8.66669 14V11.3333C8.66669 9.91885 9.22859 8.5623 10.2288 7.5621C11.229 6.56191 12.5855 6.00001 14 6.00001ZM14 8.66667C13.2928 8.66667 12.6145 8.94762 12.1144 9.44772C11.6143 9.94782 11.3334 10.6261 11.3334 11.3333V14C11.3334 14.7072 11.6143 15.3855 12.1144 15.8856C12.6145 16.3857 13.2928 16.6667 14 16.6667C14.7073 16.6667 15.3855 16.3857 15.8856 15.8856C16.3857 15.3855 16.6667 14.7072 16.6667 14V11.3333C16.6667 10.6261 16.3857 9.94782 15.8856 9.44772C15.3855 8.94762 14.7073 8.66667 14 8.66667ZM8.54669 23.168C7.77866 22.7105 7.07094 22.1587 6.44002 21.5253C7.23199 20.5947 8.24139 19.8738 9.37869 19.4267C9.54261 19.3567 9.7189 19.3204 9.89713 19.3197C10.0753 19.3191 10.2519 19.3542 10.4163 19.4229C10.5808 19.4917 10.7297 19.5927 10.8544 19.72C10.9792 19.8473 11.0771 19.9984 11.1424 20.1642C11.2078 20.33 11.2392 20.5072 11.2349 20.6854C11.2306 20.8636 11.1906 21.0391 11.1172 21.2015C11.0439 21.364 10.9388 21.5101 10.808 21.6312C10.6773 21.7523 10.5236 21.846 10.356 21.9067C9.64669 22.1867 9.03202 22.624 8.54535 23.168H8.54669ZM19.4054 23.1973C18.8891 22.6263 18.2448 22.1858 17.5254 21.912C17.3567 21.8535 17.2016 21.7617 17.0691 21.6421C16.9366 21.5226 16.8295 21.3776 16.7541 21.2158C16.6786 21.0541 16.6364 20.8788 16.63 20.7005C16.6236 20.5221 16.653 20.3443 16.7166 20.1775C16.7801 20.0107 16.8765 19.8584 17.0001 19.7296C17.1236 19.6007 17.2717 19.498 17.4357 19.4275C17.5996 19.357 17.7761 19.3201 17.9546 19.3191C18.133 19.318 18.3099 19.3528 18.4747 19.4213C19.6531 19.8695 20.7002 20.6062 21.52 21.564C20.8861 22.1946 20.1757 22.7433 19.4054 23.1973Z" fill="#000000"/></svg></div>    
                 </div>
-                <div><svg class="mx-auto" width="20" height="20" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 27.3333C6.63602 27.3333 0.666687 21.364 0.666687 14C0.666687 6.63601 6.63602 0.666672 14 0.666672C21.364 0.666672 27.3334 6.63601 27.3334 14C27.3334 21.364 21.364 27.3333 14 27.3333ZM14 24.6667C16.829 24.6667 19.5421 23.5429 21.5425 21.5425C23.5429 19.5421 24.6667 16.829 24.6667 14C24.6667 11.171 23.5429 8.45792 21.5425 6.45753C19.5421 4.45714 16.829 3.33334 14 3.33334C11.171 3.33334 8.45794 4.45714 6.45755 6.45753C4.45716 8.45792 3.33335 11.171 3.33335 14C3.33335 16.829 4.45716 19.5421 6.45755 21.5425C8.45794 23.5429 11.171 24.6667 14 24.6667ZM14 6.00001C15.4145 6.00001 16.7711 6.56191 17.7713 7.5621C18.7715 8.5623 19.3334 9.91885 19.3334 11.3333V14C19.3334 15.4145 18.7715 16.771 17.7713 17.7712C16.7711 18.7714 15.4145 19.3333 14 19.3333C12.5855 19.3333 11.229 18.7714 10.2288 17.7712C9.22859 16.771 8.66669 15.4145 8.66669 14V11.3333C8.66669 9.91885 9.22859 8.5623 10.2288 7.5621C11.229 6.56191 12.5855 6.00001 14 6.00001ZM14 8.66667C13.2928 8.66667 12.6145 8.94762 12.1144 9.44772C11.6143 9.94782 11.3334 10.6261 11.3334 11.3333V14C11.3334 14.7072 11.6143 15.3855 12.1144 15.8856C12.6145 16.3857 13.2928 16.6667 14 16.6667C14.7073 16.6667 15.3855 16.3857 15.8856 15.8856C16.3857 15.3855 16.6667 14.7072 16.6667 14V11.3333C16.6667 10.6261 16.3857 9.94782 15.8856 9.44772C15.3855 8.94762 14.7073 8.66667 14 8.66667ZM8.54669 23.168C7.77866 22.7105 7.07094 22.1587 6.44002 21.5253C7.23199 20.5947 8.24139 19.8738 9.37869 19.4267C9.54261 19.3567 9.7189 19.3204 9.89713 19.3197C10.0753 19.3191 10.2519 19.3542 10.4163 19.4229C10.5808 19.4917 10.7297 19.5927 10.8544 19.72C10.9792 19.8473 11.0771 19.9984 11.1424 20.1642C11.2078 20.33 11.2392 20.5072 11.2349 20.6854C11.2306 20.8636 11.1906 21.0391 11.1172 21.2015C11.0439 21.364 10.9388 21.5101 10.808 21.6312C10.6773 21.7523 10.5236 21.846 10.356 21.9067C9.64669 22.1867 9.03202 22.624 8.54535 23.168H8.54669ZM19.4054 23.1973C18.8891 22.6263 18.2448 22.1858 17.5254 21.912C17.3567 21.8535 17.2016 21.7617 17.0691 21.6421C16.9366 21.5226 16.8295 21.3776 16.7541 21.2158C16.6786 21.0541 16.6364 20.8788 16.63 20.7005C16.6236 20.5221 16.653 20.3443 16.7166 20.1775C16.7801 20.0107 16.8765 19.8584 17.0001 19.7296C17.1236 19.6007 17.2717 19.498 17.4357 19.4275C17.5996 19.357 17.7761 19.3201 17.9546 19.3191C18.133 19.318 18.3099 19.3528 18.4747 19.4213C19.6531 19.8695 20.7002 20.6062 21.52 21.564C20.8861 22.1946 20.1757 22.7433 19.4054 23.1973Z" fill="#000000"/></svg></div>    
+                <div @click="drawerAccount" v-else class="p-3 border-b border-gray-400 flex justify-between items-center bg-white text-black">
+                    <div class="title">
+                        <h1 class="text-sm">
+                            {{ getUser.name }}
+                        </h1>
+                    </div>
+                    <div>
+                        <svg width="20" height="13" viewBox="0 0 36 26" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M34 2H2" stroke="black" stroke-width="3" stroke-linecap="round"/><path d="M34 13L2 13" stroke="black" stroke-width="3" stroke-linecap="round"/><path d="M34 24H2" stroke="black" stroke-width="3" stroke-linecap="round"/></svg>        
+                    </div>
+                </div>
+                <div v-show="displayDrawerAccount" id="drawer-content-category" class="bg-gray-300 text-black">
+                    <!-- <div class="border-b border-black p-2 hover:bg-white" :key="category.slug" v-for="category in categories">
+                        <a :href="`/category/${category.slug}`" class="items-center flex justify-between">
+                            <span><img class="mx-auto" style="width:25px;" :src="`https://dashboard.kahioja.com/assets/images/categories/${category.photo}`"></span>
+                            <span class="text-sm">{{ category.name }}</span>
+                        </a>
+                    </div> -->
+                    <!-- Vendor Panel  -->
+                    <div v-if="getUser.is_vendor == 2" class="border-b border-black p-2 hover:bg-white items-center flex justify-between">
+                        <a target="_blank" href="https://dashboard.kahioja.com/user/login/">
+                            <span><li class="text-sm list-none">Vendor Panel</li></span>
+                        </a>
+                    </div>
+                    <div @click="openSubscription()" v-else class="border-b border-black p-2 hover:bg-white items-center flex justify-between">
+                        <span><li class="text-sm list-none">Start Selling</li></span>
+                    </div>
+                    <!-- My Orders  -->
+                    <div @click="openMyOrders()" class="border-b border-black p-2 hover:bg-white items-center flex justify-between">
+                        <span><li class="text-sm list-none">My Orders</li></span>
+                    </div>
+                    <!-- Track Order  -->
+                    <div @click="openTrackOrder()" class="border-b border-black p-2 hover:bg-white items-center flex justify-between">
+                        <span><li class="text-sm list-none">Track Order</li></span>
+                    </div>
+                    <!-- Edit Profile  -->
+                    <div @click="openEditProfile()" class="border-b border-black p-2 hover:bg-white items-center flex justify-between">
+                        <span><li class="text-sm list-none">Edit Profile</li></span>
+                    </div>
+                    <!-- Reset Password  -->
+                    <div @click="openResetPassword()" class="border-b border-black p-2 hover:bg-white items-center flex justify-between">
+                        <span><li class="text-sm list-none">Change Password</li></span>
+                    </div>
+                    <!-- Logout  -->
+                    <div class="border-b border-black p-2 hover:bg-white items-center flex justify-between">
+                        <a href="/logout">
+                            <span><li class="text-sm list-none text-center">Logout</li></span>
+                        </a>    
+                    </div>
+                </div>
             </div>
             <!-- Privacy  -->
             <div class="cursor-pointer p-3 border-b border-gray-400 flex justify-between items-center bg-white text-black">
@@ -209,6 +260,11 @@
     <CartComponent v-show="displayCart" />
     <LoginComponent v-show="displayLogin" />
     <ProductComponent v-show="displayProduct" />
+    <UserSubscription v-show="displayUserSubscription" />
+    <UserOrder v-show="displayUserOrder" />
+    <UserTrackOrder v-show="displayTrackOrder" />
+    <UserProfile v-show="displayUserProfile" />
+    <UserResetPassword v-show="displayUserResetPassword " />
 </template>
 
 <script>
@@ -217,6 +273,11 @@ import CartComponent from './CartComponent'
 import LoginComponent from './LoginComponent'
 import UserAccountSettingsComponent from './UserAccountSettingComponent'
 import ProductComponent from './productComponent'
+import UserSubscription from './UserSubscriptionComponent'
+import UserOrder from './UserOrdersComponent'
+import UserTrackOrder from './UserTrackOrderComponent'
+import UserProfile from './UserProfileComponent'
+import UserResetPassword from './UserResetPasswordComponent'
 
 export default {
     name: 'Nav',
@@ -229,7 +290,12 @@ export default {
         CartComponent,
         LoginComponent,
         UserAccountSettingsComponent,
-        ProductComponent
+        ProductComponent,
+        UserSubscription,
+        UserOrder,
+        UserTrackOrder,
+        UserProfile,
+        UserResetPassword
     },
     props: ['account'],
     data(){
@@ -241,6 +307,12 @@ export default {
             displayCategoryMobile: false,
             displayDrawerContent: false,
             displayDrawerCategory: true,
+            displayDrawerAccount: false,
+            displayUserSubscription: false,
+            displayUserOrder: false,
+            displayTrackOrder: false,
+            displayUserProfile: false,
+            displayUserResetPassword: false,
             displayBottomNav: true,
             categories: []
         }
@@ -254,6 +326,11 @@ export default {
     },
     methods:{
         drawerCategory(){
+            this.displayDrawerCategory = !this.displayDrawerCategory 
+            this.displayDrawerAccount = !this.displayDrawerAccount 
+        },
+        drawerAccount(){
+            this.displayDrawerAccount = !this.displayDrawerAccount 
             this.displayDrawerCategory = !this.displayDrawerCategory 
         },
         drawerToggle(){
@@ -286,6 +363,41 @@ export default {
             this.displayCategoryMobile = !this.displayCategoryMobile
             this.displayBottomNav = !this.displayBottomNav
             this.displayDrawerContent = !this.displayDrawerContent
+        },
+        openSubscription(){
+            this.displayUserOrder = false 
+            this.displayTrackOrder = false 
+            this.displayUserProfile = false 
+            this.displayUserResetPassword = false 
+            this.displayUserSubscription = !this.displayUserSubscription 
+        },
+        openMyOrders(){
+            this.displayUserSubscription = false
+            this.displayTrackOrder = false
+            this.displayUserProfile = false
+            this.displayUserResetPassword = false
+            this.displayUserOrder = !this.displayUserOrder
+        },
+        openTrackOrder(){
+            this.displayUserSubscription = false
+            this.displayUserOrder = false
+            this.displayUserProfile = false
+            this.displayUserResetPassword = false
+            this.displayTrackOrder = !this.displayTrackOrder
+        },
+        openEditProfile(){
+            this.displayUserSubscription = false
+            this.displayUserOrder = false
+            this.displayTrackOrder = false
+            this.displayUserResetPassword = false
+            this.displayUserProfile = !this.displayUserProfile
+        },
+        openResetPassword(){
+            this.displayUserSubscription = false
+            this.displayUserOrder = false
+            this.displayTrackOrder = false
+            this.displayUserProfile = false
+            this.displayUserResetPassword = !this.displayUserResetPassword
         }
     },
     computed: {

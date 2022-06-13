@@ -31899,6 +31899,23 @@ video {
   outline-offset: 2px;
 }
 
+.user-account-links{
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  border-bottom-width: 1px;
+}
+
+.user-account-links:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgba(243, 244, 246, var(--tw-bg-opacity));
+}
+
+.user-account-links {
+  padding: 0.75rem;
+}
+
 @media (min-width: 640px) {
   .sm\:container {
     width: 100%;

@@ -5,3 +5,7 @@
 .input-box{
     @apply border border-gray-300 rounded py-3 px-6 w-full my-2 focus:outline-none;
 }
+
+.user-account-links{
+    @apply flex border-b p-3 items-center cursor-pointer hover:bg-gray-100 justify-center;
+}

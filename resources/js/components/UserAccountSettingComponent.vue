@@ -1,36 +1,36 @@
 <template>
     <!-- Account Settings  -->
-    <div v-show="displayAccountSettings" id="account-settings" class="text-black top-20 bg-white shadow-md p-4 hidden lg:block">
-        <div v-show="displayAcountContent" @click="hideAccountContent()" id="account-settings-content" class="bg-white text-black shadow-md">
+    <div v-show="displayAccountSettings" id="account-settings" class="text-black bg-white shadow-md p-4 hidden lg:block">
+        <div v-show="displayAcountContent" @click="hideAccountContent()" id="account-settings-content" class="w-1/6 fixed md:top-24 lg:top-16 bg-white text-black shadow-md">
             <!-- Vendor Panel  -->
-            <div v-if="getUser.is_vendor == 2" class="flex border-b p-3 items-center cursor-pointer hover:bg-gray-100">
+            <div v-if="getUser.is_vendor == 2" class="user-account-links">
                 <a target="_blank" href="https://dashboard.kahioja.com/user/login/">
                     <span><li class="text-sm list-none">Vendor Panel</li></span>
                 </a>
             </div>
-            <div @click="openSubscription()" v-else class="flex border-b p-3 items-center cursor-pointer hover:bg-gray-100">
+            <div @click="openSubscription()" v-else class="user-account-links">
                 <span><li class="text-sm list-none">Start Selling</li></span>
             </div>
             <!-- My Orders  -->
-            <div @click="openMyOrders()" class="flex border-b p-3 items-center cursor-pointer hover:bg-gray-100">
+            <div @click="openMyOrders()" class="user-account-links">
                 <span><li class="text-sm list-none">My Orders</li></span>
             </div>
             <!-- Track Order  -->
-            <div @click="openTrackOrder()" class="flex border-b p-3 items-center cursor-pointer hover:bg-gray-100">
+            <div @click="openTrackOrder()" class="user-account-links">
                 <span><li class="text-sm list-none">Track Order</li></span>
             </div>
             <!-- Edit Profile  -->
-            <div @click="openEditProfile()" class="flex border-b p-3 items-center cursor-pointer hover:bg-gray-100">
+            <div @click="openEditProfile()" class="user-account-links">
                 <span><li class="text-sm list-none">Edit Profile</li></span>
             </div>
             <!-- Reset Password  -->
-            <div @click="openResetPassword()" class="flex border-b p-3 items-center cursor-pointer hover:bg-gray-100">
-                <span><li class="text-sm list-none">Reset Password</li></span>
+            <div @click="openResetPassword()" class="user-account-links">
+                <span><li class="text-sm list-none">Change Password</li></span>
             </div>
             <!-- Logout  -->
-            <div class="border-b p-3 items-center cursor-pointer hover:bg-gray-100">
+            <div class="border-b p-3 items-center cursor-pointer hover:bg-gray-100 justify-center">
                 <a href="/logout">
-                    <span><li class="text-sm list-none">Logout</li></span>
+                    <span><li class="text-sm list-none text-center">Logout</li></span>
                 </a>    
             </div>
         </div>
