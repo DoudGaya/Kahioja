@@ -11,6 +11,7 @@ use Validator;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Subscription;
+use App\Models\Country;
 use App\Models\Generalsetting;
 use App\Models\UserSubscription;
 use App\Models\FavoriteSeller;
@@ -30,8 +31,9 @@ class UserController extends Controller
 
     public function profile()
     {
-        $user = Auth::user();  
-        return view('user.profile',compact('user'));
+        $user = Auth::user();
+        $countries = Country::all();  
+        return response()->json(['user'=>$user, 'countries'=>$countries]);
     }
 
     public function profileupdate(Request $request)
@@ -66,7 +68,7 @@ class UserController extends Controller
             $input['photo'] = $name;
             } 
         $data->update($input);
-        $msg = 'Successfully updated your profile';
+        $msg = 'Profile updated Successfully';
         return response()->json($msg); 
     }
 

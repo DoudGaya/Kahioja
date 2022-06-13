@@ -109,3 +109,13 @@ Route::get('/order/trackings/{id}', [OrderController::class, 'trackload'])->name
 Route::get('/order/{id}',  [OrderController::class, 'order'])->name('user-order');
 Route::post('/order/confirm/', [OrderController::class, 'orderconfirm'])->name('user-order-confirm');
 // User Orders Ends 
+
+// User Profile
+Route::get('/profile', [UserController::class, 'profile'])->name('user-profile');
+Route::post('/profile', [UserController::class, 'profileupdate'])->name('user-profile-update');
+// User Profile Ends
+
+// User Reset
+Route::get('/reset', [UserController::class, 'resetform'])->name('user-reset');
+Route::post('/reset', [UserController::class, 'reset'])->name('user-reset-submit');
+// User Reset End

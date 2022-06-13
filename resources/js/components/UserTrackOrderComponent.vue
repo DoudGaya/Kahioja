@@ -107,15 +107,6 @@ export default {
             csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
         }
     },
-    async created(){
-        this.isLoading = true
-        axios.get(`/orders`).then(response => {
-            this.isLoading = false
-            this.orders = response.data;
-        }).catch(error => {
-            console.log(error)
-        })
-    },
     methods:{
         async submitOrder(){
             let order_no = this.trackOrderInput
