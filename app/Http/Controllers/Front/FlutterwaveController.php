@@ -276,7 +276,7 @@ class FlutterwaveController extends Controller
             return redirect()->route('front.checkoutsuccess');
 
         }elseif ($status ==  'cancelled'){
-            return redirect()->route('front.checkout');
+            return redirect()->route('front.checkoutcancelled');
         }else{
             return redirect()->route('front.checkoutfailed');
         }
@@ -284,7 +284,16 @@ class FlutterwaveController extends Controller
     
     public function checkoutfailed()
     {
-        return view('front.checkoutfailed');
+        $gs = Generalsetting::findOrFail(1);
+
+        return view('front.checkoutfailed', compact($gs));
+    }
+
+    public function checkoutcancelled()
+    {
+        $gs = Generalsetting::findOrFail(1);
+
+        return view('front.checkoutcancelled', compact($gs));
     }
 
     public function checkoutsuccess()

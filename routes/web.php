@@ -91,6 +91,7 @@ Route::get('/childcategories/{slug}',  [CatalogController::class, 'childcategori
 Route::post('/flutterwave/submit', [FlutterwaveController::class, 'initialize'])->name('flutterwave.submit');
 Route::get('/flutterwave/callback', [FlutterwaveController::class,'callback'])->name('callback');
 Route::get('/checkoutfailed', [FlutterwaveController::class, 'checkoutfailed'])->name('front.checkoutfailed');
+Route::get('/checkoutcancelled', [FlutterwaveController::class, 'checkoutcancelled'])->name('front.checkoutcancelled');
 Route::get('/checkoutsuccess', [FlutterwaveController::class, 'checkoutsuccess'])->name('front.checkoutsuccess');
 
 // User Subscription

@@ -14,5 +14,6 @@ app.component('category-component', require('./components/categoryComponent.vue'
 app.component('load-component', require('./components/loadMoreComponent.vue').default)
 app.component('checkout-component', require('./components/CheckOutComponent.vue').default)
 app.component('transaction-successful-component', require('./components/TransactionSuccessfulComponent.vue').default)
+app.component('transaction-failed-component', require('./components/TransactionFailedComponent.vue').default)
 app.component('buynow-component', require('./components/BuyNowComponent.vue').default)
 app.use(store).mount('#app')
