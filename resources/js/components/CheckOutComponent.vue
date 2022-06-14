@@ -89,7 +89,7 @@
                         </div>
                     </div>           
                 </div>
-                <div class="py-4 px-4 bg-gray-300 text-black lg:text-2xl text-lg rounded-lg font-extrabold">
+                <div class="sm:mt-24 py-4 px-4 bg-gray-300 text-black lg:text-2xl text-lg rounded-lg font-extrabold">
                     Order Summary
                 </div>
                 <div class="my-6 py-4 lg:px-16 px-4 rounded-lg yus-shadow">

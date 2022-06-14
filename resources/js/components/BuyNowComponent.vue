@@ -16,11 +16,11 @@
                 <div class="py-4 px-4 bg-gray-300 text-black text-2xl rounded-lg font-extrabold">
                     Your Order
                 </div>
-                <div id="checkout-cart-body" class="my-6 py-4 px-16 rounded-lg yus-shadow">
+                <div id="checkout-cart-body" class="my-6 py-4 px-4 rounded-lg yus-shadow">
                     <div class="my-5">
                         <div v-if="isLoading" class="loader mx-auto my-5"></div>
                         <div id="cart-body-products" class="p-4">
-                            <div class="grid grid-cols-3 gap-6 items-center">
+                            <div class="items-center">
                                 <div id="cart-body-product-image">
                                     <img :src="`https://dashboard.kahioja.com/assets/images/products/${productphoto}`" :alt="`${ productname }`">
                                 </div>
@@ -40,7 +40,7 @@
                                 </div>
                             </div>
                             <!-- //Mobile View  -->
-                            <div class="grid grid-cols-2 gap-6 md:hidden">
+                            <!-- <div class="grid grid-cols-2 gap-6 md:hidden">
                                 <div class="cursor-pointer mx-auto" @click="removeProduct(productbagid)" id="cart-body-product-remove">
                                     Remove Product
                                 </div>
@@ -53,7 +53,7 @@
                                         <button @click="addProduct(productbagid, productquantity)">+</button>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>           
                 </div>

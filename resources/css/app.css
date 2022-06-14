@@ -11,7 +11,7 @@
 }
 
 .banner-class{
-    @apply relative md:top-16 lg:top-0 top-8 lg:px-14 px-4 py-5 text-center;
+    @apply relative md:-mt-10 lg:mt-28 -mt-24 lg:px-14 px-4 py-5 text-center;
 }
 
 .front-section{

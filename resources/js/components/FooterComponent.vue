@@ -1,6 +1,6 @@
 <template>
     <!-- Footer  -->
-    <div id="footer" class="hidden md:block relative md:top-0 py-12">
+    <div id="footer" class="hidden lg:block relative md:top-0 py-12">
         <div class="grid md:grid-cols-4 grid-cols-2 gap-6 md:px-14 px-4">
             <div class="col-span-3">
                 <a href="/">

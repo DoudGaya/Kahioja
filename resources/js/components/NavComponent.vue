@@ -90,12 +90,12 @@
         <!-- <SearchBar /> -->
     </div>
     <!-- Drawer  -->
-    <div v-show="displayDrawerContent" id="drawer" class="lg:hidden">
+    <div v-show="displayDrawerContent" id="drawer" class="lg:hidden mt-24 md:mt-10">
         <!-- Content  -->
-        <div id="drawer-content" class="relative top-28 md:top-14">
+        <div id="drawer-content" class="mt-16 md:mt-24">
             <!-- Categories  -->
             <div class="border-b border-gray-400">
-                <div @click="drawerCategory" class="p-3 border-b border-gray-400 flex justify-between items-center bg-white text-black">
+                <div @click="drawerCategory" class="px-3 pt-5 pb-3 flex justify-between items-center bg-white text-black">
                     <h1 class="text-lg">Shop by Category</h1>
                     <svg width="20" height="13" viewBox="0 0 36 26" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M34 2H2" stroke="black" stroke-width="3" stroke-linecap="round"/><path d="M34 13L2 13" stroke="black" stroke-width="3" stroke-linecap="round"/><path d="M34 24H2" stroke="black" stroke-width="3" stroke-linecap="round"/></svg>
                 </div>
@@ -194,7 +194,7 @@
             </div>
         </div>
         <!-- Trademark  -->
-        <div id="drawer-trademark" class="p-3 bg-white">
+        <div id="drawer-trademark" class="p-3">
             <div class="flex justify-between">
                 <!-- logo  -->
                 <div>
@@ -336,8 +336,8 @@ export default {
             this.displayDrawerCategory = !this.displayDrawerCategory 
         },
         drawerToggle(){
-            this.displayBottomNav = !this.displayBottomNav 
             this.displayDrawerContent = !this.displayDrawerContent 
+            this.displayBottomNav = !this.displayBottomNav 
         },
         cartToggle(){ 
             this.displayCart = !this.displayCart 
@@ -351,9 +351,9 @@ export default {
                 this.displayBottomNav = !this.displayBottomNav
                 this.displayDrawerContent = !this.displayDrawerContent
             }else{
-                this.displayLogin = !this.displayLogin
                 this.displayBottomNav = !this.displayBottomNav
                 this.displayDrawerContent = !this.displayDrawerContent
+                this.displayLogin = !this.displayLogin
             }
         },
         categoryBottomToggle(){

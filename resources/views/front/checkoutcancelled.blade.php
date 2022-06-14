@@ -2,7 +2,7 @@
 
 @section('main')
     <!-- Banner -->
-    <div id="banner" class="banner-class">
+    <div class="banner-class relative top-64 md:top-56 lg:-top-6 py-7">
         <div class="md:text-2xl text-lg my-5">
             Payment Cancelled
         </div> 

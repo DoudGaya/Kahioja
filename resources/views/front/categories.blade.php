@@ -2,19 +2,22 @@
 
 @section('main')
     <!-- Banner -->
-    <div id="banner" class="mt-6 px-4 md:px-14">
+    <div class="banner-class relative top-20 md:top-10 lg:top-5 px-4 md:px-14">
         <!-- Category Nav  -->
         <category-component></category-component>
         <!-- Category Content  -->
-        <div id="cate-content" class="lg:my-16">
+        <div id="cate-content" class="lg:my-16 md:my-2 my-1">
             <div class="grid grid-cols-2 lg:grid-cols-4 md:grid-cols-3 gap-6">
                 @foreach($products as $prod)
                     @include('includes.productComponent')
                 @endforeach
             </div>
-            <div class="my-16 flex justify-center">
-                {{ $products->links('layout.pagination') }}
-            </div>
+        </div>
+        <div class="hidden my-28 md:flex justify-center">
+            {{ $products->links('layout.pagination') }}
+        </div>
+        <div class="sm:block md:hidden my-28 pt-4">
+            {{ $products->links() }}
         </div>
     </div>
 @endsection
