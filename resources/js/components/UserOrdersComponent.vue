@@ -22,7 +22,7 @@
                         </div>
                         <div class="grid grid-cols-3 gap-3 items-center border-b py-3">
                             <div class="col-span-1">
-                                <img style="width: 100px; height: 100px; border: 1px solid #ddd;" :src="`https://dashboard.kahioja.com/assets/images/products/${order.photo}`">
+                                <img style="width: 100px; height: 100px; border: 1px solid #ddd;" :src="`https://dashboard.kahioja.com/assets/images/products/${order.product_photo}`">
                             </div>
                             <div class="col-span-2">
                                 <div class="grid grid-cols-3 gap-2">

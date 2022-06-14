@@ -84,7 +84,7 @@
     <!-- Drawer  -->
     <div v-show="displayDrawerContent" id="drawer" class="lg:hidden">
         <!-- Content  -->
-        <div id="drawer-content" class="relative top-32 md:top-14">
+        <div id="drawer-content" class="relative top-28 md:top-14">
             <!-- Categories  -->
             <div class="border-b border-gray-400">
                 <div @click="drawerCategory" class="p-3 border-b border-gray-400 flex justify-between items-center bg-white text-black">
@@ -130,40 +130,34 @@
                         <svg width="20" height="13" viewBox="0 0 36 26" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M34 2H2" stroke="black" stroke-width="3" stroke-linecap="round"/><path d="M34 13L2 13" stroke="black" stroke-width="3" stroke-linecap="round"/><path d="M34 24H2" stroke="black" stroke-width="3" stroke-linecap="round"/></svg>        
                     </div>
                 </div>
-                <div v-show="displayDrawerAccount" id="drawer-content-category" class="bg-gray-300 text-black">
-                    <!-- <div class="border-b border-black p-2 hover:bg-white" :key="category.slug" v-for="category in categories">
-                        <a :href="`/category/${category.slug}`" class="items-center flex justify-between">
-                            <span><img class="mx-auto" style="width:25px;" :src="`https://dashboard.kahioja.com/assets/images/categories/${category.photo}`"></span>
-                            <span class="text-sm">{{ category.name }}</span>
-                        </a>
-                    </div> -->
+                <div  v-if="(getUser != '')" v-show="displayDrawerAccount" id="drawer-content-category" class="bg-gray-300 text-black">
                     <!-- Vendor Panel  -->
-                    <div v-if="getUser.is_vendor == 2" class="border-b border-black p-2 hover:bg-white items-center flex justify-between">
+                    <div v-if="getUser.is_vendor == 2" class="border-b border-black p-3 hover:bg-white items-center flex justify-between">
                         <a target="_blank" href="https://dashboard.kahioja.com/user/login/">
                             <span><li class="text-sm list-none">Vendor Panel</li></span>
                         </a>
                     </div>
-                    <div @click="openSubscription()" v-else class="border-b border-black p-2 hover:bg-white items-center flex justify-between">
+                    <div @click="openSubscription()" v-else class="border-b border-black p-3 hover:bg-white items-center flex justify-between">
                         <span><li class="text-sm list-none">Start Selling</li></span>
                     </div>
                     <!-- My Orders  -->
-                    <div @click="openMyOrders()" class="border-b border-black p-2 hover:bg-white items-center flex justify-between">
+                    <div @click="openMyOrders()" class="border-b border-black p-3 hover:bg-white items-center flex justify-between">
                         <span><li class="text-sm list-none">My Orders</li></span>
                     </div>
                     <!-- Track Order  -->
-                    <div @click="openTrackOrder()" class="border-b border-black p-2 hover:bg-white items-center flex justify-between">
+                    <div @click="openTrackOrder()" class="border-b border-black p-3 hover:bg-white items-center flex justify-between">
                         <span><li class="text-sm list-none">Track Order</li></span>
                     </div>
                     <!-- Edit Profile  -->
-                    <div @click="openEditProfile()" class="border-b border-black p-2 hover:bg-white items-center flex justify-between">
+                    <div @click="openEditProfile()" class="border-b border-black p-3 hover:bg-white items-center flex justify-between">
                         <span><li class="text-sm list-none">Edit Profile</li></span>
                     </div>
                     <!-- Reset Password  -->
-                    <div @click="openResetPassword()" class="border-b border-black p-2 hover:bg-white items-center flex justify-between">
+                    <div @click="openResetPassword()" class="border-b border-black p-3 hover:bg-white items-center flex justify-between">
                         <span><li class="text-sm list-none">Change Password</li></span>
                     </div>
                     <!-- Logout  -->
-                    <div class="border-b border-black p-2 hover:bg-white items-center flex justify-between">
+                    <div class="border-b border-black p-3 hover:bg-white items-center flex justify-between">
                         <a href="/logout">
                             <span><li class="text-sm list-none text-center">Logout</li></span>
                         </a>    

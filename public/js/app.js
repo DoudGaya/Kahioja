@@ -23536,7 +23536,7 @@ var _hoisted_28 = {
 };
 var _hoisted_29 = {
   id: "drawer-content",
-  "class": "relative top-32 md:top-14"
+  "class": "relative top-28 md:top-14"
 };
 var _hoisted_30 = {
   "class": "border-b border-gray-400"
@@ -23637,12 +23637,13 @@ var _hoisted_47 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 );
 
 var _hoisted_48 = {
+  key: 2,
   id: "drawer-content-category",
   "class": "bg-gray-300 text-black"
 };
 var _hoisted_49 = {
   key: 0,
-  "class": "border-b border-black p-2 hover:bg-white items-center flex justify-between"
+  "class": "border-b border-black p-3 hover:bg-white items-center flex justify-between"
 };
 
 var _hoisted_50 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
@@ -23697,7 +23698,7 @@ var _hoisted_60 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 var _hoisted_61 = [_hoisted_60];
 
 var _hoisted_62 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "border-b border-black p-2 hover:bg-white items-center flex justify-between"
+  "class": "border-b border-black p-3 hover:bg-white items-center flex justify-between"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
   href: "/logout"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", {
@@ -23959,35 +23960,35 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "p-3 border-b border-gray-400 flex justify-between items-center bg-white text-black"
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_45, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", _hoisted_46, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.getUser.name), 1
   /* TEXT */
-  )]), _hoisted_47])), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_48, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"border-b border-black p-2 hover:bg-white\" :key=\"category.slug\" v-for=\"category in categories\">\r\n                        <a :href=\"`/category/${category.slug}`\" class=\"items-center flex justify-between\">\r\n                            <span><img class=\"mx-auto\" style=\"width:25px;\" :src=\"`https://dashboard.kahioja.com/assets/images/categories/${category.photo}`\"></span>\r\n                            <span class=\"text-sm\">{{ category.name }}</span>\r\n                        </a>\r\n                    </div> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Vendor Panel  "), $options.getUser.is_vendor == 2 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_49, _hoisted_51)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
+  )]), _hoisted_47])), $options.getUser != '' ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_48, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Vendor Panel  "), $options.getUser.is_vendor == 2 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_49, _hoisted_51)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
     key: 1,
     onClick: _cache[9] || (_cache[9] = function ($event) {
       return $options.openSubscription();
     }),
-    "class": "border-b border-black p-2 hover:bg-white items-center flex justify-between"
+    "class": "border-b border-black p-3 hover:bg-white items-center flex justify-between"
   }, _hoisted_53)), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" My Orders  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     onClick: _cache[10] || (_cache[10] = function ($event) {
       return $options.openMyOrders();
     }),
-    "class": "border-b border-black p-2 hover:bg-white items-center flex justify-between"
+    "class": "border-b border-black p-3 hover:bg-white items-center flex justify-between"
   }, _hoisted_55), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Track Order  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     onClick: _cache[11] || (_cache[11] = function ($event) {
       return $options.openTrackOrder();
     }),
-    "class": "border-b border-black p-2 hover:bg-white items-center flex justify-between"
+    "class": "border-b border-black p-3 hover:bg-white items-center flex justify-between"
   }, _hoisted_57), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Edit Profile  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     onClick: _cache[12] || (_cache[12] = function ($event) {
       return $options.openEditProfile();
     }),
-    "class": "border-b border-black p-2 hover:bg-white items-center flex justify-between"
+    "class": "border-b border-black p-3 hover:bg-white items-center flex justify-between"
   }, _hoisted_59), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Reset Password  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     onClick: _cache[13] || (_cache[13] = function ($event) {
       return $options.openResetPassword();
     }),
-    "class": "border-b border-black p-2 hover:bg-white items-center flex justify-between"
+    "class": "border-b border-black p-3 hover:bg-white items-center flex justify-between"
   }, _hoisted_61), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Logout  "), _hoisted_62], 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.displayDrawerAccount]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Privacy  "), _hoisted_63, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Terms  "), _hoisted_64]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Trademark  "), _hoisted_65], 512
+  )), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.displayDrawerAccount]]) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Privacy  "), _hoisted_63, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Terms  "), _hoisted_64]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Trademark  "), _hoisted_65], 512
   /* NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.displayDrawerContent]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Bottom Nav  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_66, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_67, [_hoisted_68, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     onClick: _cache[14] || (_cache[14] = function ($event) {
@@ -25142,7 +25143,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "height": "100px",
         "border": "1px solid #ddd"
       },
-      src: "https://dashboard.kahioja.com/assets/images/products/".concat(order.photo)
+      src: "https://dashboard.kahioja.com/assets/images/products/".concat(order.product_photo)
     }, null, 8
     /* PROPS */
     , _hoisted_16)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [_hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(order.product_name), 1
@@ -25893,7 +25894,7 @@ var _hoisted_11 = /*#__PURE__*/_withScopeId(function () {
 
 var _hoisted_12 = [_hoisted_11];
 var _hoisted_13 = {
-  "class": "text-center bg-white my-3"
+  "class": "bg-white my-3"
 };
 var _hoisted_14 = {
   key: 0
@@ -26100,7 +26101,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "height": "100px",
         "border": "1px solid #ddd"
       },
-      src: "https://dashboard.kahioja.com/assets/images/products/".concat(order.photo)
+      src: "https://dashboard.kahioja.com/assets/images/products/".concat(order.product_photo)
     }, null, 8
     /* PROPS */
     , _hoisted_22)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_24, [_hoisted_25, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_26, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(order.product_name), 1
