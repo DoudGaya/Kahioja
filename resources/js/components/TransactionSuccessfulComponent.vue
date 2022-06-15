@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="relative top-48 md:top-20 lg:top-1">
         <!-- Transaction Stage -->
         <div v-show="displayPaymentSuccessful" class="my-16">
             <div>

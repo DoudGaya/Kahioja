@@ -1,5 +1,5 @@
 <template>
-    <div id="checkoutModal">
+    <div class="relative top-48 md:top-20 lg:top-1">
         <!-- Empty Cart  -->
         <div v-if="cartNo == 0" class="lg:w-1/2 lg:mx-auto p-4 flex flex-col justify-center text-center">
             <div class="mx-auto mt-6">
@@ -26,7 +26,7 @@
         </div>
         <div v-if="cartNo > 0" class="lg:grid lg:grid-cols-2 gap-12">
             <!-- Cart Details  -->
-            <div v-if="cartNo > 0" class="">
+            <div v-if="cartNo > 0" class="text-left">
                 <div class="hidden lg:block py-4 px-4 bg-gray-300 text-black lg:text-2xl text-lg rounded-lg font-extrabold">
                     Your Order
                 </div>

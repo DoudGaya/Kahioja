@@ -104,7 +104,7 @@
         <!-- Search Result  -->
         <div id="search-result-mobile" v-show="showCallBack" class="bg-white w-full border-t border-gray-300 py-2">
             <div v-if="isLoading" class="loader mx-auto mb-4"></div>
-            <div v-if="products.length != 0">
+            <div v-if="products.length > 0">
                 <div :key="product.id" v-for="product in products" class="text-sm py-1 border-b">
                     <a :href="`/item/${product.slug}`">
                         <div class="grid grid-cols-3 gap-3 items-center py-3 text-xs">
@@ -129,8 +129,8 @@
                     </a>
                 </div>
             </div>
-            <div v-else class="text-center content-center">
-                Item not Found... 
+            <div v-else class="text-center">
+                Item not found... 
             </div>
         </div>
     </div>
@@ -394,6 +394,7 @@ export default {
             this.displaySearchBox = !this.displaySearchBox
             this.showCallBack = false
             this.displayBottomNav = true
+            this.search_box = ''
         },
         async searchProduct(){
             let product = this.search_box

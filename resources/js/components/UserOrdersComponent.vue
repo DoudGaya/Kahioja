@@ -65,7 +65,7 @@
                                 <input type="hidden" name="_token" :value="csrf">
                                 <input type="hidden" name="product_id" :value="order.product_id">
                                 <input type="hidden" name="quantity" :value="order.quantity">
-                                <input @click="payNow()" value="Pay Now" type="submit" class="rounded-full flex justify-center mx-auto btn-yus w-full py-3 lg:w-1/2 lg:py-4 text-white">
+                                <input @click="payNow()" value="Pay Now" type="submit" class="rounded-full flex justify-center mx-auto btn-yus w-full py-4 lg:w-1/2 lg:py-4 text-white">
                             </form>
                         </div>
                      </div>

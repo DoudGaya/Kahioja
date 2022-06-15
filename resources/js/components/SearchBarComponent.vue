@@ -9,21 +9,26 @@
         </div>
         <div v-show="showCallBack" id="search-bar-callback" class="text-left bg-white yus-shadow">
             <div v-if="isLoading" class="loader mx-auto"></div>
-            <div :key="product.id" v-for="product in products" class="text-sm py-1 border-b">
-                <a :href="`/item/${product.slug}`">
-                    <div class="flex px-3">
-                        <div class="flex items-center">
-                            <div>
-                                <img style="width:60px; height:60px" :src="`https://dashboard.kahioja.com/assets/images/thumbnails/${product.thumbnail}`" alt="">
-                            </div>
-                            <div class="flex-col ml-3">
-                                <div><b>{{ product.name }}</b></div>
-                                <div><b>Price</b>: ₦{{ product.price }}</div>
-                                <div><b>Delivery Fee</b>: {{ (product.ship_fee != null) ? `₦${product.ship_fee}`: ' Free Delivery' }}</div>
+            <div v-if="products.length > 0">
+                <div :key="product.id" v-for="product in products" class="text-sm py-1 border-b">
+                    <a :href="`/item/${product.slug}`">
+                        <div class="flex px-3">
+                            <div class="flex items-center">
+                                <div>
+                                    <img style="width:60px; height:60px" :src="`https://dashboard.kahioja.com/assets/images/thumbnails/${product.thumbnail}`" alt="">
+                                </div>
+                                <div class="flex-col ml-3">
+                                    <div><b>{{ product.name }}</b></div>
+                                    <div><b>Price</b>: ₦{{ product.price }}</div>
+                                    <div><b>Delivery Fee</b>: {{ (product.ship_fee != null) ? `₦${product.ship_fee}`: ' Free Delivery' }}</div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </a>
+                    </a>
+                </div>
+            </div>
+            <div v-else class="text-center py-2">
+                Item not found...
             </div>
         </div>
     </div>
@@ -51,9 +56,9 @@ export default {
                 }).then(response => {
                     this.isLoading = false
 
-                    if(response.data.length == 0){
-                        this.showCallBack = false
-                    }
+                    // if(response.data.length == 0){
+                    //     this.showCallBack = false
+                    // }
 
                     this.products = response.data
                     console.log(response.data)
