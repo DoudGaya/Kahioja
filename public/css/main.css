@@ -800,6 +800,12 @@ img {vertical-align: middle;}
         z-index: 200;
     }
 
+    #search-result-mobile{
+        height: 90vh;
+        overflow: auto;
+        z-index: 300;
+    }
+
     #nav-bottom .title{
         font-style: normal;
         font-weight: 450;

@@ -56,7 +56,8 @@
 
     <!-- Mobile Screen 640px -->
     <div id="nav" class="md:hidden px-4 py-2 mb-4 text-sm fixed">
-        <div class="grid grid-cols-4 gap-2 items-center">
+        <!-- Nav Icons  -->
+        <div v-show="displayNavIcons" class="grid grid-cols-4 gap-2 items-center">
             <div class="col-span-3 flex items-center">
                 <!-- Caret  -->
                 <div class="">
@@ -82,12 +83,56 @@
                         <div class="title text-center text-sm">{{ (estimatedTotal != 0) ? `N${estimatedTotal}` : 'Empty' }}</div>
                     </div>
                 </div>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M10.8419 17.9347C11.8327 17.9347 12.8138 17.7395 13.7292 17.3604C14.6446 16.9812 15.4763 16.4254 16.177 15.7248C16.8776 15.0242 17.4333 14.1924 17.8125 13.277C18.1917 12.3616 18.3868 11.3805 18.3868 10.3897C18.3868 9.39889 18.1917 8.41777 17.8125 7.50237C17.4333 6.58697 16.8776 5.75522 16.177 5.0546C15.4763 4.35399 14.6446 3.79823 13.7292 3.41906C12.8138 3.03988 11.8327 2.84473 10.8419 2.84473C8.8408 2.84473 6.92171 3.63964 5.50675 5.0546C4.09179 6.46956 3.29688 8.38866 3.29688 10.3897C3.29688 12.3908 4.09179 14.3099 5.50675 15.7248C6.92171 17.1398 8.8408 17.9347 10.8419 17.9347V17.9347ZM18.7892 16.559L23.2911 21.0608C23.4111 21.1769 23.5068 21.3157 23.5726 21.4692C23.6384 21.6227 23.6729 21.7877 23.6743 21.9547C23.6756 22.1216 23.6437 22.2872 23.5803 22.4417C23.517 22.5962 23.4235 22.7365 23.3054 22.8545C23.1872 22.9725 23.0468 23.0658 22.8922 23.1289C22.7376 23.192 22.572 23.2237 22.405 23.2221C22.238 23.2206 22.0731 23.1858 21.9197 23.1198C21.7663 23.0537 21.6276 22.9579 21.5117 22.8377L17.0099 18.3358C14.9884 19.905 12.4449 20.6448 9.89717 20.4047C7.34943 20.1645 4.98897 18.9625 3.29631 17.0432C1.60365 15.1239 0.706037 12.6318 0.786191 10.074C0.866345 7.5162 1.91824 5.08511 3.72775 3.2756C5.53726 1.4661 7.96835 0.414196 10.5261 0.334042C13.0839 0.253888 15.5761 1.1515 17.4953 2.84416C19.4146 4.53682 20.6167 6.89728 20.8568 9.44502C21.097 11.9928 20.3571 14.5363 18.788 16.5577L18.7892 16.559Z" fill="#222222"/></svg>
+                <!-- Search Icon -->
+                <div @click="searchIcon()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10.8419 17.9347C11.8327 17.9347 12.8138 17.7395 13.7292 17.3604C14.6446 16.9812 15.4763 16.4254 16.177 15.7248C16.8776 15.0242 17.4333 14.1924 17.8125 13.277C18.1917 12.3616 18.3868 11.3805 18.3868 10.3897C18.3868 9.39889 18.1917 8.41777 17.8125 7.50237C17.4333 6.58697 16.8776 5.75522 16.177 5.0546C15.4763 4.35399 14.6446 3.79823 13.7292 3.41906C12.8138 3.03988 11.8327 2.84473 10.8419 2.84473C8.8408 2.84473 6.92171 3.63964 5.50675 5.0546C4.09179 6.46956 3.29688 8.38866 3.29688 10.3897C3.29688 12.3908 4.09179 14.3099 5.50675 15.7248C6.92171 17.1398 8.8408 17.9347 10.8419 17.9347V17.9347ZM18.7892 16.559L23.2911 21.0608C23.4111 21.1769 23.5068 21.3157 23.5726 21.4692C23.6384 21.6227 23.6729 21.7877 23.6743 21.9547C23.6756 22.1216 23.6437 22.2872 23.5803 22.4417C23.517 22.5962 23.4235 22.7365 23.3054 22.8545C23.1872 22.9725 23.0468 23.0658 22.8922 23.1289C22.7376 23.192 22.572 23.2237 22.405 23.2221C22.238 23.2206 22.0731 23.1858 21.9197 23.1198C21.7663 23.0537 21.6276 22.9579 21.5117 22.8377L17.0099 18.3358C14.9884 19.905 12.4449 20.6448 9.89717 20.4047C7.34943 20.1645 4.98897 18.9625 3.29631 17.0432C1.60365 15.1239 0.706037 12.6318 0.786191 10.074C0.866345 7.5162 1.91824 5.08511 3.72775 3.2756C5.53726 1.4661 7.96835 0.414196 10.5261 0.334042C13.0839 0.253888 15.5761 1.1515 17.4953 2.84416C19.4146 4.53682 20.6167 6.89728 20.8568 9.44502C21.097 11.9928 20.3571 14.5363 18.788 16.5577L18.7892 16.559Z" fill="#222222"/></svg>
+                </div>
             </div>
         </div>
         <!-- Search Box  -->
-        <!-- <SearchBar /> -->
+        <div v-show="displaySearchBox" class="py-4">
+            <div class="flex items-center">
+                <div @click="closeSearchBox()" class="cursor-pointer">
+                    <svg width="20" height="20" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13.6276 10.7996L20.6976 3.72764C20.8887 3.54315 21.041 3.32246 21.1458 3.07845C21.2507 2.83444 21.3058 2.572 21.3081 2.30644C21.3104 2.04088 21.2598 1.77752 21.1593 1.53173C21.0587 1.28594 20.9102 1.06263 20.7224 0.874849C20.5346 0.687064 20.3113 0.538557 20.0655 0.437996C19.8198 0.337434 19.5564 0.28683 19.2908 0.289138C19.0253 0.291446 18.7628 0.346618 18.5188 0.451436C18.2748 0.556254 18.0541 0.708619 17.8696 0.899639L10.7976 7.96964L3.72764 0.899639C3.54315 0.708619 3.32246 0.556254 3.07845 0.451436C2.83444 0.346618 2.572 0.291446 2.30644 0.289138C2.04088 0.28683 1.77752 0.337434 1.53173 0.437996C1.28594 0.538557 1.06263 0.687064 0.874849 0.874849C0.687064 1.06263 0.538557 1.28594 0.437996 1.53173C0.337434 1.77752 0.28683 2.04088 0.289138 2.30644C0.291446 2.572 0.346618 2.83444 0.451436 3.07845C0.556254 3.32246 0.708619 3.54315 0.899639 3.72764L7.96964 10.7976L0.899639 17.8696C0.708619 18.0541 0.556254 18.2748 0.451436 18.5188C0.346618 18.7628 0.291446 19.0253 0.289138 19.2908C0.28683 19.5564 0.337434 19.8198 0.437996 20.0655C0.538557 20.3113 0.687064 20.5346 0.874849 20.7224C1.06263 20.9102 1.28594 21.0587 1.53173 21.1593C1.77752 21.2598 2.04088 21.3104 2.30644 21.3081C2.572 21.3058 2.83444 21.2507 3.07845 21.1458C3.32246 21.041 3.54315 20.8887 3.72764 20.6976L10.7976 13.6276L17.8696 20.6976C18.0541 20.8887 18.2748 21.041 18.5188 21.1458C18.7628 21.2507 19.0253 21.3058 19.2908 21.3081C19.5564 21.3104 19.8198 21.2598 20.0655 21.1593C20.3113 21.0587 20.5346 20.9102 20.7224 20.7224C20.9102 20.5346 21.0587 20.3113 21.1593 20.0655C21.2598 19.8198 21.3104 19.5564 21.3081 19.2908C21.3058 19.0253 21.2507 18.7628 21.1458 18.5188C21.041 18.2748 20.8887 18.0541 20.6976 17.8696L13.6276 10.7976V10.7996Z" fill="#000"/></svg>
+                </div>
+                <div class="ml-4 border-b-2 border-gray-500">
+                    <input autocomplete="off" @keyup="searchProduct()" v-model="search_box" placeholder="What are you looking for today?" class="focus:outline-none w-full px-4" type="text" name="" id="">
+                </div>
+            </div>
+        </div>
+        <!-- Search Result  -->
+        <div id="search-result-mobile" v-show="showCallBack" class="bg-white w-full border-t border-gray-300 py-2">
+            <div v-if="isLoading" class="loader mx-auto mb-4"></div>
+            <div v-if="products.length != 0">
+                <div :key="product.id" v-for="product in products" class="text-sm py-1 border-b">
+                    <a :href="`/item/${product.slug}`">
+                        <div class="grid grid-cols-3 gap-3 items-center py-3 text-xs">
+                            <div class="col-span-1">
+                                <img style="width: 50px; height: 50px; border: 1px solid #ddd;" :src="`https://dashboard.kahioja.com/assets/images/thumbnails/${product.thumbnail}`">
+                            </div>
+                            <div class="col-span-2">
+                                <div class="grid grid-cols-3 gap-2">
+                                    <span class="col-span-1">Product:</span>
+                                    <span class="col-span-2">{{ product.name }}</span>
+                                </div>
+                                <div class="grid grid-cols-3 gap-2">
+                                    <span class="col-span-1">Price:</span>
+                                    <span class="col-span-2">₦{{ product.price }}</span>
+                                </div>
+                                <div class="grid grid-cols-3 gap-2">
+                                    <span class="col-span-1">Delivery Fee:</span>
+                                    <span class="col-span-2">{{ (product.ship_fee != null) ? `₦${product.ship_fee}`: ' Free Delivery' }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div v-else class="text-center content-center">
+                Item not Found... 
+            </div>
+        </div>
     </div>
     <!-- Drawer  -->
     <div v-show="displayDrawerContent" id="drawer" class="lg:hidden mt-24 md:mt-10">
@@ -322,7 +367,13 @@ export default {
             displayUserProfile: false,
             displayUserResetPassword: false,
             displayBottomNav: true,
-            categories: []
+            displayNavIcons: true,
+            displaySearchBox: false,
+            showCallBack: false,
+            isLoading: false,
+            categories: [],
+            search_box: '',
+            products: [],
         }
     },
     async created(){
@@ -333,6 +384,41 @@ export default {
         })
     },
     methods:{
+        searchIcon(){
+            this.displayNavIcons = !this.displayNavIcons
+            this.displaySearchBox = !this.displaySearchBox
+            this.displayBottomNav = !this.displayBottomNav
+        },
+        closeSearchBox(){
+            this.displayNavIcons = !this.displayNavIcons
+            this.displaySearchBox = !this.displaySearchBox
+            this.showCallBack = false
+            this.displayBottomNav = true
+        },
+        async searchProduct(){
+            let product = this.search_box
+            if(product.length > 2){
+                this.showCallBack = true
+                this.isLoading = true
+                axios.get(`/autosearch/product/${product}`, {
+                    slug: this.product
+                }).then(response => {
+                    this.isLoading = false
+
+                    // if(response.data.length == 0){
+                    //     this.showCallBack = false
+                    // }
+
+                    this.products = response.data
+                    console.log(response.data)
+                
+                }).catch(error => {
+                    console.log(error)
+                })
+            }else{
+                this.showCallBack = false
+            }
+        },
         drawerCategory(){
             this.displayDrawerCategory = !this.displayDrawerCategory 
             this.displayDrawerAccount = !this.displayDrawerAccount 
