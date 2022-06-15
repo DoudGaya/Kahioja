@@ -2,7 +2,7 @@
 
 @section('main')
     <!-- Banner -->
-    <div class="banner-class relative top-20 md:top-10 lg:top-5 px-4 md:px-14">
+    <div class="relative md:-mt-10 lg:mt-28 -mt-24 lg:px-14 px-4 py-5 text-center top-20 md:top-10 lg:top-5 md:px-14">
         <!-- Category Nav  -->
         <category-component></category-component>
         <!-- Category Content  -->

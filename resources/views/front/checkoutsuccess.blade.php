@@ -2,7 +2,7 @@
 
 @section('main')
     <!-- Banner -->
-    <div id="banner" class="relative top-36 lg:top-0 mt-6 lg:px-14 px-4">
+    <div class="relative md:-mt-10 lg:mt-28 -mt-24 lg:px-14 px-4 py-5 text-center top-36 lg:top-0">
         <transaction-successful-component
             :subtotal="{{ json_encode($order->pay_amount) }}" 
             :deliveryfee="{{ json_encode($deliveryFee) }}" 

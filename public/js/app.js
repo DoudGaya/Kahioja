@@ -21266,7 +21266,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   props: ['productid', 'productlink', 'productimage', 'productname', 'productcurrprice', 'productprevprice', 'productdeliveryfee'],
   data: function data() {
     return {
-      cart: []
+      cart: [],
+      displayAddToCart: false,
+      displayAddedToCart: false,
+      displayFailToAddCart: false
     };
   },
   methods: {
@@ -21278,6 +21281,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
+                _this.displayAddToCart = !_this.displayAddToCart;
+                setTimeout(function () {
+                  _this.displayAddToCart = !_this.displayAddToCart;
+                }, 3000);
                 axios.post('/addtobag', {
                   product_id: _this.productid,
                   product_price: _this.productcurrprice,
@@ -21286,11 +21293,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 }).then(function (response) {
                   _this.cart = response.data;
                   _this.cart = _this.$store.dispatch("allCartFromDatabase");
+                  _this.displayAddedToCart = !_this.displayAddedToCart;
+                  setTimeout(function () {
+                    _this.displayAddedToCart = !_this.displayAddedToCart;
+                  }, 3000);
                 })["catch"](function (error) {
                   console.log(error);
+                  _this.displayFailToAddCart = !_this.displayFailToAddCart;
+                  setTimeout(function () {
+                    _this.displayFailToAddCart = !_this.displayFailToAddCart;
+                  }, 3000);
                 });
 
-              case 1:
+              case 3:
               case "end":
                 return _context.stop();
             }
@@ -26528,6 +26543,18 @@ var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 );
 
 var _hoisted_16 = [_hoisted_14, _hoisted_15];
+var _hoisted_17 = {
+  id: "addCartNotification",
+  "class": "bg-gray-500 text-white md:py-4 py-2 md:px-8 px-3 text-xs text-center rounded-full border-white"
+};
+var _hoisted_18 = {
+  id: "addCartNotification",
+  "class": "bg-gray-500 text-white md:py-4 py-2 md:px-8 px-3 text-xs text-center rounded-full border-white"
+};
+var _hoisted_19 = {
+  id: "addCartNotification",
+  "class": "bg-gray-500 text-white md:py-4 py-2 md:px-8 px-3 text-xs text-center rounded-full border-white"
+};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
     href: $props.productlink
@@ -26553,7 +26580,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return $options.addToBag();
     }),
     "class": "mx-auto relative top-5 lg:top-8 btn-yus rounded-full w-full md:w-2/3 sm:w-full flex flex-row justify-center items-center md:p-2 text-white"
-  }, _hoisted_16)])]);
+  }, _hoisted_16)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" adding to Cart  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, " Adding Item to Cart ", 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, _ctx.displayAddCart]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" added to Cart  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, " Item Added to Cart ", 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.displayAddedToCart]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" failed to Cart  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, " Please Try again ", 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.displayFailToAddCart]])]);
 }
 
 /***/ }),

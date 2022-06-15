@@ -2,7 +2,7 @@
 
 @section('main')
     <!-- Banner -->
-    <div class="banner-class relative top-12 md:px-14 px-4">
+    <div class="relative md:-mt-10 lg:mt-28 -mt-24 lg:px-14 py-5 text-center top-12 md:px-14 px-4">
         <!-- Nav  -->
         <div id="product-details-nav" class="mt-40 md:mt-32 lg:mt-0">
             <ul class="flex text-xs">

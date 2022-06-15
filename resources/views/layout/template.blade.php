@@ -42,9 +42,6 @@
             @yield('main')
             <footer-component></footer-component> 
         </div>
-        <!-- <div id="addCartNotification" class=" bg-gray-500 text-white p-4 text-center rounded-full">
-            Adding Product to Cart
-        </div> -->
         
         <script src="{{ asset('/js/sandbox.js') }}"></script>
         <script src="{{ mix('/js/app.js') }}"></script>

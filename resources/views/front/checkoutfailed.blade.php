@@ -2,7 +2,7 @@
 
 @section('main')
     <!-- Banner -->
-    <div class="banner-class relative top-56 lg:-top-6 py-7">
+    <div class="relative md:-mt-10 lg:mt-28 -mt-24 lg:px-14 px-4 py-5 text-center top-56 lg:-top-6">
         <div class="md:text-2xl text-lg my-5">
             Payment Failed
         </div> 

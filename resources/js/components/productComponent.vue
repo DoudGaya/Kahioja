@@ -39,7 +39,18 @@
                 </div> 
             </button>
         </div>
-        
+        <!-- adding to Cart  -->
+        <div v-show="displayAddCart" id="addCartNotification" class=" bg-gray-500 text-white md:py-4 py-2 md:px-8 px-3 text-xs text-center rounded-full border-white">
+            Adding Item to Cart
+        </div>
+        <!-- added to Cart  -->
+        <div v-show="displayAddedToCart" id="addCartNotification" class=" bg-gray-500 text-white md:py-4 py-2 md:px-8 px-3 text-xs text-center rounded-full border-white">
+            Item Added to Cart
+        </div>
+        <!-- failed to Cart  -->
+        <div v-show="displayFailToAddCart" id="addCartNotification" class=" bg-gray-500 text-white md:py-4 py-2 md:px-8 px-3 text-xs text-center rounded-full border-white">
+            Please Try again
+        </div>
     </div>
 </template>
 
@@ -58,10 +69,17 @@ export default {
     data(){
         return{
             cart: [],
+            displayAddToCart: false,
+            displayAddedToCart: false,
+            displayFailToAddCart: false
         }
     },
     methods:{
         async addToBag(){
+            this.displayAddToCart = !this.displayAddToCart
+            setTimeout(()=>{
+                this.displayAddToCart = !this.displayAddToCart
+            }, 3000)
             axios.post('/addtobag', {
                 product_id: this.productid,
                 product_price: this.productcurrprice,
@@ -70,8 +88,16 @@ export default {
             }).then(response => {
                 this.cart = response.data
                 this.cart = this.$store.dispatch("allCartFromDatabase")
+                this.displayAddedToCart = !this.displayAddedToCart
+                setTimeout(()=>{
+                    this.displayAddedToCart = !this.displayAddedToCart
+                }, 3000)
             }).catch(error => {
                 console.log(error)
+                this.displayFailToAddCart = !this.displayFailToAddCart
+                setTimeout(()=>{
+                    this.displayFailToAddCart = !this.displayFailToAddCart
+                }, 3000)
             })
         }
     },
