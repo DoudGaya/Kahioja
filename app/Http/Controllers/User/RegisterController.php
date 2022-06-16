@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Input;
 use Validator;
 use Mail;
 use Session;
+use Illuminate\Support\Str;
 use App\Mail\verifyEmail;
 
 class RegisterController extends Controller
@@ -46,7 +47,8 @@ class RegisterController extends Controller
 	        $input = $request->all();        
 	        $input['password'] = bcrypt($request['password']);
 	        $token = md5(time().$request->name.$request->email);
-	        $input['verification_link'] = $token;
+			$verification_code = Str::random(8);
+	        $input['verification_link'] = $verification_code;
 	        $input['affilate_code'] = md5($request->name.$request->email);
 
 	        if(!empty($request->vendor)){
@@ -72,7 +74,15 @@ class RegisterController extends Controller
 			$user->fill($input)->save();
 	        
 			$email = $request->email;
-			\Mail::to($email)->send(new verifyEmail());
+			
+			$send_data = [
+				'name' => $request->name,
+				'verification_code' => $verification_code
+			];
+
+			\Mail::to($email)->send(new verifyEmail($send_data)); 
+			
+			// \Mail::to($email)->send(new verifyEmail());
 			
 			if(count(Mail::failures()) > 0 ){
 				session::flash('message','There seems to be a problem. Please try again in a while'); 
