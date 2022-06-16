@@ -17,7 +17,7 @@
                         Verify Email now
                     </a>
                 </button>
-        </center>
+            </center>
         </p>
         <p>
             Or <br> <a target='_blank' style='font-size: 1.5rem;' href=".url('user/register/verify/{{md5(time().$request->name.$request->email)}}">Click on this link to verify your email address</a>

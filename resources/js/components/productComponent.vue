@@ -9,8 +9,8 @@
                 <h1 style="display:none;">{{ productid }}</h1>
                 <h1 class="card-title w-full">{{ productname }}</h1>
                 <div class="flex items-center">
-                    <span class="card-curr-price"><b>{{ productcurrprice }}</b></span>
-                    <span class="card-prev-price"><b>{{ productprevprice }}</b></span>
+                    <span class="card-curr-price"><b>₦{{ productcurrprice }}</b></span>
+                    <span v-if="productpreprive != null" class="card-prev-price"><b>₦{{ productprevprice }}</b></span>
                 </div>
                 <div class="grid grid-cols-2 text-left md:flex md:flex-row card-reviews my-2">
                     <div>
@@ -30,7 +30,7 @@
         </a>
 
         <div>
-            <button @click="addToBag()" class="mx-auto relative top-5 lg:top-8 btn-yus rounded-full w-full md:w-2/3 sm:w-full flex flex-row justify-center items-center md:p-2 text-white">
+            <button @click="addToBag()" class="focus:outline-0 mx-auto relative top-5 lg:top-8 btn-yus rounded-full w-full md:w-2/3 sm:w-full flex flex-row justify-center items-center md:p-2 text-white">
                 <div class="card-bag-label">
                     Add to Bag 
                 </div>
