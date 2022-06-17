@@ -2,11 +2,11 @@
     <div style='padding-bottom:1%;'>
         <center><img style='width:20%;' src='https://kahioja.com/images/logo.png' alt='Kahioja Image'></center>
     </div>
-    <div style='border-top:2px solid #df7f1b; padding-bottom:1%;'>
+    <div style='border-top:2px solid #df7f1b; padding:2%;'>
         <center><img style='width:20%;' src='https://kahioja.com/images/thank-you.jpg' alt='Thank You'></center>
     </div>
     <div>
-        Thanks for signing up {{ $name }},
+        Thanks for signing up <b>{{ $name }}</b>,
     </div>
     <div>
         <p>

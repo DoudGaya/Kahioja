@@ -31,9 +31,7 @@ class verifyEmail extends Mailable
      */
     public function build(request $request)
     {
-        // return $this->subject('Verify Email Address')->view('mails.verifyemail', ['request'=>$request]);
-        return $this->from('info@kahioja.com')
-                    ->with([
+        return $this->with([
                         'name' => $this->send_data['name'],
                         'verification_code' => $this->send_data['verification_code'],
                     ])

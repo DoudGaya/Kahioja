@@ -81,7 +81,7 @@ class RegisterController extends Controller
 			];
 
 			try{
-            	// \Mail::to($email)->send(new verifyEmail($send_data)); 
+            	\Mail::to($email)->send(new verifyEmail($send_data)); 
 				// Attempt to log the user in
 				if(Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
 					// if successful, then redirect to their intended location

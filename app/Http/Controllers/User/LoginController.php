@@ -34,11 +34,11 @@ class LoginController extends Controller
       if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
         // if successful, then redirect to their intended location
 
-        // Check If Email is verified or not
-          // if(Auth::guard('web')->user()->email_verified == 'No'){
-          //   Auth::guard('web')->logout();
-          //   return response()->json('Your Email is not Verified!');   
-          // }
+          // Check If Email is verified or not
+          if(Auth::guard('web')->user()->email_verified == 'No'){
+            Auth::guard('web')->logout();
+            return response()->json('Your Email is not Verified!');   
+          }
 
           if(Auth::guard('web')->user()->ban == 1){
             Auth::guard('web')->logout();
@@ -46,7 +46,6 @@ class LoginController extends Controller
           }
 
           // Login as User
-          $request->session()->flash('flash', 'User successfully created.');
           return response()->json('Login Successful');
       }
 
@@ -89,7 +88,7 @@ class LoginController extends Controller
         if(count(Mail::failures()) > 0 ){
           return response()->json('There seems to be a problem. Please try again in a while');
         }else{                      
-          return response()->json('Your password has been reseted successfully. Please Check your email for your new Password');
+          return response()->json('Please Check your email for your new Password');
         }
       }else{
         // user not found
