@@ -36,6 +36,7 @@ Route::get('/termsandpolicy', [FrontendController::class, 'termsandpolicy'])->na
 // User Register
 Route::post('/register', [RegisterController::class, 'register'])->name('user-register-submit');
 Route::post('/register/verify/', [RegisterController::class, 'token'])->name('user-register-token');
+Route::post('/register/vendor/', [RegisterController::class, 'vendor'])->name('vendor-register');
 // User Register End
 
 // User Login

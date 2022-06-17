@@ -3,7 +3,7 @@
     <div v-show="displayAccountSettings" id="account-settings" class="text-black bg-white shadow-md p-4 hidden lg:block">
         <div v-show="displayAcountContent" @click="hideAccountContent()" id="account-settings-content" class="w-1/6 fixed md:top-24 lg:top-16 bg-white text-black shadow-md">
             <!-- Vendor Panel  -->
-            <div v-if="getUser.is_vendor == 2" class="user-account-links">
+            <div v-if="getUser.is_vendor > 0" class="user-account-links">
                 <a target="_blank" href="https://dashboard.kahioja.com/user/login/">
                     <span><li class="text-sm list-none">Vendor Panel</li></span>
                 </a>

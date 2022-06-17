@@ -50,26 +50,6 @@ class RegisterController extends Controller
 			$verification_code = Str::random(6);
 	        $input['verification_link'] = $verification_code;
 	        $input['affilate_code'] = md5($request->name.$request->email);
-
-	        if(!empty($request->vendor)){
-				//--- Validation Section
-				$rules = [
-					'shop_name' => 'unique:users',
-				// 	'shop_number'  => 'max:10'
-						];
-				$customs = [
-					'shop_name.unique' => 'This Shop Name has already been taken.',
-				// 	'shop_number.max'  => 'Shop Number Must Be Less Then 10 Digit.'
-				];
-
-				$validator = Validator::make($request->all(), $rules, $customs);
-				
-				if($validator->fails()) {
-					return response()->json(array('errors' => $validator->getMessageBag()->toArray()));
-				}
-				$input['is_vendor'] = 1;
-
-			}
 			  
 			$user->fill($input)->save();
 	        
@@ -122,4 +102,29 @@ class RegisterController extends Controller
 				return response()->json('Verification Code not matched!');
 			}
     }
+
+	public function vendor(Request $request){
+		//--- Validation Section
+		$rules = [
+			'shop_name' => 'unique:users',
+		];
+		
+		$validator = Validator::make($request->all(), $rules);
+		if($validator->fails()) {
+			return response()->json($validator->errors()->all());
+		}
+
+		$user = User::where('id','=', Auth::guard('web')->user()->id)->first();
+		if(isset($user)){
+			$user->shop_name = $request->shop_name;
+			$user->owner_name = $request->owner_name;
+			$user->shop_number = $request->shop_number;
+			$user->shop_address = $request->shop_address;
+			$user->is_vendor = 1;
+			$user->update();
+			return response()->json('Congratulations! Your vendor is ready!');
+		}else{
+			return response()->json('Please try again later');
+		}		
+	}
 }
