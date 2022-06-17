@@ -15,13 +15,13 @@
                 </div>
             </div>
             <div class="col-span-1">
-                <h1>Useful Links</h1>
+                <h1 class="text-xl">Useful Links</h1>
                 <div class="mt-3">
                     <ul id="footer-nav">
                         <li class="py-4">
                             <a href="/categories">All Categories</a>
                         </li>
-                        <li @click="openTrackOrder()" class="py-4 cursor-pointer">
+                        <li v-if="(getUser != '')" @click="openTrackOrder()" class="py-4 cursor-pointer">
                             Track Orders
                         </li>
                         <li class="py-4">
@@ -65,6 +65,9 @@ import UserTrackOrder from './UserTrackOrderComponent'
 
 export default {
     name: 'Footer',
+    mounted() {
+        this.$store.dispatch('loginUserFromDatabase')
+    },
     components:{
         UserTrackOrder,
     },
@@ -82,6 +85,11 @@ export default {
             this.displayTrackOrder = !this.displayTrackOrder
         }
     },
+    computed: {
+        getUser(){
+            return this.$store.getters.getUser
+        }
+    }
     
 }
 </script>
