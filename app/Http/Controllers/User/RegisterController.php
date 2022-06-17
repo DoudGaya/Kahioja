@@ -39,7 +39,7 @@ class RegisterController extends Controller
         $validator = Validator::make($request->all(), $rules);
         
         if($validator->fails()) {
-          	return response()->json($validator->getMessageBag());
+          	return response()->json($validator->errors()->all());
         }
         //--- Validation Section Ends
 
@@ -47,7 +47,7 @@ class RegisterController extends Controller
 	        $input = $request->all();        
 	        $input['password'] = bcrypt($request['password']);
 	        $token = md5(time().$request->name.$request->email);
-			$verification_code = Str::random(8);
+			$verification_code = Str::random(6);
 	        $input['verification_link'] = $verification_code;
 	        $input['affilate_code'] = md5($request->name.$request->email);
 
@@ -80,18 +80,18 @@ class RegisterController extends Controller
 				'verification_code' => $verification_code
 			];
 
-			\Mail::to($email)->send(new verifyEmail($send_data)); 
-			
-			// \Mail::to($email)->send(new verifyEmail());
-			
-			if(count(Mail::failures()) > 0 ){
-				session::flash('message','There seems to be a problem. Please try again in a while'); 
-				return response()->json('There seems to be a problem. Please try again in a while');
-			}else{                      
+			try{
+            	// \Mail::to($email)->send(new verifyEmail($send_data)); 
 				// Attempt to log the user in
 				if(Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
 					// if successful, then redirect to their intended location
-			
+					//Verify User Email redirect
+					
+					if(Auth::guard('web')->user()->email_verified == 'No'){
+						Auth::guard('web')->logout();
+						return response()->json('You need to verify your account');   
+					}
+
 					// Check If Email is verified or not
 					if(Auth::guard('web')->user()->ban == 1){
 						Auth::guard('web')->logout();
@@ -99,18 +99,17 @@ class RegisterController extends Controller
 					}
 
 					// Login as User
-					$request->session()->flash('flash', 'User successfully created.');
-					return response()->json('Please check your mail to verify your account');  
+					return response()->json('Please check your email for your account verification code');  
 				}
+            }catch(Exception $e){
+				return response()->json('Please try again in a while');
 			}
+
     }
 
-    public function token($token)
+    public function token(Request $request)
     {
-        $gs = Generalsetting::findOrFail(1);
-
-        if($gs->is_verification_email == 1){    	
-			$user = User::where('verification_link','=',$token)->first();
+        $user = User::where('verification_link','=',$request->verification_link)->first();
 			if(isset($user)){
 				$user->email_verified = 'Yes';
 				$user->update();
@@ -118,10 +117,9 @@ class RegisterController extends Controller
 				$notification->user_id = $user->id;
 				$notification->save();
 				Auth::guard('web')->login($user); 
-				return redirect()->route('front.index')->with('success','Email Verified Successfully');
+				return response()->json('Your Email has been Verified Successfully');
+			}else{
+				return response()->json('Verification Code not matched!');
 			}
-    	}else{
-    		return redirect()->back();	
-    	}
     }
 }

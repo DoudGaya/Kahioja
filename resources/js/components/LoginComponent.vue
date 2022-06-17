@@ -77,7 +77,7 @@
                         </span>
                     </div>
                     <div class="my-8">
-                        <button @click="registerUser()" class="mx-auto btn-yus rounded-full w-full py-2 text-white">
+                        <button @keydown.enter="registerUser()" @click="registerUser()" class="mx-auto btn-yus rounded-full w-full py-3 text-white">
                             Create account
                         </button>
                     </div>
@@ -110,6 +110,22 @@
                         <span class="ml-2">Sign in</span>
                     </div>
                 </div>
+                <!-- Verify Email Form  -->
+                <div v-show="displayVerifyEmailForm">
+                    <div class="my-8">
+                        Enter your Verification Code sent to your Email
+                    </div>
+                    <div class="my-4">
+                        <div>
+                            <input required v-model="verificationCode" class="input-box" type="text" name="verificationCode" id="verificationCode" placeholder="Enter your Verification Code">
+                        </div>
+                    </div>
+                    <div class="my-8">
+                        <button @click="verifyCode()" class="mx-auto btn-yus rounded-full w-full py-2 text-white">
+                            Submit
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -124,12 +140,14 @@ export default {
             displayLoginForm: true,
             displaySignUpForm: false,
             displayForgotPasswordForm: false,
+            displayVerifyEmailForm: false,
             loginEmail: '',
             loginPassword: '',
             signUpName: '',
             signUpEmail: '',
             signUpPassword: '',
             forgotPasswordEmail: '',
+            verificationCode: '',
             callback: '',
             isLoading: false
         }
@@ -146,16 +164,19 @@ export default {
             this.displayLoginForm = true 
             this.displaySignUpForm = false
             this.displayForgotPasswordForm = false
+            this.displayVerifyEmailForm = false
         },
         showSignUpForm(){
             this.displaySignUpForm = true 
             this.displayLoginForm = false 
             this.displayForgotPasswordForm = false
+            this.displayVerifyEmailForm = false
         },
         showForgotPasswordForm(){
             this.displayForgotPasswordForm = true 
             this.displayLoginForm = false
             this.displaySignUpForm = false
+            this.displayVerifyEmailForm = false
         },
         async loginUser(){
             
@@ -205,9 +226,25 @@ export default {
                             this.isLoading = false
                             this.callback = response.data
 
-                            setTimeout(()=>{
-                                window.location = '/'
-                            }, 3000)
+                            if(this.callback[0] == 'The email has already been taken.'){
+                                this.callback = 'The email address has already been taken'
+                            }
+
+                            if(this.callback[0] == 'The password must be at least 8 characters'){
+                                this.callback = 'The password must be at least 8 characters'
+                            }
+
+                            if(this.callback[0] == 'The password must not be greater than 16 characters'){
+                                this.callback = 'The password must not be greater than 16 characters'
+                            }
+
+                            if(this.callback == 'You need to verify your account'){
+                                this.callback = ''
+                                this.displayVerifyEmailForm = true
+                                this.displayForgotPasswordForm = false 
+                                this.displayLoginForm = false
+                                this.displaySignUpForm = false
+                            }
 
                         }).catch(error => {
                             console.log(error)
@@ -240,6 +277,36 @@ export default {
                     setTimeout(()=>{
                         window.location = '/'
                     }, 3000)
+
+                }).catch(error => {
+                    console.log(error)
+                })
+            }else{
+                this.callback = 'Email Address field empty'
+            }
+        },
+        async verifyCode(){
+            this.isLoading = true
+            
+            if(this.verificationCode != ''){
+                axios.post('/register/verify', {
+                    verification_link: this.verificationCode,
+                }).then(response => {
+                    this.verificationCode = '',
+
+                    this.isLoading = false
+                    this.callback = response.data
+
+                    if(this.callback == 'Your Email has been Verified Successfully'){
+                        this.displayVerifyEmailForm = false
+                        this.displayForgotPasswordForm = false 
+                        this.displayLoginForm = false
+                        this.displaySignUpForm = false
+
+                        setTimeout(()=>{
+                            window.location = '/'
+                        }, 3000)
+                    }
 
                 }).catch(error => {
                     console.log(error)

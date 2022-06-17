@@ -20028,12 +20028,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       displayLoginForm: true,
       displaySignUpForm: false,
       displayForgotPasswordForm: false,
+      displayVerifyEmailForm: false,
       loginEmail: '',
       loginPassword: '',
       signUpName: '',
       signUpEmail: '',
       signUpPassword: '',
       forgotPasswordEmail: '',
+      verificationCode: '',
       callback: '',
       isLoading: false
     };
@@ -20050,16 +20052,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.displayLoginForm = true;
       this.displaySignUpForm = false;
       this.displayForgotPasswordForm = false;
+      this.displayVerifyEmailForm = false;
     },
     showSignUpForm: function showSignUpForm() {
       this.displaySignUpForm = true;
       this.displayLoginForm = false;
       this.displayForgotPasswordForm = false;
+      this.displayVerifyEmailForm = false;
     },
     showForgotPasswordForm: function showForgotPasswordForm() {
       this.displayForgotPasswordForm = true;
       this.displayLoginForm = false;
       this.displaySignUpForm = false;
+      this.displayVerifyEmailForm = false;
     },
     loginUser: function loginUser() {
       var _this = this;
@@ -20120,9 +20125,26 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                       }).then(function (response) {
                         _this2.signUpName = '', _this2.signUpEmail = '', _this2.signUpPassword = '', _this2.isLoading = false;
                         _this2.callback = response.data;
-                        setTimeout(function () {
-                          window.location = '/';
-                        }, 3000);
+
+                        if (_this2.callback[0] == 'The email has already been taken.') {
+                          _this2.callback = 'The email address has already been taken';
+                        }
+
+                        if (_this2.callback[0] == 'The password must be at least 8 characters') {
+                          _this2.callback = 'The password must be at least 8 characters';
+                        }
+
+                        if (_this2.callback[0] == 'The password must not be greater than 16 characters') {
+                          _this2.callback = 'The password must not be greater than 16 characters';
+                        }
+
+                        if (_this2.callback == 'You need to verify your account') {
+                          _this2.callback = '';
+                          _this2.displayVerifyEmailForm = true;
+                          _this2.displayForgotPasswordForm = false;
+                          _this2.displayLoginForm = false;
+                          _this2.displaySignUpForm = false;
+                        }
                       })["catch"](function (error) {
                         console.log(error);
                       });
@@ -20179,6 +20201,47 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             }
           }
         }, _callee3);
+      }))();
+    },
+    verifyCode: function verifyCode() {
+      var _this4 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _this4.isLoading = true;
+
+                if (_this4.verificationCode != '') {
+                  axios.post('/register/verify', {
+                    verification_link: _this4.verificationCode
+                  }).then(function (response) {
+                    _this4.verificationCode = '', _this4.isLoading = false;
+                    _this4.callback = response.data;
+
+                    if (_this4.callback == 'Your Email has been Verified Successfully') {
+                      _this4.displayVerifyEmailForm = false;
+                      _this4.displayForgotPasswordForm = false;
+                      _this4.displayLoginForm = false;
+                      _this4.displaySignUpForm = false;
+                      setTimeout(function () {
+                        window.location = '/';
+                      }, 3000);
+                    }
+                  })["catch"](function (error) {
+                    console.log(error);
+                  });
+                } else {
+                  _this4.callback = 'Email Address field empty';
+                }
+
+              case 2:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4);
       }))();
     }
   }
@@ -23256,6 +23319,19 @@ var _hoisted_27 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 );
 
 var _hoisted_28 = [_hoisted_26, _hoisted_27];
+
+var _hoisted_29 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "my-8"
+}, " Enter your Verification Code sent to your Email ", -1
+/* HOISTED */
+);
+
+var _hoisted_30 = {
+  "class": "my-4"
+};
+var _hoisted_31 = {
+  "class": "my-8"
+};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
     onClick: _cache[0] || (_cache[0] = function ($event) {
@@ -23350,17 +23426,22 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, null, 512
   /* NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.signUpPassword]])])]), _hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    onClick: _cache[11] || (_cache[11] = function ($event) {
+    onKeydown: _cache[11] || (_cache[11] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function ($event) {
+      return $options.registerUser();
+    }, ["enter"])),
+    onClick: _cache[12] || (_cache[12] = function ($event) {
       return $options.registerUser();
     }),
-    "class": "mx-auto btn-yus rounded-full w-full py-2 text-white"
-  }, " Create account ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    onClick: _cache[12] || (_cache[12] = function ($event) {
+    "class": "mx-auto btn-yus rounded-full w-full py-3 text-white"
+  }, " Create account ", 32
+  /* HYDRATE_EVENTS */
+  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    onClick: _cache[13] || (_cache[13] = function ($event) {
       return $options.showLoginForm();
     }),
     "class": "my-4 cursor-pointer"
   }, " Already have an account? "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    onClick: _cache[13] || (_cache[13] = function ($event) {
+    onClick: _cache[14] || (_cache[14] = function ($event) {
       return $options.showLoginForm();
     }),
     "class": "my-8"
@@ -23368,7 +23449,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.displaySignUpForm]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Forgot Password Form  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_23, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     required: "",
-    "onUpdate:modelValue": _cache[14] || (_cache[14] = function ($event) {
+    "onUpdate:modelValue": _cache[15] || (_cache[15] = function ($event) {
       return $data.forgotPasswordEmail = $event;
     }),
     "class": "input-box",
@@ -23379,18 +23460,37 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, null, 512
   /* NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.forgotPasswordEmail]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_25, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    onClick: _cache[15] || (_cache[15] = function ($event) {
+    onClick: _cache[16] || (_cache[16] = function ($event) {
       return $options.forgotPassword();
     }),
     "class": "mx-auto btn-yus rounded-full w-full py-2 text-white"
   }, " Submit ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    onClick: _cache[16] || (_cache[16] = function ($event) {
+    onClick: _cache[17] || (_cache[17] = function ($event) {
       return $options.showLoginForm();
     }),
     "class": "my-4 cursor-pointer"
   }, _hoisted_28)], 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.displayForgotPasswordForm]])])])], 512
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.displayForgotPasswordForm]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Verify Email Form  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_29, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_30, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    required: "",
+    "onUpdate:modelValue": _cache[18] || (_cache[18] = function ($event) {
+      return $data.verificationCode = $event;
+    }),
+    "class": "input-box",
+    type: "text",
+    name: "verificationCode",
+    id: "verificationCode",
+    placeholder: "Enter your Verification Code"
+  }, null, 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.verificationCode]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_31, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    onClick: _cache[19] || (_cache[19] = function ($event) {
+      return $options.verifyCode();
+    }),
+    "class": "mx-auto btn-yus rounded-full w-full py-2 text-white"
+  }, " Submit ")])], 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.displayVerifyEmailForm]])])])], 512
   /* NEED_PATCH */
   )), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.displayLogin]]);
 }
