@@ -24420,7 +24420,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "width": "60px",
         "height": "60px"
       },
-      src: "https://dashboard.kahioja.com/assets/images/thumbnails/".concat(product.thumbnail),
+      src: "https://dashboard.kahioja.com/assets/images/products/".concat(product.photo),
       alt: ""
     }, null, 8
     /* PROPS */

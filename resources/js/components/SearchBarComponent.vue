@@ -15,7 +15,7 @@
                         <div class="flex px-3">
                             <div class="flex items-center">
                                 <div>
-                                    <img style="width:60px; height:60px" :src="`https://dashboard.kahioja.com/assets/images/thumbnails/${product.thumbnail}`" alt="">
+                                    <img style="width:60px; height:60px" :src="`https://dashboard.kahioja.com/assets/images/products/${product.photo}`" alt="">
                                 </div>
                                 <div class="flex-col ml-3">
                                     <div><b>{{ product.name }}</b></div>
