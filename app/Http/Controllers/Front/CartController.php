@@ -54,6 +54,7 @@ class CartController extends Controller
         
         $is_product_in_bag = Bag::where('product_id', $product_id)->where('user_id', $user_id)->count();
             if($is_product_in_bag == 0){
+
                 try{
                     Bag::create([
                         'product_id'=> $product_id,
@@ -66,18 +67,22 @@ class CartController extends Controller
                     ]);
                     
                     $bag = DB::select("SELECT DISTINCT bags.id as 'bagId', bags.quantity, products.name, products.price, products.ship_fee, products.photo, bags.quantity * products.price as 'subTotal' FROM bags, products, users WHERE bags.product_id = products.id && bags.user_id = '$user_id' && bags.paid = 'unpaid' ORDER BY bags.id DESC");
+                    
                     return $response = \Response::json($bag, 200);
                 
                 }catch(Exception $e){
                     return $response = \Response::json($e, 500);                    
                 }
             }else{
-                $quantity_check = DB::select("SELECT `quantity` FROM bags WHERE bags.product_id='$product_id' && bags.user_id='$user_id'");
+                $quantity_check = DB::select("SELECT `quantity`, `id` FROM bags WHERE bags.product_id='$product_id' && bags.user_id='$user_id'");
                 $quantity_add = $quantity_check[0]->quantity + $quantity;
+                $bag_id = $quantity_check[0]->id;
+                
                     try{
                         // Bag::where('product_id', $product_id)->where('user_id', $user_id)->update(['quantity' => $quantity_add]);
-                        $update_bag = DB::select("UPDATE `bags` SET `quantity`='$quantity_add' WHERE `product_id`='$product_id' && `user_id`='$user_id'");
-                        
+                        $update_bag = DB::select("UPDATE `bags` SET `quantity`='$quantity_add' WHERE `id`='$bag_id' && `user_id`='$user_id'");
+                        // return $response = \Response::json($update_bag, 200);
+
                         $bag = DB::select("SELECT DISTINCT bags.id as 'bagId', bags.quantity, products.name, products.price, products.ship_fee, products.photo, bags.quantity * products.price as 'subTotal' FROM bags, products, users WHERE bags.product_id = products.id && bags.user_id = '$user_id' && bags.paid = 'unpaid' ORDER BY bags.id DESC");
                         return $response = \Response::json($bag, 200);
                     

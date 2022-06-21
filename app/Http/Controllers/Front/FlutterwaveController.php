@@ -76,9 +76,6 @@ class FlutterwaveController extends Controller
             $bag = DB::select("SELECT DISTINCT bags.id as 'bagId', bags.quantity, bags.paid, products.id, products.user_id, products.ship_fee, products.price FROM bags, products, users WHERE bags.product_id = products.id && bags.user_id = '$user_id' && bags.paid = 'unpaid' ORDER BY bags.id DESC LIMIT 1");
         }
         
-        dd('Yes');
-        // return $response = \Response::json($bag, 200);
-        
         $reference = Flutterwave::generateReference();
 
         // Enter the details of the payment

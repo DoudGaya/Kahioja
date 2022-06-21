@@ -31,6 +31,7 @@ class OrderController extends Controller
                     'users.shop_name AS shop_name', 'users.shop_address AS shop_address', 'users.shop_number AS shop_number' 
                 ])
                 ->where('bags.user_id','=',$user->id)
+                ->orderBy('bags.created_at', 'desc')
                 ->get();
         return response()->json($bags);
     }
