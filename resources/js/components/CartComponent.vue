@@ -26,7 +26,7 @@
                                 </div>
                                 <div class="hidden md:block">
                                     <div class="cursor-pointer" @click="removeProduct(product.bagId)" id="cart-body-product-remove">
-                                        Remove Product
+                                        <img style="width:25px;" src="/images/dustbin.png" alt="Remove Item">
                                     </div>
                                 </div>
                                 
@@ -51,7 +51,8 @@
                         <!-- //Mobile View  -->
                         <div class="grid grid-cols-2 gap-6 md:hidden">
                             <div class="cursor-pointer mx-auto" @click="removeProduct(product.bagId)" id="cart-body-product-remove">
-                                Remove Product
+                                <img class="mx-auto" style="width:25px;" src="/images/dustbin.png" alt="Remove Item">
+                                <!-- Remove Product -->
                             </div>
                             <div id="cart-body-product-add" class=" flex justify-between w-3/4 rounded-full my-auto">
                                 <div class="cursor-pointer w-1/2 bg-yus rounded-l-full py-1 text-white border">
@@ -112,6 +113,34 @@
                 </div>
             </div>
         </div>
+        <!-- Subtracting to Cart  -->
+        <div v-show="displaySubtractFromCart" id="addCartNotification" class=" bg-gray-500 text-white md:py-4 py-3 md:px-8 px-3 text-xs text-center rounded-full border-white">
+            Reducing Item quantity
+        </div>
+        <!-- Subtracting to Cart  -->
+        <div v-show="displaySubtractedFromCart" id="addCartNotification" class=" bg-gray-500 text-white md:py-4 py-3 md:px-8 px-3 text-xs text-center rounded-full border-white">
+            Item quantity subtracted
+        </div>
+        <!-- adding to Cart  -->
+        <div v-show="displayAddingToCart" id="addCartNotification" class=" bg-gray-500 text-white md:py-4 py-3 md:px-8 px-3 text-xs text-center rounded-full border-white">
+            Adding Item quantity
+        </div>
+        <!-- added to Cart  -->
+        <div v-show="displayAddedToCart" id="addCartNotification" class=" bg-gray-500 text-white md:py-4 py-3 md:px-8 px-3 text-xs text-center rounded-full border-white">
+            Item quantity Added
+        </div>
+        <!-- remove for Cart  -->
+        <div v-show="displayRemoveItemFromCart" id="addCartNotification" class=" bg-gray-500 text-white md:py-4 py-3 md:px-8 px-3 text-xs text-center rounded-full border-white">
+            Removing Item
+        </div>
+        <!-- Item remove for Cart  -->
+        <div v-show="removedItemFromCart" id="addCartNotification" class=" bg-gray-500 text-white md:py-4 py-3 md:px-8 px-3 text-xs text-center rounded-full border-white">
+            Item removed
+        </div>
+        <!-- failed to Cart  -->
+        <div v-show="displayFailToAddCart" id="addCartNotification" class=" bg-gray-500 text-white md:py-4 py-3 md:px-8 px-3 text-xs text-center rounded-full border-white">
+            Please Try again
+        </div>
     </div>
 </template>
 
@@ -120,9 +149,15 @@ export default {
     name: 'CartComponent',
     data(){
         return{
+            cart: [],
             displayCart: true,
-            isLoading: false,
-            cart: []
+            displaySubtractFromCart: false,
+            displaySubtractedFromCart: false,
+            displayAddingToCart: false,
+            displayAddedToCart: false,
+            displayFailToAddCart: false,
+            displayRemoveItemFromCart: false,
+            removedItemFromCart: false
         }
     },
     computed: {
@@ -145,43 +180,62 @@ export default {
     methods:{
         async minusProduct(id, quantity){
             if(quantity > 1){
-                this.isLoading = true
+                this.displaySubtractFromCart = !this.displaySubtractFromCart
+                setTimeout(()=>{
+                    this.displaySubtractFromCart = !this.displaySubtractFromCart
+                }, 3000)
                 quantity--
                 axios.post(`/reducebyone/${id}/${quantity}`).then(response => {
                     let cart = this.cart = response.data
                     this.$store.dispatch("allCartFromDatabase")
-                    this.isLoading = false
+                    setTimeout(()=>{
+                        this.displaySubtractedFromCart = !this.displaySubtractedFromCart
+                    }, 3000)
+                    this.displaySubtractedFromCart = !this.displaySubtractedFromCart
                 }).catch(error => {
-                    console.log(error)
+                    setTimeout(()=>{
+                        this.displayFailToAddCart = !this.displayFailToAddCart
+                    }, 3000)
                 })
             } 
         },
         async addProduct(id, quantity){
             if(quantity >= 1){
-                this.isLoading = true
+                this.displayAddingToCart = !this.displayAddingToCart
+                setTimeout(()=>{
+                    this.displayAddingToCart = !this.displayAddingToCart
+                }, 3000)
                 quantity++
                 axios.post(`/addbyone/${id}/${quantity}`).then(response => {
                     this.cart = response.data
                     this.$store.dispatch("allCartFromDatabase")
-                    this.isLoading = false
+                    setTimeout(()=>{
+                        this.displayAddedToCart = !this.displayAddedToCart
+                    }, 3000)
+                    this.displayAddedToCart = !this.displayAddedToCart
                 }).catch(error => {
-                    console.log(error)
+                    setTimeout(()=>{
+                        this.displayFailToAddCart = !this.displayFailToAddCart
+                    }, 3000)
                 })
             }
         },
-        removeProduct(id){
-            //Filtering The Products
-            // this.isLoading = true
-            // this.getAllCart = this.getAllCart.filter((product) => product.bagId !== id)   
-            // this.isLoading = false
-            
-            this.isLoading = true
+        async removeProduct(id){
+            this.displayRemoveItemFromCart = !this.displayRemoveItemFromCart
+            setTimeout(()=>{
+                this.displayRemoveItemFromCart = !this.displayRemoveItemFromCart
+            }, 3000)
             axios.get(`/removeproduct/${id}/`).then(response => {
                 this.cart = response.data
                 this.$store.dispatch("allCartFromDatabase")
-                this.isLoading = false
+                setTimeout(()=>{
+                    this.removedItemFromCart = !this.removedItemFromCart
+                }, 3000)
+                this.removedItemFromCart = !this.removedItemFromCart
             }).catch(error => {
-                console.log(error)
+                setTimeout(()=>{
+                    this.displayFailToAddCart = !this.displayFailToAddCart
+                }, 3000)
             })
         },
         closeCart(){
@@ -192,39 +246,6 @@ export default {
         checkOut(){
             window.location = '/checkout'
         }
-    },
-    created(){
-        this.bags = [
-            {
-                bagId: 104,
-                quantity: "1",
-                name: "SO KILN 90G",
-                price: 55.0,
-                ship_fee: "0",
-                photo: "1605186163NTwNOMvr.jpg",
-                subTotal: 55.0
-            },
-            {
-                bagId: 103,
-                quantity: "1",
-                name: "SEPTOL WITH LEMON",
-                price: 250.0,
-                ship_fee: "0",
-                photo: "1605185784KJFVxRFY.jpg",
-                subTotal: 250.0
-            },
-            {
-                bagId: 102,
-                quantity: "1",
-                name: "SO KILN",
-                price: 50.0,
-                ship_fee: "0",
-                photo: "1605186098PrgL9KyR.jpg",
-                subTotal: 50.0
-            }
-
-        ]
-    }
-       
+    }, 
 }
 </script>
