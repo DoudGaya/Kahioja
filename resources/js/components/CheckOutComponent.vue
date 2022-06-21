@@ -115,13 +115,13 @@
                 </div>
             </div>
             <!-- Payment Info  -->
-            <div v-show="displayPaymentInfo">
+            <div v-show="displayPaymentInfo" class="text-left">
                 <div class="py-4 px-4 bg-gray-900 text-white lg:text-2xl text-lg rounded-lg font-extrabold">
                     Confirm Delivery Information
                 </div>
                 <div class="my-6 py-4 px-4 lg:px-16 rounded-lg yus-shadow">
                     <div class="mt-4 flex justify-end">
-                        <input value="Change" type="button" @click="changeDeliveryInfo" class="btn-yus-conti-shopping rounded-full w-1/3 lg:w-1/4 py-2">
+                        <input value="Change" type="button" @click="changeDeliveryInfo" class="btn-yus-conti-shopping rounded-full w-2/3 lg:w-1/4 py-2">
                     </div>
                     <div class="my-4">
                         <span>
@@ -176,7 +176,7 @@
                 </div>
             </div>
             <!-- Delivery Info  -->
-            <div v-show="displayDeliveryInfo">
+            <div v-show="displayDeliveryInfo" class="text-left">
                 <div class="py-4 px-4 bg-gray-900 text-white lg:text-2xl text-lg rounded-lg font-extrabold">
                     Delivery Information
                 </div>

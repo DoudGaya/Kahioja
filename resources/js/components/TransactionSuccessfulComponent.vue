@@ -1,5 +1,5 @@
 <template>
-    <div class="relative top-48 md:top-20 lg:top-1">
+    <div class="relative top-28 mt-24 mb-64 md:top-20 lg:top-1">
         <!-- Transaction Stage -->
         <div v-show="displayPaymentSuccessful" class="my-16">
             <div>
@@ -106,15 +106,15 @@
                 </div>
                 <div class="col-span-2">
                     <!-- Product  -->
-                    <div class="my-4 mx-auto yus-shadow p-6 rounded-lg">
+                    <div class="my-4 mx-auto yus-shadow p-6 rounded-lg text-left">
                         <div :key="bag.bagId" v-for="bag in bags" id="cart-body-products" class="p-4">
-                            <div class="items-center grid grid-cols-3 gap-8 py-2">
+                            <div class="items-center lg:grid grid-cols-3 gap-8 py-2">
                                 <div class="col-span-1">
                                     <img class="w-full border-2 rounded-md border-green-400" :src="`https://dashboard.kahioja.com/assets/images/products/${bag.photo}`" :alt="`${ bag.name }`">
                                 </div>
                                 <div class="col-span-2">
                                     <!-- Product Name  -->
-                                    <div class="text-xl font-medium my-1"><b>{{ bag.name }}</b> x {{bag.quantity}}</div>
+                                    <div class="text-xl my-1"><b>{{ bag.name }}</b> x {{bag.quantity}}</div>
                                     <!-- Order ID  -->
                                     <div class="my-1">
                                         Order ID: {{ orderid }}
