@@ -26,8 +26,8 @@
                 <div v-if="isLoading" class="loader mx-auto mt-5"></div>
                 <h1 class="product-details-title">{{ productname }}</h1>
                 <div class="flex items-center">
-                    <span class="product-curr-price"><b>{{ productcurrprice }}</b></span>
-                    <span class="product-prev-price"><b>{{ productprevprice }}</b></span>
+                    <span class="product-curr-price"><b>₦{{ productcurrprice }}</b></span>
+                    <span v-if="productpreprive != null" class="card-prev-price"><b>₦{{ productprevprice }}</b></span>
                 </div>
                 <div class="flex items-center mb-4">
                     <div class="flex mr-4">
@@ -71,7 +71,7 @@
                         <button @click="addProduct()">+</button>
                     </div>
                 </div>
-                <div class="grid grid-cols-2 gap-6 my-7">
+                <div class="lg:grid grid-cols-2 gap-6 my-7">
                     <div>
                         <button @click="addToBag()" class="mx-auto btn-yus rounded-full w-full flex flex-row justify-center items-center p-2 text-white">
                             <div class="card-bag-label">
@@ -82,6 +82,7 @@
                             </div> 
                         </button>
                     </div>
+                    <br>
                     <div>
                         <form action="/buynow" method="POST">
                             <input type="hidden" name="_token" :value="csrf">

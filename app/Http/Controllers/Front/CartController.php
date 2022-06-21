@@ -75,7 +75,8 @@ class CartController extends Controller
                 $quantity_check = DB::select("SELECT `quantity` FROM bags WHERE bags.product_id='$product_id' && bags.user_id='$user_id'");
                 $quantity_add = $quantity_check[0]->quantity + $quantity;
                     try{
-                        Bag::where('product_id', $product_id)->where('user_id', $user_id)->update(['quantity' => $quantity_add]);
+                        // Bag::where('product_id', $product_id)->where('user_id', $user_id)->update(['quantity' => $quantity_add]);
+                        $update_bag = DB::select("UPDATE `bags` SET `quantity`='$quantity_add' WHERE `product_id`='$product_id' && `user_id`='$user_id'");
                         
                         $bag = DB::select("SELECT DISTINCT bags.id as 'bagId', bags.quantity, products.name, products.price, products.ship_fee, products.photo, bags.quantity * products.price as 'subTotal' FROM bags, products, users WHERE bags.product_id = products.id && bags.user_id = '$user_id' && bags.paid = 'unpaid' ORDER BY bags.id DESC");
                         return $response = \Response::json($bag, 200);

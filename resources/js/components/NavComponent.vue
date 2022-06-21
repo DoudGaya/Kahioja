@@ -431,7 +431,7 @@ export default {
         cartToggle(){ 
             this.displayCart = !this.displayCart 
             this.displayBottomNav = !this.displayBottomNav
-            this.displayDrawerContent = !this.displayDrawerContent
+            // this.displayDrawerContent = !this.displayDrawerContent
             this.cart = this.$store.dispatch("allCartFromDatabase")
         },
         loginToggle(){

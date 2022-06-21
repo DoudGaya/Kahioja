@@ -36,7 +36,7 @@ class LoginController extends Controller
 
           // Check If Email is verified or not
           if(Auth::guard('web')->user()->email_verified == 'No'){
-            Auth::guard('web')->logout();
+            // Auth::guard('web')->logout();
             return response()->json('Your Email is not Verified!');   
           }
 

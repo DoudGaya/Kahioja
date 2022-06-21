@@ -40,15 +40,15 @@
             </button>
         </div>
         <!-- adding to Cart  -->
-        <div v-show="displayAddCart" id="addCartNotification" class=" bg-gray-500 text-white md:py-4 py-2 md:px-8 px-3 text-xs text-center rounded-full border-white">
+        <div v-show="displayAddToCart" id="addCartNotification" class=" bg-gray-500 text-white md:py-4 py-3 md:px-8 px-3 text-xs text-center rounded-full border-white">
             Adding Item to Cart
         </div>
         <!-- added to Cart  -->
-        <div v-show="displayAddedToCart" id="addCartNotification" class=" bg-gray-500 text-white md:py-4 py-2 md:px-8 px-3 text-xs text-center rounded-full border-white">
+        <div v-show="displayAddedToCart" id="addCartNotification" class=" bg-gray-500 text-white md:py-4 py-3 md:px-8 px-3 text-xs text-center rounded-full border-white">
             Item Added to Cart
         </div>
         <!-- failed to Cart  -->
-        <div v-show="displayFailToAddCart" id="addCartNotification" class=" bg-gray-500 text-white md:py-4 py-2 md:px-8 px-3 text-xs text-center rounded-full border-white">
+        <div v-show="displayFailToAddCart" id="addCartNotification" class=" bg-gray-500 text-white md:py-4 py-3 md:px-8 px-3 text-xs text-center rounded-full border-white">
             Please Try again
         </div>
     </div>
