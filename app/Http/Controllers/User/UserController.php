@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Subscription;
 use App\Models\Country;
+use App\Models\Bag;
 use App\Models\Generalsetting;
 use App\Models\UserSubscription;
 use App\Models\FavoriteSeller;
@@ -34,6 +35,39 @@ class UserController extends Controller
         $user = Auth::user();
         $countries = Country::all();  
         return response()->json(['user'=>$user, 'countries'=>$countries]);
+    }
+
+    public function orderconfirm(Request $request)
+    {
+        $order_number = $request->order_number;
+        $vendor_id = $request->vendor_id;
+        $logistics_id = $request->logistics_id;
+        
+        $data = Order::where('order_number','=',$order_number)->first();
+
+        $updateVendorOrderStatus = VendorOrder::where('order_number','=',$order_number)->where('user_id','=',$vendor_id)->update(['status' => 'delivered','logistics_id'=>$logistics_id]);
+        $updateBag = Bag::where('order_number','=',$order_number)->where('vendor_id','=',$vendor_id)->update(['status' => 'delivered','logistics_id'=>$logistics_id]);
+        $updateDeleiveryStatus = LogisticsDelivery::where('order_number','=',$order_number)->where('vendor_id','=',$vendor_id)->update(['delivery_status' => 3]);
+        
+        // The vendor will get his money when the customer has recieved his products! 
+        $uprice = User::where('id','=',$vendor_id)->first();
+        $total_sell = VendorOrder::where('user_id','=',$vendor_id)->where('order_number','=',$order_number)->where('status','!=','pending')->where('status','!=','processing')->where('status','!=','declined')->sum('price');    
+        $uprice->current_balance = $uprice->current_balance + $total_sell;
+        $uprice->update();
+        
+        // Logistic get his money
+        $company = Logistic::where('id','=',$logistics_id)->first();
+        $total_sell = VendorOrder::where('logistics_id','=',$logistics_id)->where('user_id','=',$vendor_id)->where('order_number','=',$order_number)->where('status','=','delivered')->sum('ship_fee');    
+        $company->current_balance = $company->current_balance + $total_sell;
+        $company->update();
+
+        $checkVendorOrderCount = VendorOrder::where('order_number','=',$order_number)->where('status','=','picked up for delivery')->get();
+        
+        if(count($checkVendorOrderCount) == 0){
+            $updateOrderStatus = Order::where('order_number','=',$order_number)->update(['status' => 'delivered']);
+        }
+        
+        return response()->json('Order Completed!');
     }
 
     public function profileupdate(Request $request)

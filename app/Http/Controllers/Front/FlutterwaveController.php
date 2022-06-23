@@ -42,6 +42,8 @@ class FlutterwaveController extends Controller
             Session::put('guest', $user_id);
         }
 
+        Session::put('user_id', $user_id);
+
         if(Session::has('currency')) {
             $curr = Currency::find(Session::get('currency'));
             $currency_name = $curr->name;
@@ -68,6 +70,7 @@ class FlutterwaveController extends Controller
                 'user_id'=> $user_id,
                 'user_type'=> $user_type,
                 'quantity'=> $request->productquantity,
+                'vendor_id'=> $product->user_id,
                 'paid'=> 'unpaid',
                 'order_no'=> $orderId,
                 'amount'=> $product->price,
@@ -235,7 +238,7 @@ class FlutterwaveController extends Controller
         $status = request()->status;
         
         //if payment is successful
-        if ($status ==  'completed') {
+        if($status ==  'completed' || $status == 'successful') {
         
             $transactionID = Flutterwave::getTransactionIDFromCallback();
             $data = Flutterwave::verifyTransaction($transactionID);
@@ -268,9 +271,10 @@ class FlutterwaveController extends Controller
             Session::put('customer_phone', $customer_phone);
             
             $orderNo = Session::get('orderNo');
+            $user = Session::get('user_id');
 
             $order = Order::where('order_number', $orderNo)->update([
-                    'user_id'=> Auth::user()->id,
+                    'user_id'=> $user,
                     'payment_status'=> 'completed',
                     'method'=> $card_details,
                     'txnid'=> $transactID]);
@@ -281,7 +285,7 @@ class FlutterwaveController extends Controller
             
             return redirect()->route('front.checkoutsuccess');
 
-        }elseif ($status ==  'cancelled'){
+        }else if($status ==  'cancelled'){
             return redirect()->route('front.checkoutcancelled');
         }else{
             return redirect()->route('front.checkoutfailed');

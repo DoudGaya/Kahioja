@@ -54,8 +54,9 @@
                             </div>
                             <div v-if="(order.paid == 'paid')" class="flex justify-between py-1">
                                 <b><span>Delivery Status</span></b>
+                                <!-- <span>{{ order.order_status }}</span> -->
                                 <span v-if="(order.order_status == 'pending' || order.order_status == 'processing' || order.order_status == 'completed')">Processing</span>
-                                <span v-if="(order.order_status == 'accept delivery' || order.order_status == 'pick up for delivery' || order.order_status == 'on delivery')">On Delivery</span>
+                                <span v-if="(order.order_status == 'accept delivery' || order.order_status == 'picked up for delivery' || order.order_status == 'on delivery')">On Delivery</span>
                                 <span v-if="(order.order_status == 'delivered')">Deliveried</span>
                                 <span v-if="(order.order_status == 'declined')">Declined</span>
                             </div>

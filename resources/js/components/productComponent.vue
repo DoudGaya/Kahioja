@@ -3,7 +3,7 @@
         <a :href="productlink">
 
             <!-- <img class="w-64 mx-auto py-4" :src="`https://dashboard.kahioja.com/assets/images/thumbnails/${productimage}`" :alt="productname"> -->
-            <img class="w-64 mx-auto py-4" :src="`https://dashboard.kahioja.com/assets/images/thumbnails/${productimage}`">
+            <img class="w-64 mx-auto py-4" :src="`https://dashboard.kahioja.com/assets/images/products/${productimage}`">
             <!-- Product Details  -->
             <div class="py-3">
                 <h1 style="display:none;">{{ productid }}</h1>
