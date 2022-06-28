@@ -24252,7 +24252,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "height": "50px",
         "border": "1px solid #ddd"
       },
-      src: "https://dashboard.kahioja.com/assets/images/thumbnails/".concat(product.thumbnail)
+      src: "https://dashboard.kahioja.com/assets/images/products/".concat(product.photo)
     }, null, 8
     /* PROPS */
     , _hoisted_43)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_44, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_45, [_hoisted_46, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_47, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(product.name), 1

@@ -109,7 +109,7 @@
                     <a :href="`/item/${product.slug}`">
                         <div class="flex items-center py-3 text-xs">
                             <div class="">
-                                <img style="width: 50px; height: 50px; border: 1px solid #ddd;" :src="`https://dashboard.kahioja.com/assets/images/thumbnails/${product.thumbnail}`">
+                                <img style="width: 50px; height: 50px; border: 1px solid #ddd;" :src="`https://dashboard.kahioja.com/assets/images/products/${product.photo}`">
                             </div>
                             <div class="ml-4">
                                 <div class="grid grid-cols-3 gap-2">
