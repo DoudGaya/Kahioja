@@ -52,13 +52,26 @@
                                 <b><span>Total Amount</span></b>
                                 <span>N{{ order.amount }}</span>
                             </div>
-                            <div v-if="(order.paid == 'paid')" class="flex justify-between py-1">
-                                <b><span>Delivery Status</span></b>
-                                <!-- <span>{{ order.order_status }}</span> -->
-                                <span v-if="(order.order_status == 'pending' || order.order_status == 'processing' || order.order_status == 'completed')">Processing</span>
-                                <span v-if="(order.order_status == 'accept delivery' || order.order_status == 'picked up for delivery' || order.order_status == 'on delivery')">On Delivery</span>
-                                <span v-if="(order.order_status == 'delivered')">Deliveried</span>
-                                <span v-if="(order.order_status == 'declined')">Declined</span>
+                            <div v-if="(order.paid == 'paid')">
+                                <div class="flex justify-between py-1" v-if="(order.order_status == 'pending' || order.order_status == 'processing' || order.order_status == 'completed')">
+                                    <b><span>Delivery Status</span></b>
+                                    Processing
+                                </div>
+                                <div v-show="orderConfirm" v-if="(order.order_status == 'accept delivery' || order.order_status == 'picked up for delivery' || order.order_status == 'on delivery')">
+                                    <input @click="confirmDelivery(order.order_no, order.vendor_id, order.logistics_id)" value="Confirm Delivery" type="submit" class="rounded-full flex justify-center mx-auto btn-yus w-full py-4 lg:w-1/2 lg:py-4 text-white">
+                                </div>
+                                <div v-show="callBackOrderConfirm" class="flex justify-between py-1">
+                                    <b><span>Delivery Status</span></b>
+                                    <span>Deliveried</span>
+                                </div>
+                                <div class="flex justify-between py-1" v-if="(order.order_status == 'delivered')">
+                                    <b><span>Delivery Status</span></b>
+                                    <span>Deliveried</span>
+                                </div>
+                                <div class="flex justify-between py-1" v-if="(order.order_status == 'declined')">
+                                    <b><span>Delivery Status</span></b>
+                                    <span>Declined</span>
+                                </div>
                             </div>
                         </div>
                         <div v-if="(order.paid == 'unpaid')" class="my-3">
@@ -87,6 +100,8 @@ export default {
             displayUserOrders: true,
             orderList: true,
             isLoading: false,
+            orderConfirm: true,
+            callBackOrderConfirm: false,
             callback: '',
             orders: [],
             csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
@@ -112,7 +127,20 @@ export default {
                 console.log(error)
             })
         },
+        async confirmDelivery(order_no, vendor_id, logistics_id){
+            axios.post(`/order/confirm/${order_no}/${vendor_id}/${logistics_id}`, {
+            }).then(response => {
+                this.$store.dispatch("allCartFromDatabase")
 
+                if(response.data == 'completed'){
+                    this.orderConfirm = !this.orderConfirm
+                    this.callBackOrderConfirm = !this.callBackOrderConfirm
+                }
+
+            }).catch(error => {
+                console.log(error)
+            })
+        },
         closeOrders(){
             if(this.displayUserOrders == true){
                 this.displayUserOrders = false 
