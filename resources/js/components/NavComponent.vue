@@ -213,6 +213,14 @@
                     </div>
                 </div>
             </div>
+            <!-- Track Order  -->
+            <div class="cursor-pointer p-3 border-b border-gray-400 flex justify-between items-center bg-white text-black">
+                <div @click="openTrackOrder()">
+                    <h1 class="text-sm">
+                        Track Order
+                    </h1>
+                </div>
+            </div>
             <!-- Privacy  -->
             <div class="cursor-pointer p-3 border-b border-gray-400 flex justify-between items-center bg-white text-black">
                 <div>

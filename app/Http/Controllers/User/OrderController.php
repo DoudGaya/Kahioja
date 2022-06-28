@@ -42,7 +42,7 @@ class OrderController extends Controller
 
         if(mb_strlen($slug,'utf-8') > 1){
             $search = '%'.$slug.'%';
-            $order = Bag::where('user_id','=',$user->id)->where('order_no', 'like', $search)->count();
+            $order = Bag::where('order_no', 'like', $search)->count();
             if($order > 0){
                 $bags = DB::table('bags')
                         ->join('products', 'bags.product_id','=','products.id')

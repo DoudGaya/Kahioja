@@ -21,7 +21,7 @@
                         <li class="py-4">
                             <a href="/categories">All Categories</a>
                         </li>
-                        <li v-if="(getUser != '')" @click="openTrackOrder()" class="py-4 cursor-pointer">
+                        <li @click="openTrackOrder()" class="py-4 cursor-pointer">
                             Track Orders
                         </li>
                         <li class="py-4">
