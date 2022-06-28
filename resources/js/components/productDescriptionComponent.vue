@@ -10,7 +10,7 @@
             Reviews and Comments
         </div> -->
     </div>
-    <div v-show="productDescriptionContent" class="w-full md:w-2/3 mx-auto relative -top-5 p-4 border-1 shadow">
+    <div v-show="productDescriptionContent" class="w-full md:w-2/3 relative -top-5 p-4 border-1 shadow">
         {{ productdetails }}
     </div>
     <div v-show="buyAndReturnPolicyContent" class="w-full md:w-2/3 mx-auto relative -top-5 p-4 border-1 shadow">

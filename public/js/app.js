@@ -26832,7 +26832,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, " Buy and return policy ", 2
   /* CLASS */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div @click=\"commentAndReview()\" :class=\"[commentAndReviewContent ? 'active':'not-active', 'py-3', 'md:px-8 px-4']\">\r\n            Reviews and Comments\r\n        </div> ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    "class": "w-full md:w-2/3 mx-auto relative -top-5 p-4 border-1 shadow"
+    "class": "w-full md:w-2/3 relative -top-5 p-4 border-1 shadow"
   }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.productdetails), 513
   /* TEXT, NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.productDescriptionContent]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, _hoisted_49, 512
