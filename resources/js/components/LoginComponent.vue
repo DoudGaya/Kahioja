@@ -16,9 +16,9 @@
                 <div v-if="isLoading" class="loader mx-auto"></div>
                 <!-- Login Form  -->
                 <div v-show="displayLoginForm">
-                    <div class="my-4">
+                    <!-- <div class="my-4">
                         Log in into your account
-                    </div>
+                    </div> -->
                     <div class="my-4">
                         <div>
                             <input required v-model="loginEmail" class="border border-gray-300 rounded py-3 px-6 w-full my-2 focus:outline-none" type="email" name="email" id="loginEmail" placeholder="Email Address">
@@ -30,7 +30,7 @@
                     <div @click="showForgotPasswordForm()" class="cursor-pointer flex justify-end my-4">
                         Forgot Password?
                     </div>
-                    <div class="text-left my-4">
+                    <div class="text-left my-4 items-center">
                         <span>
                             <input type="checkbox" name="signed">
                         </span>
@@ -38,8 +38,8 @@
                             Keep me signed in
                         </span>
                     </div>
-                    <div @click="loginUser()" class="my-8">
-                        <button class="mx-auto btn-yus rounded-full w-full py-2 text-white">
+                    <div class="my-8">
+                        <button id="loginBtn" @click="loginUser()" class="mx-auto btn-yus rounded-full w-full py-2 text-white">
                             Login
                         </button>
                     </div>
@@ -180,7 +180,9 @@ export default {
         },
         async loginUser(){
             
-            this.isLoading = true 
+            document.getElementById('loginBtn').innerText = 'Authenticating...'
+            // btnValue = 
+            // this.isLoading = true 
 
             if(this.loginEmail !== ''){
                 if(this.loginPassword !== ''){
@@ -199,20 +201,33 @@ export default {
                         if(this.callback == 'Your Email is not Verified!'){
                             setTimeout(()=>{
                                 this.callback = ''
-                                window.location = '/'
+                                document.getElementById('loginBtn').innerText = 'Login'
                             }, 3000)
                         }
 
                         //If Account Banned
-                        if(this.callback == 'Your Account Has Been Banned'){
+                        else if(this.callback == 'Your Account Has Been Banned'){
                             setTimeout(()=>{
                                 this.callback = ''
+                                document.getElementById('loginBtn').innerText = 'Login'
+                            }, 3000)
+                        }
+
+                        // If Wrong Password 
+                        else if(this.callback == 'Wrong Email and Password Combination'){
+                            document.getElementById('loginBtn').innerText = 'Wrong Email and Password Combination'
+                            setTimeout(()=>{
+                                this.callback = ''
+                                document.getElementById('loginBtn').innerText = 'Login'
+                            }, 3000)
+                        }else{
+                            setTimeout(()=>{
+                                this.callback = ''
+                                document.getElementById('loginBtn').innerText = 'Login successful...'
+                                window.location = '/'
                             }, 3000)
                         }
                         
-                        setTimeout(()=>{
-                            window.location = '/'
-                        }, 3000)
 
                     }).catch(error => {
                         console.log(error)
@@ -222,6 +237,10 @@ export default {
                 }
             }else{
                 this.callback = 'Email Address field empty'
+                setTimeout(()=>{
+                    this.callback = ''
+                    document.getElementById('loginBtn').innerText = 'Login'
+                }, 3000)
             }
         },
         async registerUser(){

@@ -62,11 +62,11 @@
                                 </div>
                                 <div v-show="callBackOrderConfirm" class="flex justify-between py-1">
                                     <b><span>Delivery Status</span></b>
-                                    <span>Deliveried</span>
+                                    <span>Delivered</span>
                                 </div>
                                 <div class="flex justify-between py-1" v-if="(order.order_status == 'delivered')">
                                     <b><span>Delivery Status</span></b>
-                                    <span>Deliveried</span>
+                                    <span>Delivered</span>
                                 </div>
                                 <div class="flex justify-between py-1" v-if="(order.order_status == 'declined')">
                                     <b><span>Delivery Status</span></b>

@@ -106,6 +106,7 @@ class OrderController extends Controller
 
         $updateVendorOrderStatus = VendorOrder::where('order_number','=',$order_number)->where('user_id','=',$vendor_id)->update(['status' => 'delivered','logistics_id'=>$logistics_id]);
         $updateDeleiveryStatus = LogisticsDelivery::where('order_number','=',$order_number)->where('vendor_id','=',$vendor_id)->update(['delivery_status' => 3]);
+        $updateBagStatus = Bag::where('order_no','=',$order_number)->where('vendor_id','=',$vendor_id)->update(['status' => 'delivered']);
         
         // The vendor will get his money when the customer has recieved his products! 
         $uprice = User::where('id','=',$vendor_id)->first();
