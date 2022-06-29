@@ -140,11 +140,11 @@
                     <h1 class="text-lg">Shop by Category</h1>
                     <svg width="20" height="13" viewBox="0 0 36 26" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M34 2H2" stroke="black" stroke-width="3" stroke-linecap="round"/><path d="M34 13L2 13" stroke="black" stroke-width="3" stroke-linecap="round"/><path d="M34 24H2" stroke="black" stroke-width="3" stroke-linecap="round"/></svg>
                 </div>
-                <div v-show="displayDrawerCategory" id="drawer-content-category" class="bg-gray-300 text-black">
+                <div v-show="displayDrawerCategory" id="drawer-content-category" class="bg-gray-200 text-black">
                     <div class="border-b border-gray-400 p-2 hover:bg-white" :key="category.slug" v-for="category in categories">
-                        <a :href="`/category/${category.slug}`" class="items-center flex justify-between">
+                        <a :href="`/category/${category.slug}`" class="items-center flex">
                             <span><img class="mx-auto" style="width:25px;" :src="`https://dashboard.kahioja.com/assets/images/categories/${category.photo}`"></span>
-                            <span class="text-sm">{{ category.name }}</span>
+                            <span class="text-sm ml-2">{{ category.name }}</span>
                         </a>
                     </div>
                 </div>
@@ -179,7 +179,7 @@
                         <svg width="20" height="13" viewBox="0 0 36 26" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M34 2H2" stroke="black" stroke-width="3" stroke-linecap="round"/><path d="M34 13L2 13" stroke="black" stroke-width="3" stroke-linecap="round"/><path d="M34 24H2" stroke="black" stroke-width="3" stroke-linecap="round"/></svg>        
                     </div>
                 </div>
-                <div  v-if="(getUser != '')" v-show="displayDrawerAccount" id="drawer-content-category" class="bg-gray-300 text-black">
+                <div  v-if="(getUser != '')" v-show="displayDrawerAccount" id="drawer-content-category" class="bg-gray-200 text-black px-2">
                     <!-- Vendor Panel  -->
                     <div v-if="getUser.is_vendor == 2" class="border-b border-black p-3 hover:bg-white items-center flex justify-between">
                         <a target="_blank" href="https://dashboard.kahioja.com/user/login/">

@@ -23880,12 +23880,12 @@ var _hoisted_55 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticV
 var _hoisted_57 = [_hoisted_55];
 var _hoisted_58 = {
   id: "drawer-content-category",
-  "class": "bg-gray-300 text-black"
+  "class": "bg-gray-200 text-black"
 };
 var _hoisted_59 = ["href"];
 var _hoisted_60 = ["src"];
 var _hoisted_61 = {
-  "class": "text-sm"
+  "class": "text-sm ml-2"
 };
 
 var _hoisted_62 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", {
@@ -23972,7 +23972,7 @@ var _hoisted_71 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 var _hoisted_72 = {
   key: 2,
   id: "drawer-content-category",
-  "class": "bg-gray-300 text-black"
+  "class": "bg-gray-200 text-black px-2"
 };
 var _hoisted_73 = {
   key: 0,
@@ -24320,7 +24320,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       key: category.slug
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
       href: "/category/".concat(category.slug),
-      "class": "items-center flex justify-between"
+      "class": "items-center flex"
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
       "class": "mx-auto",
       style: {
