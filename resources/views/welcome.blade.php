@@ -83,20 +83,29 @@
             </div>
         </div>
     </div>
-    <!-- Best Product  -->
+    <!-- Groceries  -->
     <div id="best-product" class="relative lg:top-0 lg:px-14 px-4 py-8">
-        <h1 class="headings-yus">Best Products</h1>
+        <h1 class="headings-yus">Groceries</h1>
         <div class="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-6">
-            @foreach($best_products as $prod)
+            @foreach($groceries as $prod)
                 @include('includes.productComponent')
             @endforeach
         </div>
     </div>
-    <!-- Top Rated -->
-    <div id="top-product" class="relative lg:top-0 lg:px-14 px-4 py-8">
-        <h1 class="headings-yus">Top Rated</h1>
+    <!-- Fashion & Accessories Product  -->
+    <div id="best-product" class="relative lg:top-0 lg:px-14 px-4 py-8">
+        <h1 class="headings-yus">Fashion & Accessories</h1>
         <div class="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-6">
-            @foreach($top_products as $prod)
+            @foreach($fashion as $prod)
+                @include('includes.productComponent')
+            @endforeach
+        </div>
+    </div>
+    <!-- Drinks Product  -->
+    <div id="best-product" class="relative lg:top-0 lg:px-14 px-4 py-8">
+        <h1 class="headings-yus">Drinks & Beverages</h1>
+        <div class="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-6">
+            @foreach($drinks as $prod)
                 @include('includes.productComponent')
             @endforeach
         </div>
@@ -107,11 +116,11 @@
             <img class="mx-auto" src="{{ asset('images/banner-2.jpg') }}" alt="banner 2">
         </div>
     </div>
-    <!-- Hot Products -->
-    <div id="hot-product" class="relative lg:top-0 lg:px-14 px-4 py-8">
-        <h1 class="headings-yus">Hot Products</h1>
+    <!-- Toiletries Product  -->
+    <div id="best-product" class="relative lg:top-0 lg:px-14 px-4 py-8">
+        <h1 class="headings-yus">Toiletries</h1>
         <div class="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-6">
-            @foreach($hot_products as $prod)
+            @foreach($toiletries as $prod)
                 @include('includes.productComponent')
             @endforeach
         </div>
@@ -122,11 +131,11 @@
             <img class="mx-auto" src="{{ asset('images/banner-3.jpg') }}" alt="banner 3">
         </div>
     </div>
-    <!-- Sale Products -->
+    <!-- Hot Products -->
     <div id="hot-product" class="relative lg:top-0 lg:px-14 px-4 py-8">
-        <h1 class="headings-yus">Sale Products</h1>
+        <h1 class="headings-yus">Hot Products</h1>
         <div class="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-6">
-            @foreach($sale_products as $prod)
+            @foreach($hot_products as $prod)
                 @include('includes.productComponent')
             @endforeach
         </div>

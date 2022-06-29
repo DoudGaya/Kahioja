@@ -121,10 +121,13 @@ class FrontendController extends Controller
         $latest_products =  Product::where('latest','=',1)->where('status','=',1)->select($selectable)->orderBy('id','desc')->take(8)->get();
         $trending_products =  Product::where('trending','=',1)->where('status','=',1)->select($selectable)->orderBy('id','desc')->take(8)->get();
         $sale_products =  Product::where('sale','=',1)->where('status','=',1)->select($selectable)->orderBy('id','desc')->take(8)->get();
+        $fashion =  Product::where('category_id','=',20)->where('status','=',1)->orderBy('id','desc')->take(8)->get();
+        $groceries =  Product::where('category_id','=',21)->where('status','=',1)->orderBy('id','desc')->take(8)->get();
+        $toiletries =  Product::where('category_id','=',22)->where('status','=',1)->orderBy('id','desc')->take(8)->get();
+        $drinks =  Product::where('category_id','=',23)->where('status','=',1)->orderBy('id','desc')->take(8)->get();
         $categories = Category::select('name', 'photo', 'slug')->where('status', 1)->orderBy('id', 'desc')->take(6)->get();
         
-        // dd($best_products);
-        return view('welcome',compact('best_products','top_products','hot_products','sale_products','ps','gs','categories'));
+        return view('welcome',compact('best_products','top_products','hot_products','sale_products','ps','gs','categories', 'fashion', 'groceries', 'toiletries', 'drinks'));
 	}
 
     public function pagenotfound()
