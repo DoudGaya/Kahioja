@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\LoginController;
 use App\Http\Controllers\User\RegisterController;
 use App\Http\Controllers\Front\FrontendController;
+use App\Http\Controllers\Front\PaymentController;
 use App\Http\Controllers\Front\CatalogController;
 use App\Http\Controllers\Front\CartController;
 use App\Http\Controllers\Front\FlutterwaveController;
@@ -90,6 +91,8 @@ Route::get('/childcategories/{slug}',  [CatalogController::class, 'childcategori
 // CATEGORY SECTION ENDS
 
 // Payment Method 
+Route::post('/pay', [PaymentController::class, 'redirectToGateway'])->name('pay');
+Route::get('/payment/callback', [PaymentController::class, 'handleGatewayCallback']);
 Route::post('/flutterwave/submit', [FlutterwaveController::class, 'initialize'])->name('flutterwave.submit');
 Route::get('/flutterwave/callback', [FlutterwaveController::class,'callback'])->name('callback');
 Route::get('/checkoutfailed', [FlutterwaveController::class, 'checkoutfailed'])->name('front.checkoutfailed');

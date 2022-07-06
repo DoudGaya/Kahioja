@@ -19575,7 +19575,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 _this2.isLoading = true;
-                axios.post('/flutterwave/submit').then(function (response) {
+                axios.post('/pay').then(function (response) {
                   _this2.isLoading = false;
                 })["catch"](function (error) {
                   console.log(error);
@@ -19950,16 +19950,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
-                _this5.isLoading = true; // alert()
-
-                axios.post('/flutterwave/submit', {// name: this.signUpName,
-                  // email: this.signUpEmail,
-                  // password: this.signUpPassword
-                }).then(function (response) {
+                _this5.isLoading = true;
+                axios.post('/pay', {}).then(function (response) {
                   _this5.isLoading = false;
-                  console.log(response.data); // setTimeout(()=>{
-                  //     window.location = '/'
-                  // }, 3000)
+                  console.log(response.data);
                 })["catch"](function (error) {
                   console.log(error);
                 });
@@ -21688,7 +21682,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "relative top-28 mt-24 mb-64 md:top-20 lg:top-1"
+  "class": "relative top-28 mt-24 mb-64 md:top-20 lg:top-1 text-left"
 };
 var _hoisted_2 = {
   "class": "my-8 hidden md:block"
@@ -21928,7 +21922,7 @@ var _hoisted_47 = {
   "class": "my-8"
 };
 var _hoisted_48 = {
-  action: "/flutterwave/submit",
+  action: "/pay",
   method: "POST"
 };
 var _hoisted_49 = ["value"];
@@ -22087,7 +22081,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   , _hoisted_54), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "hidden",
     name: "amount",
-    value: $options.totalFee
+    value: $options.totalFee * 100
   }, null, 8
   /* PROPS */
   , _hoisted_55), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
@@ -22889,7 +22883,7 @@ var _hoisted_69 = {
   "class": "my-8"
 };
 var _hoisted_70 = {
-  action: "/flutterwave/submit",
+  action: "/pay",
   method: "POST"
 };
 var _hoisted_71 = ["value"];
@@ -23112,7 +23106,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   , _hoisted_76), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "hidden",
     name: "amount",
-    value: $options.totalFee
+    value: $options.totalFee * 100
   }, null, 8
   /* PROPS */
   , _hoisted_77), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
@@ -24833,7 +24827,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "relative top-28 mt-24 mb-64 md:top-20 lg:top-1"
+  "class": "relative top-28 mt-24 mb-64 md:top-20 lg:top-1 text-left"
 };
 var _hoisted_2 = {
   "class": "my-16"
@@ -24985,7 +24979,7 @@ var _hoisted_30 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 
 var _hoisted_31 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "text-right"
-}, "Flutterwave", -1
+}, "Paystack", -1
 /* HOISTED */
 );
 
@@ -25140,7 +25134,7 @@ var _hoisted_62 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 
 var _hoisted_63 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "text-right"
-}, "Flutterwave", -1
+}, "Paystack", -1
 /* HOISTED */
 );
 

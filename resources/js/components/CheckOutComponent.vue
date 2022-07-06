@@ -157,14 +157,14 @@
                     </div>
                     <div v-if="isLoading" class="loader mx-auto my-5"></div>
                     <div class="my-8">
-                        <form action="/flutterwave/submit" method="POST">
+                        <form action="/pay" method="POST">
                             <input type="hidden" name="_token" :value="csrf">
                             <input type="hidden" name="name" :value="checkoutname">
                             <input type="hidden" name="email" :value="checkoutemail">
                             <input type="hidden" name="phone" :value="checkoutphone">
                             <input type="hidden" name="address" :value="checkoutaddress">
                             <input type="hidden" name="city" :value="checkoutcity">
-                            <input type="hidden" name="amount" :value="totalFee">
+                            <input type="hidden" name="amount" :value="(totalFee * 100)">
                             <input type="hidden" name="deliveryFee" :value="deliveryFee">
                             <input type="hidden" name="serviceFee" :value="serviceFee">
                             <input :value="`Pay N${ totalFee }`" type="submit" @click="confirmPayment()" class="flex justify-center mx-auto btn-yus rounded-full w-full py-5 lg:w-1/2 lg:py-4 text-white">
@@ -316,20 +316,10 @@ export default {
         },
         async confirmPayment(){
             this.isLoading = true
-            // alert()
-            axios.post('/flutterwave/submit', {
-                // name: this.signUpName,
-                // email: this.signUpEmail,
-                // password: this.signUpPassword
+            axios.post('/pay', {
             }).then(response => {
-                
                 this.isLoading = false
                 console.log(response.data)
-
-                // setTimeout(()=>{
-                //     window.location = '/'
-                // }, 3000)
-
             }).catch(error => {
                 console.log(error)
             })

@@ -1,5 +1,5 @@
 <template>
-    <div class="relative top-28 mt-24 mb-64 md:top-20 lg:top-1">
+    <div class="relative top-28 mt-24 mb-64 md:top-20 lg:top-1 text-left">
         <!-- Transaction Stage -->
         <div v-show="displayPaymentSuccessful" class="my-16">
             <div>
@@ -64,7 +64,7 @@
                         <div>Amount Paid</div>
                         <div class="text-right">N{{ subtotal }}</div>
                         <div>Payment Method</div>
-                        <div class="text-right">Flutterwave</div>
+                        <div class="text-right">Paystack</div>
                         <div>Transaction ID</div>
                         <div class="text-right">{{ transactionid }}</div>
                         <div>Order ID</div>
@@ -167,7 +167,7 @@
                                 <div>Amount Paid</div>
                                 <div class="text-right">N{{ subtotal }}</div>
                                 <div>Payment Method</div>
-                                <div class="text-right">Flutterwave</div>
+                                <div class="text-right">Paystack</div>
                                 <div>Transaction ID</div>
                                 <div class="text-right">{{ transactionid }}</div>
                                 <div>Order ID</div>
