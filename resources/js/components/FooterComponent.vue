@@ -9,9 +9,8 @@
                     </div>
                 </a>
                 <div class="w-full md:w-1/2 mt-12">
-                    <p>
-                        Kahioja is an ecommerce platform that serve local market across Africa. We aim to give access to myriad of products on our platform and help businesses grow whilst making sales and delivery as ease 
-                    </p>
+                    <div v-html="footer.footer"></div>
+                    <!-- Kahioja is an ecommerce platform that serve local market across Africa. We aim to give access to myriad of products on our platform and help businesses grow whilst making sales and delivery as ease  -->
                 </div>
             </div>
             <div class="col-span-1">
@@ -52,9 +51,8 @@
             </div>
         </div>
         <div class="mt-6 w-full md:px-14 px-4">
-            <p>
-                Copyright &copy; 2022 <br>All Rights Reserved By Kahioja
-            </p>
+            <div v-html="footer.copyright"></div>
+                <!-- Copyright &copy; 2022 <br>All Rights Reserved By Kahioja -->
         </div>
     </div>
     <UserTrackOrder v-show="displayTrackOrder" />
@@ -74,7 +72,15 @@ export default {
     data(){
         return{
             displayTrackOrder: false,
+            footer: []
         }
+    },
+    async created(){
+        axios.get(`/footer`).then(response => {
+            this.footer = response.data;
+        }).catch(error => {
+            console.log(error)
+        })
     },
     methods:{
         openTrackOrder(){

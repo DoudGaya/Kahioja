@@ -83,20 +83,20 @@
             </div>
         </div>
     </div>
-    <!-- Groceries  -->
-    <div id="best-product" class="relative lg:top-0 lg:px-14 px-4 py-8">
-        <h1 class="headings-yus">Groceries</h1>
-        <div class="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-6">
-            @foreach($groceries as $prod)
-                @include('includes.productComponent')
-            @endforeach
-        </div>
-    </div>
     <!-- Fashion & Accessories Product  -->
     <div id="best-product" class="relative lg:top-0 lg:px-14 px-4 py-8">
         <h1 class="headings-yus">Fashion & Accessories</h1>
         <div class="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-6">
             @foreach($fashion as $prod)
+                @include('includes.productComponent')
+            @endforeach
+        </div>
+    </div>
+    <!-- Groceries  -->
+    <div id="best-product" class="relative lg:top-0 lg:px-14 px-4 py-8">
+        <h1 class="headings-yus">Groceries</h1>
+        <div class="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-6">
+            @foreach($groceries as $prod)
                 @include('includes.productComponent')
             @endforeach
         </div>

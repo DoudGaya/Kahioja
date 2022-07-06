@@ -32,6 +32,7 @@ Route::get('/404', [FrontendController::class, 'pagenotfound']);
 Route::get('/500', [FrontendController::class, 'serveerror']);
 Route::get('/privacyandsecurity', [FrontendController::class, 'privacyandsecurity'])->name('front.privacyandsecurity');
 Route::get('/termsandpolicy', [FrontendController::class, 'termsandpolicy'])->name('front.termsandpolicy');
+Route::get('/footer', [FrontendController::class, 'footer'])->name('footer');
 
 // User Register
 Route::post('/register', [RegisterController::class, 'register'])->name('user-register-submit');

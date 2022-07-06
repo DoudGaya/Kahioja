@@ -116,7 +116,6 @@ class CartController extends Controller
         
         try{
             $product = Product::where('id', $product_id)->first();
-            // dd($product);
             return view('front.buynow', compact('product', 'gs', 'quantity'));
         }catch(Exception $e){
             return $response = \Response::json($e, 500);                    

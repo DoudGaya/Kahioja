@@ -156,6 +156,12 @@ class FrontendController extends Controller
         return view('front.termsandpolicy', compact('gs', 'termsandpolicypage'));
     }
 
+    public function footer()
+    {
+        $gs = Generalsetting::orderby('id', 'desc')->first();
+        return $response = \Response::json($gs, 200);
+    }
+
     public function autosearch($slug)
     {
         if(mb_strlen($slug,'utf-8') > 1){
