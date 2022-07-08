@@ -5,6 +5,9 @@ window.axios = require('axios')
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
 
 let app = createApp({})
+app.use(require('vue-resource'));
+app.component('load-product-component', require('./components/LoadProductComponent.vue').default);
+app.component('InfiniteLoading', require('vue-infinite-loading'));
 app.component('nav-component', require('./components/NavComponent.vue').default)
 app.component('footer-component', require('./components/FooterComponent.vue').default)
 app.component('product-component', require('./components/productComponent.vue').default)

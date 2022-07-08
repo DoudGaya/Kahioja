@@ -62,6 +62,16 @@
                         </span>
                     </div>
                 </div>
+                <div class="product-details-content flex items-center w-full my-5">
+                    <a class="hover:underline" :href="`/store/${store}/`">
+                        <span>
+                            Visit Store: 
+                        </span>
+                        <span class="ml-2">
+                            {{ store }}
+                        </span>
+                    </a>
+                </div>
                 <div id="cart-body-product-add" class="flex justify-between w-full md:w-1/4 py-2 px-4 rounded-full my-2">
                     <div class="cursor-pointer">
                         <button @click="minusProduct()"> - </button>
@@ -83,6 +93,7 @@
                         </button>
                     </div>
                     <br>
+                    
                     <div>
                         <form action="/buynow" method="POST">
                             <input type="hidden" name="_token" :value="csrf">
@@ -134,7 +145,8 @@ export default {
         'productcurrprice',
         'productprevprice',
         'productsku',
-        'productdeliveryfee'
+        'productdeliveryfee',
+        'store'
     ],
     data(){
         return{

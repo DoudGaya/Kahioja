@@ -44,6 +44,12 @@ class CatalogController extends Controller
         return $response = \Response::json($category, 200);
     }
 
+    public function allproducts(){
+        $data = Product::orderBy('id', 'desc')->paginate(10);
+        dd($data);
+        return response()->json($data);
+    }
+
     public function allstores(){
 
       $stores = User::select('shop_name')->where('is_vendor', 1)->orderBy('shop_name', 'asc')->get();
@@ -153,6 +159,9 @@ class CatalogController extends Controller
         // $this->code_image();
         $gs = Generalsetting::findOrFail(1);
         $productt = Product::where('slug','=',$slug)->firstOrFail();
+        $vendor_id = Product::where('slug', $slug)->pluck('user_id')->first();
+        $store = User::where('id', $productt->user_id)->pluck('shop_name')->first();
+        
         if($productt->status == 0){
           return response()->view('errors.404')->setStatusCode(404); 
         }
@@ -180,7 +189,8 @@ class CatalogController extends Controller
             $vendors = Product::where('status','=',1)->where('user_id','=',0)->take(8)->get();
         }
         
-        return view('front.product',compact('productt','curr','vendors','gs'));
+        // dd($store);
+        return view('front.product',compact('productt','curr','vendors','gs','store'));
 
     }
 

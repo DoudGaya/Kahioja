@@ -48,6 +48,7 @@
             @endforeach
         </div>
     </div>
+    <!-- <load-product-component></load-product-component> -->
     <!-- Main Category -->
     <div id="main-cat" class="relative top-3 lg:top-0 lg:px-14 px-4 my-8 text-center hidden lg:block">
         <div class="grid lg:grid-cols-2 gap-6">

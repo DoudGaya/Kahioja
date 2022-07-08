@@ -30,6 +30,7 @@
                 :productname="{{ json_encode($productt->name) }}" 
                 :productcurrprice="{{ json_encode($productt->price) }}" 
                 :productsku="{{ json_encode($productt->sku) }}" 
+                :store="{{ json_encode($store) }}" 
                 :productdeliveryfee="{{ json_encode($productt->showShippingFee()) }}" 
             ></product-details-component>    
         </div>

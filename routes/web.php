@@ -83,6 +83,7 @@ Route::get('/highestproduct/', [CatalogController::class, 'highestproduct']);
 Route::get('/categories/', [CatalogController::class, 'categories'])->name('front.categories');
 Route::get('/allcategories/', [CatalogController::class, 'allcategories']);
 Route::get('/allstores/', [CatalogController::class, 'allstores']);
+Route::get('/allproducts/', [CatalogController::class, 'allproducts']);
 Route::get('/category/{slug}/', [CatalogController::class, 'category'])->name('front.category');
 Route::get('/store/{shop_name}/', [CatalogController::class, 'shop']);
 Route::get('/category/{slug1}/{slug2}', [CatalogController::class, 'subcategory'])->name('front.subcat');

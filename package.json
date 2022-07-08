@@ -28,7 +28,9 @@
     },
     "dependencies": {
         "flutterwave-vue-v3": "^1.0.5",
+        "vue-infinite-loading": "^2.4.5",
         "vue-product-zoomer": "^3.0.1",
+        "vue-resource": "^1.5.3",
         "vue-router": "^4.0.15",
         "vuex": "^4.0.2"
     }
