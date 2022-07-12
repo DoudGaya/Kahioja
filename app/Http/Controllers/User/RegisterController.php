@@ -62,7 +62,7 @@ class RegisterController extends Controller
 			];
 
 			try{
-            	// \Mail::to($email)->send(new verifyEmail($send_data)); 
+            	\Mail::to($email)->send(new verifyEmail($send_data)); 
 				try{
 					$user->fill($input)->save();
 					// Attempt to log the user in
@@ -88,7 +88,7 @@ class RegisterController extends Controller
 					return response()->json('Please try again in a while');
 				}
             }catch(Exception $e){
-				// return response()->json('Please try again in a while');
+				return response()->json('Please try again in a while');
 			}
 
     }

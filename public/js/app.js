@@ -19629,7 +19629,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       removedItemFromCart: false,
       bagItem: true,
       displaySignUpForm: false,
-      signUpForm: false,
+      signUpForm: true,
       verifyEmailForm: false,
       signUpName: '',
       signUpEmail: '',
@@ -19871,9 +19871,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     },
     closeCart: function closeCart() {
-      var cart = this.cart;
+      var cart = this.car;
       this.displayCart = !this.displayCart;
       this.$store.dispatch("allCartFromDatabase");
+    },
+    closeSignUpForm: function closeSignUpForm() {
+      this.displaySignUpForm = !this.displaySignUpForm;
+      this.bagItem = !this.bagItem;
     },
     checkOut: function checkOut() {
       if (this.getUser != '') {
@@ -19881,7 +19885,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       } else {
         this.bagItem = !this.bagItem;
         this.displaySignUpForm = !this.displaySignUpForm;
-        this.signUpForm = !this.signUpForm;
       }
     }
   }
@@ -22931,7 +22934,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.bagItem]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_66, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_67, [_hoisted_68, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
     onClick: _cache[4] || (_cache[4] = function ($event) {
-      return $options.closeCart();
+      return $options.closeSignUpForm();
     }),
     "class": "cursor-pointer"
   }, _hoisted_70)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_71, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_72, [$data.isLoading ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_73)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_74, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.callback), 1
