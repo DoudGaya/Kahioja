@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Generalsetting;
 use App\Models\User;
+use App\Models\Bag;
 use App\Classes\GeniusMailer;
 use App\Models\Notification;
 use Auth;
@@ -15,6 +16,7 @@ use Mail;
 use Session;
 use Illuminate\Support\Str;
 use App\Mail\verifyEmail;
+use DB;
 
 class RegisterController extends Controller
 {
@@ -50,8 +52,6 @@ class RegisterController extends Controller
 			$verification_code = Str::random(6);
 	        $input['verification_link'] = $verification_code;
 	        $input['affilate_code'] = md5($request->name.$request->email);
-			  
-			$user->fill($input)->save();
 	        
 			$email = $request->email;
 			
@@ -61,36 +61,60 @@ class RegisterController extends Controller
 			];
 
 			try{
-            	\Mail::to($email)->send(new verifyEmail($send_data)); 
-				// Attempt to log the user in
-				if(Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-					// if successful, then redirect to their intended location
-					//Verify User Email redirect
-					
-					if(Auth::guard('web')->user()->email_verified == 'No'){
-						Auth::guard('web')->logout();
-						return response()->json('You need to verify your account');   
-					}
+            	// \Mail::to($email)->send(new verifyEmail($send_data)); 
+				try{
+					$user->fill($input)->save();
+					// Attempt to log the user in
+					if(Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+						// if successful, then redirect to their intended location
+						//Verify User Email redirect
+						
+						if(Auth::guard('web')->user()->email_verified == 'No'){
+							Auth::guard('web')->logout();
+							return response()->json('You need to verify your account');   
+						}
 
-					// Check If Email is verified or not
-					if(Auth::guard('web')->user()->ban == 1){
-						Auth::guard('web')->logout();
-						return response()->json('Your Account Has Been Banned');   
-					}
+						// Check If Email is verified or not
+						if(Auth::guard('web')->user()->ban == 1){
+							Auth::guard('web')->logout();
+							return response()->json('Your Account Has Been Banned');   
+						}
 
-					// Login as User
-					return response()->json('Please check your email for your account verification code');  
+						// Login as User
+						return response()->json('Please check your email for your account verification code');  
+					}
+				}catch(Exception $e){
+					return response()->json('Please try again in a while');
 				}
             }catch(Exception $e){
-				return response()->json('Please try again in a while');
+				// return response()->json('Please try again in a while');
 			}
 
     }
 
-    public function token(Request $request)
+	public function token(Request $request){
+		$user = User::where('verification_link','=',$request->verification_link)->first();
+			if(isset($user)){
+				$user->email_verified = 'Yes';
+				$user->update();
+				$notification = new Notification;
+				$notification->user_id = $user->id;
+				$notification->save();
+				Auth::guard('web')->login($user); 
+				return response()->json('Your Email has been Verified Successfully');
+			}else{
+				return response()->json('Verification Code not matched!');
+			}
+	}
+
+	public function guestToken(Request $request)
     {
         $user = User::where('verification_link','=',$request->verification_link)->first();
 			if(isset($user)){
+				if(Session::has('guest')){
+					$guest = Session::get('guest');
+					$update_bag = DB::select("UPDATE `bags` SET `user_id`='$user->id', `user_type`='user' WHERE `user_id`='$guest' && `user_type`='guest'");
+				}
 				$user->email_verified = 'Yes';
 				$user->update();
 				$notification = new Notification;

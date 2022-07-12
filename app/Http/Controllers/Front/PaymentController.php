@@ -257,7 +257,7 @@ class PaymentController extends Controller
                 $card_details = $payment_type;
             }
             
-            $customer_email = $name;
+            $customer_email = $email;
             $customer_phone = $phone;
 
             Session::put('transactID', $transactID);
