@@ -34,7 +34,13 @@
                 :productdeliveryfee="{{ json_encode($productt->showShippingFee()) }}" 
             ></product-details-component>    
         </div>
+
+        <div class="mb-4">
+            {!! $shareproduct !!}
+        </div>
+        
         <hr>
+        
         <!-- Product Description & Reviews & Return Policy  -->
         <div id="productDescription">
             <product-description-component

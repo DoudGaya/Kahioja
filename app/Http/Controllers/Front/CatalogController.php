@@ -162,6 +162,9 @@ class CatalogController extends Controller
         $vendor_id = Product::where('slug', $slug)->pluck('user_id')->first();
         $store = User::where('id', $productt->user_id)->pluck('shop_name')->first();
         
+        // dd($productt->slug);
+        $shareproduct = \Share::page('https://kahioja.com/item/'.$productt->slug)->facebook()->twitter()->linkedin()->telegram()->whatsapp() ;
+
         if($productt->status == 0){
           return response()->view('errors.404')->setStatusCode(404); 
         }
@@ -175,6 +178,7 @@ class CatalogController extends Controller
         {
             $curr = Currency::where('is_default','=',1)->first();
         }
+
         $product_click =  new ProductClick;
         $product_click->product_id = $productt->id;
         $product_click->date = Carbon::now()->format('Y-m-d');
@@ -189,8 +193,7 @@ class CatalogController extends Controller
             $vendors = Product::where('status','=',1)->where('user_id','=',0)->take(8)->get();
         }
         
-        // dd($store);
-        return view('front.product',compact('productt','curr','vendors','gs','store'));
+        return view('front.product',compact('productt','curr','vendors','gs','store'))->with('shareproduct', $shareproduct);
 
     }
 
