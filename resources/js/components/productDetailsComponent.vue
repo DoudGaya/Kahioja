@@ -1,5 +1,5 @@
 <template>
-    <div id="product-details" class="grid grid-cols-1 lg:grid-cols-5 gap-6 my-12">
+    <div v-show="displayProductDetails" id="product-details" class="grid grid-cols-1 lg:grid-cols-5 gap-6 my-12">
         <div id="slide-wrapper" class="hidden col-span-1 my-auto md:flex flex-col">
             <svg id="slideLeft" class="arrow" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="16" cy="16" r="15" transform="rotate(-90 16 16)" stroke="#222222" stroke-width="2"/><path d="M14.657 19.586L10.707 15.636C10.5184 15.4538 10.2658 15.353 10.0036 15.3553C9.7414 15.3576 9.49058 15.4628 9.30518 15.6482C9.11977 15.8336 9.0146 16.0844 9.01232 16.3466C9.01004 16.6088 9.11084 16.8614 9.293 17.05L14.95 22.707C15.0426 22.8002 15.1528 22.8741 15.2741 22.9246C15.3955 22.9751 15.5256 23.001 15.657 23.001C15.7884 23.001 15.9185 22.9751 16.0398 22.9246C16.1612 22.8741 16.2713 22.8002 16.364 22.707L22.021 17.05C22.1165 16.9578 22.1927 16.8474 22.2451 16.7254C22.2975 16.6034 22.3251 16.4722 22.3262 16.3394C22.3274 16.2066 22.3021 16.0749 22.2518 15.952C22.2015 15.8291 22.1273 15.7175 22.0334 15.6236C21.9395 15.5297 21.8278 15.4555 21.7049 15.4052C21.5821 15.3549 21.4504 15.3296 21.3176 15.3307C21.1848 15.3319 21.0536 15.3595 20.9316 15.4119C20.8096 15.4643 20.6992 15.5405 20.607 15.636L16.657 19.586V10C16.657 9.73478 16.5516 9.48043 16.3641 9.29289C16.1766 9.10536 15.9222 9 15.657 9C15.3918 9 15.1374 9.10536 14.9499 9.29289C14.7624 9.48043 14.657 9.73478 14.657 10V19.586V19.586Z" fill="#222222"/></svg>
 
@@ -109,7 +109,7 @@
                             </button>
                         </form>
                         <div v-else>
-                            <button @click="buyNow()" style="background-color:#ff9400;" class="mx-auto btn-yus rounded-full w-full flex flex-row justify-center items-center py-2 text-white">
+                            <button @click="buyNowGuest()" style="background-color:#ff9400;" class="mx-auto btn-yus rounded-full w-full flex flex-row justify-center items-center py-2 text-white">
                                 <div class="card-bag-label">
                                     Buy Now 
                                 </div>
@@ -142,6 +142,68 @@
             </div>
         </div>
     </div>
+    <div v-show="displaySignUpForm" id="cart" class="shadow">
+        <div id="cart-content">
+            <div id="cart-header" class="p-4 flex justify-between">
+                <span>Create Account</span>
+                <span @click="closeCart()" class="cursor-pointer">
+                    <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13.6276 10.7996L20.6976 3.72764C20.8887 3.54315 21.041 3.32246 21.1458 3.07845C21.2507 2.83444 21.3058 2.572 21.3081 2.30644C21.3104 2.04088 21.2598 1.77752 21.1593 1.53173C21.0587 1.28594 20.9102 1.06263 20.7224 0.874849C20.5346 0.687064 20.3113 0.538557 20.0655 0.437996C19.8198 0.337434 19.5564 0.28683 19.2908 0.289138C19.0253 0.291446 18.7628 0.346618 18.5188 0.451436C18.2748 0.556254 18.0541 0.708619 17.8696 0.899639L10.7976 7.96964L3.72764 0.899639C3.54315 0.708619 3.32246 0.556254 3.07845 0.451436C2.83444 0.346618 2.572 0.291446 2.30644 0.289138C2.04088 0.28683 1.77752 0.337434 1.53173 0.437996C1.28594 0.538557 1.06263 0.687064 0.874849 0.874849C0.687064 1.06263 0.538557 1.28594 0.437996 1.53173C0.337434 1.77752 0.28683 2.04088 0.289138 2.30644C0.291446 2.572 0.346618 2.83444 0.451436 3.07845C0.556254 3.32246 0.708619 3.54315 0.899639 3.72764L7.96964 10.7976L0.899639 17.8696C0.708619 18.0541 0.556254 18.2748 0.451436 18.5188C0.346618 18.7628 0.291446 19.0253 0.289138 19.2908C0.28683 19.5564 0.337434 19.8198 0.437996 20.0655C0.538557 20.3113 0.687064 20.5346 0.874849 20.7224C1.06263 20.9102 1.28594 21.0587 1.53173 21.1593C1.77752 21.2598 2.04088 21.3104 2.30644 21.3081C2.572 21.3058 2.83444 21.2507 3.07845 21.1458C3.32246 21.041 3.54315 20.8887 3.72764 20.6976L10.7976 13.6276L17.8696 20.6976C18.0541 20.8887 18.2748 21.041 18.5188 21.1458C18.7628 21.2507 19.0253 21.3058 19.2908 21.3081C19.5564 21.3104 19.8198 21.2598 20.0655 21.1593C20.3113 21.0587 20.5346 20.9102 20.7224 20.7224C20.9102 20.5346 21.0587 20.3113 21.1593 20.0655C21.2598 19.8198 21.3104 19.5564 21.3081 19.2908C21.3058 19.0253 21.2507 18.7628 21.1458 18.5188C21.041 18.2748 20.8887 18.0541 20.6976 17.8696L13.6276 10.7976V10.7996Z" fill="white"/></svg>
+                </span> 
+            </div>
+            <div id="cart-body">
+                <div class="my-5 py-6 text-center px-4 md:px-16">
+                    <div v-if="isLoading" class="loader mx-auto"></div>        
+                    <div class="mt-4">
+                        {{ callback }}
+                    </div>
+                    <!-- SignUp Form  -->
+                    <div v-show="signUpForm">
+                        <div class="my-4">
+                            Sign Up Now to enjoy amazing offers on Kahioja! 
+                        </div>
+                        <div class="my-4">
+                            <div>
+                                <input required v-model="signUpName" class="border border-gray-300 rounded py-3 px-6 w-full my-2 focus:outline-none" type="text" name="name" id="signUpName" placeholder="Full Name">
+                            </div>
+                            <div>
+                                <input required v-model="signUpEmail" class="border border-gray-300 rounded py-3 px-6 w-full my-2 focus:outline-none" type="email" name="email" id="signUpEmail" placeholder="Email Address">
+                            </div>
+                            <div>
+                                <input required v-model="signUpPassword" class="border border-gray-300 rounded py-3 px-6 w-full my-2 focus:outline-none" type="password" name="password" id="signUpPassword" placeholder="Password">
+                            </div>
+                        </div>
+                        <div class="my-8">
+                            <button @keydown.enter="registerUser()" @click="registerUser()" class="mx-auto btn-yus rounded-full w-full py-3 text-white">
+                                Create account
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Verify Email Form  -->
+                    <div v-show="verifyEmailForm">
+                        <form action="/register/verify/buynow" method="POST">
+                            
+                            <div class="my-8">
+                                Enter your Verification Code sent to your Email
+                            </div>
+                            <div class="my-4">
+                                <input type="hidden" name="_token" :value="csrf">
+                                <input type="hidden" name="product_id" :value="productid">
+                                <input type="hidden" name="quantity" :value="quantity">
+                                <div>
+                                    <input required v-model="verificationCode" class="border border-gray-300 rounded py-3 px-6 w-full my-2 focus:outline-none" type="text" name="verificationCode" id="verificationCode" placeholder="Enter your Verification Code">
+                                </div>
+                            </div>
+                            <div class="my-8">
+                                <button @click="verifyCode()" class="mx-auto btn-yus rounded-full w-full py-2 text-white">
+                                    Submit
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -167,7 +229,17 @@ export default {
         return{
             quantity: 1,
             isLoading: false,
-            csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+            displayProductDetails: true,
+            displaySignUpForm: false,
+            signUpForm: false,
+            verifyEmailForm: false,
+            signUpName: '',
+            signUpEmail: '',
+            signUpPassword: '',
+            verification_code: '',
+            isLoading: '',
+            callback: ''
         }
     },
     methods:{
@@ -204,7 +276,92 @@ export default {
             }).catch(error => {
                 console.log(error)
             })
-        }
+        },
+        async buyNowGuest(){
+            this.displaySignUpForm = !this.displaySignUpForm
+            this.signUpForm = !this.signUpForm
+        },
+        async registerUser(){
+            this.isLoading = true 
+            if(this.signUpName !== ''){
+                if(this.signUpEmail !== ''){
+                    if(this.signUpPassword !== ''){
+                        axios.post('/register', {
+                            name: this.signUpName,
+                            email: this.signUpEmail,
+                            password: this.signUpPassword
+                        }).then(response => {
+                            this.signUpName = '',
+                            this.signUpEmail = '',
+                            this.signUpPassword = '',
+
+                            this.isLoading = false
+                            this.callback = response.data
+
+                            if(this.callback[0] == 'The email has already been taken.'){
+                                this.callback = 'The email address has already been taken'
+                            }
+
+                            if(this.callback[0] == 'The password must be at least 8 characters'){
+                                this.callback = 'The password must be at least 8 characters'
+                            }
+
+                            if(this.callback[0] == 'The password must not be greater than 16 characters'){
+                                this.callback = 'The password must not be greater than 16 characters'
+                            }
+
+                            if(this.callback == 'You need to verify your account'){
+                                this.callback = ''
+                                this.verifyEmailForm = true
+                                this.signUpForm = false
+                            }
+
+                        }).catch(error => {
+                            console.log(error)
+                        })
+                    }else{
+                        this.isLoading = false
+                        this.callback = 'Password field empty'
+                    }
+                }else{
+                    this.isLoading = false
+                    this.callback = 'Email field empty'
+                }
+            }else{
+                this.isLoading = false
+                this.callback = 'Name field empty'
+            }
+        },
+        async verifyCode(){
+            this.isLoading = true
+            
+            if(this.verificationCode != ''){
+                axios.post('/register/verify/buynow', {
+                    product_id: this.productid,
+                    quantity: this.quantity,
+                    verification_link: this.verificationCode,
+                }).then(response => {
+                    this.verificationCode = '',
+
+                    this.isLoading = false
+                    this.callback = response.data
+
+                    if(this.callback == 'Your Email has been Verified Successfully'){
+                        setTimeout(()=>{
+                            window.location = '/buynow'
+                        }, 3000)
+                    }
+
+                }).catch(error => {
+                    console.log(error)
+                })
+            }else{
+                this.callback = 'Email Address field empty'
+            }
+        },
+        closeCart(){
+            this.displaySignUpForm = !this.displaySignUpForm 
+        },
     }
 }
 </script>

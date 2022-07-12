@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Generalsetting;
 use App\Models\User;
 use App\Models\Bag;
+use App\Models\Product;
 use App\Classes\GeniusMailer;
 use App\Models\Notification;
 use Auth;
@@ -122,6 +123,33 @@ class RegisterController extends Controller
 				$notification->save();
 				Auth::guard('web')->login($user); 
 				return response()->json('Your Email has been Verified Successfully');
+			}else{
+				return response()->json('Verification Code not matched!');
+			}
+    }
+
+	public function buyNowToken(Request $request)
+    {
+		$gs = Generalsetting::findOrFail(1);
+		$user = User::where('verification_link','=',$request->verificationCode)->first();
+			if(isset($user)){
+				$user->email_verified = 'Yes';
+				$user->update();
+				$notification = new Notification;
+				$notification->user_id = $user->id;
+				$notification->save();
+				
+				Auth::guard('web')->login($user); 
+				$product_id = $request->product_id;
+				$quantity = $request->quantity;
+							
+				try{
+					$product = Product::where('id', $product_id)->first();
+					return view('front.buynow', compact('product', 'gs', 'quantity'));
+				}catch(Exception $e){
+					return $response = \Response::json($e, 500);                    
+				}
+			
 			}else{
 				return response()->json('Verification Code not matched!');
 			}

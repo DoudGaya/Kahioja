@@ -39,6 +39,7 @@ Route::get('/footer', [FrontendController::class, 'footer'])->name('footer');
 Route::post('/register', [RegisterController::class, 'register'])->name('user-register-submit');
 Route::post('/register/verify/', [RegisterController::class, 'token'])->name('user-register-token');
 Route::post('/register/verify/guest', [RegisterController::class, 'guestToken'])->name('guest-register-token');
+Route::post('/register/verify/buynow', [RegisterController::class, 'buyNowToken'])->name('buy-now-register-token');
 Route::post('/register/vendor/', [RegisterController::class, 'vendor'])->name('vendor-register');
 // User Register End
 
