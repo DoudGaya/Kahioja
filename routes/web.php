@@ -56,7 +56,6 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('user-logout');
 // PRODUCT AUTO SEARCH SECTION
 Route::get('/autosearch/product/{slug}',[FrontendController::class, 'autosearch']);
 Route::get('/ordertrack/{slug}',[OrderController::class, 'trackorder']);
-Route::get('/allproducts/',[FrontendController::class, 'allproducts']);
 // PRODCT AUTO SEARCH SECTION ENDS
 
 // CART

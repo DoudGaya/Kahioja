@@ -48,7 +48,6 @@
             @endforeach
         </div>
     </div>
-    <!-- <load-product-component></load-product-component> -->
     <!-- Main Category -->
     <div id="main-cat" class="relative top-3 lg:top-0 lg:px-14 px-4 my-8 text-center hidden lg:block">
         <div class="grid lg:grid-cols-2 gap-6">
@@ -132,14 +131,14 @@
             <img class="mx-auto" src="{{ asset('images/banner-3.jpg') }}" alt="banner 3">
         </div>
     </div>
-    <!-- Hot Products -->
-    <div id="hot-product" class="relative lg:top-0 lg:px-14 px-4 py-8">
-        <h1 class="headings-yus">Hot Products</h1>
-        <div class="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-6">
-            @foreach($hot_products as $prod)
-                @include('includes.productComponent')
-            @endforeach
+    <!-- Infinite Scroll -->
+    <div class="relative lg:top-0 lg:px-14 px-4 py-8">
+        <div class="col-md-12" id="post-data">
+            @include('includes.data')
         </div>
+    </div>
+    <div class="ajax-load text-center" style="display:none">
+        <p><div class="loader mx-auto"></div></p>
     </div>
     <!-- Trust  -->
     <div class="relative lg:top-0 lg:px-14 px-4 py-8 mb-12">
@@ -187,3 +186,40 @@
         </div>
     </div>
 @endsection
+<script type="text/javascript">
+	var page = 1;
+	window.addEventListener('scroll',()=>{
+        const {scrollHeight,scrollTop,clientHeight} = document.documentElement;
+	    if(scrollTop + clientHeight > scrollHeight - 5){
+	        page++;
+	        loadMoreData(page);
+	    }
+	});
+
+
+	function loadMoreData(page){
+	  $.ajax(
+	        {
+	            url: '?page=' + page,
+	            type: "get",
+	            beforeSend: function()
+	            {
+	                $('.ajax-load').show();
+	            }
+	        })
+	        .done(function(data)
+	        {
+	            if(data.html == ""){
+	                $('.ajax-load').html("No more records found");
+	                return;
+	            }
+	            $('.ajax-load').hide();
+	            $("#post-data").append(data.html);
+                console.log(data.html);
+	        })
+	        .fail(function(jqXHR, ajaxOptions, thrownError)
+	        {
+	            console.log('server not responding...');
+	        });
+	}
+</script>

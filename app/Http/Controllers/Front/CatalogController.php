@@ -162,7 +162,6 @@ class CatalogController extends Controller
         $vendor_id = Product::where('slug', $slug)->pluck('user_id')->first();
         $store = User::where('id', $productt->user_id)->pluck('shop_name')->first();
         
-        // dd($productt->slug);
         $shareproduct = \Share::page('https://kahioja.com/item/'.$productt->slug)->facebook()->twitter()->linkedin()->telegram()->whatsapp() ;
 
         if($productt->status == 0){
