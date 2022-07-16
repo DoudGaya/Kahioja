@@ -20960,6 +20960,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       orderList: true,
       isLoading: false,
       orderConfirm: true,
+      orderProgressStatus: true,
       callBackOrderConfirm: false,
       callback: '',
       orders: [],
@@ -21028,8 +21029,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   _this3.$store.dispatch("allCartFromDatabase");
 
                   if (response.data == 'completed') {
+                    _this3.callBackOrderConfirm = true;
                     _this3.orderConfirm = !_this3.orderConfirm;
-                    _this3.callBackOrderConfirm = !_this3.callBackOrderConfirm;
+                    _this3.orderProgressStatus = !_this3.orderProgressStatus;
                   }
                 })["catch"](function (error) {
                   console.log(error);
@@ -25952,78 +25954,121 @@ var _hoisted_37 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_38 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Processing ");
+var _hoisted_38 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, "Processing", -1
+  /* HOISTED */
+  );
+});
 
 var _hoisted_39 = [_hoisted_37, _hoisted_38];
 var _hoisted_40 = {
-  key: 1
-};
-var _hoisted_41 = ["onClick"];
-var _hoisted_42 = {
+  key: 1,
   "class": "flex justify-between py-1"
 };
 
-var _hoisted_43 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_41 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("b", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, "Delivery Status")], -1
   /* HOISTED */
   );
 });
 
-var _hoisted_44 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, "Delivered", -1
+var _hoisted_42 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, "Dispatch", -1
   /* HOISTED */
   );
 });
 
-var _hoisted_45 = [_hoisted_43, _hoisted_44];
-var _hoisted_46 = {
+var _hoisted_43 = [_hoisted_41, _hoisted_42];
+var _hoisted_44 = {
   key: 2,
   "class": "flex justify-between py-1"
 };
 
-var _hoisted_47 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_45 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("b", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, "Delivery Status")], -1
   /* HOISTED */
   );
 });
 
-var _hoisted_48 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_46 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, "Enroute", -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_47 = [_hoisted_45, _hoisted_46];
+var _hoisted_48 = {
+  key: 3,
+  "class": "flex justify-between py-1"
+};
+
+var _hoisted_49 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("b", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, "Delivery Status")], -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_50 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, "Delivered", -1
   /* HOISTED */
   );
 });
 
-var _hoisted_49 = [_hoisted_47, _hoisted_48];
-var _hoisted_50 = {
-  key: 3,
+var _hoisted_51 = [_hoisted_49, _hoisted_50];
+var _hoisted_52 = {
+  key: 4,
   "class": "flex justify-between py-1"
 };
 
-var _hoisted_51 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_53 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("b", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, "Delivery Status")], -1
   /* HOISTED */
   );
 });
 
-var _hoisted_52 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_54 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, "Declined", -1
   /* HOISTED */
   );
 });
 
-var _hoisted_53 = [_hoisted_51, _hoisted_52];
-var _hoisted_54 = {
-  key: 0,
+var _hoisted_55 = [_hoisted_53, _hoisted_54];
+var _hoisted_56 = {
+  key: 0
+};
+var _hoisted_57 = {
+  key: 0
+};
+var _hoisted_58 = ["onClick"];
+var _hoisted_59 = {
+  "class": "flex justify-between py-1"
+};
+
+var _hoisted_60 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("b", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, "Delivery Status")], -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_61 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, "Delivered", -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_62 = [_hoisted_60, _hoisted_61];
+var _hoisted_63 = {
+  key: 1,
   "class": "my-3"
 };
-var _hoisted_55 = {
+var _hoisted_64 = {
   action: "/buynow",
   method: "POST"
 };
-var _hoisted_56 = ["value"];
-var _hoisted_57 = ["value"];
-var _hoisted_58 = ["value"];
-var _hoisted_59 = {
+var _hoisted_65 = ["value"];
+var _hoisted_66 = ["value"];
+var _hoisted_67 = ["value"];
+var _hoisted_68 = {
   key: 2,
   "class": "text-center text-2xl p-4"
 };
@@ -26065,7 +26110,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     /* TEXT */
     )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_33, [_hoisted_34, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, "N" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(order.amount), 1
     /* TEXT */
-    )]), order.paid == 'paid' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_35, [order.order_status == 'pending' || order.order_status == 'processing' || order.order_status == 'completed' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_36, _hoisted_39)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), order.order_status == 'accept delivery' || order.order_status == 'picked up for delivery' || order.order_status == 'on delivery' ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_40, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    )]), order.paid == 'paid' ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_35, [order.order_status == 'pending' || order.order_status == 'processing' || order.order_status == 'completed' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_36, _hoisted_39)) : order.order_status == 'accept delivery' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_40, _hoisted_43)) : order.order_status == 'picked up for delivery' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_44, _hoisted_47)) : order.order_status == 'delivered' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_48, _hoisted_51)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_52, _hoisted_55))], 512
+    /* NEED_PATCH */
+    )), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.orderProgressStatus]]) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), order.paid == 'paid' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_56, [order.order_status == 'picked up for delivery' || order.order_status == 'on delivery' ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_57, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
       onClick: function onClick($event) {
         return $options.confirmDelivery(order.order_no, order.vendor_id, order.logistics_id);
       },
@@ -26074,29 +26121,29 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       "class": "rounded-full flex justify-center mx-auto btn-yus w-full py-4 lg:w-1/2 lg:py-4 text-white"
     }, null, 8
     /* PROPS */
-    , _hoisted_41)], 512
+    , _hoisted_58)], 512
     /* NEED_PATCH */
-    )), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.orderConfirm]]) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_42, _hoisted_45, 512
+    )), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.orderConfirm]]) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_59, _hoisted_62, 512
     /* NEED_PATCH */
-    ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.callBackOrderConfirm]]), order.order_status == 'delivered' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_46, _hoisted_49)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), order.order_status == 'declined' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_50, _hoisted_53)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), order.paid == 'unpaid' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_54, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", _hoisted_55, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.callBackOrderConfirm]])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), order.paid == 'unpaid' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_63, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", _hoisted_64, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
       type: "hidden",
       name: "_token",
       value: $data.csrf
     }, null, 8
     /* PROPS */
-    , _hoisted_56), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    , _hoisted_65), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
       type: "hidden",
       name: "product_id",
       value: order.product_id
     }, null, 8
     /* PROPS */
-    , _hoisted_57), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    , _hoisted_66), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
       type: "hidden",
       name: "quantity",
       value: order.quantity
     }, null, 8
     /* PROPS */
-    , _hoisted_58), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    , _hoisted_67), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
       onClick: _cache[1] || (_cache[1] = function ($event) {
         return $options.payNow();
       }),
@@ -26108,7 +26155,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* KEYED_FRAGMENT */
   ))], 512
   /* NEED_PATCH */
-  )), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.orderList]]) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_59, " Order Empty "))])])], 512
+  )), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.orderList]]) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_68, " Order Empty "))])])], 512
   /* NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.displayUserOrders]])], 2112
   /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */

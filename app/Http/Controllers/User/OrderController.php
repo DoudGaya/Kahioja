@@ -30,7 +30,6 @@ class OrderController extends Controller
                     ['products.id AS product_id', 'products.name AS product_name', 'products.photo AS product_photo', 'products.name AS product_name',
                     'bags.quantity AS quantity', 'bags.amount AS amount', 'bags.ship_fee AS ship_fee', 'bags.status AS order_status', 'bags.paid AS paid', 'bags.order_no AS order_no', 'bags.created_at AS time_ordered', 
                     'users.shop_name AS shop_name', 'users.shop_address AS shop_address', 'users.shop_number AS shop_number',
-                    // 'logistics.company AS logistics_company'
                     'bags.vendor_id AS vendor_id', 'bags.logistics_id AS logistics_id' 
                 ])
                 ->where('bags.user_id','=',$user->id)
@@ -110,7 +109,7 @@ class OrderController extends Controller
         
         // The vendor will get his money when the customer has recieved his products! 
         $uprice = User::where('id','=',$vendor_id)->first();
-        $total_sell = VendorOrder::where('user_id','=',$vendor_id)->where('order_number','=',$order_number)->where('status','!=','pending')->where('status','!=','processing')->where('status','!=','declined')->sum('price');    
+        $total_sell = VendorOrder::where('user_id','=',$vendor_id)->where('order_number','=',$order_number)->where('status','=','delivered')->sum('price');    
         $uprice->current_balance = $uprice->current_balance + $total_sell;
         $uprice->update();
         
@@ -120,7 +119,7 @@ class OrderController extends Controller
         $company->current_balance = $company->current_balance + $total_sell;
         $company->update();
 
-        $checkVendorOrderCount = VendorOrder::where('order_number','=',$order_number)->where('status','=','picked up for delivery')->get();
+        $checkVendorOrderCount = VendorOrder::where('order_number','=',$order_number)->where('status','=','completed')->orwhere('status','=','pending')->orwhere('status','=','accept delivery')->orwhere('status','=','picked up for delivery')->get();
         
         if(count($checkVendorOrderCount) == 0){
             $updateOrderStatus = Order::where('order_number','=',$order_number)->update(['status' => 'delivered']);

@@ -52,26 +52,36 @@
                                 <b><span>Total Amount</span></b>
                                 <span>N{{ order.amount }}</span>
                             </div>
-                            <div v-if="(order.paid == 'paid')">
+                            <div v-show="orderProgressStatus" v-if="(order.paid == 'paid')">
                                 <div class="flex justify-between py-1" v-if="(order.order_status == 'pending' || order.order_status == 'processing' || order.order_status == 'completed')">
                                     <b><span>Delivery Status</span></b>
-                                    Processing
+                                    <span>Processing</span>
                                 </div>
-                                <div v-show="orderConfirm" v-if="(order.order_status == 'accept delivery' || order.order_status == 'picked up for delivery' || order.order_status == 'on delivery')">
-                                    <input @click="confirmDelivery(order.order_no, order.vendor_id, order.logistics_id)" value="Confirm Delivery" type="submit" class="rounded-full flex justify-center mx-auto btn-yus w-full py-4 lg:w-1/2 lg:py-4 text-white">
+                                <div class="flex justify-between py-1" v-else-if="(order.order_status == 'accept delivery')">
+                                    <b><span>Delivery Status</span></b>
+                                    <span>Dispatch</span>
                                 </div>
-                                <div v-show="callBackOrderConfirm" class="flex justify-between py-1">
+                                <div class="flex justify-between py-1" v-else-if="(order.order_status == 'picked up for delivery')">
+                                    <b><span>Delivery Status</span></b>
+                                    <span>Enroute</span>
+                                </div>
+                                <div class="flex justify-between py-1" v-else-if="(order.order_status == 'delivered')">
                                     <b><span>Delivery Status</span></b>
                                     <span>Delivered</span>
                                 </div>
-                                <div class="flex justify-between py-1" v-if="(order.order_status == 'delivered')">
-                                    <b><span>Delivery Status</span></b>
-                                    <span>Delivered</span>
-                                </div>
-                                <div class="flex justify-between py-1" v-if="(order.order_status == 'declined')">
+                                <div class="flex justify-between py-1" v-else>
                                     <b><span>Delivery Status</span></b>
                                     <span>Declined</span>
                                 </div>
+                            </div>
+                        </div>
+                        <div v-if="(order.paid == 'paid')">
+                            <div v-show="orderConfirm" v-if="(order.order_status == 'picked up for delivery' || order.order_status == 'on delivery')">
+                                <input @click="confirmDelivery(order.order_no, order.vendor_id, order.logistics_id)" value="Confirm Delivery" type="submit" class="rounded-full flex justify-center mx-auto btn-yus w-full py-4 lg:w-1/2 lg:py-4 text-white">
+                            </div>
+                            <div v-show="callBackOrderConfirm" class="flex justify-between py-1">
+                                <b><span>Delivery Status</span></b>
+                                <span>Delivered</span>
                             </div>
                         </div>
                         <div v-if="(order.paid == 'unpaid')" class="my-3">
@@ -101,6 +111,7 @@ export default {
             orderList: true,
             isLoading: false,
             orderConfirm: true,
+            orderProgressStatus: true,
             callBackOrderConfirm: false,
             callback: '',
             orders: [],
@@ -133,8 +144,9 @@ export default {
                 this.$store.dispatch("allCartFromDatabase")
 
                 if(response.data == 'completed'){
+                    this.callBackOrderConfirm = true
                     this.orderConfirm = !this.orderConfirm
-                    this.callBackOrderConfirm = !this.callBackOrderConfirm
+                    this.orderProgressStatus = !this.orderProgressStatus
                 }
 
             }).catch(error => {
