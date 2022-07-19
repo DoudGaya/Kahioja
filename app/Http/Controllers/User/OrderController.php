@@ -13,6 +13,8 @@ use App\Models\Product;
 use App\Models\VendorOrder;
 use App\Models\LogisticsDelivery;
 use App\Models\Logistic;
+use App\Models\Withdraw;
+
 use App\Models\PaymentGateway;
 use Illuminate\Support\Facades\Input;
 
@@ -102,22 +104,56 @@ class OrderController extends Controller
         $logistics_id = $request->logistics_id;
         
         $data = Order::where('order_number','=',$order_number)->first();
-
+    
         $updateVendorOrderStatus = VendorOrder::where('order_number','=',$order_number)->where('user_id','=',$vendor_id)->update(['status' => 'delivered','logistics_id'=>$logistics_id]);
         $updateDeleiveryStatus = LogisticsDelivery::where('order_number','=',$order_number)->where('vendor_id','=',$vendor_id)->update(['delivery_status' => 3]);
         $updateBagStatus = Bag::where('order_no','=',$order_number)->where('vendor_id','=',$vendor_id)->update(['status' => 'delivered']);
         
         // The vendor will get his money when the customer has recieved his products! 
-        $uprice = User::where('id','=',$vendor_id)->first();
-        $total_sell = VendorOrder::where('user_id','=',$vendor_id)->where('order_number','=',$order_number)->where('status','=','delivered')->sum('price');    
-        $uprice->current_balance = $uprice->current_balance + $total_sell;
-        $uprice->update();
+        $vendor = User::where('id','=',$vendor_id)->first();
+        $total_sell_vendor = VendorOrder::where('user_id','=',$vendor_id)->where('order_number','=',$order_number)->where('status','=','delivered')->sum('price');    
+        $vendor->current_balance = $vendor->current_balance + $total_sell_vendor;
+        $vendor->update();
+
+        //Initiate Vendor withdrawal Request
+        if($total_sell_vendor != 0){
+            
+            $vendor->current_balance = $vendor->current_balance - $total_sell_vendor;
+            $vendor->update();
+            
+            $newwithdraw = new Withdraw();
+            $newwithdraw['user_id'] = $vendor_id;
+            $newwithdraw['acc_name'] = $vendor->account_name;
+            $newwithdraw['bank_name'] = $vendor->bank_name;
+            $newwithdraw['iban'] = $vendor->account_no;
+            $newwithdraw['amount'] = $total_sell_vendor;
+            $newwithdraw['fee'] = 0;
+            $newwithdraw['type'] = 'vendor';
+            $newwithdraw->save();
+        }
         
         // Logistic get his money
         $company = Logistic::where('id','=',$logistics_id)->first();
-        $total_sell = VendorOrder::where('logistics_id','=',$logistics_id)->where('user_id','=',$vendor_id)->where('order_number','=',$order_number)->where('status','=','delivered')->sum('ship_fee');    
-        $company->current_balance = $company->current_balance + $total_sell;
+        $total_sell_logistics = VendorOrder::where('logistics_id','=',$logistics_id)->where('user_id','=',$vendor_id)->where('order_number','=',$order_number)->where('status','=','delivered')->sum('ship_fee');    
+        $company->current_balance = $company->current_balance + $total_sell_logistics;
         $company->update();
+
+        //Initiate Logistics withdrawal Request
+        if($total_sell_logistics != 0){
+            
+            $company->current_balance = $company->current_balance - $total_sell_logistics;
+            $company->update();
+            
+            $newwithdraw = new Withdraw();
+            $newwithdraw['user_id'] = $logistics_id;
+            $newwithdraw['acc_name'] = $company->account_name;
+            $newwithdraw['bank_name'] = $company->bank_name;
+            $newwithdraw['iban'] = $company->account_no;
+            $newwithdraw['amount'] = $total_sell_logistics;
+            $newwithdraw['fee'] = 0;
+            $newwithdraw['type'] = 'logistics';
+            $newwithdraw->save();
+        }
 
         $checkVendorOrderCount = VendorOrder::where('order_number','=',$order_number)->where('status','=','completed')->orwhere('status','=','pending')->orwhere('status','=','accept delivery')->orwhere('status','=','picked up for delivery')->get();
         
