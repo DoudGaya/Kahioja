@@ -21266,46 +21266,63 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'UserSubscription',
+  created: function created() {
+    var _this = this;
+
+    axios.get("/listofbanks.json").then(function (response) {
+      _this.listOfBanks = response.data.data;
+    })["catch"](function (error) {
+      console.log(error);
+    });
+  },
   data: function data() {
     return {
       displayUserSubscription: false,
       isLoading: false,
+      listOfBanks: [],
       shopName: '',
       ownerName: '',
       shopNumber: '',
       shopAddress: '',
+      bankName: '',
+      accountNo: '',
+      accountName: '',
       callback: ''
     };
   },
   methods: {
     startSelling: function startSelling() {
-      var _this = this;
+      var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _this.isLoading = true;
+                _this2.isLoading = true;
                 axios.post('/register/vendor', {
-                  shop_name: _this.shopName,
-                  owner_name: _this.ownerName,
-                  shop_number: _this.shopNumber,
-                  shop_address: _this.shopAddress
+                  shop_name: _this2.shopName,
+                  owner_name: _this2.ownerName,
+                  shop_number: _this2.shopNumber,
+                  shop_address: _this2.shopAddress,
+                  bank_name: _this2.bankName,
+                  account_no: _this2.accountNo,
+                  account_name: _this2.accountName
                 }).then(function (response) {
-                  _this.callback = response.data;
+                  _this2.callback = response.data;
 
-                  if (_this.callback[0] == 'The shop name has already been taken.') {
-                    _this.callback = 'The shop name has already been taken';
+                  if (_this2.callback[0] == 'The shop name has already been taken.') {
+                    _this2.callback = 'The shop name has already been taken';
                     setTimeout(function () {
-                      _this.callback = '';
+                      _this2.callback = '';
                     }, 3000);
                   }
 
                   setTimeout(function () {
-                    _this.callback = '';
+                    _this2.callback = '';
+                    window.location = '/';
                   }, 3000);
-                  _this.isLoading = false;
+                  _this2.isLoading = false;
                 })["catch"](function (error) {
                   console.log(error);
                 });
@@ -26546,6 +26563,16 @@ var _hoisted_11 = {
 };
 
 var _hoisted_12 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+    value: ""
+  }, null, -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_13 = ["value"];
+
+var _hoisted_14 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": "mx-auto btn-yus rounded-full w-full py-2 text-white"
   }, " Start Selling ", -1
@@ -26553,7 +26580,7 @@ var _hoisted_12 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_13 = [_hoisted_12];
+var _hoisted_15 = [_hoisted_14];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" User Subscription  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [_hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
     onClick: _cache[0] || (_cache[0] = function ($event) {
@@ -26606,12 +26633,53 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     placeholder: "Shop Address"
   }, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.shopAddress]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    onClick: _cache[5] || (_cache[5] = function ($event) {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.shopAddress]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+    required: "",
+    "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
+      return $data.bankName = $event;
+    }),
+    "class": "input-box",
+    type: "text",
+    name: "bank_name"
+  }, [_hoisted_12, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.listOfBanks, function (bank) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("option", {
+      key: bank.name,
+      value: bank.name
+    }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(bank.name), 9
+    /* TEXT, PROPS */
+    , _hoisted_13);
+  }), 128
+  /* KEYED_FRAGMENT */
+  ))], 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.bankName]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    required: "",
+    "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
+      return $data.accountNo = $event;
+    }),
+    "class": "input-box",
+    type: "text",
+    name: "account_no",
+    placeholder: "Account No"
+  }, null, 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.accountNo]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    required: "",
+    "onUpdate:modelValue": _cache[7] || (_cache[7] = function ($event) {
+      return $data.accountName = $event;
+    }),
+    "class": "input-box",
+    type: "text",
+    name: "account_name",
+    placeholder: "Account Name"
+  }, null, 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.accountName]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    onClick: _cache[8] || (_cache[8] = function ($event) {
       return $options.startSelling();
     }),
     "class": "my-8"
-  }, _hoisted_13)])])])], 512
+  }, _hoisted_15)])])])], 512
   /* NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.displayUserSubscription]])], 2112
   /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */

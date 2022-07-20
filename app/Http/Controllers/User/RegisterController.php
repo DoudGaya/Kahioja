@@ -172,9 +172,12 @@ class RegisterController extends Controller
 			$user->owner_name = $request->owner_name;
 			$user->shop_number = $request->shop_number;
 			$user->shop_address = $request->shop_address;
+			$user->bank_name = $request->bank_name;
+			$user->account_no = $request->account_no;
+			$user->account_name = $request->account_name;
 			$user->is_vendor = 1;
 			$user->update();
-			return response()->json('Congratulations! Your vendor is ready!');
+			return response()->json('Congratulations! Your vendor account is ready!');
 		}else{
 			return response()->json('Please try again later');
 		}		

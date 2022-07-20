@@ -27,6 +27,18 @@
                         <div>
                             <input required v-model="shopAddress" class="input-box" type="text" name="shop_address" placeholder="Shop Address">
                         </div>
+                        <div>
+                            <select required v-model="bankName" class="input-box" type="text" name="bank_name">
+                                <option value=""></option>
+                                <option v-for="bank in listOfBanks" :key="bank.name" :value="bank.name">{{ bank.name }}</option>
+                            </select>
+                        </div>
+                        <div>
+                            <input required v-model="accountNo" class="input-box" type="text" name="account_no" placeholder="Account No">
+                        </div>
+                        <div>
+                            <input required v-model="accountName" class="input-box" type="text" name="account_name" placeholder="Account Name">
+                        </div>
                     </div>
                     <div @click="startSelling()" class="my-8">
                         <button class="mx-auto btn-yus rounded-full w-full py-2 text-white">
@@ -42,14 +54,25 @@
 <script>
 export default {
     name: 'UserSubscription',
+    created(){
+        axios.get(`/listofbanks.json`).then(response => {
+            this.listOfBanks = response.data.data
+        }).catch(error => {
+            console.log(error)
+        })
+    },
     data(){
         return{
             displayUserSubscription: false,
             isLoading: false,
+            listOfBanks: [],
             shopName: '',
             ownerName: '',
             shopNumber: '',
             shopAddress: '',
+            bankName: '',
+            accountNo: '',
+            accountName: '',
             callback: '',
         }
     },
@@ -60,7 +83,10 @@ export default {
                 shop_name: this.shopName,
                 owner_name: this.ownerName,
                 shop_number: this.shopNumber,
-                shop_address: this.shopAddress
+                shop_address: this.shopAddress,
+                bank_name: this.bankName,
+                account_no: this.accountNo,
+                account_name: this.accountName
             }).then(response => {
                 this.callback = response.data
                 
@@ -73,6 +99,7 @@ export default {
 
                 setTimeout(()=>{
                     this.callback = ''
+                    window.location = '/'
                 }, 3000)
                 
                 this.isLoading = false
