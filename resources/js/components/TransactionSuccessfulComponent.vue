@@ -76,7 +76,7 @@
                     <button @click="trackOrder()" class="mx-auto btn-yus-conti-shopping rounded-full w-full py-2">
                         Track Order
                     </button>
-                    <button class="flex flex-row items-center justify-center mx-auto btn-yus rounded-full w-full py-2 text-white">
+                    <button @click="printReceipt()" class="flex flex-row items-center justify-center mx-auto btn-yus rounded-full w-full py-2 text-white">
                         <span>Print Receipt</span>
                         <span><svg class="ml-3" width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16.5 14H17.5C17.7652 14 18.0196 13.8946 18.2071 13.7071C18.3946 13.5196 18.5 13.2652 18.5 13V7C18.5 6.73478 18.3946 6.48043 18.2071 6.29289C18.0196 6.10536 17.7652 6 17.5 6H3.5C3.23478 6 2.98043 6.10536 2.79289 6.29289C2.60536 6.48043 2.5 6.73478 2.5 7V13C2.5 13.2652 2.60536 13.5196 2.79289 13.7071C2.98043 13.8946 3.23478 14 3.5 14H4.5V9H16.5V14ZM4.5 4V0H16.5V4H17.5C18.2956 4 19.0587 4.31607 19.6213 4.87868C20.1839 5.44129 20.5 6.20435 20.5 7V13C20.5 13.7956 20.1839 14.5587 19.6213 15.1213C19.0587 15.6839 18.2956 16 17.5 16H16.5V20H4.5V16H3.5C2.70435 16 1.94129 15.6839 1.37868 15.1213C0.81607 14.5587 0.5 13.7956 0.5 13L0.5 7C0.5 6.20435 0.81607 5.44129 1.37868 4.87868C1.94129 4.31607 2.70435 4 3.5 4H4.5ZM6.5 18H14.5V11H6.5V18ZM6.5 4H14.5V2H6.5V4Z" fill="white"/></svg></span>
                     </button>
@@ -201,6 +201,9 @@ export default {
         trackOrder(){
             this.displayTrackOrder = !this.displayTrackOrder
             this.displayTransactionSummary = !this.displayTransactionSummary
+        },
+        printReceipt(){
+            window.location = '/order/print'
         }
     },
     mounted(){

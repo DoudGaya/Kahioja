@@ -34,7 +34,7 @@
                             </select>
                         </div>
                         <div>
-                            <input required v-model="accountNo" class="input-box" type="text" name="account_no" placeholder="Account No">
+                            <input min="10" required v-model="accountNo" class="input-box" type="text" name="account_no" placeholder="Account No">
                         </div>
                         <div>
                             <input required v-model="accountName" class="input-box" type="text" name="account_name" placeholder="Account Name">

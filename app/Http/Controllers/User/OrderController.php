@@ -8,6 +8,7 @@ use Auth;
 use App\Models\Order;
 use App\Models\Bag;
 use DB;
+use Session;
 use App\Models\User;
 use App\Models\Product;
 use App\Models\VendorOrder;
@@ -25,7 +26,6 @@ class OrderController extends Controller
     {
         $user = Auth::user();
         $bags = DB::table('bags')
-                // ->join('logistics', 'bags.logistics_id', '=', 'logistics.id')
                 ->join('products', 'bags.product_id','=','products.id')
                 ->join('users', 'products.user_id', '=', 'users.id')
                 ->select(
@@ -38,6 +38,24 @@ class OrderController extends Controller
                 ->orderBy('bags.created_at', 'desc')
                 ->get();
         return response()->json($bags);
+    }
+
+    public function print(){
+        $orderNo = Session::get('orderNo');
+        $bags = DB::table('bags')
+                ->join('products', 'bags.product_id','=','products.id')
+                ->join('users', 'products.user_id', '=', 'users.id')
+                ->select(
+                    ['products.id AS product_id', 'products.name AS product_name', 'products.photo AS product_photo', 'products.name AS product_name',
+                    'bags.quantity AS quantity', 'bags.amount AS amount', 'bags.ship_fee AS ship_fee', 'bags.status AS order_status', 'bags.paid AS paid', 'bags.order_no AS order_no', 'bags.created_at AS time_ordered', 
+                    'users.shop_name AS shop_name', 'users.shop_address AS shop_address', 'users.shop_number AS shop_number',
+                    'bags.vendor_id AS vendor_id', 'bags.logistics_id AS logistics_id' 
+                ])
+                ->where('bags.order_no','=',$orderNo)
+                ->orderBy('bags.created_at', 'desc')
+                ->get();
+        $orderDetails = Order::where('order_number', $orderNo)->first();
+        return view('front.print', compact('bags', 'orderNo', 'orderDetails'));
     }
 
     public function trackorder($slug)
@@ -71,7 +89,6 @@ class OrderController extends Controller
         return view('load.track-load',compact('order','datas'));
 
     }
-
 
     public function order($id)
     {
