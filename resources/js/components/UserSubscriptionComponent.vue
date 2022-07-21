@@ -29,7 +29,7 @@
                         </div>
                         <div>
                             <select required v-model="bankName" class="input-box" type="text" name="bank_name">
-                                <option value=""></option>
+                                <option value="">Select Bank Name</option>
                                 <option v-for="bank in listOfBanks" :key="bank.name" :value="bank.name">{{ bank.name }}</option>
                             </select>
                         </div>

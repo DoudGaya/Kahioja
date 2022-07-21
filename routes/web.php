@@ -46,6 +46,7 @@ Route::post('/register/vendor/', [RegisterController::class, 'vendor'])->name('v
 // User Login
 Route::get('/user', [LoginController::class ,'user']);
 Route::post('/login', [LoginController::class ,'login'])->name('user.login.submit');
+Route::post('/login/buynow', [LoginController::class ,'loginBuyNow'])->name('user.login.buynow');
 Route::post('/forgot', [LoginController::class, 'forgot']);
 // User Login End
 

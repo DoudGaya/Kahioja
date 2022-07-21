@@ -82,6 +82,10 @@ class RegisterController extends Controller
 						}
 
 						// Login as User
+						if(Session::has('guest')){
+							$guest = Session::get('guest');
+							$update_bag = DB::select("UPDATE `bags` SET `user_id`=Auth::guard('web')->user()->id, `user_type`='user' WHERE `user_id`='$guest' && `user_type`='guest'");
+						}
 						return response()->json('Please check your email for your account verification code');  
 					}
 				}catch(Exception $e){

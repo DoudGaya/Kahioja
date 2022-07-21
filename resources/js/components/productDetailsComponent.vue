@@ -177,6 +177,75 @@
                                 Create account
                             </button>
                         </div>
+                        <div @click="showLoginForm()" class="my-4 cursor-pointer">
+                            Already have an account?
+                        </div>
+                        <div @click="showLoginForm()" class="my-8">
+                            <button class="mx-auto btn-yus-conti-shopping rounded-full w-full py-2 text-black">
+                                Login
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Login Form  -->
+                    <div v-show="displayLoginForm">
+                        <form action="/login/buynow" method="POST">
+                            <div class="my-4">
+                                <input type="hidden" name="_token" :value="csrf">
+                                <input type="hidden" name="product_id" :value="productid">
+                                <input type="hidden" name="quantity" :value="quantity">
+                                
+                                <div>
+                                    <input required v-model="loginEmail" class="border border-gray-300 rounded py-3 px-6 w-full my-2 focus:outline-none" type="email" name="email" id="loginEmail" placeholder="Email Address">
+                                </div>
+                                <div>
+                                    <input required v-model="loginPassword" class="border border-gray-300 rounded py-3 px-6 w-full my-2 focus:outline-none" type="password" name="password" id="loginPassword" placeholder="Password">
+                                </div>
+                            </div>
+                            <div @click="showForgotPasswordForm()" class="cursor-pointer flex justify-end my-4">
+                                Forgot Password?
+                            </div>
+                            <div class="text-left my-4 items-center">
+                                <span>
+                                    <input type="checkbox" name="signed">
+                                </span>
+                                <span>
+                                    Keep me signed in
+                                </span>
+                            </div>
+                            <div class="my-8">
+                                <button type="submit" class="mx-auto btn-yus rounded-full w-full py-2 text-white">
+                                    Login
+                                </button>
+                            </div>
+                        </form>
+                        <div @click="showSignUpForm()" class="my-4 cursor-pointer">
+                            Do not have an account?
+                        </div>
+                        <div @click="showSignUpForm()" class="my-8">
+                            <button class="mx-auto btn-yus-conti-shopping rounded-full w-full py-3 text-black">
+                                Create account
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Forgot Password Form  -->
+                    <div v-show="displayForgotPasswordForm">
+                        <div class="my-8">
+                            Enter the email address your register your account. We will send you a verification link to reset your account.
+                        </div>
+                        <div class="my-4">
+                            <div>
+                                <input required v-model="forgotPasswordEmail" class="border border-gray-300 rounded py-3 px-6 w-full my-2 focus:outline-none" type="text" name="forgotPasswordEmail" id="ForgotPasswordEmail" placeholder="Email Address">
+                            </div>
+                        </div>
+                        <div class="my-8">
+                            <button @click="forgotPassword()" class="mx-auto btn-yus rounded-full w-full py-2 text-white">
+                                Submit
+                            </button>
+                        </div>
+                        <div @click="showLoginForm()" class="my-4 cursor-pointer">
+                            <span>Remember your password?</span>
+                            <span class="ml-2">Sign in</span>
+                        </div>
                     </div>
                     <!-- Verify Email Form  -->
                     <div v-show="verifyEmailForm">
@@ -193,7 +262,7 @@
                                     <input required v-model="verificationCode" class="border border-gray-300 rounded py-3 px-6 w-full my-2 focus:outline-none" type="text" name="verificationCode" id="verificationCode" placeholder="Enter your Verification Code">
                                 </div>
                             </div>
-                            <div class="my-8">
+                            <div c lass="my-8">
                                 <button @click="verifyCode()" class="mx-auto btn-yus rounded-full w-full py-2 text-white">
                                     Submit
                                 </button>
@@ -231,14 +300,18 @@ export default {
             isLoading: false,
             csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
             displayProductDetails: true,
+            displayLoginForm: false,
             displaySignUpForm: false,
+            displayForgotPasswordForm: false,
             signUpForm: false,
             verifyEmailForm: false,
+            loginEmail: '',
+            loginPassword: '',
             signUpName: '',
             signUpEmail: '',
             signUpPassword: '',
+            forgotPasswordEmail: '',
             verification_code: '',
-            isLoading: '',
             callback: ''
         }
     },
@@ -266,6 +339,86 @@ export default {
             }).catch(error => {
                 console.log(error)
             })
+        },
+        showLoginForm(){
+            this.displayLoginForm = true 
+            this.signUpForm = false
+            this.displayForgotPasswordForm = false 
+        },
+        showSignUpForm(){
+            this.signUpForm = true  
+            this.displayLoginForm = false 
+            this.displayForgotPasswordForm = false 
+        },
+        showForgotPasswordForm(){
+            this.displayForgotPasswordForm = true 
+            this.displayLoginForm = false
+            this.signUpForm = false
+        },
+        async loginUser(){
+            
+            document.getElementById('loginBtn').innerText = 'Authenticating...'
+            // btnValue = 
+            // this.isLoading = true 
+
+            if(this.loginEmail !== ''){
+                if(this.loginPassword !== ''){
+                    axios.post('/login', {
+                        email: this.loginEmail,
+                        password: this.loginPassword
+                    }).then(response => {
+                        this.loginEmail = '',
+                        this.loginPassword = '',
+
+                        this.isLoading = false
+
+                        this.callback = response.data
+
+                        //If Email not verified
+                        if(this.callback == 'Your Email is not Verified!'){
+                            setTimeout(()=>{
+                                this.callback = ''
+                                document.getElementById('loginBtn').innerText = 'Login'
+                            }, 3000)
+                        }
+
+                        //If Account Banned
+                        else if(this.callback == 'Your Account Has Been Banned'){
+                            setTimeout(()=>{
+                                this.callback = ''
+                                document.getElementById('loginBtn').innerText = 'Login'
+                            }, 3000)
+                        }
+
+                        // If Wrong Password 
+                        else if(this.callback == 'Wrong Email and Password Combination'){
+                            document.getElementById('loginBtn').innerText = 'Wrong Email and Password Combination'
+                            setTimeout(()=>{
+                                this.callback = ''
+                                document.getElementById('loginBtn').innerText = 'Login'
+                            }, 3000)
+                        }else{
+                            setTimeout(()=>{
+                                this.callback = ''
+                                document.getElementById('loginBtn').innerText = 'Login successful...'
+                                window.location = '/'
+                            }, 3000)
+                        }
+                        
+
+                    }).catch(error => {
+                        console.log(error)
+                    })
+                }else{
+                    this.callback = 'Password field empty'
+                }
+            }else{
+                this.callback = 'Email Address field empty'
+                setTimeout(()=>{
+                    this.callback = ''
+                    document.getElementById('loginBtn').innerText = 'Login'
+                }, 3000)
+            }
         },
         async buyNow(){
             axios.post('/buynow', {

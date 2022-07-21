@@ -19627,10 +19627,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       displayFailToAddCart: false,
       displayRemoveItemFromCart: false,
       removedItemFromCart: false,
+      displayLoginForm: false,
+      displayForgotPasswordForm: false,
       bagItem: true,
       displaySignUpForm: false,
       signUpForm: true,
       verifyEmailForm: false,
+      loginEmail: '',
+      loginPassword: '',
       signUpName: '',
       signUpEmail: '',
       signUpPassword: '',
@@ -19771,6 +19775,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee3);
       }))();
     },
+    showLoginForm: function showLoginForm() {
+      this.displayLoginForm = true;
+      this.signUpForm = false;
+      this.displayForgotPasswordForm = false;
+      this.verifyEmailForm = false;
+    },
+    showSignUpForm: function showSignUpForm() {
+      this.signUpForm = true;
+      this.displayLoginForm = false;
+      this.displayForgotPasswordForm = false;
+    },
+    showForgotPasswordForm: function showForgotPasswordForm() {
+      this.displayForgotPasswordForm = true;
+      this.displayLoginForm = false;
+      this.signUpForm = false;
+    },
     registerUser: function registerUser() {
       var _this4 = this;
 
@@ -19870,6 +19890,106 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee5);
       }))();
     },
+    loginUser: function loginUser() {
+      var _this6 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee6$(_context6) {
+          while (1) {
+            switch (_context6.prev = _context6.next) {
+              case 0:
+                document.getElementById('loginBtn').innerText = 'Authenticating...';
+
+                if (_this6.loginEmail !== '') {
+                  if (_this6.loginPassword !== '') {
+                    axios.post('/login', {
+                      email: _this6.loginEmail,
+                      password: _this6.loginPassword
+                    }).then(function (response) {
+                      _this6.loginEmail = '', _this6.loginPassword = '', _this6.isLoading = false;
+                      _this6.callback = response.data; //If Email not verified
+
+                      if (_this6.callback == 'Your Email is not Verified!') {
+                        setTimeout(function () {
+                          _this6.callback = '';
+                          document.getElementById('loginBtn').innerText = 'Login';
+                        }, 3000);
+                      } //If Account Banned
+                      else if (_this6.callback == 'Your Account Has Been Banned') {
+                        setTimeout(function () {
+                          _this6.callback = '';
+                          document.getElementById('loginBtn').innerText = 'Login';
+                        }, 3000);
+                      } // If Wrong Password 
+                      else if (_this6.callback == 'Wrong Email and Password Combination') {
+                        document.getElementById('loginBtn').innerText = 'Wrong Email and Password Combination';
+                        setTimeout(function () {
+                          _this6.callback = '';
+                          document.getElementById('loginBtn').innerText = 'Login';
+                        }, 3000);
+                      } else {
+                        setTimeout(function () {
+                          _this6.callback = '';
+                          document.getElementById('loginBtn').innerText = 'Login successful...';
+                          window.location = '/';
+                        }, 3000);
+                      }
+                    })["catch"](function (error) {
+                      console.log(error);
+                    });
+                  } else {
+                    _this6.callback = 'Password field empty';
+                  }
+                } else {
+                  _this6.callback = 'Email Address field empty';
+                  setTimeout(function () {
+                    _this6.callback = '';
+                    document.getElementById('loginBtn').innerText = 'Login';
+                  }, 3000);
+                }
+
+              case 2:
+              case "end":
+                return _context6.stop();
+            }
+          }
+        }, _callee6);
+      }))();
+    },
+    forgotPassword: function forgotPassword() {
+      var _this7 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee7() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee7$(_context7) {
+          while (1) {
+            switch (_context7.prev = _context7.next) {
+              case 0:
+                _this7.isLoading = true;
+
+                if (_this7.forgotPasswordEmail != '') {
+                  axios.post('/forgot', {
+                    email: _this7.forgotPasswordEmail
+                  }).then(function (response) {
+                    _this7.forgotPasswordEmail = '', _this7.isLoading = false;
+                    _this7.callback = response.data;
+                    setTimeout(function () {
+                      window.location = '/';
+                    }, 3000);
+                  })["catch"](function (error) {
+                    console.log(error);
+                  });
+                } else {
+                  _this7.callback = 'Email Address field empty';
+                }
+
+              case 2:
+              case "end":
+                return _context7.stop();
+            }
+          }
+        }, _callee7);
+      }))();
+    },
     closeCart: function closeCart() {
       var cart = this.car;
       this.displayCart = !this.displayCart;
@@ -19877,6 +19997,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     closeSignUpForm: function closeSignUpForm() {
       this.displaySignUpForm = !this.displaySignUpForm;
+      this.displayLoginForm = !this.displayLoginForm;
       this.bagItem = !this.bagItem;
     },
     checkOut: function checkOut() {
@@ -21699,8 +21820,6 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'ProductDetails',
   props: ['productid', 'productimage', 'productgallery', 'productname', 'productcurrprice', 'productprevprice', 'productsku', 'productdeliveryfee', 'store'],
@@ -21710,21 +21829,25 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   },
   data: function data() {
-    var _ref;
-
-    return _ref = {
+    return {
       quantity: 1,
       isLoading: false,
       csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
       displayProductDetails: true,
+      displayLoginForm: false,
       displaySignUpForm: false,
+      displayForgotPasswordForm: false,
       signUpForm: false,
       verifyEmailForm: false,
+      loginEmail: '',
+      loginPassword: '',
       signUpName: '',
       signUpEmail: '',
       signUpPassword: '',
-      verification_code: ''
-    }, _defineProperty(_ref, "isLoading", ''), _defineProperty(_ref, "callback", ''), _ref;
+      forgotPasswordEmail: '',
+      verification_code: '',
+      callback: ''
+    };
   },
   methods: {
     minusProduct: function minusProduct() {
@@ -21796,7 +21919,22 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }, _callee3);
       }))();
     },
-    buyNow: function buyNow() {
+    showLoginForm: function showLoginForm() {
+      this.displayLoginForm = true;
+      this.signUpForm = false;
+      this.displayForgotPasswordForm = false;
+    },
+    showSignUpForm: function showSignUpForm() {
+      this.signUpForm = true;
+      this.displayLoginForm = false;
+      this.displayForgotPasswordForm = false;
+    },
+    showForgotPasswordForm: function showForgotPasswordForm() {
+      this.displayForgotPasswordForm = true;
+      this.displayLoginForm = false;
+      this.signUpForm = false;
+    },
+    loginUser: function loginUser() {
       var _this4 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
@@ -21804,16 +21942,58 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
-                axios.post('/buynow', {
-                  product_id: _this4.productid,
-                  quantity: _this4.quantity
-                }).then(function (response) {
-                  _this4.$store.dispatch("allCartFromDatabase");
-                })["catch"](function (error) {
-                  console.log(error);
-                });
+                document.getElementById('loginBtn').innerText = 'Authenticating...'; // btnValue = 
+                // this.isLoading = true 
 
-              case 1:
+                if (_this4.loginEmail !== '') {
+                  if (_this4.loginPassword !== '') {
+                    axios.post('/login', {
+                      email: _this4.loginEmail,
+                      password: _this4.loginPassword
+                    }).then(function (response) {
+                      _this4.loginEmail = '', _this4.loginPassword = '', _this4.isLoading = false;
+                      _this4.callback = response.data; //If Email not verified
+
+                      if (_this4.callback == 'Your Email is not Verified!') {
+                        setTimeout(function () {
+                          _this4.callback = '';
+                          document.getElementById('loginBtn').innerText = 'Login';
+                        }, 3000);
+                      } //If Account Banned
+                      else if (_this4.callback == 'Your Account Has Been Banned') {
+                        setTimeout(function () {
+                          _this4.callback = '';
+                          document.getElementById('loginBtn').innerText = 'Login';
+                        }, 3000);
+                      } // If Wrong Password 
+                      else if (_this4.callback == 'Wrong Email and Password Combination') {
+                        document.getElementById('loginBtn').innerText = 'Wrong Email and Password Combination';
+                        setTimeout(function () {
+                          _this4.callback = '';
+                          document.getElementById('loginBtn').innerText = 'Login';
+                        }, 3000);
+                      } else {
+                        setTimeout(function () {
+                          _this4.callback = '';
+                          document.getElementById('loginBtn').innerText = 'Login successful...';
+                          window.location = '/';
+                        }, 3000);
+                      }
+                    })["catch"](function (error) {
+                      console.log(error);
+                    });
+                  } else {
+                    _this4.callback = 'Password field empty';
+                  }
+                } else {
+                  _this4.callback = 'Email Address field empty';
+                  setTimeout(function () {
+                    _this4.callback = '';
+                    document.getElementById('loginBtn').innerText = 'Login';
+                  }, 3000);
+                }
+
+              case 2:
               case "end":
                 return _context4.stop();
             }
@@ -21821,7 +22001,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }, _callee4);
       }))();
     },
-    buyNowGuest: function buyNowGuest() {
+    buyNow: function buyNow() {
       var _this5 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
@@ -21829,10 +22009,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           while (1) {
             switch (_context5.prev = _context5.next) {
               case 0:
-                _this5.displaySignUpForm = !_this5.displaySignUpForm;
-                _this5.signUpForm = !_this5.signUpForm;
+                axios.post('/buynow', {
+                  product_id: _this5.productid,
+                  quantity: _this5.quantity
+                }).then(function (response) {
+                  _this5.$store.dispatch("allCartFromDatabase");
+                })["catch"](function (error) {
+                  console.log(error);
+                });
 
-              case 2:
+              case 1:
               case "end":
                 return _context5.stop();
             }
@@ -21840,7 +22026,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }, _callee5);
       }))();
     },
-    registerUser: function registerUser() {
+    buyNowGuest: function buyNowGuest() {
       var _this6 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6() {
@@ -21848,51 +22034,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           while (1) {
             switch (_context6.prev = _context6.next) {
               case 0:
-                _this6.isLoading = true;
-
-                if (_this6.signUpName !== '') {
-                  if (_this6.signUpEmail !== '') {
-                    if (_this6.signUpPassword !== '') {
-                      axios.post('/register', {
-                        name: _this6.signUpName,
-                        email: _this6.signUpEmail,
-                        password: _this6.signUpPassword
-                      }).then(function (response) {
-                        _this6.signUpName = '', _this6.signUpEmail = '', _this6.signUpPassword = '', _this6.isLoading = false;
-                        _this6.callback = response.data;
-
-                        if (_this6.callback[0] == 'The email has already been taken.') {
-                          _this6.callback = 'The email address has already been taken';
-                        }
-
-                        if (_this6.callback[0] == 'The password must be at least 8 characters') {
-                          _this6.callback = 'The password must be at least 8 characters';
-                        }
-
-                        if (_this6.callback[0] == 'The password must not be greater than 16 characters') {
-                          _this6.callback = 'The password must not be greater than 16 characters';
-                        }
-
-                        if (_this6.callback == 'You need to verify your account') {
-                          _this6.callback = '';
-                          _this6.verifyEmailForm = true;
-                          _this6.signUpForm = false;
-                        }
-                      })["catch"](function (error) {
-                        console.log(error);
-                      });
-                    } else {
-                      _this6.isLoading = false;
-                      _this6.callback = 'Password field empty';
-                    }
-                  } else {
-                    _this6.isLoading = false;
-                    _this6.callback = 'Email field empty';
-                  }
-                } else {
-                  _this6.isLoading = false;
-                  _this6.callback = 'Name field empty';
-                }
+                _this6.displaySignUpForm = !_this6.displaySignUpForm;
+                _this6.signUpForm = !_this6.signUpForm;
 
               case 2:
               case "end":
@@ -21902,7 +22045,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }, _callee6);
       }))();
     },
-    verifyCode: function verifyCode() {
+    registerUser: function registerUser() {
       var _this7 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee7() {
@@ -21912,25 +22055,48 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
               case 0:
                 _this7.isLoading = true;
 
-                if (_this7.verificationCode != '') {
-                  axios.post('/register/verify/buynow', {
-                    product_id: _this7.productid,
-                    quantity: _this7.quantity,
-                    verification_link: _this7.verificationCode
-                  }).then(function (response) {
-                    _this7.verificationCode = '', _this7.isLoading = false;
-                    _this7.callback = response.data;
+                if (_this7.signUpName !== '') {
+                  if (_this7.signUpEmail !== '') {
+                    if (_this7.signUpPassword !== '') {
+                      axios.post('/register', {
+                        name: _this7.signUpName,
+                        email: _this7.signUpEmail,
+                        password: _this7.signUpPassword
+                      }).then(function (response) {
+                        _this7.signUpName = '', _this7.signUpEmail = '', _this7.signUpPassword = '', _this7.isLoading = false;
+                        _this7.callback = response.data;
 
-                    if (_this7.callback == 'Your Email has been Verified Successfully') {
-                      setTimeout(function () {
-                        window.location = '/buynow';
-                      }, 3000);
+                        if (_this7.callback[0] == 'The email has already been taken.') {
+                          _this7.callback = 'The email address has already been taken';
+                        }
+
+                        if (_this7.callback[0] == 'The password must be at least 8 characters') {
+                          _this7.callback = 'The password must be at least 8 characters';
+                        }
+
+                        if (_this7.callback[0] == 'The password must not be greater than 16 characters') {
+                          _this7.callback = 'The password must not be greater than 16 characters';
+                        }
+
+                        if (_this7.callback == 'You need to verify your account') {
+                          _this7.callback = '';
+                          _this7.verifyEmailForm = true;
+                          _this7.signUpForm = false;
+                        }
+                      })["catch"](function (error) {
+                        console.log(error);
+                      });
+                    } else {
+                      _this7.isLoading = false;
+                      _this7.callback = 'Password field empty';
                     }
-                  })["catch"](function (error) {
-                    console.log(error);
-                  });
+                  } else {
+                    _this7.isLoading = false;
+                    _this7.callback = 'Email field empty';
+                  }
                 } else {
-                  _this7.callback = 'Email Address field empty';
+                  _this7.isLoading = false;
+                  _this7.callback = 'Name field empty';
                 }
 
               case 2:
@@ -21939,6 +22105,45 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             }
           }
         }, _callee7);
+      }))();
+    },
+    verifyCode: function verifyCode() {
+      var _this8 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee8() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee8$(_context8) {
+          while (1) {
+            switch (_context8.prev = _context8.next) {
+              case 0:
+                _this8.isLoading = true;
+
+                if (_this8.verificationCode != '') {
+                  axios.post('/register/verify/buynow', {
+                    product_id: _this8.productid,
+                    quantity: _this8.quantity,
+                    verification_link: _this8.verificationCode
+                  }).then(function (response) {
+                    _this8.verificationCode = '', _this8.isLoading = false;
+                    _this8.callback = response.data;
+
+                    if (_this8.callback == 'Your Email has been Verified Successfully') {
+                      setTimeout(function () {
+                        window.location = '/buynow';
+                      }, 3000);
+                    }
+                  })["catch"](function (error) {
+                    console.log(error);
+                  });
+                } else {
+                  _this8.callback = 'Email Address field empty';
+                }
+
+              case 2:
+              case "end":
+                return _context8.stop();
+            }
+          }
+        }, _callee8);
       }))();
     },
     closeCart: function closeCart() {
@@ -22784,16 +22989,73 @@ var _hoisted_77 = {
   "class": "my-8"
 };
 
-var _hoisted_78 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_78 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  "class": "mx-auto btn-yus-conti-shopping rounded-full w-full py-2 text-black"
+}, " Login ", -1
+/* HOISTED */
+);
+
+var _hoisted_79 = [_hoisted_78];
+var _hoisted_80 = {
+  "class": "my-4"
+};
+
+var _hoisted_81 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "text-left my-4 items-center"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  type: "checkbox",
+  name: "signed"
+})]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, " Keep me signed in ")], -1
+/* HOISTED */
+);
+
+var _hoisted_82 = {
+  "class": "my-8"
+};
+
+var _hoisted_83 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  "class": "mx-auto btn-yus-conti-shopping rounded-full w-full py-3 text-black"
+}, " Create account ", -1
+/* HOISTED */
+);
+
+var _hoisted_84 = [_hoisted_83];
+
+var _hoisted_85 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "my-8"
+}, " Enter the email address your register your account. We will send you a verification link to reset your account. ", -1
+/* HOISTED */
+);
+
+var _hoisted_86 = {
+  "class": "my-4"
+};
+var _hoisted_87 = {
+  "class": "my-8"
+};
+
+var _hoisted_88 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, "Remember your password?", -1
+/* HOISTED */
+);
+
+var _hoisted_89 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "ml-2"
+}, "Sign in", -1
+/* HOISTED */
+);
+
+var _hoisted_90 = [_hoisted_88, _hoisted_89];
+
+var _hoisted_91 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "my-8"
 }, " Enter your Verification Code sent to your Email ", -1
 /* HOISTED */
 );
 
-var _hoisted_79 = {
+var _hoisted_92 = {
   "class": "my-4"
 };
-var _hoisted_80 = {
+var _hoisted_93 = {
   "class": "my-8"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -22966,11 +23228,95 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "mx-auto btn-yus rounded-full w-full py-3 text-white"
   }, " Create account ", 32
   /* HYDRATE_EVENTS */
-  )])], 512
+  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    onClick: _cache[10] || (_cache[10] = function ($event) {
+      return $options.showLoginForm();
+    }),
+    "class": "my-4 cursor-pointer"
+  }, " Already have an account? "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    onClick: _cache[11] || (_cache[11] = function ($event) {
+      return $options.showLoginForm();
+    }),
+    "class": "my-8"
+  }, _hoisted_79)], 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.signUpForm]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Verify Email Form  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_78, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_79, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.signUpForm]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Login Form  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"my-4\">\r\n                                Log in into your account\r\n                            </div> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_80, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     required: "",
-    "onUpdate:modelValue": _cache[10] || (_cache[10] = function ($event) {
+    "onUpdate:modelValue": _cache[12] || (_cache[12] = function ($event) {
+      return $data.loginEmail = $event;
+    }),
+    "class": "border border-gray-300 rounded py-3 px-6 w-full my-2 focus:outline-none",
+    type: "email",
+    name: "email",
+    id: "loginEmail",
+    placeholder: "Email Address"
+  }, null, 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.loginEmail]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    onKeydown: _cache[13] || (_cache[13] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function ($event) {
+      return $options.loginUser();
+    }, ["enter"])),
+    required: "",
+    "onUpdate:modelValue": _cache[14] || (_cache[14] = function ($event) {
+      return $data.loginPassword = $event;
+    }),
+    "class": "border border-gray-300 rounded py-3 px-6 w-full my-2 focus:outline-none",
+    type: "password",
+    name: "password",
+    id: "loginPassword",
+    placeholder: "Password"
+  }, null, 544
+  /* HYDRATE_EVENTS, NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.loginPassword]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    onClick: _cache[15] || (_cache[15] = function ($event) {
+      return $options.showForgotPasswordForm();
+    }),
+    "class": "cursor-pointer flex justify-end my-4"
+  }, " Forgot Password? "), _hoisted_81, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_82, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    id: "loginBtn",
+    onClick: _cache[16] || (_cache[16] = function ($event) {
+      return $options.loginUser();
+    }),
+    "class": "mx-auto btn-yus rounded-full w-full py-2 text-white"
+  }, " Login ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    onClick: _cache[17] || (_cache[17] = function ($event) {
+      return $options.showSignUpForm();
+    }),
+    "class": "my-4 cursor-pointer"
+  }, " Do not have an account? "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    onClick: _cache[18] || (_cache[18] = function ($event) {
+      return $options.showSignUpForm();
+    }),
+    "class": "my-8"
+  }, _hoisted_84)], 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.displayLoginForm]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Forgot Password Form  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_85, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_86, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    required: "",
+    "onUpdate:modelValue": _cache[19] || (_cache[19] = function ($event) {
+      return _ctx.forgotPasswordEmail = $event;
+    }),
+    "class": "border border-gray-300 rounded py-3 px-6 w-full my-2 focus:outline-none",
+    type: "text",
+    name: "forgotPasswordEmail",
+    id: "ForgotPasswordEmail",
+    placeholder: "Email Address"
+  }, null, 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.forgotPasswordEmail]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_87, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    onClick: _cache[20] || (_cache[20] = function ($event) {
+      return $options.forgotPassword();
+    }),
+    "class": "mx-auto btn-yus rounded-full w-full py-2 text-white"
+  }, " Submit ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    onClick: _cache[21] || (_cache[21] = function ($event) {
+      return $options.showLoginForm();
+    }),
+    "class": "my-4 cursor-pointer"
+  }, _hoisted_90)], 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.displayForgotPasswordForm]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Verify Email Form  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_91, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_92, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    required: "",
+    "onUpdate:modelValue": _cache[22] || (_cache[22] = function ($event) {
       return _ctx.verificationCode = $event;
     }),
     "class": "border border-gray-300 rounded py-3 px-6 w-full my-2 focus:outline-none",
@@ -22980,8 +23326,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     placeholder: "Enter your Verification Code"
   }, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.verificationCode]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_80, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    onClick: _cache[11] || (_cache[11] = function ($event) {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.verificationCode]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_93, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    onClick: _cache[23] || (_cache[23] = function ($event) {
       return $options.verifyCode();
     }),
     "class": "mx-auto btn-yus rounded-full w-full py-2 text-white"
@@ -26565,7 +26911,7 @@ var _hoisted_11 = {
 var _hoisted_12 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
     value: ""
-  }, null, -1
+  }, "Select Bank Name", -1
   /* HOISTED */
   );
 });
@@ -27825,25 +28171,95 @@ var _hoisted_67 = {
 var _hoisted_68 = {
   "class": "my-8"
 };
-var _hoisted_69 = {
+
+var _hoisted_69 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  "class": "mx-auto btn-yus-conti-shopping rounded-full w-full py-2 text-black"
+}, " Login ", -1
+/* HOISTED */
+);
+
+var _hoisted_70 = [_hoisted_69];
+var _hoisted_71 = {
+  action: "/login/buynow",
+  method: "POST"
+};
+var _hoisted_72 = {
+  "class": "my-4"
+};
+var _hoisted_73 = ["value"];
+var _hoisted_74 = ["value"];
+var _hoisted_75 = ["value"];
+
+var _hoisted_76 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "text-left my-4 items-center"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  type: "checkbox",
+  name: "signed"
+})]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, " Keep me signed in ")], -1
+/* HOISTED */
+);
+
+var _hoisted_77 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "my-8"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  type: "submit",
+  "class": "mx-auto btn-yus rounded-full w-full py-2 text-white"
+}, " Login ")], -1
+/* HOISTED */
+);
+
+var _hoisted_78 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  "class": "mx-auto btn-yus-conti-shopping rounded-full w-full py-3 text-black"
+}, " Create account ", -1
+/* HOISTED */
+);
+
+var _hoisted_79 = [_hoisted_78];
+
+var _hoisted_80 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "my-8"
+}, " Enter the email address your register your account. We will send you a verification link to reset your account. ", -1
+/* HOISTED */
+);
+
+var _hoisted_81 = {
+  "class": "my-4"
+};
+var _hoisted_82 = {
+  "class": "my-8"
+};
+
+var _hoisted_83 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, "Remember your password?", -1
+/* HOISTED */
+);
+
+var _hoisted_84 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "ml-2"
+}, "Sign in", -1
+/* HOISTED */
+);
+
+var _hoisted_85 = [_hoisted_83, _hoisted_84];
+var _hoisted_86 = {
   action: "/register/verify/buynow",
   method: "POST"
 };
 
-var _hoisted_70 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_87 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "my-8"
 }, " Enter your Verification Code sent to your Email ", -1
 /* HOISTED */
 );
 
-var _hoisted_71 = {
+var _hoisted_88 = {
   "class": "my-4"
 };
-var _hoisted_72 = ["value"];
-var _hoisted_73 = ["value"];
-var _hoisted_74 = ["value"];
-var _hoisted_75 = {
-  "class": "my-8"
+var _hoisted_89 = ["value"];
+var _hoisted_90 = ["value"];
+var _hoisted_91 = ["value"];
+var _hoisted_92 = {
+  c: "",
+  lass: "my-8"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
@@ -27998,29 +28414,122 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "mx-auto btn-yus rounded-full w-full py-3 text-white"
   }, " Create account ", 32
   /* HYDRATE_EVENTS */
-  )])], 512
+  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    onClick: _cache[11] || (_cache[11] = function ($event) {
+      return $options.showLoginForm();
+    }),
+    "class": "my-4 cursor-pointer"
+  }, " Already have an account? "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    onClick: _cache[12] || (_cache[12] = function ($event) {
+      return $options.showLoginForm();
+    }),
+    "class": "my-8"
+  }, _hoisted_70)], 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.signUpForm]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Verify Email Form  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", _hoisted_69, [_hoisted_70, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_71, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.signUpForm]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Login Form  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", _hoisted_71, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_72, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "hidden",
     name: "_token",
     value: $data.csrf
   }, null, 8
   /* PROPS */
-  , _hoisted_72), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  , _hoisted_73), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "hidden",
     name: "product_id",
     value: $props.productid
   }, null, 8
   /* PROPS */
-  , _hoisted_73), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  , _hoisted_74), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "hidden",
     name: "quantity",
     value: $data.quantity
   }, null, 8
   /* PROPS */
-  , _hoisted_74), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  , _hoisted_75), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     required: "",
-    "onUpdate:modelValue": _cache[11] || (_cache[11] = function ($event) {
+    "onUpdate:modelValue": _cache[13] || (_cache[13] = function ($event) {
+      return $data.loginEmail = $event;
+    }),
+    "class": "border border-gray-300 rounded py-3 px-6 w-full my-2 focus:outline-none",
+    type: "email",
+    name: "email",
+    id: "loginEmail",
+    placeholder: "Email Address"
+  }, null, 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.loginEmail]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    required: "",
+    "onUpdate:modelValue": _cache[14] || (_cache[14] = function ($event) {
+      return $data.loginPassword = $event;
+    }),
+    "class": "border border-gray-300 rounded py-3 px-6 w-full my-2 focus:outline-none",
+    type: "password",
+    name: "password",
+    id: "loginPassword",
+    placeholder: "Password"
+  }, null, 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.loginPassword]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    onClick: _cache[15] || (_cache[15] = function ($event) {
+      return $options.showForgotPasswordForm();
+    }),
+    "class": "cursor-pointer flex justify-end my-4"
+  }, " Forgot Password? "), _hoisted_76, _hoisted_77]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    onClick: _cache[16] || (_cache[16] = function ($event) {
+      return $options.showSignUpForm();
+    }),
+    "class": "my-4 cursor-pointer"
+  }, " Do not have an account? "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    onClick: _cache[17] || (_cache[17] = function ($event) {
+      return $options.showSignUpForm();
+    }),
+    "class": "my-8"
+  }, _hoisted_79)], 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.displayLoginForm]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Forgot Password Form  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_80, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_81, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    required: "",
+    "onUpdate:modelValue": _cache[18] || (_cache[18] = function ($event) {
+      return $data.forgotPasswordEmail = $event;
+    }),
+    "class": "border border-gray-300 rounded py-3 px-6 w-full my-2 focus:outline-none",
+    type: "text",
+    name: "forgotPasswordEmail",
+    id: "ForgotPasswordEmail",
+    placeholder: "Email Address"
+  }, null, 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.forgotPasswordEmail]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_82, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    onClick: _cache[19] || (_cache[19] = function ($event) {
+      return _ctx.forgotPassword();
+    }),
+    "class": "mx-auto btn-yus rounded-full w-full py-2 text-white"
+  }, " Submit ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    onClick: _cache[20] || (_cache[20] = function ($event) {
+      return $options.showLoginForm();
+    }),
+    "class": "my-4 cursor-pointer"
+  }, _hoisted_85)], 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.displayForgotPasswordForm]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Verify Email Form  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", _hoisted_86, [_hoisted_87, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_88, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    type: "hidden",
+    name: "_token",
+    value: $data.csrf
+  }, null, 8
+  /* PROPS */
+  , _hoisted_89), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    type: "hidden",
+    name: "product_id",
+    value: $props.productid
+  }, null, 8
+  /* PROPS */
+  , _hoisted_90), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    type: "hidden",
+    name: "quantity",
+    value: $data.quantity
+  }, null, 8
+  /* PROPS */
+  , _hoisted_91), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    required: "",
+    "onUpdate:modelValue": _cache[21] || (_cache[21] = function ($event) {
       return _ctx.verificationCode = $event;
     }),
     "class": "border border-gray-300 rounded py-3 px-6 w-full my-2 focus:outline-none",
@@ -28030,8 +28539,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     placeholder: "Enter your Verification Code"
   }, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.verificationCode]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_75, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    onClick: _cache[12] || (_cache[12] = function ($event) {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.verificationCode]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_92, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    onClick: _cache[22] || (_cache[22] = function ($event) {
       return $options.verifyCode();
     }),
     "class": "mx-auto btn-yus rounded-full w-full py-2 text-white"
