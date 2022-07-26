@@ -18,6 +18,7 @@
         html, body {
             width: 210mm;
             height: 287mm;
+            font-size: 50%;
         }
 
         html {
@@ -100,11 +101,11 @@
         <div class="text-2xl font-extrabold mt-2">
             Product Ordered ({{ count($bags) }})
         </div>
-        <div class="grid grid-cols-2 gap-4 w-full">
+        <div class="grid grid-cols-5 gap-4 w-full">
             @foreach($bags as $order)
                 <div>
                     <div class="col-span-1">
-                        <img style="width: 100px; height: 100px; border: 1px solid #ddd;" src="https://dashboard.kahioja.com/assets/images/products/{{$order->product_photo}}">
+                        <img style="width: 50px; height: 50px; border: 1px solid #ddd;" src="https://dashboard.kahioja.com/assets/images/products/{{$order->product_photo}}">
                     </div>
                     <div class="col-span-2 py-5">
                         <div class="grid grid-cols-3 gap-2">
@@ -143,7 +144,7 @@
     <div class="absolute bottom-0 w-full text-sm">
         <div class="flex justify-between">
             <div>
-                Date Generated {{ date('h:ia', time()) }} {{ date('d M Y') }}
+                Date Generated {{ date('h:ia', time() + 3600) }} {{ date('d M Y') }}
             </div>
             <div class="mr-6">
                 Kahioja Stores <br>

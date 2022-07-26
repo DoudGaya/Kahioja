@@ -44,7 +44,8 @@ class OrderController extends Controller
     }
 
     public function print(){
-        $orderNo = Session::get('orderNo');
+        $orderNo = 'KKwL1654198502';
+        // $orderNo = Session::get('orderNo');
         $bags = DB::table('bags')
                 ->join('products', 'bags.product_id','=','products.id')
                 ->join('users', 'products.user_id', '=', 'users.id')
@@ -150,6 +151,8 @@ class OrderController extends Controller
             $newwithdraw['iban'] = $vendor->account_no;
             $newwithdraw['amount'] = $total_sell_vendor;
             $newwithdraw['fee'] = 0;
+            $newwithdraw['method'] = 'Automatic';
+            $newwithdraw['order_no'] = $order_number;
             $newwithdraw['type'] = 'vendor';
             $newwithdraw->save();
         }
@@ -174,6 +177,7 @@ class OrderController extends Controller
             $newwithdraw['amount'] = $total_sell_logistics;
             $newwithdraw['fee'] = 0;
             $newwithdraw['type'] = 'logistics';
+            $newwithdraw['order_no'] = $order_number;
             $newwithdraw->save();
         }
 
