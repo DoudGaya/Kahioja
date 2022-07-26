@@ -1,6 +1,6 @@
 <div style='width: 80%; margin:0px auto; border:2px solid #eee; text-align:left; padding: 2% 4%; line-height: 1.6; text-align: center;'>
     <div style='padding-bottom:1%;'>
-        <center><img style='width:20%;' src='https://kahioja.com/images/logo.png' alt='Kahioja Image'></center>
+        <center><img style='width:20%;' src='https://kahioja.com/images/kahioja.png' alt='Kahioja Image'></center>
     </div>
     <div style='border-top:2px solid #df7f1b; padding:2%;'>
         <center><img style='width:20%;' src='https://kahioja.com/images/thank-you.jpg' alt='Thank You'></center>

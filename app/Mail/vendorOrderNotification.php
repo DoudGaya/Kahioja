@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Http\Request;
 
 class vendorOrderNotification extends Mailable
 {
@@ -29,11 +30,11 @@ class vendorOrderNotification extends Mailable
     public function build(request $request)
     {
         return $this->with([
-                        'order_no' => $this->send_data['orderId'],
-                        'cust_name' => $this->send_data['name'],
-                        'cust_email' => $this->send_data['email'],
-                        'cust_phone' => $this->send_data['phone'],
-                        'cust_address' => $this->send_data['address'],
+                        'order_no' => $this->send_data['order_no'],
+                        'cust_name' => $this->send_data['cust_name'],
+                        'cust_email' => $this->send_data['cust_email'],
+                        'cust_phone' => $this->send_data['cust_phone'],
+                        'cust_address' => $this->send_data['cust_address'],
                         'cart' => $this->send_data['cart'],
                         'amount' => $this->send_data['amount']
                     ])
