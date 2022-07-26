@@ -27716,7 +27716,7 @@ var _hoisted_1 = {
 var _hoisted_2 = ["href"];
 var _hoisted_3 = ["src"];
 var _hoisted_4 = {
-  "class": "py-3"
+  "class": "py-3 mt-3"
 };
 var _hoisted_5 = {
   style: {
@@ -27783,7 +27783,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
     href: $props.productlink
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <img class=\"w-64 mx-auto py-4\" :src=\"`https://dashboard.kahioja.com/assets/images/thumbnails/${productimage}`\" :alt=\"productname\"> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
-    "class": "w-64 mx-auto py-4",
+    style: {
+      "width": "300px",
+      "height": "250px"
+    },
+    "class": "object-cover py-4",
     src: "https://dashboard.kahioja.com/assets/images/products/".concat($props.productimage)
   }, null, 8
   /* PROPS */

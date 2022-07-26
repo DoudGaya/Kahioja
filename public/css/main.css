@@ -260,7 +260,7 @@ img {vertical-align: middle;}
 .card-bag-label{
     font-style: normal;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 80%;
     line-height: 26px;
     display: flex;
     align-items: center;

@@ -1,9 +1,9 @@
-<div class="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-6">
+<div class="grid lg:grid-cols-6 md:grid-cols-3 grid-cols-2 gap-3">
     @foreach($products as $product)
     <div class="bg-white rounded-lg px-4 my-4 cursor-pointer yus-shadow">
         <a href="/item/{{$product->slug}}">
 
-            <img class="object-cover py-4" src="https://dashboard.kahioja.com/assets/images/products/{{$product->photo}}">
+            <img style="width:300px; height:250px;" class="object-cover py-4" src="https://dashboard.kahioja.com/assets/images/products/{{$product->photo}}">
             <!-- Product Details  -->
             <div class="py-3">
                 <h1 class="card-title w-full">{{ $product->name }}</h1>
