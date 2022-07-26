@@ -25,6 +25,8 @@ use Auth;
 use Illuminate\Http\Request;
 use Session;
 use Illuminate\Support\Str;
+use Mail;
+use App\Mail\verifyOrderNotification;
 
 use App\Http\Requests;
 use Illuminate\Support\Facades\Redirect;
@@ -85,6 +87,8 @@ class PaymentController extends Controller
             ]);
             $bag = DB::select("SELECT DISTINCT bags.id as 'bagId', bags.quantity, bags.paid, products.id, products.user_id, products.ship_fee, products.price FROM bags, products, users WHERE bags.product_id = products.id && bags.user_id = '$user_id' && bags.paid = 'unpaid' ORDER BY bags.id DESC LIMIT 1");
         }
+
+        // dd($bag);
 
         $data = array(
             "amount" => 90,
@@ -245,6 +249,49 @@ class PaymentController extends Controller
                 $payment_status = 'paid';
                 $cart->paid = $payment_status;
                 $cart->update();
+            }
+
+            foreach($bag as $item){
+                
+                $vendor_email = User::where('id', $item->user_id)->get();
+                
+                foreach($vendor_email as $email){
+                    $email = $email->email;
+                    $vendor_id = $item->user_id;
+                    
+                    $cart = DB::table('bags')
+                    ->join('products', 'bags.product_id','=','products.id')
+                    ->join('users', 'products.user_id', '=', 'users.id')
+                    ->join('vendor_orders', 'users.id', '=', 'vendor_orders.user_id')
+                    ->select(
+                        ['products.id AS product_id', 'products.name AS product_name', 'products.photo AS product_photo', 'products.name AS product_name',
+                        'bags.quantity AS quantity', 'bags.amount AS amount', 'bags.ship_fee AS ship_fee', 'bags.status AS order_status', 'bags.paid AS paid', 'bags.order_no AS order_no', 'bags.created_at AS time_ordered', 
+                        'users.shop_name AS shop_name', 'users.shop_address AS shop_address', 'users.shop_number AS shop_number',
+                        'bags.vendor_id AS vendor_id', 'bags.logistics_id AS logistics_id',
+                        'vendor_orders.id AS vendor_order_id', 
+                        DB::raw('1 as active')
+                    ])
+                    ->where('vendor_id', $vendor_id)
+                    ->where('order_no', $orderId)
+                    ->orderBy('bags.created_at', 'desc')
+                    ->get();
+    
+                    $send_data = [
+                        'order_no' => $orderId,
+                        'cust_name' => $request->name,
+                        'cust_email' => $request->email,
+                        'cust_phone' => $request->phone,
+                        'cust_address' => $request->address,
+                        'amount' => $request->amount,
+                        'cart' => $cart
+                    ];
+        
+                    try{
+                        \Mail::to($email)->send(new vendorOrderNotification($send_data)); 
+                    }catch(Exception $e){
+                        return response()->json('Please try again in a while');
+                    }
+                }
             }
 
             Session::put('temporder', $order);
