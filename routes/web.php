@@ -117,7 +117,7 @@ Route::get('/order/tracking',  [OrderController::class, 'ordertrack'])->name('us
 Route::get('/order/print',  [OrderController::class, 'print'])->name('user-order-print');
 Route::get('/order/trackings/{id}', [OrderController::class, 'trackload'])->name('user-order-track-search');
 Route::get('/order/{id}',  [OrderController::class, 'order'])->name('user-order');
-Route::post('/order/confirm/{order_no}/{vendor_id}/{logistics_id}', [OrderController::class, 'orderconfirm'])->name('user-order-confirm');
+Route::post('/order/confirm/{order_no}/{vendor_id}/{logistics_id}/{vendor_order_id}/{product_id}', [OrderController::class, 'orderconfirm'])->name('user-order-confirm');
 // User Orders Ends 
 
 // User Profile

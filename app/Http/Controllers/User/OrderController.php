@@ -28,11 +28,14 @@ class OrderController extends Controller
         $bags = DB::table('bags')
                 ->join('products', 'bags.product_id','=','products.id')
                 ->join('users', 'products.user_id', '=', 'users.id')
+                ->join('vendor_orders', 'users.id', '=', 'vendor_orders.user_id')
                 ->select(
                     ['products.id AS product_id', 'products.name AS product_name', 'products.photo AS product_photo', 'products.name AS product_name',
                     'bags.quantity AS quantity', 'bags.amount AS amount', 'bags.ship_fee AS ship_fee', 'bags.status AS order_status', 'bags.paid AS paid', 'bags.order_no AS order_no', 'bags.created_at AS time_ordered', 
                     'users.shop_name AS shop_name', 'users.shop_address AS shop_address', 'users.shop_number AS shop_number',
-                    'bags.vendor_id AS vendor_id', 'bags.logistics_id AS logistics_id' 
+                    'bags.vendor_id AS vendor_id', 'bags.logistics_id AS logistics_id',
+                    'vendor_orders.id AS vendor_order_id', 
+                    DB::raw('1 as active')
                 ])
                 ->where('bags.user_id','=',$user->id)
                 ->orderBy('bags.created_at', 'desc')
@@ -118,17 +121,19 @@ class OrderController extends Controller
             
         $order_number = $request->order_no;
         $vendor_id = $request->vendor_id;
+        $vendor_order_id = $request->vendor_order_id;
+        $product_order_id = $request->product_id;
         $logistics_id = $request->logistics_id;
         
         $data = Order::where('order_number','=',$order_number)->first();
     
-        $updateVendorOrderStatus = VendorOrder::where('order_number','=',$order_number)->where('user_id','=',$vendor_id)->update(['status' => 'delivered','logistics_id'=>$logistics_id]);
+        $updateVendorOrderStatus = VendorOrder::where('id', $vendor_order_id)->where('order_number','=',$order_number)->where('user_id','=',$vendor_id)->update(['status' => 'delivered', 'logistics_id'=>$logistics_id]);
+        $updateBagStatus = Bag::where('product_id', $product_order_id)->where('order_no','=',$order_number)->where('vendor_id','=',$vendor_id)->update(['status' => 'delivered']);
         $updateDeleiveryStatus = LogisticsDelivery::where('order_number','=',$order_number)->where('vendor_id','=',$vendor_id)->update(['delivery_status' => 3]);
-        $updateBagStatus = Bag::where('order_no','=',$order_number)->where('vendor_id','=',$vendor_id)->update(['status' => 'delivered']);
         
         // The vendor will get his money when the customer has recieved his products! 
         $vendor = User::where('id','=',$vendor_id)->first();
-        $total_sell_vendor = VendorOrder::where('user_id','=',$vendor_id)->where('order_number','=',$order_number)->where('status','=','delivered')->sum('price');    
+        $total_sell_vendor = VendorOrder::where('id', $vendor_order_id)->where('user_id','=',$vendor_id)->where('order_number','=',$order_number)->where('status','=','delivered')->sum('price');    
         $vendor->current_balance = $vendor->current_balance + $total_sell_vendor;
         $vendor->update();
 
@@ -151,7 +156,7 @@ class OrderController extends Controller
         
         // Logistic get his money
         $company = Logistic::where('id','=',$logistics_id)->first();
-        $total_sell_logistics = VendorOrder::where('logistics_id','=',$logistics_id)->where('user_id','=',$vendor_id)->where('order_number','=',$order_number)->where('status','=','delivered')->sum('ship_fee');    
+        $total_sell_logistics = VendorOrder::where('id', $vendor_order_id)->where('logistics_id','=',$logistics_id)->where('user_id','=',$vendor_id)->where('order_number','=',$order_number)->where('status','=','delivered')->sum('ship_fee');    
         $company->current_balance = $company->current_balance + $total_sell_logistics;
         $company->update();
 
