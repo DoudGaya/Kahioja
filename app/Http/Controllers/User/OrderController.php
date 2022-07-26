@@ -44,8 +44,7 @@ class OrderController extends Controller
     }
 
     public function print(){
-        $orderNo = 'KKwL1654198502';
-        // $orderNo = Session::get('orderNo');
+        $orderNo = Session::get('orderNo');
         $bags = DB::table('bags')
                 ->join('products', 'bags.product_id','=','products.id')
                 ->join('users', 'products.user_id', '=', 'users.id')

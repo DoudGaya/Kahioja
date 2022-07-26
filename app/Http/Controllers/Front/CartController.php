@@ -53,7 +53,7 @@ class CartController extends Controller
         $product_delivery_fee = Product::select('ship_fee')->where('id', $product_id)->pluck('ship_fee')->first();
         $vendor_id = Product::select('user_id')->where('id', $product_id)->pluck('user_id')->first();
         
-        $is_product_in_bag = Bag::where('product_id', $product_id)->where('user_id', $user_id)->count();
+        $is_product_in_bag = Bag::where('product_id', $product_id)->where('user_id', $user_id)->where('paid', 'unpaid')->where('vendor_id', $vendor_id)->count();
             if($is_product_in_bag == 0){
 
                 try{
@@ -68,7 +68,7 @@ class CartController extends Controller
                         'paid'=> 'unpaid'
                     ]);
                     
-                    $bag = DB::select("SELECT DISTINCT bags.id as 'bagId', bags.quantity, products.name, products.price, products.ship_fee, products.photo, bags.quantity * products.price as 'subTotal' FROM bags, products, users WHERE bags.product_id = products.id && bags.user_id = '$user_id' && bags.paid = 'unpaid' ORDER BY bags.id DESC");
+                    $bag = DB::select("SELECT DISTINCT bags.id as 'bagId', bags.quantity, products.name, products.price, products.ship_fee, products.photo, bags.quantity * products.price as 'subTotal' FROM bags, products, users WHERE bags.vendor_id = '$vendor_id' && bags.product_id = products.id && bags.user_id = '$user_id' && bags.paid = 'unpaid' ORDER BY bags.id DESC");
                     
                     return $response = \Response::json($bag, 200);
                 
@@ -76,16 +76,16 @@ class CartController extends Controller
                     return $response = \Response::json($e, 500);                    
                 }
             }else{
-                $quantity_check = DB::select("SELECT `quantity`, `id` FROM bags WHERE bags.product_id='$product_id' && bags.user_id='$user_id'");
+                $quantity_check = DB::select("SELECT `quantity`, `id` FROM bags WHERE bags.vendor_id = '$vendor_id' &&  bags.product_id='$product_id' && bags.user_id='$user_id' && bags.paid='unpaid'");
                 $quantity_add = $quantity_check[0]->quantity + $quantity;
                 $bag_id = $quantity_check[0]->id;
                 
                     try{
                         // Bag::where('product_id', $product_id)->where('user_id', $user_id)->update(['quantity' => $quantity_add]);
-                        $update_bag = DB::select("UPDATE `bags` SET `quantity`='$quantity_add' WHERE `id`='$bag_id' && `user_id`='$user_id'");
+                        $update_bag = DB::select("UPDATE `bags` SET `quantity`='$quantity_add' WHERE `id`='$bag_id' && `user_id`='$user_id'  && `paid`='unpaid' && `vendor_id` = '$vendor_id'");
                         // return $response = \Response::json($update_bag, 200);
 
-                        $bag = DB::select("SELECT DISTINCT bags.id as 'bagId', bags.quantity, products.name, products.price, products.ship_fee, products.photo, bags.quantity * products.price as 'subTotal' FROM bags, products, users WHERE bags.product_id = products.id && bags.user_id = '$user_id' && bags.paid = 'unpaid' ORDER BY bags.id DESC");
+                        $bag = DB::select("SELECT DISTINCT bags.id as 'bagId', bags.quantity, products.name, products.price, products.ship_fee, products.photo, bags.quantity * products.price as 'subTotal' FROM bags, products, users WHERE bags.vendor_id = '$vendor_id' &&  bags.product_id = products.id && bags.user_id = '$user_id' && bags.paid = 'unpaid' ORDER BY bags.id DESC");
                         return $response = \Response::json($bag, 200);
                     
                     }catch(Exception $e){
