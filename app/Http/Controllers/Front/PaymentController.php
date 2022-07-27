@@ -26,7 +26,7 @@ use Illuminate\Http\Request;
 use Session;
 use Illuminate\Support\Str;
 use Mail;
-use App\Mail\verifyOrderNotification;
+use App\Mail\vendorOrderNotification;
 
 use App\Http\Requests;
 use Illuminate\Support\Facades\Redirect;
@@ -68,7 +68,7 @@ class PaymentController extends Controller
         if($request->productid == null){
             //Checkout from cart
             $update_order_id = DB::select("UPDATE `bags` SET `order_no`='$orderId' WHERE `user_id`='$user_id' && `paid`='unpaid'");
-            $bag = DB::select("SELECT DISTINCT bags.id as 'bagId', bags.quantity, bags.paid, products.id, products.user_id, products.ship_fee, products.price FROM bags, products, users WHERE bags.product_id = products.id && bags.user_id = '$user_id' && bags.paid = 'unpaid' ORDER BY bags.id DESC");
+            $bag = DB::select("SELECT DISTINCT bags.id as 'bagId',bags.product_id AS 'product_id', bags.quantity, bags.paid, products.id, products.user_id, products.ship_fee, products.price FROM bags, products, users WHERE bags.product_id = products.id && bags.user_id = '$user_id' && bags.paid = 'unpaid' ORDER BY bags.id DESC");
         
         }else{
             //Buy Now
@@ -85,7 +85,7 @@ class PaymentController extends Controller
                 'amount'=> $product->price,
                 'ship_fee'=> $product->ship_fee,
             ]);
-            $bag = DB::select("SELECT DISTINCT bags.id as 'bagId', bags.quantity, bags.paid, products.id, products.user_id, products.ship_fee, products.price FROM bags, products, users WHERE bags.product_id = products.id && bags.user_id = '$user_id' && bags.paid = 'unpaid' ORDER BY bags.id DESC LIMIT 1");
+            $bag = DB::select("SELECT DISTINCT bags.id as 'bagId', bags.product_id AS 'product_id', bags.quantity, bags.paid, products.id, products.user_id, products.ship_fee, products.price FROM bags, products, users WHERE bags.product_id = products.id && bags.user_id = '$user_id' && bags.paid = 'unpaid' ORDER BY bags.id DESC LIMIT 1");
         }
 
         // dd($bag);
@@ -126,170 +126,203 @@ class PaymentController extends Controller
         
         if($paymentDetails['data']['status'] == 'success'){
             $gs = Session::get('gs');
-            $user_id = Session::get('user_id');
-            $customer = User::where('id', $user_id)->first();
+            if(!empty($user_id = Session::get('user_id'))){
+                $customer = User::where('id', $user_id)->first();
+            }else{
+                $user_id = Session::get('name');
+            }
+            
             $amount = (Session::get('amount') / 100);
+            
             if(!empty(Session::get('email'))){
                 $email = Session::get('email');
             }else{
-                $email = $customer->email;
+                $email = Auth::user()->email;
             }
+            
             if(!empty(Session::get('name'))){
                 $name = Session::get('name');
             }else{
-                $name = $customer->name;
+                $name = Auth::user()->name;
             }
+            
             if(!empty(Session::get('phone'))){
                 $phone = Session::get('phone');
             }else{
-                $phone = $customer->phone;
+                $phone = Auth::user()->phone;
             }
+            
+            
             $orderNo = Session::get('orderId');
             $address = Session::get('address');
             $city = Session::get('city');
             $bag = Session::get('bag');
 
+            // dd($orderNo);
 
             //Updating Order
-            $order = new Order;
+            $order_count = Order::where('order_number', $orderNo)->count();
+            if($order_count == 0){
+                $order = new Order;
 
-            $item_name = $gs->title." Order";
-            $item_number = $orderNo;
-            
-            $order['user_id'] = $user_id;
-            $order['cart'] = ''; 
-            $order['totalQty'] = 1;
-            $order['pay_amount'] = $amount;
-            $order['customer_email'] = $email;
-            $order['customer_name'] = $name;
-            $order['shipping_cost'] = 1;
-            $order['packing_cost'] = 1;
-            $order['tax'] = 1;
-            $order['customer_phone'] = $phone;
-            $order['order_number'] = $orderNo;
-            $order['customer_address'] = $address;
-            $order['customer_country'] = 'Nigeria';
-            $order['customer_city'] = $city;
-            $order['payment_status'] = "Paid";
-            $order['currency_sign'] = $paymentDetails['data']['currency'];
-            $order['currency_value'] = 1;
-
-            if($order['dp'] == 1){
-                $order['status'] = 'completed';
-            }
-
-            $order->save();
-
-            if($order->dp == 1){
-                $track = new OrderTrack;
-                $track->title = 'Completed';
-                $track->text = 'Your order has completed successfully.';
-                $track->order_id = $order->id;
-                $track->save();
-            }else {
-                $track = new OrderTrack;
-                $track->title = 'Pending';
-                $track->text = 'You have successfully placed your order.';
-                $track->order_id = $order->id;
-                $track->save();
-            }
-
-            $notification = new Notification;
-            $notification->order_id = $order->id;
-            $notification->save();
-
-            //Substracting From Stock
-            foreach($bag as $prod){
-                $quantity_purchased = $prod->quantity;
-                if($quantity_purchased != null){
-                    $product = Product::findOrFail($prod->id);
-                    $quantity_left = $product->stock - $quantity_purchased;
-                    $product->stock = $quantity_left;
-                    $product->update();  
-                    
-                    if($product->stock <= 5){
-                        $notification = new Notification;
-                        $notification->product_id = $product->id;
-                        $notification->save();                    
-                    }              
+                $item_name = $gs->title." Order";
+                $item_number = $orderNo;
                 
-                }
-            }
-
-            //Sending vendor notification
-            foreach($bag as $prod){
-                if($prod->user_id != 0){
-                    $vorder =  new VendorOrder;
-                    $vorder->order_id = $order->id;
-                    $vorder->user_id = $prod->user_id;
-                    $notf[] = $prod->user_id;
-                    $vorder->qty = $prod->quantity;
-                    $vorder->price = $prod->price;
-                    $vorder->ship_fee = $prod->ship_fee;
-                    $vorder->order_number = $order->order_number;             
-                    $vorder->save();
-                }
-            }
-
-
-            //Sending User Notification
-            if(!empty($notf)){
-                $users = array_unique($notf);
-                foreach ($users as $user) {
-                    $notification = new UserNotification;
-                    $notification->user_id = $user;
-                    $notification->order_number = $order->order_number;
-                    $notification->save();    
-                }
-            }
-
-            // Updating Bag 
-            foreach($bag as $prod){
-                $cart = Bag::findOrFail($prod->bagId);
-                $payment_status = 'paid';
-                $cart->paid = $payment_status;
-                $cart->update();
-            }
-
-            foreach($bag as $item){
-                
-                $vendor_email = User::where('id', $item->user_id)->get();
-                
-                foreach($vendor_email as $email){
-                    $email = $email->email;
-                    $vendor_id = $item->user_id;
-                    
-                    $cart = DB::table('bags')
-                    ->join('products', 'bags.product_id','=','products.id')
-                    ->join('users', 'products.user_id', '=', 'users.id')
-                    ->join('vendor_orders', 'bags.order_no', '=', 'vendor_orders.order_number')
-                    ->select(
-                        ['products.id AS product_id', 'products.name AS product_name', 'products.photo AS product_photo', 'products.name AS product_name',
-                        'bags.quantity AS quantity', 'bags.amount AS amount', 'bags.ship_fee AS ship_fee', 'bags.status AS order_status', 'bags.paid AS paid', 'bags.order_no AS order_no', 'bags.created_at AS time_ordered', 
-                        'users.shop_name AS shop_name', 'users.shop_address AS shop_address', 'users.shop_number AS shop_number',
-                        'bags.vendor_id AS vendor_id', 'bags.logistics_id AS logistics_id',
-                        'vendor_orders.id AS vendor_order_id', 
-                        DB::raw('1 as active')
-                    ])
-                    ->where('vendor_id', $vendor_id)
-                    ->where('order_no', $orderId)
-                    ->orderBy('bags.created_at', 'desc')
-                    ->get();
+                $order['user_id'] = $user_id;
+                $order['cart'] = ''; 
+                $order['totalQty'] = 1;
+                $order['pay_amount'] = $amount;
+                $order['customer_email'] = $email;
+                $order['customer_name'] = $name;
+                $order['shipping_cost'] = 1;
+                $order['packing_cost'] = 1;
+                $order['tax'] = 1;
+                $order['customer_phone'] = $phone;
+                $order['order_number'] = $orderNo;
+                $order['customer_address'] = $address;
+                $order['customer_country'] = 'Nigeria';
+                $order['customer_city'] = $city;
+                $order['payment_status'] = "Paid";
+                $order['currency_sign'] = $paymentDetails['data']['currency'];
+                $order['currency_value'] = 1;
     
-                    $send_data = [
-                        'order_no' => $orderId,
-                        'cust_name' => $request->name,
-                        'cust_email' => $request->email,
-                        'cust_phone' => $request->phone,
-                        'cust_address' => $request->address,
-                        'amount' => $request->amount,
-                        'cart' => $cart
-                    ];
+                if($order['dp'] == 1){
+                    $order['status'] = 'completed';
+                }
+    
+                $order->save();
+    
+                if($order->dp == 1){
+                    $track = new OrderTrack;
+                    $track->title = 'Completed';
+                    $track->text = 'Your order has completed successfully.';
+                    $track->order_id = $order->id;
+                    $track->save();
+                }else {
+                    $track = new OrderTrack;
+                    $track->title = 'Pending';
+                    $track->text = 'You have successfully placed your order.';
+                    $track->order_id = $order->id;
+                    $track->save();
+                }
+    
+                $notification = new Notification;
+                $notification->order_id = $order->id;
+                $notification->save();
+    
+                //Substracting From Stock
+                foreach($bag as $prod){
+                    $quantity_purchased = $prod->quantity;
+                    if($quantity_purchased != null){
+                        $product = Product::findOrFail($prod->id);
+                        $quantity_left = $product->stock - $quantity_purchased;
+                        $product->stock = $quantity_left;
+                        $product->update();  
+                        
+                        if($product->stock <= 5){
+                            $notification = new Notification;
+                            $notification->product_id = $product->id;
+                            $notification->save();                    
+                        }              
+                    
+                    }
+                }
+                
+                // dd($bag);
+    
+                //Sending vendor notification
+                foreach($bag as $prod){
+                    if($prod->user_id != 0){
+                        $vorder =  new VendorOrder;
+                        $vorder->order_id = $order->id;
+                        $vorder->user_id = $prod->user_id;
+                        $vorder->product_id = $prod->product_id;
+                        $notf[] = $prod->user_id;
+                        $vorder->qty = $prod->quantity;
+                        $vorder->price = $prod->price;
+                        $vorder->ship_fee = $prod->ship_fee;
+                        $vorder->order_number = $order->order_number;             
+                        $vorder->save();
+                    }
+                }
+    
+    
+                //Sending User Notification
+                if(!empty($notf)){
+                    $users = array_unique($notf);
+                    foreach ($users as $user) {
+                        $notification = new UserNotification;
+                        $notification->user_id = $user;
+                        $notification->order_number = $order->order_number;
+                        $notification->save();    
+                    }
+                }
+    
+                // Updating Bag 
+                foreach($bag as $prod){
+                    $cart = Bag::findOrFail($prod->bagId);
+                    $payment_status = 'paid';
+                    $cart->paid = $payment_status;
+                    $cart->update();
+                }
+    
+                foreach($bag as $item){
+                    
+                    $vendor_email = User::where('id', $item->user_id)->get();
+                    
+                    foreach($vendor_email as $vendor){
+                        $vendor_email = $vendor->email;
+                        $vendor_id = $item->user_id;
+                        
+                        $cart = DB::table('bags')
+                        ->join('products', 'bags.product_id','=','products.id')
+                        ->join('users', 'products.user_id', '=', 'users.id')
+                        ->join('vendor_orders', 'bags.order_no', '=', 'vendor_orders.order_number')
+                        ->select(
+                            ['products.id AS product_id', 'products.name AS product_name', 'products.photo AS product_photo', 'products.name AS product_name',
+                            'bags.quantity AS quantity', 'bags.amount AS amount', 'bags.ship_fee AS ship_fee', 'bags.status AS order_status', 'bags.paid AS paid', 'bags.order_no AS order_no', 'bags.created_at AS time_ordered', 
+                            'users.shop_name AS shop_name', 'users.shop_address AS shop_address', 'users.shop_number AS shop_number',
+                            'bags.vendor_id AS vendor_id', 'bags.logistics_id AS logistics_id',
+                            'vendor_orders.id AS vendor_order_id', 
+                            DB::raw('1 as active')
+                        ])
+                        ->where('vendor_id', $vendor_id)
+                        ->where('order_no', $orderNo)
+                        ->orderBy('bags.created_at', 'desc')
+                        ->get();
         
-                    try{
-                        \Mail::to($email)->send(new vendorOrderNotification($send_data)); 
-                    }catch(Exception $e){
-                        return response()->json('Please try again in a while');
+                        $send_data = Array(
+                            'order_no' => $orderNo,
+                            'cust_name' => $name,
+                            'cust_email' => $email,
+                            'cust_phone' => $phone,
+                            'cust_address' => $address,
+                            'amount' => $amount,
+                            'cart' => $cart);
+                            
+                        // dd($send_data);
+                            
+                        // $send_data['order_no'] = array_push($orderNo);
+                        // $send_data['cust_name'] = array_push($name);
+                        // $send_data['cust_email'] = array_push($email);
+                        // $send_data['cust_address'] = array_push($address);
+                        // $send_data['amount'] = array_push($amount);
+                        // $send_data['cart'] = array_push($cart);
+                        // $send_data = [
+                            // 'order_no' => $orderNo,
+                            // 'cust_name' => $name,
+                            // 'cust_email' => $email,
+                            // 'cust_phone' => $phone,
+                            // 'cust_address' => $address,
+                            // 'amount' => $amount,
+                            // 'cart' => $cart[]
+                        // ];
+            
+                        try{
+                            \Mail::to($vendor_email)->send(new vendorOrderNotification($send_data)); 
+                        }catch(Exception $e){
+                            return response()->json('Please try again in a while');
+                        }
                     }
                 }
             }
@@ -334,7 +367,7 @@ class PaymentController extends Controller
                     'txnid'=> $transactID]);
 
             $bag = Bag::where('order_no', $orderNo)->update([
-                    'paid' => 'paid'
+                    'paid' => 'paid', 'order_no' => $orderNo
             ]);
             
             return redirect()->route('front.checkoutsuccess');

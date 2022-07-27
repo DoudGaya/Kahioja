@@ -25,21 +25,27 @@ class OrderController extends Controller
     public function orders()
     {
         $user = Auth::user();
+        $user_id = Auth::user()->id;
         $bags = DB::table('bags')
                 ->join('products', 'bags.product_id','=','products.id')
                 ->join('users', 'products.user_id', '=', 'users.id')
-                ->join('vendor_orders', 'bags.order_no', '=', 'vendor_orders.order_number')
+                ->join('vendor_orders', 'bags.product_id', '=', 'vendor_orders.product_id')
                 ->select(
                     ['products.id AS product_id', 'products.name AS product_name', 'products.photo AS product_photo', 'products.name AS product_name',
                     'bags.quantity AS quantity', 'bags.amount AS amount', 'bags.ship_fee AS ship_fee', 'bags.status AS order_status', 'bags.paid AS paid', 'bags.order_no AS order_no', 'bags.created_at AS time_ordered', 
                     'users.shop_name AS shop_name', 'users.shop_address AS shop_address', 'users.shop_number AS shop_number',
                     'bags.vendor_id AS vendor_id', 'bags.logistics_id AS logistics_id',
-                    'vendor_orders.id AS vendor_order_id', 
+                    // 'vendor_orders.id AS vendor_order_id', 
                     DB::raw('1 as active')
                 ])
+                ->distinct('vendor_orders.id')
+                ->distinct('bags.id')
                 ->where('bags.user_id','=',$user->id)
                 ->orderBy('bags.created_at', 'desc')
                 ->get();
+        // $bags = DB::select("SELECT DISTINCT bags.quantity AS quantity, bags.amount AS amount, bags.ship_fee AS ship_fee, bags.status AS order_status, bags.paid AS paid, bags.order_no AS order_no, bags.created_at AS time_ordered, bags.vendor_id AS vendor_id, bags.logistics_id AS logistics_id, products.id AS product_id, products.name AS product_name, products.photo AS product_photo, products.name AS product_name, users.shop_name AS shop_name, users.shop_address AS shop_address, users.shop_number AS shop_number, vendor_orders.id AS vendor_order_id FROM `bags`, `products`, `users`, `vendor_orders` WHERE bags.product_id = products.id && bags.vendor_id = users.id && bags.user_id = '$user_id'");
+        
+        // dd($bags);
         return response()->json($bags);
     }
 
@@ -121,9 +127,11 @@ class OrderController extends Controller
             
         $order_number = $request->order_no;
         $vendor_id = $request->vendor_id;
-        $vendor_order_id = $request->vendor_order_id;
+        // $vendor_order_id = $request->vendor_order_id;
         $product_order_id = $request->product_id;
         $logistics_id = $request->logistics_id;
+        
+        $vendor_order_id = VendorOrder::where('order_number', $order_number)->where('product_id', $product_order_id)->where('user_id', $vendor_id)->pluck('id')->first();
         
         $data = Order::where('order_number','=',$order_number)->first();
     
