@@ -111,11 +111,11 @@
         </div>
     </div>
     <!-- Banner 2 -->
-    <div id="banner2" class="relative lg:top-0 mt-16">
+    <!-- <div id="banner2" class="relative lg:top-0 mt-16">
         <div class="flex items-center">
             <img class="mx-auto" src="{{ asset('images/banner-2.jpg') }}" alt="banner 2">
         </div>
-    </div>
+    </div> -->
     <!-- Toiletries Product  -->
     <div id="best-product" class="relative lg:top-0 lg:px-14 px-4 py-8">
         <h1 class="headings-yus">Toiletries</h1>
@@ -126,11 +126,11 @@
         </div>
     </div>
     <!-- Banner 3 -->
-    <div id="banner3" class="relative lg:top-0">
+    <!-- <div id="banner3" class="relative lg:top-0">
         <div class="flex items-center">
             <img class="mx-auto" src="{{ asset('images/banner-3.jpg') }}" alt="banner 3">
         </div>
-    </div>
+    </div> -->
     <!-- Infinite Scroll -->
     <div class="relative lg:top-0 lg:px-14 px-4 py-8">
         <div class="col-md-12" id="post-data">

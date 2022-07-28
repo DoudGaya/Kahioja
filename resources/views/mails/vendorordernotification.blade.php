@@ -7,13 +7,13 @@
     </div>
     <div style="text-align: left;">
         <div>
-            <h1 style='color:#df7f1b;'>You have an order from <b>{{ $cust_name }}</b></h1>,
+            <h1 style='color:#df7f1b;'>You have an order from <b>{{ $cust_name }}</b></h1>
         </div>
         <div>
             Order No: <b>{{ $order_no }}</b>
         </div>
         <div>
-            Amount Paid: <b>{{ $amount }}</b>
+            Amount Paid: <b>N{{ $amount }}</b>
         </div>
         <div>
             Customer Name: <b>{{ $cust_name }}</b>,
@@ -30,7 +30,7 @@
     </div>
     <div style="text-align: left;">
         <div>
-            <h1 style='color:#df7f1b;'>Products Ordered</h1>,
+            <h1 style='color:#df7f1b;'>Products Ordered</h1>
         </div>
         <div style="width: 100%; float:left; margin-bottom: 5%;">
             @foreach($cart as $product)

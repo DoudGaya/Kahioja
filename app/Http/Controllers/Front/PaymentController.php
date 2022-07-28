@@ -68,7 +68,7 @@ class PaymentController extends Controller
         if($request->productid == null){
             //Checkout from cart
             $update_order_id = DB::select("UPDATE `bags` SET `order_no`='$orderId' WHERE `user_id`='$user_id' && `paid`='unpaid'");
-            $bag = DB::select("SELECT DISTINCT bags.id as 'bagId',bags.product_id AS 'product_id', bags.quantity, bags.paid, products.id, products.user_id, products.ship_fee, products.price FROM bags, products, users WHERE bags.product_id = products.id && bags.user_id = '$user_id' && bags.paid = 'unpaid' ORDER BY bags.id DESC");
+            $bag = DB::select("SELECT DISTINCT bags.id as 'bagId', bags.product_id AS 'product_id', bags.vendor_id AS 'vendor_id', bags.quantity, bags.paid, products.id, products.user_id, products.ship_fee, products.price FROM bags, products, users WHERE bags.product_id = products.id && bags.user_id = '$user_id' && bags.paid = 'unpaid' ORDER BY bags.id DESC");
         
         }else{
             //Buy Now
@@ -85,7 +85,7 @@ class PaymentController extends Controller
                 'amount'=> $product->price,
                 'ship_fee'=> $product->ship_fee,
             ]);
-            $bag = DB::select("SELECT DISTINCT bags.id as 'bagId', bags.product_id AS 'product_id', bags.quantity, bags.paid, products.id, products.user_id, products.ship_fee, products.price FROM bags, products, users WHERE bags.product_id = products.id && bags.user_id = '$user_id' && bags.paid = 'unpaid' ORDER BY bags.id DESC LIMIT 1");
+            $bag = DB::select("SELECT DISTINCT bags.id as 'bagId', bags.product_id AS 'product_id', bags.vendor_id AS 'vendor_id', bags.quantity, bags.paid, products.id, products.user_id, products.ship_fee, products.price FROM bags, products, users WHERE bags.product_id = products.id && bags.user_id = '$user_id' && bags.paid = 'unpaid' ORDER BY bags.id DESC LIMIT 1");
         }
 
         // dd($bag);
@@ -210,7 +210,7 @@ class PaymentController extends Controller
                 $notification->order_id = $order->id;
                 $notification->save();
     
-                //Substracting From Stock
+                // Substracting From Stock
                 foreach($bag as $prod){
                     $quantity_purchased = $prod->quantity;
                     if($quantity_purchased != null){
@@ -245,9 +245,8 @@ class PaymentController extends Controller
                         $vorder->save();
                     }
                 }
-    
-    
-                //Sending User Notification
+        
+                // Sending User Notification
                 if(!empty($notf)){
                     $users = array_unique($notf);
                     foreach ($users as $user) {
@@ -263,67 +262,50 @@ class PaymentController extends Controller
                     $cart = Bag::findOrFail($prod->bagId);
                     $payment_status = 'paid';
                     $cart->paid = $payment_status;
+                    $cart->order_no = $orderNo;
                     $cart->update();
                 }
+
+                $vendors = DB::select("SELECT DISTINCT bags.vendor_id as 'vendor_id' FROM bags WHERE bags.order_no = '$orderNo'");
     
-                foreach($bag as $item){
+                foreach($vendors as $vendor){
                     
-                    $vendor_email = User::where('id', $item->user_id)->get();
+                    $vendor_id = $vendor->vendor_id;
+                    $seller = User::where('id', $vendor_id)->first();
+                
+                    $vendor_email = $seller->email;
                     
-                    foreach($vendor_email as $vendor){
-                        $vendor_email = $vendor->email;
-                        $vendor_id = $item->user_id;
-                        
-                        $cart = DB::table('bags')
+
+                    $vendor_total_amount = Bag::where('vendor_id', $vendor_id)->where('order_no', $orderNo)->sum('amount');
+
+                    
+                    $cart = DB::table('bags')
                         ->join('products', 'bags.product_id','=','products.id')
                         ->join('users', 'products.user_id', '=', 'users.id')
-                        ->join('vendor_orders', 'bags.order_no', '=', 'vendor_orders.order_number')
                         ->select(
                             ['products.id AS product_id', 'products.name AS product_name', 'products.photo AS product_photo', 'products.name AS product_name',
                             'bags.quantity AS quantity', 'bags.amount AS amount', 'bags.ship_fee AS ship_fee', 'bags.status AS order_status', 'bags.paid AS paid', 'bags.order_no AS order_no', 'bags.created_at AS time_ordered', 
                             'users.shop_name AS shop_name', 'users.shop_address AS shop_address', 'users.shop_number AS shop_number',
-                            'bags.vendor_id AS vendor_id', 'bags.logistics_id AS logistics_id',
-                            'vendor_orders.id AS vendor_order_id', 
-                            DB::raw('1 as active')
                         ])
                         ->where('vendor_id', $vendor_id)
                         ->where('order_no', $orderNo)
                         ->orderBy('bags.created_at', 'desc')
                         ->get();
-        
+                        
                         $send_data = Array(
                             'order_no' => $orderNo,
                             'cust_name' => $name,
                             'cust_email' => $email,
                             'cust_phone' => $phone,
                             'cust_address' => $address,
-                            'amount' => $amount,
+                            'amount' => $vendor_total_amount,
                             'cart' => $cart);
-                            
-                        // dd($send_data);
-                            
-                        // $send_data['order_no'] = array_push($orderNo);
-                        // $send_data['cust_name'] = array_push($name);
-                        // $send_data['cust_email'] = array_push($email);
-                        // $send_data['cust_address'] = array_push($address);
-                        // $send_data['amount'] = array_push($amount);
-                        // $send_data['cart'] = array_push($cart);
-                        // $send_data = [
-                            // 'order_no' => $orderNo,
-                            // 'cust_name' => $name,
-                            // 'cust_email' => $email,
-                            // 'cust_phone' => $phone,
-                            // 'cust_address' => $address,
-                            // 'amount' => $amount,
-                            // 'cart' => $cart[]
-                        // ];
             
                         try{
                             \Mail::to($vendor_email)->send(new vendorOrderNotification($send_data)); 
                         }catch(Exception $e){
                             return response()->json('Please try again in a while');
                         }
-                    }
                 }
             }
 
