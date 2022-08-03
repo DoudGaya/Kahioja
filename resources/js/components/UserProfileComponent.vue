@@ -21,7 +21,7 @@
                                 <input required v-model="userName" class="input-box" type="text" name="name" placeholder="User Name">
                             </div>
                             <div>
-                                <input required v-model="userEmail" class="input-box" type="email" name="email" placeholder="Email Address">
+                                <input disabled required v-model="userEmail" class="input-box" type="email" name="email" placeholder="Email Address">
                             </div>
                             <div>
                                 <input required v-model="userPhone" class="input-box" type="text" name="phone" placeholder="Phone">
