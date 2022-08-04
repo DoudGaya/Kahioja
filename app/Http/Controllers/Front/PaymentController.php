@@ -27,6 +27,7 @@ use Session;
 use Illuminate\Support\Str;
 use Mail;
 use App\Mail\vendorOrderNotification;
+use App\Mail\userOrderNotification;
 
 use App\Http\Requests;
 use Illuminate\Support\Facades\Redirect;
@@ -266,6 +267,7 @@ class PaymentController extends Controller
                     $cart->update();
                 }
 
+                //Send Vendors Notification
                 $vendors = DB::select("SELECT DISTINCT bags.vendor_id as 'vendor_id' FROM bags WHERE bags.order_no = '$orderNo'");
     
                 foreach($vendors as $vendor){
@@ -307,6 +309,36 @@ class PaymentController extends Controller
                             return response()->json('Please try again in a while');
                         }
                 }
+
+                //Send User Notification
+                $checkout_user_id = Auth::user()->id;
+                $user_items = DB::table('bags')
+                    ->join('products', 'bags.product_id','=','products.id')
+                    ->join('users', 'products.user_id', '=', 'users.id')
+                    ->select(
+                        ['products.id AS product_id', 'products.name AS product_name', 'products.photo AS product_photo', 'products.name AS product_name',
+                        'bags.quantity AS quantity', 'bags.amount AS amount', 'bags.ship_fee AS ship_fee', 'bags.status AS order_status', 'bags.paid AS paid', 'bags.order_no AS order_no', 'bags.created_at AS time_ordered', 
+                        'users.shop_name AS shop_name', 'users.shop_address AS shop_address', 'users.shop_number AS shop_number',
+                    ])
+                    ->where('user_id', $checkout_user_id)
+                    ->where('order_no', $orderNo)
+                    ->orderBy('bags.created_at', 'desc')
+                    ->get();
+                    
+                    $send_data = Array(
+                        'order_no' => $orderNo,
+                        'cust_name' => $name,
+                        'cust_email' => $email,
+                        'cust_phone' => $phone,
+                        'cust_address' => $address,
+                        'amount' => $vendor_total_amount,
+                        'cart' => $user_items);
+        
+                    try{
+                        \Mail::to($email)->send(new userOrderNotification($send_data)); 
+                    }catch(Exception $e){
+                        return response()->json('Please try again in a while');
+                    }
             }
 
             Session::put('temporder', $order);

@@ -18,6 +18,10 @@
 				width: 15%;
 			}
 			
+			a{
+				text-decoration: none;
+			}
+			
 			@media only screen and (max-width:768px)
 			{
 			
@@ -52,10 +56,10 @@
 			<hr>
 			<div style="text-align: left;">
 				<div>
-					<h1 style='color:#df7f1b;'>You have an order to process from <b>{{ $cust_name }}</b>, kindly start processing immediately.</h1>
+					<h1 style='color:#df7f1b;'>We've recieved your order and your item(s) will be delivered soon!.</h1>
 				</div>
 				<div>
-					The Order ID is <b>{{ $order_no }}</b>. A summary of the order is shown below.
+					The Order ID is <b>{{ $order_no }}</b>. A summary of the order is shown below. To view the status of your order, please login to your dashboard <a  style='color:#df7f1b;' href="https://kahioja.com">Kahioja</a>
 				</div>
 				<hr>
 				<div>
