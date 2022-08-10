@@ -99,7 +99,7 @@ export default {
 
                 setTimeout(()=>{
                     this.callback = ''
-                    window.location = '/'
+                    window.location = 'https://dashboard.kahioja.com/vendor/login'
                 }, 3000)
                 
                 this.isLoading = false

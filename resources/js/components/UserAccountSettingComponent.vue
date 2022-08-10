@@ -8,7 +8,7 @@
                     <span><li class="text-sm list-none">Vendor Panel</li></span>
                 </a>
             </div>
-            <div @click="openSubscription()" v-else class="flex border-b p-3 items-center cursor-pointer hover:bg-gray-100 justify-center">
+            <div v-else @click="openSubscription()" class="flex border-b p-3 items-center cursor-pointer hover:bg-gray-100 justify-center">
                 <span><li class="text-sm list-none">Start Selling</li></span>
             </div>
             <!-- My Orders  -->

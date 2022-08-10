@@ -21448,7 +21448,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                   setTimeout(function () {
                     _this2.callback = '';
-                    window.location = '/';
+                    window.location = 'https://dashboard.kahioja.com/vendor/login';
                   }, 3000);
                   _this2.isLoading = false;
                 })["catch"](function (error) {
