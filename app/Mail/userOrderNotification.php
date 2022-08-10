@@ -27,7 +27,7 @@ class userOrderNotification extends Mailable
      *
      * @return $this
      */
-    public function build()
+    public function build(request $request)
     {
         {
             return $this->with([

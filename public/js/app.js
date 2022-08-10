@@ -19931,7 +19931,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                         setTimeout(function () {
                           _this6.callback = '';
                           document.getElementById('loginBtn').innerText = 'Login successful...';
-                          window.location = '/';
+                          window.location = '/checkout';
                         }, 3000);
                       }
                     })["catch"](function (error) {
@@ -20362,7 +20362,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                document.getElementById('loginBtn').innerText = 'Authenticating...'; // btnValue = 
+                document.getElementById('loginBtnFront').innerText = 'Authenticating...'; // btnValue = 
                 // this.isLoading = true 
 
                 if (_this.loginEmail !== '') {
@@ -20377,7 +20377,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                       if (_this.callback == 'Your Email is not Verified!') {
                         setTimeout(function () {
                           _this.callback = '';
-                          document.getElementById('loginBtn').innerText = 'Login';
+                          document.getElementById('loginBtnFront').innerText = 'Login';
                         }, 3000);
                       } //If Account Banned
                       else if (_this.callback == 'Your Account Has Been Banned') {
@@ -24288,7 +24288,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }),
     "class": "cursor-pointer flex justify-end my-4"
   }, " Forgot Password? "), _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    id: "loginBtn",
+    id: "loginBtnFront",
     onClick: _cache[5] || (_cache[5] = function ($event) {
       return $options.loginUser();
     }),

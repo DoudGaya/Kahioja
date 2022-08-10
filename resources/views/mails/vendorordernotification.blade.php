@@ -108,7 +108,7 @@
 				Your KAHIOJA Team
 			</div>
 			<div style='border-top:2px solid #000; margin-top:1%; padding:2%;'>
-				<center><img id="footer-img" src='https://kahioja.com/images/logo.png' alt='Kahioja Image'></center>
+				<center><img id="footer-img" src='https://kahioja.com/images/kahioja.png' alt='Kahioja Image'></center>
 			</div>
 			<div style='text-align:center; font-size:11px; line-height:1.3;'>
 				A1/A2 Block A Hamisu Abba Sumaila Plaza Tarauni Kano, Nigeria | <a style='color:#df7f1b;'>info@kahioja.com</a><br>

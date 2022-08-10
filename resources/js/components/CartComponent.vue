@@ -517,7 +517,7 @@ export default {
                             setTimeout(()=>{
                                 this.callback = ''
                                 document.getElementById('loginBtn').innerText = 'Login successful...'
-                                window.location = '/'
+                                window.location = '/checkout'
                             }, 3000)
                         }
                         

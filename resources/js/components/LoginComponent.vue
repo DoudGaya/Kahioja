@@ -39,7 +39,7 @@
                         </span>
                     </div>
                     <div class="my-8">
-                        <button id="loginBtn" @click="loginUser()" class="mx-auto btn-yus rounded-full w-full py-2 text-white">
+                        <button id="loginBtnFront" @click="loginUser()" class="mx-auto btn-yus rounded-full w-full py-2 text-white">
                             Login
                         </button>
                     </div>
@@ -180,7 +180,7 @@ export default {
         },
         async loginUser(){
             
-            document.getElementById('loginBtn').innerText = 'Authenticating...'
+            document.getElementById('loginBtnFront').innerText = 'Authenticating...'
             // btnValue = 
             // this.isLoading = true 
 
@@ -201,7 +201,7 @@ export default {
                         if(this.callback == 'Your Email is not Verified!'){
                             setTimeout(()=>{
                                 this.callback = ''
-                                document.getElementById('loginBtn').innerText = 'Login'
+                                document.getElementById('loginBtnFront').innerText = 'Login'
                             }, 3000)
                         }
 

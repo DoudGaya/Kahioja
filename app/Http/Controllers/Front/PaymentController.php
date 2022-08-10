@@ -289,8 +289,8 @@ class PaymentController extends Controller
                             'bags.quantity AS quantity', 'bags.amount AS amount', 'bags.ship_fee AS ship_fee', 'bags.status AS order_status', 'bags.paid AS paid', 'bags.order_no AS order_no', 'bags.created_at AS time_ordered', 
                             'users.shop_name AS shop_name', 'users.shop_address AS shop_address', 'users.shop_number AS shop_number',
                         ])
-                        ->where('vendor_id', $vendor_id)
-                        ->where('order_no', $orderNo)
+                        ->where('bags.vendor_id', $vendor_id)
+                        ->where('bags.order_no', $orderNo)
                         ->orderBy('bags.created_at', 'desc')
                         ->get();
                         
@@ -320,8 +320,8 @@ class PaymentController extends Controller
                         'bags.quantity AS quantity', 'bags.amount AS amount', 'bags.ship_fee AS ship_fee', 'bags.status AS order_status', 'bags.paid AS paid', 'bags.order_no AS order_no', 'bags.created_at AS time_ordered', 
                         'users.shop_name AS shop_name', 'users.shop_address AS shop_address', 'users.shop_number AS shop_number',
                     ])
-                    ->where('user_id', $checkout_user_id)
-                    ->where('order_no', $orderNo)
+                    ->where('bags.user_id', $checkout_user_id)
+                    ->where('bags.order_no', $orderNo)
                     ->orderBy('bags.created_at', 'desc')
                     ->get();
                     
