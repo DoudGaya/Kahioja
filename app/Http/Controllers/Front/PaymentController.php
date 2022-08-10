@@ -126,7 +126,9 @@ class PaymentController extends Controller
         // dd($paymentDetails);
         
         if($paymentDetails['data']['status'] == 'success'){
+            
             $gs = Session::get('gs');
+            
             if(!empty($user_id = Session::get('user_id'))){
                 $customer = User::where('id', $user_id)->first();
             }else{
@@ -137,20 +139,14 @@ class PaymentController extends Controller
             
             if(!empty(Session::get('email'))){
                 $email = Session::get('email');
-            }else{
-                $email = Auth::user()->email;
             }
             
             if(!empty(Session::get('name'))){
                 $name = Session::get('name');
-            }else{
-                $name = Auth::user()->name;
             }
             
             if(!empty(Session::get('phone'))){
                 $phone = Session::get('phone');
-            }else{
-                $phone = Auth::user()->phone;
             }
             
             
