@@ -151,17 +151,26 @@ class OrderController extends Controller
             $vendor->current_balance = $vendor->current_balance - $total_sell_vendor;
             $vendor->update();
             
-            $newwithdraw = new Withdraw();
-            $newwithdraw['user_id'] = $vendor_id;
-            $newwithdraw['acc_name'] = $vendor->account_name;
-            $newwithdraw['bank_name'] = $vendor->bank_name;
-            $newwithdraw['iban'] = $vendor->account_no;
-            $newwithdraw['amount'] = $total_sell_vendor;
-            $newwithdraw['fee'] = 0;
-            $newwithdraw['method'] = 'Automatic';
-            $newwithdraw['order_no'] = $order_number;
-            $newwithdraw['type'] = 'vendor';
-            $newwithdraw->save();
+            $check_if_for_pending_request = Withdraw::where('user_id', $vendor_id)->where('order_no', $order_number)->where('type', 'vendor')->get();
+
+            if(count($check_if_for_pending_request) == 0){
+                $newwithdraw = new Withdraw();
+                $newwithdraw['user_id'] = $vendor_id;
+                $newwithdraw['acc_name'] = $vendor->account_name;
+                $newwithdraw['bank_name'] = $vendor->bank_name;
+                $newwithdraw['iban'] = $vendor->account_no;
+                $newwithdraw['amount'] = $total_sell_vendor;
+                $newwithdraw['fee'] = 0;
+                $newwithdraw['method'] = 'Automatic';
+                $newwithdraw['order_no'] = $order_number;
+                $newwithdraw['type'] = 'vendor';
+                $newwithdraw->save();
+            }else{
+                $pending_amount = Withdraw::where('user_id', $vendor_id)->where('order_no', $order_number)->where('type', 'vendor')->sum('amount');
+                $new_withdrawal_amount = $pending_amount + $total_sell_vendor;
+                $update_withdrawal_request = Withdraw::where('user_id', $vendor_id)->where('order_no', $order_number)->where('type', 'vendor')->update(['amount' => $new_withdrawal_amount]);
+            }
+        
         }
         
         // Logistic get his money
@@ -176,16 +185,25 @@ class OrderController extends Controller
             $company->current_balance = $company->current_balance - $total_sell_logistics;
             $company->update();
             
-            $newwithdraw = new Withdraw();
-            $newwithdraw['user_id'] = $logistics_id;
-            $newwithdraw['acc_name'] = $company->account_name;
-            $newwithdraw['bank_name'] = $company->bank_name;
-            $newwithdraw['iban'] = $company->account_no;
-            $newwithdraw['amount'] = $total_sell_logistics;
-            $newwithdraw['fee'] = 0;
-            $newwithdraw['type'] = 'logistics';
-            $newwithdraw['order_no'] = $order_number;
-            $newwithdraw->save();
+            $check_if_for_pending_request_logistics = Withdraw::where('user_id', $logistics_id)->where('order_no', $order_number)->where('type', 'logistics')->get();
+
+            if(count($check_if_for_pending_request_logistics) == 0){
+                $newwithdraw = new Withdraw();
+                $newwithdraw['user_id'] = $logistics_id;
+                $newwithdraw['acc_name'] = $company->account_name;
+                $newwithdraw['bank_name'] = $company->bank_name;
+                $newwithdraw['iban'] = $company->account_no;
+                $newwithdraw['amount'] = $total_sell_logistics;
+                $newwithdraw['fee'] = 0;
+                $newwithdraw['type'] = 'logistics';
+                $newwithdraw['order_no'] = $order_number;
+                $newwithdraw->save();
+            }else{
+                $pending_amount_logistics = Withdraw::where('user_id', $logistics_id)->where('order_no', $order_number)->where('type', 'logistics')->sum('amount');
+                $new_withdrawal_amount_logistics = $pending_amount_logistics + $total_sell_logistics;
+                $update_withdrawal_request_logistics = Withdraw::where('user_id', $logistics_id)->where('order_no', $order_number)->where('type', 'logistics')->update(['amount' => $new_withdrawal_amount_logistics]);
+                
+            }
         }
 
         $checkVendorOrderCount = VendorOrder::where('order_number','=',$order_number)->where('status','=','completed')->orwhere('status','=','pending')->orwhere('status','=','accept delivery')->orwhere('status','=','picked up for delivery')->get();
