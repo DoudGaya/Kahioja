@@ -24,7 +24,9 @@
                             <input required v-model="loginEmail" class="border border-gray-300 rounded py-3 px-6 w-full my-2 focus:outline-none" type="email" name="email" id="loginEmail" placeholder="Email Address">
                         </div>
                         <div>
-                            <input @keydown.enter="loginUser()" required v-model="loginPassword" class="border border-gray-300 rounded py-3 px-6 w-full my-2 focus:outline-none" type="password" name="password" id="loginPassword" placeholder="Password">
+                            <input v-if="showPassword" @keydown.enter="loginUser()" required v-model="loginPassword" class="border border-gray-300 rounded py-3 px-6 w-full my-2 focus:outline-none" type="text" name="password" id="loginPassword" placeholder="Password">
+                            
+                            <input v-else @keydown.enter="loginUser()" required v-model="loginPassword" class="border border-gray-300 rounded py-3 px-6 w-full my-2 focus:outline-none" type="password" name="password" id="loginPassword" placeholder="Password">
                         </div>
                     </div>
                     <div @click="showForgotPasswordForm()" class="cursor-pointer flex justify-end my-4">
@@ -32,10 +34,10 @@
                     </div>
                     <div class="text-left my-4 items-center">
                         <span>
-                            <input type="checkbox" name="signed">
+                            <input @click="toggleShow" type="checkbox" name="signed">
                         </span>
                         <span>
-                            Keep me signed in
+                            Show Password 
                         </span>
                     </div>
                     <div class="my-8">
@@ -136,6 +138,8 @@ export default {
     name: 'LoginComponent',
     data(){
         return{
+            showPassword: false,
+            password: null,
             displayLogin: true,
             displayLoginForm: true,
             displaySignUpForm: false,
@@ -152,7 +156,15 @@ export default {
             isLoading: false
         }
     },
+    computed:{
+        buttonLabel() {
+            return (this.showPassword) ? "Hide" : "Show"
+        }
+    },
     methods:{
+        toggleShow(){
+            this.showPassword = !this.showPassword
+        },
         closeCart(){
             if(this.displayLogin == true){
                 this.displayLogin = false
