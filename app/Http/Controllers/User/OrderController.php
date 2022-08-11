@@ -209,7 +209,7 @@ class OrderController extends Controller
             }
         }
 
-        $checkVendorOrderCount = VendorOrder::where('order_number','=',$order_number)->where('status','=','completed')->orwhere('status','=','pending')->orwhere('status','=','accept delivery')->orwhere('status','=','picked up for delivery')->get();
+        $checkVendorOrderCount = VendorOrder::where('order_number','=',$order_number)->where('status','!=','delivered')->get();
         
         if(count($checkVendorOrderCount) == 0){
             $updateOrderStatus = Order::where('order_number','=',$order_number)->update(['status' => 'delivered']);
@@ -217,7 +217,7 @@ class OrderController extends Controller
             //Send User Notification
             $checkout_user_id = Auth::user()->id;
             $cust_email = Auth::user()->email;
-            $total_amount = Order::where('order_no', $order_number)->sum('pay_amount');
+            $total_amount = Order::where('order_number', $order_number)->sum('pay_amount');
 
             $user_items = DB::table('bags')
                 ->join('products', 'bags.product_id','=','products.id')
