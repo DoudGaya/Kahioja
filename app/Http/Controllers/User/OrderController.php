@@ -19,6 +19,9 @@ use App\Models\Withdraw;
 use App\Models\PaymentGateway;
 use Illuminate\Support\Facades\Input;
 
+use Mail;
+use App\Mail\UserOrderCompleteMsg;
+
 class OrderController extends Controller
 {
 
@@ -210,10 +213,39 @@ class OrderController extends Controller
         
         if(count($checkVendorOrderCount) == 0){
             $updateOrderStatus = Order::where('order_number','=',$order_number)->update(['status' => 'delivered']);
+
+            //Send User Notification
+            $checkout_user_id = Auth::user()->id;
+            $cust_email = Auth::user()->email;
+            $total_amount = Order::where('order_no', $order_number)->sum('pay_amount');
+
+            $user_items = DB::table('bags')
+                ->join('products', 'bags.product_id','=','products.id')
+                ->join('users', 'products.user_id', '=', 'users.id')
+                ->select(
+                    ['products.id AS product_id', 'products.name AS product_name', 'products.photo AS product_photo', 'products.name AS product_name',
+                    'bags.quantity AS quantity', 'bags.amount AS amount', 'bags.ship_fee AS ship_fee', 'bags.status AS order_status', 'bags.paid AS paid', 'bags.order_no AS order_no', 'bags.created_at AS time_ordered', 
+                    'users.shop_name AS shop_name', 'users.shop_address AS shop_address', 'users.shop_number AS shop_number',
+                ])
+                ->where('bags.user_id', $checkout_user_id)
+                ->where('bags.order_no', $order_number)
+                ->orderBy('bags.created_at', 'desc')
+                ->get();
+                
+                $send_data = Array(
+                    'order_no' => $order_number,
+                    'amount' => $total_amount,
+                    'cart' => $user_items
+                );
+    
+                try{
+                    \Mail::to($cust_email)->send(new UserOrderCompleteMsg($send_data)); 
+                }catch(Exception $e){
+                    return response()->json('Please try again in a while');
+                }
         }
         
         return response()->json('completed');
-        // return redirect()->route('user-orders');
     }
 
     public function orderdownload($slug,$id)

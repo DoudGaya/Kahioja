@@ -59,9 +59,6 @@
 				</div>
 				<hr>
 				<div>
-					Order No: <b>{{ $order_no }}</b>
-				</div>
-				<div>
 					Amount Paid: <b>N{{ $amount }}</b>
 				</div>
 				<div>

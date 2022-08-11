@@ -56,26 +56,14 @@
 			<hr>
 			<div style="text-align: left;">
 				<div>
-					<h1 style='color:#df7f1b;'>We've recieved your order and your item(s) will be delivered soon!.</h1>
+					<h1 style='color:#df7f1b;'>Your order with ID <b>{{ $order_no }}</b> has been completed successfully!.</h1>
 				</div>
 				<div>
-					The Order ID is <b>{{ $order_no }}</b>. A summary of the order is shown below. To view the status of your order, please login to your dashboard <a  style='color:#df7f1b;' href="https://kahioja.com">Kahioja</a>
+					A summary of the order is shown below.
 				</div>
 				<hr>
 				<div>
 					Amount Paid: <b>N{{ $amount }}</b>
-				</div>
-				<div>
-					Customer Name: <b>{{ $cust_name }}</b>,
-				</div>
-				<div>
-					Customer Phone: <b>{{ $cust_phone }}</b>,
-				</div>
-				<div>
-					Customer Email: <b>{{ $cust_email }}</b>,
-				</div>
-				<div>
-					Customer Address: <b>{{ $cust_address }}</b>,
 				</div>
 			</div>
 			<div style="text-align: left;">
