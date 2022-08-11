@@ -25,7 +25,6 @@
                         </div>
                         <div>
                             <input v-if="showPassword" @keydown.enter="loginUser()" required v-model="loginPassword" class="border border-gray-300 rounded py-3 px-6 w-full my-2 focus:outline-none" type="text" name="password" id="loginPassword" placeholder="Password">
-                            
                             <input v-else @keydown.enter="loginUser()" required v-model="loginPassword" class="border border-gray-300 rounded py-3 px-6 w-full my-2 focus:outline-none" type="password" name="password" id="loginPassword" placeholder="Password">
                         </div>
                     </div>
@@ -154,11 +153,6 @@ export default {
             verificationCode: '',
             callback: '',
             isLoading: false
-        }
-    },
-    computed:{
-        buttonLabel() {
-            return (this.showPassword) ? "Hide" : "Show"
         }
     },
     methods:{
