@@ -52,8 +52,8 @@ class OrderController extends Controller
         return response()->json($bags);
     }
 
-    public function print(){
-        $orderNo = Session::get('orderNo');
+    public function print($orderid){
+        // $orderNo = Session::get('orderNo');
         $bags = DB::table('bags')
                 ->join('products', 'bags.product_id','=','products.id')
                 ->join('users', 'products.user_id', '=', 'users.id')
@@ -63,10 +63,11 @@ class OrderController extends Controller
                     'users.shop_name AS shop_name', 'users.shop_address AS shop_address', 'users.shop_number AS shop_number',
                     'bags.vendor_id AS vendor_id', 'bags.logistics_id AS logistics_id' 
                 ])
-                ->where('bags.order_no','=',$orderNo)
+                ->where('bags.order_no','=',$orderid)
                 ->orderBy('bags.created_at', 'desc')
                 ->get();
-        $orderDetails = Order::where('order_number', $orderNo)->first();
+                
+        $orderDetails = Order::where('order_number', $orderid)->first();
         return view('front.print', compact('bags', 'orderNo', 'orderDetails'));
     }
 

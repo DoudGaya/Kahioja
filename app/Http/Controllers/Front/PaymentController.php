@@ -46,23 +46,11 @@ class PaymentController extends Controller
         }else{
             $user_id = 'guest_'.Str::random(5).time();
             $user_type = 'guest';
-            // Cookie::queue('guest', $user_id, 525600);
             $request->session()->put(['guest' => $user_id]);
-            // Session::put('guest', $user_id);
         }
 
-        // Cookie::queue('user_id', $user_id, 525600);
         $request->session()->put(['user_id', $user_id]);
-        // Session::put('user_id', $user_id);
-
-        if(Session::has('currency')) {
-            $curr = Currency::find(Session::get('currency'));
-            $currency_name = $curr->name;
-        }else{
-            $curr = Currency::where('is_default','=',1)->first();
-            $currency_name = $curr->name;
-        }
-
+        
         $gs = Generalsetting::findOrFail(1);
         $orderId = Str::random(4).time();
         $words = 'KahIoJaSma';
@@ -139,12 +127,6 @@ class PaymentController extends Controller
             "orderID" => $orderId,
         );
 
-        $request->session()->put(['total_qty' => $totalQty]);
-        $request->session()->put(['user_id' => $user_id]);
-        $request->session()->put(['bag' => $bag]);
-        $request->session()->put(['gs' => $gs]);
-        $request->session()->put(['orderId' => $orderId]);
-        
         try{
             return Paystack::getAuthorizationUrl($data)->redirectNow();
         }catch(\Exception $e) {
@@ -156,16 +138,21 @@ class PaymentController extends Controller
     {
         $paymentDetails = Paystack::getPaymentData();
 
-        // dd($paymentDetails);
-        
         if($paymentDetails['data']['status'] == 'success'){
             
-            $gs = $request->session()->get('gs');
-            $user_id = $request->session()->get('user_id');
-            $orderNo = $request->session()->get('orderId');
-            $bag = $request->session()->get('bag');
-        
+            $payment_email = $paymentDetails['data']['customer']['email'];
+            
+            $orderNo = DB::select("SELECT orders.order_number FROM orders WHERE orders.customer_email = '$payment_email' ORDER BY orders.id DESC LIMIT 1");
+            
+            $user_id = DB::select("SELECT orders.user_id FROM orders WHERE orders.customer_email = '$payment_email' ORDER BY orders.id DESC LIMIT 1");
+            
+            $orderNo = $orderNo[0]->order_number;
+            $user_id = $user_id[0]->user_id;
+            
+            $bag = DB::select("SELECT DISTINCT bags.id as 'bagId', bags.product_id AS 'product_id', bags.vendor_id AS 'vendor_id', bags.quantity, bags.paid, products.id, products.user_id, products.ship_fee, products.price FROM bags, products, users WHERE bags.product_id = products.id && bags.user_id = '$user_id' && bags.paid = 'unpaid' ORDER BY bags.id DESC");
+            
             $total_qty = Bag::where('order_no', $orderNo)->sum('quantity');
+            
             $email = Order::where('order_number', $orderNo)->pluck('customer_email')->first();
             $name = Order::where('order_number', $orderNo)->pluck('customer_name')->first();
             $phone = Order::where('order_number', $orderNo)->pluck('customer_phone')->first();
@@ -174,6 +161,7 @@ class PaymentController extends Controller
             $pay_amount = Order::where('order_number', $orderNo)->pluck('pay_amount')->first();
             $deliveryFee = Order::where('order_number', $orderNo)->pluck('delivery_fee')->first();
             $serviceFee = Order::where('order_number', $orderNo)->pluck('service_fee')->first();
+            
             $order = Order::where('order_number', $orderNo)->first();
             
             //Updating Order
@@ -202,8 +190,6 @@ class PaymentController extends Controller
                     }
                 }
                 
-                // dd($bag);
-    
                 //Sending vendor notification
                 foreach($bag as $prod){
                     if($prod->user_id != 0){
@@ -317,10 +303,6 @@ class PaymentController extends Controller
                     }
             }
         
-            // $request->session()->put(['temporder' => $order]);
-            $request->session()->put(['tempbag' => $bag]);
-            $request->session()->put(['orderNo'=> $orderNo]);
-
             $transactID = $paymentDetails['data']['id'];
             $tx_ref = $paymentDetails['data']['reference'];
             $amount_collected = ($paymentDetails['data']['amount'] / 100);
@@ -342,17 +324,8 @@ class PaymentController extends Controller
             $customer_email = $email;
             $customer_phone = $phone;
             
-            $request->session()->put(['transactID' => $transactID]);
-            $request->session()->put(['payment_type' => $payment_type]);
-            $request->session()->put(['customer_email' => $customer_email]);
-            $request->session()->put(['customer_phone' => $customer_phone]);
-            
-            $orderNo = $request->session()->get('orderNo');
-            $user = $request->session()->get('user_id');
-
             $order = Order::where('order_number', $orderNo)->update(
                 [
-                    'user_id'=> $user,
                     'payment_status'=> 'completed',
                     'method'=> $card_details,
                     'txnid'=> $transactID,
@@ -364,7 +337,19 @@ class PaymentController extends Controller
                     'paid' => 'paid', 'order_no' => $orderNo
             ]);
             
-            return redirect()->route('front.checkoutsuccess');
+            $gs = Generalsetting::findOrFail(1);
+            $order = Order::where('order_number', $orderNo)->first();
+        
+            $order_no = $order->order_number;
+            $deliveryFee = $order->delivery_fee;
+            $serviceFee = $order->service_fee;
+            
+            $bags = DB::select("SELECT DISTINCT bags.id as 'bagId', bags.quantity, bags.order_no, bags.paid, products.id, products.name, products.photo, products.price, orders.status, orders.created_at 
+            FROM bags, products, orders
+            WHERE bags.order_no = '$orderNo' && bags.product_id = products.id && orders.order_number = bags.order_no
+            ORDER BY bags.id DESC");
+            
+            return view('front.checkoutsuccess', compact('gs', 'order', 'transactID', 'deliveryFee', 'serviceFee', 'bags'));
 
         }else{
             return redirect()->route('front.checkoutfailed');
@@ -379,24 +364,22 @@ class PaymentController extends Controller
     {
         $gs = Generalsetting::findOrFail(1);
         
-        if(Session::has('orderNo')){
-            $orderNo = Session::get('orderNo');
-            $transactID = Session::get('transactID');
-            $payment_type = Session::get('payment_type');
-            $order = Order::where('order_number', $orderNo)->first();
-            
-            $order_no = $order->order_number;
-            $deliveryFee = $order->delivery_fee;
-            $serviceFee = $order->service_fee;
-
-            //Getting the items in the bag
-            $bags = DB::select("SELECT DISTINCT bags.id as 'bagId', bags.quantity, bags.order_no, bags.paid, products.id, products.name, products.photo, products.price, orders.status, orders.created_at 
-                FROM bags, products, orders
-                WHERE bags.order_no = '$order_no' && bags.product_id = products.id && orders.order_number = bags.order_no
-                ORDER BY bags.id DESC");
+        $orderNo = $orderNo;
+        $transactID = $transactID;
+        $payment_type = $payment_type;
+        $order = Order::where('order_number', $orderNo)->first();
         
-            return view('front.checkoutsuccess', compact('gs', 'order', 'transactID', 'deliveryFee', 'serviceFee', 'bags'));
-        }
+        $order_no = $order->order_number;
+        $deliveryFee = $order->delivery_fee;
+        $serviceFee = $order->service_fee;
+
+        //Getting the items in the bag
+        $bags = DB::select("SELECT DISTINCT bags.id as 'bagId', bags.quantity, bags.order_no, bags.paid, products.id, products.name, products.photo, products.price, orders.status, orders.created_at 
+            FROM bags, products, orders
+            WHERE bags.order_no = '$order_no' && bags.product_id = products.id && orders.order_number = bags.order_no
+            ORDER BY bags.id DESC");
+    
+        return view('front.checkoutsuccess', compact('gs', 'order', 'transactID', 'deliveryFee', 'serviceFee', 'bags'));
 
     }
 
