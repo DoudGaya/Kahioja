@@ -84,30 +84,44 @@
         </div>
     </div> -->
     <!-- Fashion & Accessories Product  -->
-    <div id="best-product" class="relative lg:top-0 lg:px-14 px-4 py-8">
+    <div id="best-product" class="relative lg:top-0 lg:px-14 px-4 py-8 flex flex-col bg-white m-auto p-auto">
         <h1 class="headings-yus">Fashion & Accessories</h1>
-        <div class="grid lg:grid-cols-6 md:grid-cols-3 grid-cols-2 gap-3">
-            @foreach($fashion as $prod)
-                @include('includes.productComponent')
-            @endforeach
-        </div>
+        <!-- <div class=""> -->
+            <div class="flex overflow-x-scroll pb-10 hide-scroll-bar">
+                <div class="flex flex-nowrap">
+                    @foreach($fashion as $prod)
+                        <div class="inline px-3 md:w-64 w-48 max-w-xs hover:shadow-xl transition-shadow duration-300 ease-in-out">
+                            @include('includes.productComponent')
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        <!-- </div> -->
     </div>
     <!-- Groceries  -->
     <div id="best-product" class="relative lg:top-0 lg:px-14 px-4 py-8">
         <h1 class="headings-yus">Groceries</h1>
-        <div class="grid lg:grid-cols-6 md:grid-cols-3 grid-cols-2 gap-3">
-            @foreach($groceries as $prod)
-                @include('includes.productComponent')
-            @endforeach
+        <div class="flex overflow-x-scroll pb-10 hide-scroll-bar">
+            <div class="flex flex-nowrap">
+                @foreach($groceries as $prod)
+                    <div class="inline px-3 md:w-64 w-48 max-w-xs hover:shadow-xl transition-shadow duration-300 ease-in-out">
+                        @include('includes.productComponent')
+                    </div>
+                @endforeach
+            </div>
         </div>
     </div>
     <!-- Drinks Product  -->
     <div id="best-product" class="relative lg:top-0 lg:px-14 px-4 py-8">
         <h1 class="headings-yus">Drinks & Beverages</h1>
-        <div class="grid lg:grid-cols-6 md:grid-cols-3 grid-cols-2 gap-3">
-            @foreach($drinks as $prod)
-                @include('includes.productComponent')
-            @endforeach
+        <div class="flex overflow-x-scroll pb-10 hide-scroll-bar">
+            <div class="flex flex-nowrap">
+                @foreach($drinks as $prod)
+                    <div class="inline px-3 md:w-64 w-48 max-w-xs hover:shadow-xl transition-shadow duration-300 ease-in-out">
+                        @include('includes.productComponent')
+                    </div>
+                @endforeach
+            </div>
         </div>
     </div>
     <!-- Banner 2 -->
@@ -119,10 +133,14 @@
     <!-- Toiletries Product  -->
     <div id="best-product" class="relative lg:top-0 lg:px-14 px-4 py-8">
         <h1 class="headings-yus">Toiletries</h1>
-        <div class="grid lg:grid-cols-6 md:grid-cols-3 grid-cols-2 gap-3">
-            @foreach($toiletries as $prod)
-                @include('includes.productComponent')
-            @endforeach
+        <div class="flex overflow-x-scroll pb-10 hide-scroll-bar">
+            <div class="flex flex-nowrap">
+                @foreach($toiletries as $prod)
+                    <div class="inline px-3 md:w-64 w-48 max-w-xs hover:shadow-xl transition-shadow duration-300 ease-in-out">
+                        @include('includes.productComponent')
+                    </div>
+                @endforeach
+            </div>
         </div>
     </div>
     <!-- Banner 3 -->

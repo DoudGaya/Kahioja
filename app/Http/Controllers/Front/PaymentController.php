@@ -25,10 +25,10 @@ use Auth;
 use Illuminate\Http\Request;
 use Session;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Cookie;
 use Mail;
 use App\Mail\vendorOrderNotification;
 use App\Mail\userOrderNotification;
-
 use App\Http\Requests;
 use Illuminate\Support\Facades\Redirect;
 use Paystack;
@@ -46,10 +46,14 @@ class PaymentController extends Controller
         }else{
             $user_id = 'guest_'.Str::random(5).time();
             $user_type = 'guest';
-            Session::put('guest', $user_id);
+            // Cookie::queue('guest', $user_id, 525600);
+            $request->session()->put(['guest' => $user_id]);
+            // Session::put('guest', $user_id);
         }
 
-        Session::put('user_id', $user_id);
+        // Cookie::queue('user_id', $user_id, 525600);
+        $request->session()->put(['user_id', $user_id]);
+        // Session::put('user_id', $user_id);
 
         if(Session::has('currency')) {
             $curr = Currency::find(Session::get('currency'));
@@ -64,8 +68,16 @@ class PaymentController extends Controller
         $words = 'KahIoJaSma';
         $reference = str_shuffle($words).time();
         
-        // dd($request->amount);
-
+        $amount = ($request->amount / 100); 
+        $email = $request->email; 
+        $name = $request->name; 
+        $phone = $request->phone; 
+        $address = $request->address; 
+        $city = $request->city; 
+        $serviceFee = $request->serviceFee; 
+        $deliveryFee = $request->deliveryFee;
+        
+        
         if($request->productid == null){
             //Checkout from cart
             $update_order_id = DB::select("UPDATE `bags` SET `order_no`='$orderId' WHERE `user_id`='$user_id' && `paid`='unpaid'");
@@ -89,8 +101,36 @@ class PaymentController extends Controller
             $bag = DB::select("SELECT DISTINCT bags.id as 'bagId', bags.product_id AS 'product_id', bags.vendor_id AS 'vendor_id', bags.quantity, bags.paid, products.id, products.user_id, products.ship_fee, products.price FROM bags, products, users WHERE bags.product_id = products.id && bags.user_id = '$user_id' && bags.paid = 'unpaid' ORDER BY bags.id DESC LIMIT 1");
         }
 
-        // dd($bag);
+        $totalQty = Bag::where('order_no', $orderId)->sum('quantity');
 
+        $order = new Order;
+
+            $order['user_id'] = $user_id;
+            $order['cart'] = ''; 
+            $order['totalQty'] = $totalQty;
+            $order['pay_amount'] = $amount;
+            $order['delivery_fee'] = $deliveryFee;
+            $order['service_fee'] = $serviceFee;
+            $order['customer_email'] = $email;
+            $order['customer_name'] = $name;
+            $order['shipping_cost'] = 1;
+            $order['packing_cost'] = 1;
+            $order['tax'] = 1;
+            $order['customer_phone'] = $phone;
+            $order['order_number'] = $orderId;
+            $order['customer_address'] = $address;
+            $order['customer_country'] = 'Nigeria';
+            $order['customer_city'] = $city;
+            $order['payment_status'] = "unpaid";
+            $order['currency_sign'] = 'NGN';
+            $order['currency_value'] = 1;
+
+            if($order['dp'] == 1){
+                $order['status'] = 'completed';
+            }
+
+        $order->save();
+        
         $data = array(
             "amount" => 90,
             "reference" => $reference,
@@ -99,19 +139,12 @@ class PaymentController extends Controller
             "orderID" => $orderId,
         );
 
-        Session::put('user_id', $user_id);
-        Session::put('bag', $bag);
-        Session::put('gs', $gs);
-        Session::put('amount', $request->amount);
-        Session::put('email', $request->email);
-        Session::put('name', $request->name);
-        Session::put('phone', $request->phone);
-        Session::put('orderId', $orderId);
-        Session::put('address', $request->address);
-        Session::put('city', $request->city);
-        Session::put('deliveryFee', $request->deliveryFee);
-        Session::put('serviceFee', $request->serviceFee);
-
+        $request->session()->put(['total_qty' => $totalQty]);
+        $request->session()->put(['user_id' => $user_id]);
+        $request->session()->put(['bag' => $bag]);
+        $request->session()->put(['gs' => $gs]);
+        $request->session()->put(['orderId' => $orderId]);
+        
         try{
             return Paystack::getAuthorizationUrl($data)->redirectNow();
         }catch(\Exception $e) {
@@ -119,7 +152,7 @@ class PaymentController extends Controller
         }        
     }
 
-    public function handleGatewayCallback()
+    public function handleGatewayCallback(Request $request)
     {
         $paymentDetails = Paystack::getPaymentData();
 
@@ -127,82 +160,25 @@ class PaymentController extends Controller
         
         if($paymentDetails['data']['status'] == 'success'){
             
-            $gs = Session::get('gs');
+            $gs = $request->session()->get('gs');
+            $user_id = $request->session()->get('user_id');
+            $orderNo = $request->session()->get('orderId');
+            $bag = $request->session()->get('bag');
+        
+            $total_qty = Bag::where('order_no', $orderNo)->sum('quantity');
+            $email = Order::where('order_number', $orderNo)->pluck('customer_email')->first();
+            $name = Order::where('order_number', $orderNo)->pluck('customer_name')->first();
+            $phone = Order::where('order_number', $orderNo)->pluck('customer_phone')->first();
+            $address = Order::where('order_number', $orderNo)->pluck('customer_address')->first();
+            $city = Order::where('order_number', $orderNo)->pluck('customer_city')->first();
+            $pay_amount = Order::where('order_number', $orderNo)->pluck('pay_amount')->first();
+            $deliveryFee = Order::where('order_no', $orderNo)->pluck('delivery_fee')->first();
+            $serviceFee = Order::where('order_no', $orderNo)->pluck('service_fee')->first();
             
-            if(!empty($user_id = Session::get('user_id'))){
-                $customer = User::where('id', $user_id)->first();
-            }else{
-                $user_id = Session::get('name');
-            }
-            
-            $amount = (Session::get('amount') / 100);
-            
-            if(!empty(Session::get('email'))){
-                $email = Session::get('email');
-            }
-            
-            if(!empty(Session::get('name'))){
-                $name = Session::get('name');
-            }
-            
-            if(!empty(Session::get('phone'))){
-                $phone = Session::get('phone');
-            }
-            
-            
-            $orderNo = Session::get('orderId');
-            $address = Session::get('address');
-            $city = Session::get('city');
-            $bag = Session::get('bag');
-
-            // dd($orderNo);
-
             //Updating Order
             $order_count = Order::where('order_number', $orderNo)->count();
-            if($order_count == 0){
-                $order = new Order;
-
-                $item_name = $gs->title." Order";
-                $item_number = $orderNo;
-                
-                $order['user_id'] = $user_id;
-                $order['cart'] = ''; 
-                $order['totalQty'] = 1;
-                $order['pay_amount'] = $amount;
-                $order['customer_email'] = $email;
-                $order['customer_name'] = $name;
-                $order['shipping_cost'] = 1;
-                $order['packing_cost'] = 1;
-                $order['tax'] = 1;
-                $order['customer_phone'] = $phone;
-                $order['order_number'] = $orderNo;
-                $order['customer_address'] = $address;
-                $order['customer_country'] = 'Nigeria';
-                $order['customer_city'] = $city;
-                $order['payment_status'] = "Paid";
-                $order['currency_sign'] = $paymentDetails['data']['currency'];
-                $order['currency_value'] = 1;
-    
-                if($order['dp'] == 1){
-                    $order['status'] = 'completed';
-                }
-    
-                $order->save();
-    
-                if($order->dp == 1){
-                    $track = new OrderTrack;
-                    $track->title = 'Completed';
-                    $track->text = 'Your order has completed successfully.';
-                    $track->order_id = $order->id;
-                    $track->save();
-                }else {
-                    $track = new OrderTrack;
-                    $track->title = 'Pending';
-                    $track->text = 'You have successfully placed your order.';
-                    $track->order_id = $order->id;
-                    $track->save();
-                }
-    
+            
+            if($order_count == 1){
                 $notification = new Notification;
                 $notification->order_id = $order->id;
                 $notification->save();
@@ -307,7 +283,9 @@ class PaymentController extends Controller
                 }
 
                 //Send User Notification
-                $checkout_user_id = Auth::user()->id;
+                $checkout_user_id = $user_id;
+                $total_amount_paid = $pay_amount;
+                
                 $user_items = DB::table('bags')
                     ->join('products', 'bags.product_id','=','products.id')
                     ->join('users', 'products.user_id', '=', 'users.id')
@@ -327,8 +305,9 @@ class PaymentController extends Controller
                         'cust_email' => $email,
                         'cust_phone' => $phone,
                         'cust_address' => $address,
-                        'amount' => $vendor_total_amount,
-                        'cart' => $user_items);
+                        'amount' => $total_amount_paid,
+                        'cart' => $user_items
+                    );
         
                     try{
                         \Mail::to($email)->send(new userOrderNotification($send_data)); 
@@ -336,16 +315,16 @@ class PaymentController extends Controller
                         return response()->json('Please try again in a while');
                     }
             }
-
-            Session::put('temporder', $order);
-            Session::put('tempbag', $bag);
-            Session::put('orderNo', $order['order_number']);
+        
+            // $request->session()->put(['temporder' => $order]);
+            $request->session()->put(['tempbag' => $bag]);
+            $request->session()->put(['orderNo'=> $orderNo]);
 
             $transactID = $paymentDetails['data']['id'];
             $tx_ref = $paymentDetails['data']['reference'];
             $amount_collected = ($paymentDetails['data']['amount'] / 100);
             $charge_fee = ($paymentDetails['data']['fees'] / 100);
-            $amount_paid = $amount;
+            $amount_paid = $pay_amount;
             $currency = $paymentDetails['data']['currency'];
             $date = date("D M j Y G:i:s",  strtotime($paymentDetails['data']['createdAt'])  + 1 * 3600);
             
@@ -361,20 +340,24 @@ class PaymentController extends Controller
             
             $customer_email = $email;
             $customer_phone = $phone;
-
-            Session::put('transactID', $transactID);
-            Session::put('payment_type', $payment_type);
-            Session::put('customer_email', $customer_email);
-            Session::put('customer_phone', $customer_phone);
             
-            $orderNo = Session::get('orderNo');
-            $user = Session::get('user_id');
+            $request->session()->put(['transactID' => $transactID]);
+            $request->session()->put(['payment_type' => $payment_type]);
+            $request->session()->put(['customer_email' => $customer_email]);
+            $request->session()->put(['customer_phone' => $customer_phone]);
+            
+            $orderNo = $request->session()->get('orderNo');
+            $user = $request->session()->get('user_id');
 
-            $order = Order::where('order_number', $orderNo)->update([
+            $order = Order::where('order_number', $orderNo)->update(
+                [
                     'user_id'=> $user,
                     'payment_status'=> 'completed',
                     'method'=> $card_details,
-                    'txnid'=> $transactID]);
+                    'txnid'=> $transactID,
+                    'currency_sign'=> $currency,
+                ]
+            );
 
             $bag = Bag::where('order_no', $orderNo)->update([
                     'paid' => 'paid', 'order_no' => $orderNo
@@ -389,5 +372,44 @@ class PaymentController extends Controller
         // Now you have the payment details,
         // you can store the authorization_code in your db to allow for recurrent subscriptions
         // you can then redirect or do whatever you want
+    }
+
+    public function checkoutsuccess()
+    {
+        $gs = Generalsetting::findOrFail(1);
+        
+        if(Session::has('orderNo')){
+            $orderNo = Session::get('orderNo');
+            $transactID = Session::get('transactID');
+            $payment_type = Session::get('payment_type');
+            $order = Order::where('order_no', $orderNo)->get();
+            
+            $order_no = $order->order_number;
+            $deliveryFee = $order->delivery_fee;
+            $serviceFee = $order->service_fee;
+
+            //Getting the items in the bag
+            $bags = DB::select("SELECT DISTINCT bags.id as 'bagId', bags.quantity, bags.order_no, bags.paid, products.id, products.name, products.photo, products.price, orders.status, orders.created_at 
+                FROM bags, products, orders
+                WHERE bags.order_no = '$order_no' && bags.product_id = products.id && orders.order_number = bags.order_no
+                ORDER BY bags.id DESC");
+        
+            return view('front.checkoutsuccess', compact('gs', 'order', 'transactID', 'deliveryFee', 'serviceFee', 'bags'));
+        }
+
+    }
+
+    public function checkoutfailed()
+    {
+        $gs = Generalsetting::findOrFail(1);
+
+        return view('front.checkoutfailed', compact($gs));
+    }
+
+    public function checkoutcancelled()
+    {
+        $gs = Generalsetting::findOrFail(1);
+
+        return view('front.checkoutcancelled', compact($gs));
     }
 }
