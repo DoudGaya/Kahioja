@@ -172,8 +172,9 @@ class PaymentController extends Controller
             $address = Order::where('order_number', $orderNo)->pluck('customer_address')->first();
             $city = Order::where('order_number', $orderNo)->pluck('customer_city')->first();
             $pay_amount = Order::where('order_number', $orderNo)->pluck('pay_amount')->first();
-            $deliveryFee = Order::where('order_no', $orderNo)->pluck('delivery_fee')->first();
-            $serviceFee = Order::where('order_no', $orderNo)->pluck('service_fee')->first();
+            $deliveryFee = Order::where('order_number', $orderNo)->pluck('delivery_fee')->first();
+            $serviceFee = Order::where('order_number', $orderNo)->pluck('service_fee')->first();
+            $order = Order::where('order_number', $orderNo)->first();
             
             //Updating Order
             $order_count = Order::where('order_number', $orderNo)->count();
@@ -382,7 +383,7 @@ class PaymentController extends Controller
             $orderNo = Session::get('orderNo');
             $transactID = Session::get('transactID');
             $payment_type = Session::get('payment_type');
-            $order = Order::where('order_no', $orderNo)->get();
+            $order = Order::where('order_number', $orderNo)->first();
             
             $order_no = $order->order_number;
             $deliveryFee = $order->delivery_fee;
