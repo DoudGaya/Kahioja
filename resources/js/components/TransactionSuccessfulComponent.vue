@@ -203,7 +203,7 @@ export default {
             this.displayTransactionSummary = !this.displayTransactionSummary
         },
         printReceipt(){
-            window.location = `/order/print'/${this.orderid}`
+            window.location = `/order/print/${this.orderid}`
         }
     },
     mounted(){

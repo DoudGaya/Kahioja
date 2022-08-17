@@ -20961,7 +20961,7 @@ __webpack_require__.r(__webpack_exports__);
       this.displayTransactionSummary = !this.displayTransactionSummary;
     },
     printReceipt: function printReceipt() {
-      window.location = '/order/print';
+      window.location = "/order/print/".concat(this.orderid);
     }
   },
   mounted: function mounted() {
