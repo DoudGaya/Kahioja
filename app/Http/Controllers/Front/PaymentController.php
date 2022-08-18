@@ -165,9 +165,9 @@ class PaymentController extends Controller
             $order = Order::where('order_number', $orderNo)->first();
             
             //Updating Order
-            $order_count = Order::where('order_number', $orderNo)->count();
+            $order_count = VendorOrder::where('order_number', $orderNo)->count();
             
-            if($order_count == 1){
+            if($order_count == 0){
                 $notification = new Notification;
                 $notification->order_id = $order->id;
                 $notification->save();
