@@ -116,7 +116,7 @@ class FrontendController extends Controller
         $groceries =  Product::where('category_id','=',21)->where('status','=',1)->orderBy('id','desc')->take(8)->get();
         $toiletries =  Product::where('category_id','=',22)->where('status','=',1)->orderBy('id','desc')->take(8)->get();
         $drinks =  Product::where('category_id','=',23)->where('status','=',1)->orderBy('id','desc')->take(8)->get();
-        $categories = Category::select('name', 'photo', 'slug')->where('status', 1)->orderBy('id', 'desc')->take(6)->get();
+        $categories = Category::select('name', 'photo', 'slug')->where('status', 1)->orderBy('id', 'desc')->get();
 
         
         $products = Product::where('status', 1)->orderby('id', 'desc')->paginate(8);

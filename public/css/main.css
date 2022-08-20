@@ -168,13 +168,10 @@ img {vertical-align: middle;}
     font-family: "CircularStd Bold";
     font-style: normal;
     font-weight: bold;
-    font-size: 30px;
-    line-height: 39px;
+    font-size: 18px;
     display: flex;
     align-items: center;
     color: #000000;
-    margin-bottom: 1%;
-    margin-top: 1%;
 }
 
 .cate-yus{
@@ -184,6 +181,10 @@ img {vertical-align: middle;}
     box-sizing: border-box;
     border-radius: 50%;
     margin-bottom: 3%;
+}
+
+.popular-cate-title{
+    font-size: 12px;
 }
 
 .cate-title-yus{
@@ -213,7 +214,6 @@ img {vertical-align: middle;}
     font-style: normal;
     font-weight: 450;
     font-size: 16px;
-    line-height: 27px;
     display: flex;
     align-items: flex-end;
     color: #3B3B3B;
@@ -228,8 +228,7 @@ img {vertical-align: middle;}
 .card-curr-price{
     font-style: normal;
     font-weight: bold;
-    font-size: 20px;
-    line-height: 26px;
+    font-size: 12px;
     display: flex;
     align-items: center;
     color: #222222;
@@ -261,7 +260,6 @@ img {vertical-align: middle;}
     font-style: normal;
     font-weight: bold;
     font-size: 80%;
-    line-height: 26px;
     display: flex;
     align-items: center;
     text-align: center;
@@ -269,12 +267,12 @@ img {vertical-align: middle;}
     flex: none;
     order: 0;
     flex-grow: 0;
-    margin: 0px 8px;
+    margin: 0px 2px;
 }
 
 .btn-yus{
     background-color: #F37022;
-    height: 56px;
+    /* height: 56px; */
 }
 
 .btn-yus-conti-shopping{
@@ -699,9 +697,9 @@ img {vertical-align: middle;}
         width: 12px;
     }
 
-    .btn-yus{
-        height: 46px;
-    }
+    /* .btn-yus{ */
+        /* height: 46px; */
+    /* } */
 }
 
 @media only screen and (max-width:768px)
@@ -742,7 +740,7 @@ img {vertical-align: middle;}
     }
 
     .headings-yus{
-        font-size: 16px;
+        font-size: 14px;
     }
 
     .cate-yus{
@@ -982,8 +980,8 @@ img {vertical-align: middle;}
         width: 12px;
     }
 
-    .btn-yus{
-        height: 56px;
-    }
+    /* .btn-yus{ */
+        /* height: 56px; */
+    /* } */
 
 }

@@ -50,7 +50,7 @@
         <!-- Similar Products -->
         <div id="similar-product" class="mt-20 md:mb-20 mb-20">
             <h1 class="headings-yus">Similar product you may like</h1>
-            <div id="product" class="grid grid-cols-2 lg:grid-cols-4 md:grid-cols-3 gap-6">
+            <div id="product" class="grid grid-cols-2 lg:grid-cols-6 md:grid-cols-4 gap-6">
                 @foreach($productt->category->products()->where('status','=',1)->where('id','!=',$productt->id)->take(8)->get() as $prod)
                     @include('includes.productComponent')
                 @endforeach
