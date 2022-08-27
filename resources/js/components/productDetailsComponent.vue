@@ -29,15 +29,11 @@
                     <span class="product-curr-price"><b>₦{{ productcurrprice }}</b></span>
                     <span v-if="productpreprive != null" class="card-prev-price"><b>₦{{ productprevprice }}</b></span>
                 </div>
-                <div class="flex items-center mb-4">
-                    <div class="flex mr-4">
-                        <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5.26444 0.25L6.35956 3.62042H9.90343L7.03638 5.70346L8.13149 9.07388L5.26444 6.99085L2.39739 9.07388L3.4925 5.70346L0.625452 3.62042H4.16932L5.26444 0.25Z" fill="#FFBD00"/></svg>
-                        <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5.26444 0.25L6.35956 3.62042H9.90343L7.03638 5.70346L8.13149 9.07388L5.26444 6.99085L2.39739 9.07388L3.4925 5.70346L0.625452 3.62042H4.16932L5.26444 0.25Z" fill="#FFBD00"/></svg>
-                        <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5.26444 0.25L6.35956 3.62042H9.90343L7.03638 5.70346L8.13149 9.07388L5.26444 6.99085L2.39739 9.07388L3.4925 5.70346L0.625452 3.62042H4.16932L5.26444 0.25Z" fill="#FFBD00"/></svg>
-                        <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5.26444 0.25L6.35956 3.62042H9.90343L7.03638 5.70346L8.13149 9.07388L5.26444 6.99085L2.39739 9.07388L3.4925 5.70346L0.625452 3.62042H4.16932L5.26444 0.25Z" fill="#FFBD00"/></svg>
-                        <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5.26444 0.25L6.35956 3.62042H9.90343L7.03638 5.70346L8.13149 9.07388L5.26444 6.99085L2.39739 9.07388L3.4925 5.70346L0.625452 3.62042H4.16932L5.26444 0.25Z" fill="#FFBD00"/></svg>
-                    </div>
-                    <div class="card-reviews">120 Reviews</div>
+                <div v-if="(productstock > 0) || (productstock == null)" class="flex items-center mb-4">
+                    <h1 class="product-details-title"> </h1>
+                </div>
+                <div v-else class="mb-4">
+                    <h1 class="text-red-700">Out of Stock</h1>
                 </div>
                 <div class="product-details-content">
                     <p>
@@ -81,7 +77,7 @@
                         <button @click="addProduct()">+</button>
                     </div>
                 </div>
-                <div class="lg:grid grid-cols-2 gap-6 my-7">
+                <div v-if="(productstock > 0) || (productstock == null)" class="lg:grid grid-cols-2 gap-6 my-7">
                     <div>
                         <button @click="addToBag()" class="mx-auto btn-yus rounded-full w-full flex flex-row justify-center items-center p-2 text-white">
                             <div class="card-bag-label">
@@ -286,6 +282,7 @@ export default {
         'productcurrprice',
         'productprevprice',
         'productsku',
+        'productstock',
         'productdeliveryfee',
         'store'
     ],

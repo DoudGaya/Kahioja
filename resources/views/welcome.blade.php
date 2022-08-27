@@ -107,7 +107,7 @@
         </div>
         <!-- Infinite Scroll -->
         <div class="">
-            <div class="col-md-12" id="post-data">
+            <div id="post-data">
                 @include('includes.data')
             </div>
         </div>
