@@ -287,6 +287,8 @@ class Product extends Model
     public function showShippingFee() {
         $gs = Generalsetting::findOrFail(1);
         $ship_fee = $this->ship_fee;
+        $ship_fee = round((($this->ship_fee * 0.075) + $this->ship_fee), 2);
+
         if(!$ship_fee){
             return 'Free Delivery';
         }
@@ -301,7 +303,7 @@ class Product extends Model
         }
         $ship_fee = round($ship_fee * $curr->value,2);
         if($gs->currency_format == 0){
-            return $curr->sign.$ship_fee;
+            return $curr->sign.$ship_fee ;
         }
         else{
             return $ship_fee.$curr->sign;

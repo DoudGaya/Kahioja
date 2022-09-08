@@ -179,7 +179,7 @@ class RegisterController extends Controller
 			$user->bank_name = $request->bank_name;
 			$user->account_no = $request->account_no;
 			$user->account_name = $request->account_name;
-			$user->is_vendor = 1;
+			$user->is_vendor = 2;
 			$user->update();
 			return response()->json('Congratulations! Your vendor account is ready!');
 		}else{

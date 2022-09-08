@@ -29,6 +29,7 @@ use App\Http\Controllers\User\OrderController;
 // ************************************ FRONT SECTION **********************************************
 
 Route::get('/', [FrontendController::class, 'index'])->name('front.index');
+Route::get('/printproduct', [FrontendController::class, 'printproduct'])->name('front.index');
 Route::get('/404', [FrontendController::class, 'pagenotfound']);
 Route::get('/500', [FrontendController::class, 'serveerror']);
 Route::get('/privacyandsecurity', [FrontendController::class, 'privacyandsecurity'])->name('front.privacyandsecurity');

@@ -154,6 +154,12 @@ class FrontendController extends Controller
         $termsandpolicypage = Page::where('slug', 'terms')->first();
         return view('front.termsandpolicy', compact('gs', 'termsandpolicypage'));
     }
+    
+    public function printproduct()
+    {
+        $products = Product::orderby('id', 'desc')->get();
+        return view('printproduct', compact('products'));
+    }
 
     public function footer()
     {

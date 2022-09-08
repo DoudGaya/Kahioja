@@ -118,7 +118,11 @@
                                 </div>
                                 <div class="grid grid-cols-3 gap-2">
                                     <span class="col-span-1">Price:</span>
-                                    <span class="col-span-2">₦{{ product.price }}</span>
+                                    <span class="col-span-2">₦{{ ((product.price * 0.143) + product.price).toFixed(2) }}</span>
+                                </div>
+                                <div class="grid grid-cols-3 gap-2">
+                                    <span class="col-span-1">Delivery Fee:</span>
+                                    <span class="col-span-2">₦{{ ((product.ship_fee * 0.075) + product.ship_fee).toFixed(2) }}</span>
                                 </div>
                             </div>
                         </div>
@@ -516,7 +520,9 @@ export default {
             return this.$store.getters.deliveryFee    
         },
         estimatedTotal(){
-            return parseInt(this.subTotal) + parseInt(this.deliveryFee)
+            let productTotal = (this.subTotal * 0.143) + this.subTotal
+            let deliveryTotal = (this.deliveryFee * 0.075) + this.deliveryFee
+            return (parseFloat(productTotal) + parseFloat(deliveryTotal)).toFixed(2)
         }
     }
 }

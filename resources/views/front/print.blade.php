@@ -141,7 +141,7 @@
             @endforeach
         </div>
     </div>
-    <div class="absolute bottom-0 w-full text-sm">
+    <div class="w-full text-sm">
         <div class="flex justify-between">
             <div>
                 Date Generated {{ date('h:ia', time() + 3600) }} {{ date('d M Y') }}
@@ -152,10 +152,10 @@
             </div>
         </div>
     </div>
-    <script type="text/javascript">
-        setTimeout(function () {
-            window.close();
-        }, 500);
-    </script>
+    // <script type="text/javascript">
+    //     setTimeout(function () {
+    //         window.close();
+    //     }, 500);
+    // </script>
 </body>
 </html>

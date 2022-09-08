@@ -28,9 +28,10 @@
                 :productimage="{{ json_encode($productt->photo) }}" 
                 :productgallery="{{ json_encode($productt->galleries) }}" 
                 :productname="{{ json_encode($productt->name) }}" 
-                :productcurrprice="{{ json_encode($productt->price) }}" 
+                :productcurrprice="{{ round((json_encode($productt->price) * 0.143) + json_encode($productt->price), 2) }}" 
                 :productsku="{{ json_encode($productt->sku) }}" 
                 :productstock="{{ json_encode($productt->stock) }}" 
+                :deliverytime="{{ json_encode($productt->ship) }}" 
                 :store="{{ json_encode($store) }}" 
                 :productdeliveryfee="{{ json_encode($productt->showShippingFee()) }}" 
             ></product-details-component>    

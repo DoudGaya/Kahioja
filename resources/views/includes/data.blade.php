@@ -9,10 +9,7 @@
                 <h1 class="card-title w-full">{{ $product->name }}</h1>
                 <div class="flex justify-between items-center">
                     <div class="flex items-center">
-                        <span class="card-curr-price"><b>₦{{ $product->price }}</b></span>
-                        @if($product->previous_price != null)
-                            <span class="card-prev-price"><b>₦{{ $product->previous_price }}</b></span>
-                        @endif
+                        <span class="card-curr-price"><b>₦{{ round((($product->price * 0.143) + $product->price), 2) }}</b></span>
                     </div>
                     <div class="grid grid-cols-2 text-left md:flex md:flex-row card-reviews my-2">
                         <div>
@@ -20,7 +17,7 @@
                         </div>
                         &nbsp;
                         @if($product->ship_fee != 0 || $product->ship_fee != '')
-                            <div>₦{{ $product->ship_fee }}</div>
+                            <div>{{ ($product->showShippingFee()) }}</div>
                         @else
                             <div>Free Delivery</div>
                         @endif

@@ -18,7 +18,7 @@
         </div>
         <!-- Product Image  -->
         <div class="md:col-span-2 w-full border rounded-xl shadow">
-            <img id="featured-product" class="w-4/5 mx-auto py-6" :src="`https://dashboard.kahioja.com/assets/images/products/${productimage}`" :alt="productname">
+            <img style="width:350px;" id="featured-product" class="w-4/5 mx-auto py-6" :src="`https://dashboard.kahioja.com/assets/images/products/${productimage}`" :alt="productname">
         </div>
         <!-- Product Details  -->
         <div class="rounded-xl px-10 py-8 border md:col-span-2 shadow">
@@ -53,9 +53,15 @@
                         <span>
                             <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M17.9157 22.0795C20.4602 22.0795 22.5229 20.0168 22.5229 17.4724C22.5229 14.9279 20.4602 12.8652 17.9157 12.8652C15.3713 12.8652 13.3086 14.9279 13.3086 17.4724C13.3086 20.0168 15.3713 22.0795 17.9157 22.0795Z" stroke="#7E7E7E" stroke-width="0.988223" stroke-linecap="round"/><path d="M17.918 14.3809V17.4716L20.0307 18.7586" stroke="#7E7E7E" stroke-width="0.988223" stroke-linecap="round"/><path d="M11.7867 20.5781H3.99866C3.80839 20.5781 3.62592 20.5025 3.49138 20.368C3.35683 20.2335 3.28125 20.051 3.28125 19.8607V4.79554C3.28125 4.60527 3.35683 4.42279 3.49138 4.28825C3.62592 4.15371 3.80839 4.07812 3.99866 4.07812H20.5638C20.7541 4.07812 20.9366 4.15371 21.0711 4.28825C21.2057 4.42279 21.2813 4.60527 21.2813 4.79554V11.8171" stroke="#7E7E7E" stroke-width="0.988223" stroke-miterlimit="10" stroke-linecap="round"/><path d="M6.21484 6.9707H12.8165" stroke="#7E7E7E" stroke-width="0.988223" stroke-miterlimit="10" stroke-linecap="round"/><path d="M6.21484 9.64062H10.072" stroke="#7E7E7E" stroke-width="0.988223" stroke-miterlimit="10" stroke-linecap="round"/></svg>
                         </span>
-                        <span class="ml-1">
-                            1 Day Delivery within Kano
+                        <span class="ml-1 text-left leading-5">
+                            {{ deliveryTime }}
                         </span>
+                        <!-- <span v-else-if="(deliverytime > 1)" class="ml-1">
+                            {{ deliverytime }} Days
+                        </span>
+                        <span v-else class="ml-1">
+                            1 Day
+                        </span> -->
                     </div>
                 </div>
                 <div class="product-details-content flex items-center w-full my-5">
@@ -283,6 +289,7 @@ export default {
         'productprevprice',
         'productsku',
         'productstock',
+        'deliverytime',
         'productdeliveryfee',
         'store'
     ],
@@ -310,6 +317,12 @@ export default {
             forgotPasswordEmail: '',
             verification_code: '',
             callback: ''
+        }
+    },
+    computed:{
+        deliveryTime(){
+            const today = new Date(Date.now() + (86400000 * this.deliverytime))
+            return `Estimated Delivery Date: ${today.getDate()}/${today.getMonth() + 1}/${today.getFullYear()}`
         }
     },
     methods:{
