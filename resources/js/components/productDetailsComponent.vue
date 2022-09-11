@@ -1,24 +1,27 @@
 <template>
-    <div v-show="displayProductDetails" id="product-details" class="grid grid-cols-1 lg:grid-cols-5 gap-6 my-12">
-        <div id="slide-wrapper" class="hidden col-span-1 my-auto md:flex flex-col">
-            <svg id="slideLeft" class="arrow" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="16" cy="16" r="15" transform="rotate(-90 16 16)" stroke="#222222" stroke-width="2"/><path d="M14.657 19.586L10.707 15.636C10.5184 15.4538 10.2658 15.353 10.0036 15.3553C9.7414 15.3576 9.49058 15.4628 9.30518 15.6482C9.11977 15.8336 9.0146 16.0844 9.01232 16.3466C9.01004 16.6088 9.11084 16.8614 9.293 17.05L14.95 22.707C15.0426 22.8002 15.1528 22.8741 15.2741 22.9246C15.3955 22.9751 15.5256 23.001 15.657 23.001C15.7884 23.001 15.9185 22.9751 16.0398 22.9246C16.1612 22.8741 16.2713 22.8002 16.364 22.707L22.021 17.05C22.1165 16.9578 22.1927 16.8474 22.2451 16.7254C22.2975 16.6034 22.3251 16.4722 22.3262 16.3394C22.3274 16.2066 22.3021 16.0749 22.2518 15.952C22.2015 15.8291 22.1273 15.7175 22.0334 15.6236C21.9395 15.5297 21.8278 15.4555 21.7049 15.4052C21.5821 15.3549 21.4504 15.3296 21.3176 15.3307C21.1848 15.3319 21.0536 15.3595 20.9316 15.4119C20.8096 15.4643 20.6992 15.5405 20.607 15.636L16.657 19.586V10C16.657 9.73478 16.5516 9.48043 16.3641 9.29289C16.1766 9.10536 15.9222 9 15.657 9C15.3918 9 15.1374 9.10536 14.9499 9.29289C14.7624 9.48043 14.657 9.73478 14.657 10V19.586V19.586Z" fill="#222222"/></svg>
-
-            <div id="slider" class="hidden md:flex flex-col">
-                <div class="w-full border rounded-xl shadow mb-2 px-10 py-8">
-                    <img class="object-cover product-gallery product-active" :src="`https://dashboard.kahioja.com/assets/images/products/${productimage}`" :alt="`${ productname }`">
-                </div>
-                <div :key="productphoto" v-for="productphoto in productgallery">    
-                    <div class="w-full border rounded-xl shadow mb-2 px-10 py-8">
-                        <img class="object-cover product-gallery product-active" :src="`https://dashboard.kahioja.com/assets/images/galleries/${productphoto.photo}`" :alt="`${ productname }`">
+    <div v-show="displayProductDetails" id="product-details" class="lg:grid grid-cols-1 lg:grid-cols-5 gap-6 lg:my-12 my-4">
+        <!-- Product Gallery  -->
+        <div class="md:flex flex-row col-span-1 my-auto">
+            <div class="flex overflow-x-scroll lg:pb-10 pb-4 hide-scroll-bar">
+                <div class="flex flex-nowrap">
+                    <div class="inline-block px-1">
+                        <div class="lg:w-48 lg:h-48 w-24 h-24 max-w-xs overflow-hidden rounded-lg shadow-md bg-white hover:shadow-xl transition-shadow duration-300 ease-in-out">
+                            <img class="object-cover product-gallery product-active" :src="`https://dashboard.kahioja.com/assets/images/products/${productimage}`" :alt="`${ productname }`">
+                        </div>
+                    </div>
+                    <div :key="productphoto" v-for="productphoto in productgallery"> 
+                        <div class="inline-block px-1">
+                            <div class="lg:w-48 lg:h-48 w-24 h-24 max-w-xs overflow-hidden rounded-lg shadow-md bg-white hover:shadow-xl transition-shadow duration-300 ease-in-out">
+                                <img class="object-cover product-gallery product-active" :src="`https://dashboard.kahioja.com/assets/images/galleries/${productphoto.photo}`" :alt="`${ productname }`">
+                            </div>
+                        </div>   
                     </div>
                 </div>
             </div>
-            <!-- <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="16" cy="16" r="15" transform="rotate(-90 16 16)" stroke="#222222" stroke-width="2"/><path d="M14.657 19.586L10.707 15.636C10.5184 15.4538 10.2658 15.353 10.0036 15.3553C9.7414 15.3576 9.49058 15.4628 9.30518 15.6482C9.11977 15.8336 9.0146 16.0844 9.01232 16.3466C9.01004 16.6088 9.11084 16.8614 9.293 17.05L14.95 22.707C15.0426 22.8002 15.1528 22.8741 15.2741 22.9246C15.3955 22.9751 15.5256 23.001 15.657 23.001C15.7884 23.001 15.9185 22.9751 16.0398 22.9246C16.1612 22.8741 16.2713 22.8002 16.364 22.707L22.021 17.05C22.1165 16.9578 22.1927 16.8474 22.2451 16.7254C22.2975 16.6034 22.3251 16.4722 22.3262 16.3394C22.3274 16.2066 22.3021 16.0749 22.2518 15.952C22.2015 15.8291 22.1273 15.7175 22.0334 15.6236C21.9395 15.5297 21.8278 15.4555 21.7049 15.4052C21.5821 15.3549 21.4504 15.3296 21.3176 15.3307C21.1848 15.3319 21.0536 15.3595 20.9316 15.4119C20.8096 15.4643 20.6992 15.5405 20.607 15.636L16.657 19.586V10C16.657 9.73478 16.5516 9.48043 16.3641 9.29289C16.1766 9.10536 15.9222 9 15.657 9C15.3918 9 15.1374 9.10536 14.9499 9.29289C14.7624 9.48043 14.657 9.73478 14.657 10V19.586V19.586Z" fill="#222222"/></svg> -->
-            <svg id="slideRight" class="arrow" width="32" height="32" viewBox="0 0 32 33" fill="none" xmlns="http://www.w3.org/2000/svg"><circle r="15" transform="matrix(0 1 1 0 16 16.3263)" stroke="#222222" stroke-width="2"/><path d="M14.657 12.7403L10.707 16.6903C10.5184 16.8725 10.2658 16.9732 10.0036 16.971C9.74141 16.9687 9.4906 16.8635 9.30519 16.6781C9.11978 16.4927 9.01461 16.2419 9.01234 15.9797C9.01006 15.7175 9.11085 15.4649 9.29301 15.2763L14.95 9.61929C15.0427 9.52611 15.1528 9.45216 15.2742 9.4017C15.3955 9.35124 15.5256 9.32526 15.657 9.32526C15.7884 9.32526 15.9185 9.35124 16.0399 9.4017C16.1612 9.45216 16.2714 9.52611 16.364 9.61929L22.021 15.2763C22.1165 15.3685 22.1927 15.4789 22.2451 15.6009C22.2975 15.7229 22.3251 15.8541 22.3263 15.9869C22.3274 16.1197 22.3021 16.2514 22.2518 16.3742C22.2016 16.4971 22.1273 16.6088 22.0334 16.7027C21.9395 16.7966 21.8279 16.8708 21.705 16.9211C21.5821 16.9714 21.4504 16.9967 21.3176 16.9955C21.1848 16.9944 21.0536 16.9668 20.9316 16.9144C20.8096 16.862 20.6993 16.7858 20.607 16.6903L16.657 12.7403V22.3263C16.657 22.5915 16.5517 22.8459 16.3641 23.0334C16.1766 23.2209 15.9222 23.3263 15.657 23.3263C15.3918 23.3263 15.1374 23.2209 14.9499 23.0334C14.7624 22.8459 14.657 22.5915 14.657 22.3263V12.7403Z" fill="#222222"/></svg>
         </div>
         <!-- Product Image  -->
         <div class="md:col-span-2 w-full border rounded-xl shadow">
-            <img style="width:350px;" id="featured-product" class="w-4/5 mx-auto py-6" :src="`https://dashboard.kahioja.com/assets/images/products/${productimage}`" :alt="productname">
+            <img id="featured-product" class="w-3/5 mx-auto py-6 my-auto" :src="`https://dashboard.kahioja.com/assets/images/products/${productimage}`" :alt="productname">
         </div>
         <!-- Product Details  -->
         <div class="rounded-xl px-10 py-8 border md:col-span-2 shadow">
@@ -143,6 +146,7 @@
                 </div>
             </div>
         </div>
+
     </div>
     <div v-show="displaySignUpForm" id="cart" class="shadow">
         <div id="cart-content">

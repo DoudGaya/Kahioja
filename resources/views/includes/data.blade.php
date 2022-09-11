@@ -1,12 +1,12 @@
 <div class="grid lg:grid-cols-8 md:grid-cols-3 grid-cols-2 gap-3">
     @foreach($products as $product)
-    <div class="bg-white rounded-lg my-4 cursor-pointer yus-shadow">
+    <div class="bg-white rounded-lg lg:my-4 my-1 cursor-pointer yus-shadow">
         <a href="/item/{{$product->slug}}">
 
-            <img style="height:130px;" class="object-cover w-full" src="https://dashboard.kahioja.com/assets/images/products/{{$product->photo}}">
+            <img id="product_img" class="mx-auto" src="https://dashboard.kahioja.com/assets/images/products/{{$product->photo}}">
             <!-- Product Details  -->
-            <div class="py-3 px-4">
-                <h1 class="card-title w-full">{{ $product->name }}</h1>
+            <div class="lg:py-3 py-1 px-4">
+                <h1 class="text-sm w-full">{{ $product->name }}</h1>
                 <div class="flex justify-between items-center">
                     <div class="flex items-center">
                         <span class="card-curr-price"><b>₦{{ round((($product->price * 0.143) + $product->price), 2) }}</b></span>

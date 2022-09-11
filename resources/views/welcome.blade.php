@@ -41,7 +41,7 @@
                     <div class="inline px-3 lg:w-48 w-24 max-w-xs ">
                         <a href="{{ route('front.category', $category->slug) }}">
                             <div class="lg:cate-yus rounded-none">
-                                <img style="width:85px; height:85px;" class="mx-auto" src="https://dashboard.kahioja.com/assets/images/categories/{{$category->photo}}" alt="{{ $category->name }}">
+                                <img style="width:50px; height:50px;" class="mx-auto" src="https://dashboard.kahioja.com/assets/images/categories/{{$category->photo}}" alt="{{ $category->name }}">
                             </div>
                             <span class="popular-cate-title">{{ $category->name }}</span>
                         </a>
@@ -58,7 +58,7 @@
                 <div class="flex overflow-x-scroll pb-4 hide-scroll-bar">
                     <div class="flex flex-nowrap">
                         @foreach($fashion as $prod)
-                            <div class="inline lg:px-3 px-0 pr-2 md:w-64 w-48 max-w-xs">
+                            <div class="inline lg:px-1 px-0 pr-2 md:w-52 w-48 max-w-xs">
                                 @include('includes.productComponent')
                             </div>
                         @endforeach
@@ -67,12 +67,12 @@
             <!-- </div> -->
         </div>
         <!-- Groceries  -->
-        <div id="best-product" class="">
+        <div id="best-product" class="-mt-8">
             <h1 class="headings-yus">Groceries</h1>
             <div class="flex overflow-x-scroll pb-4 hide-scroll-bar">
                 <div class="flex flex-nowrap">
                     @foreach($groceries as $prod)
-                        <div class="inline lg:px-3 px-0 pr-2 md:w-64 w-48 max-w-xs ">
+                        <div class="inline lg:px-1 px-0 pr-2 md:w-52 w-48 max-w-xs">
                             @include('includes.productComponent')
                         </div>
                     @endforeach
@@ -80,12 +80,12 @@
             </div>
         </div>
         <!-- Drinks Product  -->
-        <div id="best-product" class="">
+        <div id="best-product" class="lg:-mt-5 -mt-8">
             <h1 class="headings-yus">Drinks & Beverages</h1>
             <div class="flex overflow-x-scroll pb-4 hide-scroll-bar">
                 <div class="flex flex-nowrap">
                     @foreach($drinks as $prod)
-                        <div class="inline lg:px-3 px-0 pr-2 md:w-64 w-48 max-w-xs ">
+                        <div class="inline lg:px-1 px-0 pr-2 md:w-52 w-48 max-w-xs">
                             @include('includes.productComponent')
                         </div>
                     @endforeach
@@ -93,12 +93,12 @@
             </div>
         </div>
         <!-- Toiletries Product  -->
-        <div id="best-product" class="">
+        <div id="best-product" class="-mt-8">
             <h1 class="headings-yus">Toiletries</h1>
             <div class="flex overflow-x-scroll pb-4 hide-scroll-bar">
                 <div class="flex flex-nowrap">
                     @foreach($toiletries as $prod)
-                        <div class="inline lg:px-3 px-0 pr-2 md:w-64 w-48 max-w-xs ">
+                        <div class="inline lg:px-1 px-0 pr-2 md:w-52 w-48 max-w-xs">
                             @include('includes.productComponent')
                         </div>
                     @endforeach
@@ -106,7 +106,7 @@
             </div>
         </div>
         <!-- Infinite Scroll -->
-        <div class="">
+        <div class="-mt-8">
             <div id="post-data">
                 @include('includes.data')
             </div>

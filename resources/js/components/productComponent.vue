@@ -2,11 +2,11 @@
     <div class="bg-white rounded-lg my-4 cursor-pointer yus-shadow">
         <a :href="productlink">
 
-            <img style="height:130px;" class="object-cover w-full" :src="`https://dashboard.kahioja.com/assets/images/products/${productimage}`">
+            <img id="product_img" class="mx-auto" :src="`https://dashboard.kahioja.com/assets/images/products/${productimage}`">
             <!-- Product Details  -->
             <div class="py-3 px-4">
                 <h1 style="display:none;">{{ productid }}</h1>
-                <h1 class="card-title w-full">{{ productname }}</h1>
+                <h1 class="w-full text-sm">{{ productname }}</h1>
                 <div class="flex justify-between items-center">
                     <div class="flex items-center">
                         <span class="card-curr-price"><b>₦{{ productcurrprice }}</b></span>
@@ -31,7 +31,7 @@
         </a>
 
         <div v-if="(productstock > 0) || (productstock == null)" class="mb-4 pb-4">
-            <button @click="addToBag()" class="focus:outline-0 mx-auto btn-yus rounded-full lg:w-2/3 w-2/3 flex flex-row justify-center items-center md:p-2 text-white">
+            <button @click="addToBag()" class="focus:outline-0 mx-auto btn-yus rounded-full flex flex-row justify-center items-center md:p-2 text-white">
                 <div class="card-bag-label">
                     Add to Bag 
                 </div>

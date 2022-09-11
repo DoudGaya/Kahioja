@@ -258,8 +258,7 @@ img {vertical-align: middle;}
 
 .card-bag-label{
     font-style: normal;
-    font-weight: bold;
-    font-size: 80%;
+    font-size: 12px;
     display: flex;
     align-items: center;
     text-align: center;
@@ -294,6 +293,11 @@ img {vertical-align: middle;}
     font-size: 20px;
     line-height: 26px;
     color: #000000;
+}
+
+#product_img{
+    width: 100px;
+    height: 100px;
 }
 
 #cart, #login{
@@ -689,7 +693,7 @@ img {vertical-align: middle;}
     }
 
     .card-bag-label{
-        font-size: 10px;
+        font-size: 8px;
     }
 
     #bag-icon{
@@ -715,6 +719,11 @@ img {vertical-align: middle;}
         margin-top: 28%;
     }
 
+    #product_img{
+        width: 65px;
+        height: 65px;
+    }
+
     #cate-content{
         position: relative;
         top: 100px;
@@ -726,7 +735,7 @@ img {vertical-align: middle;}
     }
 
     .card-bag-label{
-        font-size: 10px;
+        font-size: 8px;
     }
 
     #bag-icon{
@@ -762,8 +771,8 @@ img {vertical-align: middle;}
     }
 
     .card-bag-label{
-        font-size: 14px;
-        line-height: 16px;
+        font-size: 8px;
+        /* line-height: 16px; */
         margin: 0px 8px;
     }
 
@@ -773,7 +782,7 @@ img {vertical-align: middle;}
     }
 
     .btn-yus, #cart-checkout, .btn-yus-conti-shopping{
-        height: 52px;
+        height: 32px;
         font-size: 12px;
     }
 
@@ -972,7 +981,7 @@ img {vertical-align: middle;}
     }
 
     .card-bag-label{
-        font-size: 10px;
+        font-size: 8px;
     }
 
     #bag-icon{

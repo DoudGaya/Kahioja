@@ -50,7 +50,7 @@
                             </div>
                             <div class="flex justify-between py-1">
                                 <b><span>Total Amount</span></b>
-                                <span>N{{ order.amount }}</span>
+                                <span>N{{ ((order.amount * 0.143) + order.amount).toFixed(2) }}</span>
                             </div>
                             <div v-show="order.active" v-if="(order.paid == 'paid')">
                                 <div class="flex justify-between py-1" v-if="(order.order_status == 'pending' || order.order_status == 'processing' || order.order_status == 'completed')">
