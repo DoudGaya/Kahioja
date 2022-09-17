@@ -26186,13 +26186,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }),
     id: "account-settings-content",
     "class": "w-1/6 fixed md:top-24 lg:top-16 bg-white text-black shadow-md"
-  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Vendor Panel  "), $options.getUser.is_vendor > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_2, _hoisted_4)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Vendor Panel  "), $options.getUser.is_vendor >= 1 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_2, _hoisted_4)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $options.getUser.is_vendor == 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
     key: 1,
     onClick: _cache[0] || (_cache[0] = function ($event) {
       return $options.openSubscription();
     }),
     "class": "flex border-b p-3 items-center cursor-pointer hover:bg-gray-100 justify-center"
-  }, _hoisted_6)), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" My Orders  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  }, _hoisted_6)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" My Orders  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     onClick: _cache[1] || (_cache[1] = function ($event) {
       return $options.openMyOrders();
     }),
