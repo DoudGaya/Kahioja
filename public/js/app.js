@@ -27814,7 +27814,7 @@ var _hoisted_5 = {
   }
 };
 var _hoisted_6 = {
-  "class": "w-full text-sm"
+  "class": "w-full text-sm card-title"
 };
 var _hoisted_7 = {
   "class": "flex justify-between items-center"
@@ -27875,7 +27875,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     href: $props.productlink
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
     id: "product_img",
-    "class": "mx-auto",
+    "class": "w-full object-cover",
     src: "https://dashboard.kahioja.com/assets/images/products/".concat($props.productimage)
   }, null, 8
   /* PROPS */

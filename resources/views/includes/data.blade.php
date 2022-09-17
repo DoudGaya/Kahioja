@@ -3,10 +3,10 @@
     <div class="bg-white rounded-lg lg:my-4 my-1 cursor-pointer yus-shadow">
         <a href="/item/{{$product->slug}}">
 
-            <img id="product_img" class="mx-auto" src="https://dashboard.kahioja.com/assets/images/products/{{$product->photo}}">
+            <img id="product_img" class="w-full object-cover" src="https://dashboard.kahioja.com/assets/images/products/{{$product->photo}}">
             <!-- Product Details  -->
             <div class="lg:py-3 py-1 px-4">
-                <h1 class="text-sm w-full">{{ $product->name }}</h1>
+                <h1 class="text-sm w-full card-title">{{ $product->name }}</h1>
                 <div class="flex justify-between items-center">
                     <div class="flex items-center">
                         <span class="card-curr-price"><b>₦{{ round((($product->price * 0.143) + $product->price), 2) }}</b></span>

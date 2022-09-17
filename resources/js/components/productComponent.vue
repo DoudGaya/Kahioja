@@ -2,11 +2,11 @@
     <div class="bg-white rounded-lg my-4 cursor-pointer yus-shadow">
         <a :href="productlink">
 
-            <img id="product_img" class="mx-auto" :src="`https://dashboard.kahioja.com/assets/images/products/${productimage}`">
+            <img id="product_img" class="w-full object-cover" :src="`https://dashboard.kahioja.com/assets/images/products/${productimage}`">
             <!-- Product Details  -->
             <div class="py-3 px-4">
                 <h1 style="display:none;">{{ productid }}</h1>
-                <h1 class="w-full text-sm">{{ productname }}</h1>
+                <h1 class="w-full text-sm card-title">{{ productname }}</h1>
                 <div class="flex justify-between items-center">
                     <div class="flex items-center">
                         <span class="card-curr-price"><b>₦{{ productcurrprice }}</b></span>
