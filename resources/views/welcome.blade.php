@@ -38,10 +38,10 @@
         <div class="flex overflow-x-scroll pb-4 hide-scroll-bar">
             <div class="flex flex-nowrap">
                 @foreach($categories as $category)
-                    <div class="inline px-3 lg:w-48 w-24 max-w-xs ">
+                    <div class="inline px-3 lg:w-40 w-24 max-w-xs">
                         <a href="{{ route('front.category', $category->slug) }}">
                             <div class="lg:cate-yus rounded-none">
-                                <img style="width:50px; height:50px;" class="mx-auto" src="https://dashboard.kahioja.com/assets/images/categories/{{$category->photo}}" alt="{{ $category->name }}">
+                                <img style="height:75px;" class="mx-auto rounded-full object-cover" src="https://dashboard.kahioja.com/assets/images/categories/{{$category->photo}}" alt="{{ $category->name }}">
                             </div>
                             <span class="popular-cate-title">{{ $category->name }}</span>
                         </a>
