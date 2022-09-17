@@ -185,12 +185,12 @@
                 </div>
                 <div  v-if="(getUser != '')" v-show="displayDrawerAccount" id="drawer-content-category" class="bg-gray-200 text-black px-2">
                     <!-- Vendor Panel  -->
-                    <div v-if="getUser.is_vendor == 2" class="border-b border-black p-3 hover:bg-white items-center flex justify-between">
+                    <div v-if="getUser.is_vendor >= 1" class="border-b border-black p-3 hover:bg-white items-center flex justify-between">
                         <a target="_blank" href="https://dashboard.kahioja.com/user/login/">
                             <span><li class="text-sm list-none">Vendor Panel</li></span>
                         </a>
                     </div>
-                    <div @click="openSubscription()" v-else class="border-b border-black p-3 hover:bg-white items-center flex justify-between">
+                    <div v-if="getUser.is_vendor == 0" @click="openSubscription()" class="border-b border-black p-3 hover:bg-white items-center flex justify-between">
                         <span><li class="text-sm list-none">Start Selling</li></span>
                     </div>
                     <!-- My Orders  -->
