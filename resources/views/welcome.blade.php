@@ -51,6 +51,7 @@
         </div>
     </div>
     <div class="relative lg:-top-16 lg:px-14 px-1 py-8">
+        @if(count($fashion) > 0)
         <!-- Fashion & Accessories Product  -->
         <div id="best-product" class="mt-5">
             <h1 class="headings-yus">Fashion & Accessories</h1>
@@ -66,7 +67,9 @@
                 </div>
             <!-- </div> -->
         </div>
+        @endif
         <!-- Groceries  -->
+        @if(count($groceries) > 0)
         <div id="best-product" class="-mt-8">
             <h1 class="headings-yus">Groceries</h1>
             <div class="flex overflow-x-scroll pb-4 hide-scroll-bar">
@@ -79,6 +82,8 @@
                 </div>
             </div>
         </div>
+        @endif
+        @if(count($drinks) > 0)
         <!-- Drinks Product  -->
         <div id="best-product" class="lg:-mt-5 -mt-8">
             <h1 class="headings-yus">Drinks & Beverages</h1>
@@ -92,6 +97,8 @@
                 </div>
             </div>
         </div>
+        @endif
+        @if(count($toiletries) > 0)
         <!-- Toiletries Product  -->
         <div id="best-product" class="-mt-8">
             <h1 class="headings-yus">Toiletries</h1>
@@ -105,6 +112,7 @@
                 </div>
             </div>
         </div>
+        @endif
         <!-- Infinite Scroll -->
         <div class="-mt-8">
             <div id="post-data">
