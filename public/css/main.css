@@ -297,7 +297,7 @@ img {vertical-align: middle;}
 
 #product_img{
     /* width: 100px; */
-    height: 150px;
+    height: 200px;
 }
 
 #cart, #login{
@@ -721,7 +721,7 @@ img {vertical-align: middle;}
 
     #product_img{
         /* width: 65px; */
-        height: 75px;
+        height: 175px;
     }
 
     #cate-content{
