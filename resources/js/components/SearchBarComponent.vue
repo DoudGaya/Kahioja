@@ -19,8 +19,8 @@
                                 </div>
                                 <div class="flex-col ml-3">
                                     <div><b>{{ product.name }}</b></div>
-                                    <div><b>Price</b>: ₦{{ ((product.price * 0.143) + product.price).toFixed(2) }}</div>
-                                    <div><b>Delivery Fee</b>: {{ (product.ship_fee != null) ? `₦${((product.ship_fee * 0.075) + product.ship_fee).toFixed(2)}`: ' Free Delivery' }}</div>
+                                    <div><b>Price</b>: ₦{{ parseFloat(((product.price * 0.143) + product.price)).toLocaleString() }}</div>
+                                    <div><b>Delivery Fee</b>: {{ (product.ship_fee != null) ? `₦${parseFloat(((product.ship_fee * 0.075) + product.ship_fee)).toLocaleString()}`: ' Free Delivery' }}</div>
                                 </div>
                             </div>
                         </div>

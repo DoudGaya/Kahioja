@@ -17,7 +17,7 @@
                         </div>
                         &nbsp;
                         @if($product->ship_fee != 0 || $product->ship_fee != '')
-                            <div>{{ ($product->showShippingFee()) }}</div>
+                            <div>{{ number_format((($product->ship_fee * 0.075) + $product->ship_fee), 2, '.', ',') }}</div>
                         @else
                             <div>Free Delivery</div>
                         @endif

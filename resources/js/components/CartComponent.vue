@@ -39,7 +39,7 @@
                                 </div>
                                 <div>
                                     <div id="cart-body-product-price">
-                                        N{{ ((product.subTotal * 0.143) + product.subTotal).toFixed(2) }}
+                                        N{{ parseFloat(((product.subTotal * 0.143) + product.subTotal)).toLocaleString() }}
                                     </div>
                                     <div class="hidden md:block">
                                         <div id="cart-body-product-add" class="flex justify-between w-3/4 rounded-full mt-11">
@@ -76,9 +76,9 @@
                     <div v-if="cartNo > 0" id="cart-total" class="px-4 md:px-16 py-5 my-5">
                         <div class="grid grid-cols-2 gap-6 py-1 w-full font-bold">
                             <div>Subtotal <span class="font-normal">(all products)</span></div>
-                            <div class="text-right">N{{ subTotal }}</div>
+                            <div class="text-right">N{{ parseFloat(subTotal).toLocaleString() }}</div>
                             <div>Delivery Fee</div>
-                            <div class="text-right">N{{ deliveryFee }}</div>
+                            <div class="text-right">N{{ parseFloat(deliveryFee).toLocaleString() }}</div>
                             <div>Estimated Total</div>
                             <div class="text-right">N{{ estimatedTotal }}</div>
                         </div>
@@ -318,13 +318,13 @@ export default {
             return this.$store.getters.addCart
         },
         subTotal(){
-            return ((this.$store.getters.subTotal * 0.143) + this.$store.getters.subTotal).toFixed(2) 
+            return ((this.$store.getters.subTotal * 0.143) + this.$store.getters.subTotal) 
         },
         deliveryFee(){
-            return ((this.$store.getters.deliveryFee * 0.075) + this.$store.getters.deliveryFee).toFixed(2)   
+            return ((this.$store.getters.deliveryFee * 0.075) + this.$store.getters.deliveryFee)   
         },
         estimatedTotal(){
-            return ((+this.subTotal) + (+this.deliveryFee)).toFixed(2)
+            return parseFloat(((this.subTotal) + (this.deliveryFee))).toLocaleString()
         }
     },
     methods:{

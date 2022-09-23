@@ -15,11 +15,12 @@
             <meta name="description" content="{{ $blog->meta_description }}">
             <title>{{$gs->title}}</title>
         @elseif(isset($productt))
+            <link rel="icon" type="image/x-icon" href="https://dashboard.kahioja.com/assets/images/products/'.$productt->photo.'"/>
             <meta name="keywords" content="{{ !empty($productt->meta_tag) ? implode(',', $productt->meta_tag ): '' }}">
             <meta name="description" content="{{ $productt->meta_description != null ? $productt->meta_description : strip_tags($productt->description) }}">
             <meta property="og:title" content="{{$productt->name}}" />
             <meta property="og:description" content="{{ $productt->meta_description != null ? $productt->meta_description : strip_tags($productt->description) }}" />
-            <meta property="og:image" content="{{asset('assets/images/products/'.$productt->photo)}}" />
+            <meta property="og:image" content="https://dashboard.kahioja.com/assets/images/products/'.$productt->photo.'" />
             <meta name="author" content="Kahioja Store">
             <title>{{substr($productt->name, 0,11)."-"}}{{$gs->title}}</title>
         @else
@@ -31,7 +32,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Fonts -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-	    <link rel="icon"  type="image/x-icon" href="{{ asset('images/favicon.ico')}}"/>
+	    <link rel="icon" type="image/x-icon" href="{{ asset('images/favicon.ico')}}"/>
         <link href="{{ asset('css/main.css') }}" rel="stylesheet">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js" integrity="sha512-n/4gHW3atM3QqRcbCn6ewmpxcLAHGaDjpEBu4xZd47N0W2oQ+6q7oc3PXstrJYXcbNU1OHdQ1T7pAP+gi5Yu8g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>    
         <!-- CSS -->

@@ -33,7 +33,7 @@
                 :productstock="{{ json_encode($productt->stock) }}" 
                 :deliverytime="{{ json_encode($productt->ship) }}" 
                 :store="{{ json_encode($store) }}" 
-                :productdeliveryfee="{{ json_encode($productt->showShippingFee()) }}" 
+                :productdeliveryfee="{{ round((json_encode($productt->ship_fee) * 0.075) + json_encode($productt->ship_fee), 2) }}" 
             ></product-details-component>    
         </div>
 

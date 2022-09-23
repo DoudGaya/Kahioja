@@ -5,6 +5,6 @@
     :productname="{{ json_encode($prod->name) }}" 
     :productcurrprice="{{ round((json_encode($prod->price) * 0.143) + json_encode($prod->price), 2)  }}" 
     :productstock="{{ json_encode($prod->stock) }}" 
-    :productdeliveryfee="{{ json_encode($prod->showShippingFee()) }}" 
+    :productdeliveryfee="{{ json_encode($prod->ship_fee) }}" 
 >
 </product-component>

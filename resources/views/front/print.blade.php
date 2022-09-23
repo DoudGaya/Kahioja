@@ -55,7 +55,7 @@
                 </div>
                 <div class="flex justify-between w-3/4 my-2">
                     <div>Amount Paid</div>
-                    <div class="text-right">N{{ $orderDetails->pay_amount }}</div>
+                    <div class="text-right">N{{ number_format($orderDetails->pay_amount, 2, '.', ',') }}</div>
                 </div>
                 <div class="flex justify-between w-3/4 my-2">
                     <div>Payment Method</div>
@@ -130,7 +130,7 @@
                         </div>
                         <div class="grid grid-cols-3 gap-2">
                             <b><span class="col-span-1">Total Amount</span></b>
-                            <span class="col-span-2">N{{ $order->amount }}</span>
+                            <span class="col-span-2">N{{ number_format($order->amount, 2, '.', ',') }}</span>
                         </div>
                         <div class="grid grid-cols-3 gap-2">
                             <b><span class="col-span-1">Delivery Status</span></b>
