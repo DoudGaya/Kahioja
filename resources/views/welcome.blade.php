@@ -41,9 +41,9 @@
                     <div class="inline px-3 lg:w-40 w-24 max-w-xs">
                         <a href="{{ route('front.category', $category->slug) }}">
                             <div class="lg:cate-yus rounded-none">
-                                <img style="height:75px;" class="mx-auto rounded-full object-cover" src="https://dashboard.kahioja.com/assets/images/categories/{{$category->photo}}" alt="{{ $category->name }}">
+                                <img style="height:50px;" class="mx-auto rounded-full object-cover" src="https://dashboard.kahioja.com/assets/images/categories/{{$category->photo}}" alt="{{ $category->name }}">
                             </div>
-                            <span class="popular-cate-title">{{ $category->name }}</span>
+                            <span class="popular-cate-title">{{ (strlen($category->name) <= 10) ? $category->name : substr($category->name, 0,16)."..." }}</span>
                         </a>
                     </div>
                 @endforeach

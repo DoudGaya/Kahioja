@@ -1,4 +1,4 @@
-<div class="grid lg:grid-cols-8 md:grid-cols-4 grid-cols-2 gap-2">
+<div class="grid grid-cols-2 lg:grid-cols-4 md:grid-cols-4 gap-3">
     @foreach($products as $product)
     <div class="bg-white rounded-lg lg:my-4 my-1 cursor-pointer yus-shadow">
         <a href="/item/{{$product->slug}}">
