@@ -81,7 +81,8 @@
                     <div class="cursor-pointer">
                         <button @click="minusProduct()"> - </button>
                     </div>
-                    <input class="w-1/3 text-center bg-white" :value="quantity" disabled>
+                    <input v-if="productquantityinbag != null" class="w-1/3 text-center bg-white" :value="productquantityinbag" disabled>
+                    <input v-else class="w-1/3 text-center bg-white" :value="quantity" disabled>
                     <div class="cursor-pointer">
                         <button @click="addProduct()">+</button>
                     </div>
@@ -295,7 +296,8 @@ export default {
         'productstock',
         'deliverytime',
         'productdeliveryfee',
-        'store'
+        'store',
+        'productquantityinbag'
     ],
     computed: {
         getUser(){

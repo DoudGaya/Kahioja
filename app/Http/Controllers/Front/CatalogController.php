@@ -10,6 +10,7 @@ use App\Models\Generalsetting;
 use App\Models\Currency;
 use App\Models\Order;
 use App\Models\User;
+use App\Models\Bag;
 use App\Models\Product;
 use App\Models\ProductClick;
 use App\Models\Rating;
@@ -156,17 +157,32 @@ class CatalogController extends Controller
 
     public function product($slug)
     {
-        // $this->code_image();
+        //get User
+        if(Auth::user()){
+            $user_id = Auth::user()->id;
+            $user_type = 'user';
+        }else if(Session::has('guest')){
+            $user_id = Session::get('guest');
+            $user_type = 'guest';
+        }else{
+            $user_id = 'guest_'.Str::random(5).time();
+            $user_type = 'guest';
+            Session::put('guest', $user_id);
+        }
+
         $gs = Generalsetting::findOrFail(1);
         $productt = Product::where('slug','=',$slug)->firstOrFail();
         $vendor_id = Product::where('slug', $slug)->pluck('user_id')->first();
         $store = User::where('id', $productt->user_id)->pluck('shop_name')->first();
+        $product_id = $productt->id;
+        $product_quantity_in_bag = Bag::select('quantity')->where('product_id', $product_id)->where('user_id', $user_id)->where('paid', 'unpaid')->pluck('quantity')->first();
         
         $shareproduct = \Share::page('https://kahioja.com/item/'.$productt->slug)->facebook()->twitter()->linkedin()->telegram()->whatsapp() ;
 
         if($productt->status == 0){
           return response()->view('errors.404')->setStatusCode(404); 
         }
+
         $productt->views+=1;
         $productt->update();
         if (Session::has('currency'))
@@ -192,7 +208,7 @@ class CatalogController extends Controller
             $vendors = Product::where('status','=',1)->where('user_id','=',0)->take(8)->get();
         }
         
-        return view('front.product',compact('productt','curr','vendors','gs','store'))->with('shareproduct', $shareproduct);
+        return view('front.product',compact('productt','curr','vendors','gs','store', 'product_quantity_in_bag'))->with('shareproduct', $shareproduct);
 
     }
 

@@ -34,6 +34,7 @@
                 :deliverytime="{{ json_encode($productt->ship) }}" 
                 :store="{{ json_encode($store) }}" 
                 :productdeliveryfee="{{ round((json_encode($productt->ship_fee) * 0.075) + json_encode($productt->ship_fee), 2) }}" 
+                :productquantityinbag="{{ json_encode($product_quantity_in_bag) }}" 
             ></product-details-component>    
         </div>
 
