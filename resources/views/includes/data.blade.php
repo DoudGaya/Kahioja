@@ -19,7 +19,7 @@
                         @if($product->ship_fee != 0 || $product->ship_fee != null)
                             <div>₦{{ number_format((($product->ship_fee * 0.075) + $product->ship_fee), 2, '.', ',') }}</div>
                         @else
-                            <div>Free</div>
+                            <div>Free Delivery</div>
                         @endif
                     </div>
                 </div>

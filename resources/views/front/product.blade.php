@@ -2,7 +2,7 @@
 
 @section('main')
     <!-- Banner -->
-    <div class="relative md:-mt-10 lg:mt-28 -mt-32 lg:px-14 py-5 text-center top-12 md:px-14 px-4">
+    <div class="relative md:-mt-10 lg:mt-28 -mt-24 lg:px-14 py-5 text-center top-12 md:px-14 px-4">
         <!-- Nav  -->
         <div id="product-details-nav" class="mt-40 md:mt-32 lg:mt-0">
             <ul class="flex text-xs">
@@ -33,7 +33,7 @@
                 :productstock="{{ json_encode($productt->stock) }}" 
                 :deliverytime="{{ json_encode($productt->ship) }}" 
                 :store="{{ json_encode($store) }}" 
-                :productdeliveryfee="{{ round((json_encode($productt->ship_fee) * 0.075) + json_encode($productt->ship_fee), 2) }}" 
+                :productdeliveryfee="{{ ($productt->ship_fee != null) ? round((json_encode($productt->ship_fee) * 0.075) + json_encode($productt->ship_fee), 2) : $productt->ship_fee }}" 
                 :productquantityinbag="{{ json_encode($product_quantity_in_bag) }}" 
             ></product-details-component>    
         </div>
