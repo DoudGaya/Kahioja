@@ -23,7 +23,7 @@
                         @endif
                     </div>
                 </div>
-                @if($product->stock <= 0 || $product->stock != null)
+                @if($product->stock <= 0 || $product->stock == null)
                     <div class="px-4 w-full flex justify-center">
                         <h1 class="text-red-700">Out of Stock</h1>
                     </div>
