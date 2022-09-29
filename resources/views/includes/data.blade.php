@@ -3,7 +3,7 @@
     <div class="bg-white rounded-lg lg:my-4 my-1 cursor-pointer yus-shadow">
         <a href="/item/{{$product->slug}}">
 
-            <img id="product_img" class="w-full object-cover" src="https://dashboard.kahioja.com/assets/images/products/{{$product->photo}}">
+            <img id="product_img" class="mx-auto" src="https://dashboard.kahioja.com/assets/images/products/{{$product->photo}}">
             <!-- Product Details  -->
             <div class="lg:py-3 py-1 px-4">
                 <h1 class="text-sm w-full card-title">{{ (strlen($product->name) < 16) ? $product->name : substr($product->name, 0,16)."..." }}</h1>
