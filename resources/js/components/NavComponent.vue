@@ -118,11 +118,11 @@
                                 </div>
                                 <div class="grid grid-cols-3 gap-2">
                                     <span class="col-span-1">Price:</span>
-                                    <span class="col-span-2">₦{{ parseFlaot(((product.price * 0.143) + product.price)).toLocaleString() }}</span>
+                                    <span class="col-span-2">₦{{ parseFloat(((product.price * 0.143) + product.price)).toLocaleString() }}</span>
                                 </div>
                                 <div class="grid grid-cols-3 gap-2">
                                     <span class="col-span-1">Delivery Fee:</span>
-                                    <span class="col-span-2">₦{{ parseFlaot(((product.ship_fee * 0.075) + product.ship_fee)).toLocaleString() }}</span>
+                                    <span class="col-span-2">₦{{ parseFloat(((product.ship_fee * 0.075) + product.ship_fee)).toLocaleString() }}</span>
                                 </div>
                             </div>
                         </div>
