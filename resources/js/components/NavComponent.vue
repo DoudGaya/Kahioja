@@ -186,7 +186,7 @@
                 <div  v-if="(getUser != '')" v-show="displayDrawerAccount" id="drawer-content-category" class="bg-gray-200 text-black px-2">
                     <!-- Vendor Panel  -->
                     <div v-if="getUser.is_vendor >= 1" class="border-b border-black p-3 hover:bg-white items-center flex justify-between">
-                        <a target="_blank" href="https://dashboard.kahioja.com/user/login/">
+                        <a target="_blank" href="https://dashboard.kahioja.com/vendor/login/">
                             <span><li class="text-sm list-none">Vendor Panel</li></span>
                         </a>
                     </div>

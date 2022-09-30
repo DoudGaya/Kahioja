@@ -24878,7 +24878,7 @@ var _hoisted_74 = {
 
 var _hoisted_75 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
   target: "_blank",
-  href: "https://dashboard.kahioja.com/user/login/"
+  href: "https://dashboard.kahioja.com/vendor/login/"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", {
   "class": "text-sm list-none"
 }, "Vendor Panel")])], -1
