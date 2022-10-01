@@ -27872,7 +27872,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     href: $props.productlink
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
     id: "product_img",
-    "class": "w-full object-cover",
+    "class": "mx-auto",
     src: "https://dashboard.kahioja.com/assets/images/products/".concat($props.productimage)
   }, null, 8
   /* PROPS */
