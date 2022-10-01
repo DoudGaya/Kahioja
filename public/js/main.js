@@ -61,7 +61,6 @@ const buttonRightGallery = document.getElementById('slideRightGallery');
 const buttonLeftGallery = document.getElementById('slideLeftGallery');
 
   buttonRightGallery.onclick = function () {
-    alert()
     document.getElementById('gallery').scrollLeft -= 150;
   };
 
