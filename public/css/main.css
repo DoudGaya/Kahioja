@@ -724,6 +724,14 @@ img {vertical-align: middle;}
         height: 175px;
     }
 
+    .card-curr-price{
+        font-size: 10px;
+    }
+    
+    .card-prev-price{
+        font-size: 12px;
+    }
+
     #cate-content{
         position: relative;
         top: 100px;
