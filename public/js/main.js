@@ -1,12 +1,3 @@
-//Product Gallery
-let  productGallery = document.getElementsByClassName('product-gallery')
-
-for(var i=0; i < productGallery.length; i++){
-  productGallery[i].addEventListener('click', function(){
-    document.getElementById('featured-product').src = this.src
-  })
-}
-
 // Horizontal Scroll
 // a) Fashion  
 const buttonRightFash = document.getElementById('slideRightFash');
