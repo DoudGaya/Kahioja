@@ -112,10 +112,11 @@ class FrontendController extends Controller
 	{
         $gs = Generalsetting::findOrFail(1);
         $ps = DB::table('pagesettings')->find(1);
-        $fashion =  Product::where('category_id','=',20)->where('status','=',1)->orderBy('id','desc')->take(8)->get();
-        $groceries =  Product::where('category_id','=',21)->where('status','=',1)->orderBy('id','desc')->take(8)->get();
-        $toiletries =  Product::where('category_id','=',22)->where('status','=',1)->orderBy('id','desc')->take(8)->get();
-        $drinks =  Product::where('category_id','=',23)->where('status','=',1)->orderBy('id','desc')->take(8)->get();
+        $fashion =  Product::where('category_id','=',20)->where('status','=',1)->orderBy('id','desc')->take(16)->get();
+        $groceries =  Product::where('category_id','=',21)->where('status','=',1)->orderBy('id','desc')->take(16)->get();
+        $perfumes =  Product::where('category_id','=',91)->where('status','=',1)->orderBy('id','desc')->take(16)->get();
+        $toiletries =  Product::where('category_id','=',22)->where('status','=',1)->orderBy('id','desc')->take(16)->get();
+        $drinks =  Product::where('category_id','=',23)->where('status','=',1)->orderBy('id','desc')->take(16)->get();
         $categories = Category::select('name', 'photo', 'slug')->where('status', 1)->orderBy('id', 'desc')->get();
 
         
@@ -126,7 +127,7 @@ class FrontendController extends Controller
             return response()->json(['html'=>$view]);
         }
         // dd($products);
-        return view('welcome',compact('ps','gs','categories', 'fashion', 'groceries', 'toiletries', 'drinks', 'products'));
+        return view('welcome',compact('ps','gs','categories', 'fashion', 'groceries', 'toiletries', 'drinks', 'products', 'perfumes'));
 	}
 
     public function pagenotfound()

@@ -1,4 +1,16 @@
 // Horizontal Scroll
+// a) Perfumes  
+const buttonRightPerfumes = document.getElementById('slideRightPerfumes');
+const buttonLeftPerfumes = document.getElementById('slideLeftPerfumes');
+
+  buttonRightPerfumes.onclick = function () {
+    document.getElementById('perfumes').scrollLeft -= 150;
+  };
+
+  buttonLeftPerfumes.onclick = function () {
+    document.getElementById('perfumes').scrollLeft += 150;
+  };
+
 // a) Fashion  
 const buttonRightFash = document.getElementById('slideRightFash');
 const buttonLeftFash = document.getElementById('slideLeftFash');
