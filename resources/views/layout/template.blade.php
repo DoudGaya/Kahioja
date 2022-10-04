@@ -7,14 +7,11 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         @if(isset($productt))
-            <link rel="icon" href="https://dashboard.kahioja.com/assets/images/products/{{$productt->photo}}"/>
-            <meta name="keywords" content="{{ !empty($productt->meta_tag) ? implode(',', $productt->meta_tag ): '' }}">
-            <meta name="description" content="{{ $productt->details != null ? $productt->details : strip_tags($productt->details) }}">
-            <meta property="og:title" content="{{$productt->name}}" />
-            <meta property="og:description" content="{{ $productt->details != null ? $productt->details : strip_tags($productt->details) }}" />
-            <meta property="og:image" content="https://dashboard.kahioja.com/assets/images/products/{{$productt->photo}}" />
-            <meta name="author" content="Kahioja Store">
-            <title>{{substr($productt->name, 0,11)."-"}}{{$gs->title}}</title>
+            @include('meta::manager', [
+                'title'         => substr($productt->name, 0,11)."-" .$gs->title,
+                'description'   => $productt->details,
+                'image'         => 'https://dashboard.kahioja.com/assets/images/products/'.$productt->photo,
+            ])
         @else
             <meta name="keywords" content="Kahioja">
             <meta name="author" content="Kahioja Store">
@@ -23,7 +20,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Fonts -->
-	    <!-- <link rel="icon" type="image/x-icon" href="{{ asset('images/favicon.ico')}}"/> -->
+	    <link rel="icon" type="image/x-icon" href="{{ asset('images/favicon.ico')}}"/>
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <link href="{{ asset('css/main.css') }}" rel="stylesheet">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js" integrity="sha512-n/4gHW3atM3QqRcbCn6ewmpxcLAHGaDjpEBu4xZd47N0W2oQ+6q7oc3PXstrJYXcbNU1OHdQ1T7pAP+gi5Yu8g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>    
