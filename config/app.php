@@ -163,7 +163,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Unicodeveloper\Paystack\PaystackServiceProvider::class,
         Jorenvh\Share\Providers\ShareServiceProvider::class,
-        Davmixcool\MetaManager\MetaServiceProvider::class,
+        // Davmixcool\MetaManager\MetaServiceProvider::class,
 
         /*
          * Package Service Providers...

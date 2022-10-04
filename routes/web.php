@@ -28,6 +28,17 @@ use App\Http\Controllers\User\OrderController;
 
 // ************************************ FRONT SECTION **********************************************
 
+Route::get('/clear', function() {
+
+    Artisan::call('cache:clear');
+    Artisan::call('config:clear');
+    Artisan::call('config:cache');
+    Artisan::call('view:clear');
+ 
+    return "Cleared!";
+ 
+ });
+
 Route::get('/', [FrontendController::class, 'index'])->name('front.index');
 Route::get('/printproduct', [FrontendController::class, 'printproduct'])->name('front.index');
 Route::get('/404', [FrontendController::class, 'pagenotfound']);

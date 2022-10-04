@@ -1,5 +1,13 @@
 @extends('layout.template')
 
+@section('meta_description')
+        {{ $productt->details }}
+@endsection
+
+@section('meta_kewords')
+         {{ $productt->meta_tag }}
+@endsection
+
 @section('main')
     <!-- Banner -->
     <div class="relative md:-mt-10 lg:mt-28 -mt-24 lg:px-14 py-5 text-center top-12 md:px-14 px-4">
