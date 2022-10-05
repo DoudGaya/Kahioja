@@ -44,7 +44,7 @@
         </div>
         
         <script src="{{ asset('/js/sandbox.js') }}"></script>
-        <script src="{{ asset('/js/app.js') }}"></script>
+        <script src="{{ mix('/js/app.js') }}"></script>
         @if(!(isset($productt)))
             <script src="{{ asset('/js/main.js') }}"></script>
         @else
