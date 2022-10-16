@@ -35,7 +35,7 @@
                                 </div>
                                 <div>
                                     <div id="cart-body-product-price">
-                                        N{{ ((productprice * productquantity * 0.143) + productprice * productquantity).toFixed(2) }}
+                                        N{{ parseFloat((productprice)).toLocaleString() }}
                                     </div>
                                 </div>
                             </div>
@@ -65,9 +65,9 @@
                     <div class="py-5 my-5">
                         <div class="grid grid-cols-2 gap-6 py-1 w-full font-bold">
                             <div>Subtotal <span class="font-normal">(all products)</span></div>
-                            <div class="text-right">N{{ parseFloat(((subTotal * 0.143) + subTotal)).toLocaleString() }}</div>
+                            <div class="text-right">N{{ parseFloat((subTotal)).toLocaleString() }}</div>
                             <div>Delivery Fee</div>
-                            <div class="text-right">{{ (deliveryFee != 0) ? `N${parseFloat(((deliveryFee * 0.075) + deliveryFee)).toLocaleString()}` : 'Free Delivery' }}</div>
+                            <div class="text-right">{{ (deliveryFee != 0) ? `N${parseFloat((deliveryFee)).toLocaleString()}` : 'Free Delivery' }}</div>
                             <!-- <div>Service Fee</div>
                             <div class="text-right">N{{ serviceFee  }}</div> -->
                             <div>Estimated Total</div>
@@ -210,7 +210,7 @@ export default {
             return this.$store.getters.addCart
         },
         subTotal(){
-            return this.productprice * this.productquantity 
+            return this.productprice 
         },
         deliveryFee(){
             if(this.deliveryfee != null){
@@ -220,13 +220,11 @@ export default {
             }
         },
         estimatedTotal(){
-            let productTotal = (this.subTotal * 0.143) + this.subTotal
-            let deliveryTotal = (this.deliveryFee * 0.075) + this.deliveryFee
-            return (parseFloat(productTotal) + parseFloat(deliveryTotal)).toFixed(2)
+            return (parseFloat(this.subTotal) + parseFloat(this.deliveryFee)).toFixed(2)
         },
         serviceFee(){
             // return Math.ceil(parseFloat((1.4 / 100) * this.estimatedTotal).toFixed(2)) 
-            return ((this.subTotal * 0.143) + (this.deliveryFee * 0.075)).toFixed(2) 
+            return ((this.subTotal * 0.15) + (this.deliveryFee * 0.15)).toFixed(2) 
         },
         totalFee(){
             return this.estimatedTotal

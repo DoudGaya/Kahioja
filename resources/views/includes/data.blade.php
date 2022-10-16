@@ -9,7 +9,7 @@
                 <h1 class="text-sm w-full card-title">{{ (strlen($product->name) < 16) ? $product->name : substr($product->name, 0,16)."..." }}</h1>
                 <div class="flex justify-between items-center">
                     <div class="flex items-center">
-                        <span class="card-curr-price"><b>₦{{ number_format((($product->price * 0.143) + $product->price), 2, '.', ',') }}</b></span>
+                        <span class="card-curr-price"><b>₦{{ number_format((($product->price * 0.15) + $product->price), 2, '.', ',') }}</b></span>
                     </div>
                     <div class="grid grid-cols-2 text-left md:flex md:flex-row card-reviews my-2">
                         <div>
@@ -17,7 +17,7 @@
                         </div>
                         &nbsp;
                         @if($product->ship_fee != 0 || $product->ship_fee != null)
-                            <div>₦{{ number_format((($product->ship_fee * 0.075) + $product->ship_fee), 2, '.', ',') }}</div>
+                            <div>₦{{ number_format((($product->ship_fee * 0.15) + $product->ship_fee), 2, '.', ',') }}</div>
                         @else
                             <div>Free Delivery</div>
                         @endif

@@ -56,7 +56,7 @@
                                 </div>
                                 <div>
                                     <div id="cart-body-product-price">
-                                        N{{ parseFloat(((product.subTotal * 0.143) + product.subTotal)).toLocaleString() }}
+                                        N{{ parseFloat(product.subTotal).toLocaleString() }}
                                     </div>
                                     <div class="hidden lg:block">
                                         <div id="cart-body-product-add" class="flex justify-between lg:w-1/2 rounded-full mt-11 lg:mt-6">
@@ -80,7 +80,7 @@
                                     <div class="cursor-pointer">
                                     <button @click="minusProduct(product.bagId, product.quantity)"> - </button>
                                     </div>
-                                    <input class="w-1/3 text-center bg-white" :value="product.quantity" disabled>
+                                    <input class="w-1/3 text-center bg-white" :value="product.quantity">
                                     <div class="cursor-pointer">
                                         <button @click="addProduct(product.bagId, product.quantity)">+</button>
                                     </div>
@@ -97,9 +97,9 @@
                     <div v-if="cartNo > 0" class="py-5 my-5">
                         <div class="grid grid-cols-2 gap-6 py-1 w-full font-bold">
                             <div>Subtotal <span class="font-normal">(all products)</span></div>
-                            <div class="text-right">N{{ parseFloat(((subTotal * 0.143) + subTotal)).toLocaleString() }}</div>
+                            <div class="text-right">N{{ parseFloat(subTotal).toLocaleString() }}</div>
                             <div>Delivery Fee</div>
-                            <div class="text-right">{{ (deliveryFee != 0) ? `N${parseFloat(((deliveryFee * 0.075) + deliveryFee)).toLocaleString()}` : 'Free Delivery' }}</div>
+                            <div class="text-right">{{ (deliveryFee != 0) ? `N${parseFloat(deliveryFee).toLocaleString()}` : 'Free Delivery' }}</div>
                             <!-- <div>Service Fee</div>
                             <div class="text-right">N{{ serviceFee  }}</div> -->
                             <div>Estimated Total</div>
@@ -242,12 +242,10 @@ export default {
             return this.$store.getters.deliveryFee    
         },
         estimatedTotal(){
-            let productTotal = (this.subTotal * 0.143) + this.subTotal
-            let deliveryTotal = (this.deliveryFee * 0.075) + this.deliveryFee
-            return (parseFloat(productTotal) + parseFloat(deliveryTotal)).toFixed(2)
+            return (parseFloat(this.subTotal) + parseFloat(this.deliveryFee)).toFixed(2)
         },
         serviceFee(){
-            return ((this.subTotal * 0.143) + (this.deliveryFee * 0.075)).toFixed(2) 
+            return ((this.subTotal * 0.15) + (this.deliveryFee * 0.15)).toFixed(2) 
         },
         totalFee(){
             // return (+this.estimatedTotal) + (+this.serviceFee)

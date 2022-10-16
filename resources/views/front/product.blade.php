@@ -36,13 +36,14 @@
                 :productimage="{{ json_encode($productt->photo) }}" 
                 :productgallery="{{ json_encode($productt->galleries) }}" 
                 :productname="{{ json_encode($productt->name) }}" 
-                :productcurrprice="{{ round((json_encode($productt->price) * 0.143) + json_encode($productt->price), 2) }}" 
+                :productcurrprice="{{ round((json_encode($productt->price) * 0.15) + json_encode($productt->price), 2) }}" 
                 :productsku="{{ json_encode($productt->sku) }}" 
                 :productstock="{{ json_encode($productt->stock) }}" 
                 :deliverytime="{{ json_encode($productt->ship) }}" 
                 :store="{{ json_encode($store) }}" 
-                :productdeliveryfee="{{ ($productt->ship_fee != null) ? round((json_encode($productt->ship_fee) * 0.075) + json_encode($productt->ship_fee), 2) : $productt->ship_fee }}" 
+                :productdeliveryfee="{{ ($productt->ship_fee != null) ? round((json_encode($productt->ship_fee) * 0.15) + json_encode($productt->ship_fee), 2) : $productt->ship_fee }}" 
                 :productquantityinbag="{{ json_encode($product_quantity_in_bag) }}" 
+                :productwholesale="{{ json_encode($wholesale) }}" 
             ></product-details-component>    
         </div>
 

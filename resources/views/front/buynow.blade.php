@@ -8,8 +8,8 @@
             :productphoto="{{ json_encode($product->photo) }}" 
             :productname="{{ json_encode($product->name) }}" 
             :productquantity="{{ json_encode($quantity) }}" 
-            :productprice="{{ json_encode($product->price) }}" 
-            :deliveryfee="{{ json_encode($product->ship_fee) }}"
+            :productprice="{{ json_encode($product_price) }}" 
+            :deliveryfee="{{ json_encode($product_delivery_fee) }}"
         ></buynow-component>
     </div>
 @endsection

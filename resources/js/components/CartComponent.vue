@@ -39,7 +39,7 @@
                                 </div>
                                 <div>
                                     <div id="cart-body-product-price">
-                                        N{{ parseFloat(((product.subTotal * 0.143) + product.subTotal)).toLocaleString() }}
+                                        N{{ parseFloat(((product.subTotal))).toLocaleString() }}
                                     </div>
                                     <div class="hidden md:block">
                                         <div id="cart-body-product-add" class="flex justify-between w-3/4 rounded-full mt-11">
@@ -318,10 +318,10 @@ export default {
             return this.$store.getters.addCart
         },
         subTotal(){
-            return ((this.$store.getters.subTotal * 0.143) + this.$store.getters.subTotal) 
+            return this.$store.getters.subTotal 
         },
         deliveryFee(){
-            return ((this.$store.getters.deliveryFee * 0.075) + this.$store.getters.deliveryFee)   
+            return this.$store.getters.deliveryFee   
         },
         estimatedTotal(){
             return parseFloat(((this.subTotal) + (this.deliveryFee))).toLocaleString()

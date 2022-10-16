@@ -80,22 +80,29 @@
                         </span> -->
                     </div>
                 </div>
-                <div class="product-details-content flex items-center w-full my-5">
-                    <a class="hover:underline" :href="`/store/${store}/`">
-                        <span>
-                            Visit Store: 
-                        </span>
-                        <span class="ml-2">
-                            {{ store }}
-                        </span>
-                    </a>
+                <div class="grid grid-cols-2 gap-6 my-4 text-left text-gray-500">
+                    <div>
+                        <a class="hover:underline" :href="`/store/${store}/`">
+                            <span>
+                                Visit Store: 
+                            </span>
+                            <span class="ml-2">
+                                {{ store }}
+                            </span>
+                        </a>
+                    </div>
+                    <div v-if="((productwholesale.length) > 0)">
+                        <div :key="sale.product_id" v-for="sale in productwholesale">
+                            Buy {{sale.qty }} and get <b>{{sale.discount}}%</b> discount!
+                        </div>
+                    </div>
                 </div>
                 <div id="cart-body-product-add" class="flex justify-between w-full md:w-1/4 py-2 px-4 rounded-full my-2">
                     <div class="cursor-pointer">
                         <button @click="minusProduct()"> - </button>
                     </div>
-                    <input v-if="productquantityinbag != null" class="w-1/3 text-center bg-white" :value="productquantityinbag" disabled>
-                    <input v-else class="w-1/3 text-center bg-white" :value="quantity" disabled>
+                    <!-- <input v-if="productquantityinbag != null" class="w-1/3 text-center bg-white" :value="productquantityinbag" disabled> -->
+                    <input type="number" class="w-1/3 text-center bg-white" v-model="quantity">
                     <div class="cursor-pointer">
                         <button @click="addProduct()">+</button>
                     </div>
@@ -313,7 +320,8 @@ export default {
         'deliverytime',
         'productdeliveryfee',
         'store',
-        'productquantityinbag'
+        'productquantityinbag',
+        'productwholesale'
     ],
     computed: {
         getUser(){
@@ -322,7 +330,7 @@ export default {
     },
     data(){
         return{
-            quantity: 1,
+            quantity: (this.productquantityinbag != null) ? this.productquantityinbag : 1,
             isLoading: false,
             csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
             displayProductDetails: true,
@@ -338,7 +346,8 @@ export default {
             signUpPassword: '',
             forgotPasswordEmail: '',
             verification_code: '',
-            callback: ''
+            callback: '',
+            wholesale: []
         }
     },
     computed:{
@@ -353,7 +362,7 @@ export default {
                 this.isLoading = true
                 this.quantity = this.quantity - 1
                 this.isLoading = false
-            } 
+            }
         },
         async addProduct(){
             if(this.quantity >= 1){
@@ -363,6 +372,7 @@ export default {
             }
         },
         async addToBag(){
+            this.isLoading = !this.isLoading
             axios.post('/addtobag', {
                 product_id: this.productid,
                 quantity: this.quantity
@@ -371,6 +381,7 @@ export default {
             }).catch(error => {
                 console.log(error)
             })
+            this.isLoading = !this.isLoading
         },
         showLoginForm(){
             this.displayLoginForm = true 

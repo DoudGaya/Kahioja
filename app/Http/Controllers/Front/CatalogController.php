@@ -17,6 +17,7 @@ use App\Models\Rating;
 use App\Models\Reply;
 use App\Models\Report;
 use App\Models\Subcategory;
+use App\Models\Wholesale;
 use Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -176,7 +177,7 @@ class CatalogController extends Controller
         $store = User::where('id', $productt->user_id)->pluck('shop_name')->first();
         $product_id = $productt->id;
         $product_quantity_in_bag = Bag::select('quantity')->where('product_id', $product_id)->where('user_id', $user_id)->where('paid', 'unpaid')->pluck('quantity')->first();
-        
+        $wholesale = Wholesale::where('product_id', $product_id)->get();        
         $shareproduct = \Share::page('https://kahioja.com/item/'.$productt->slug)->facebook()->twitter()->linkedin()->telegram()->whatsapp() ;
 
         if($productt->status == 0){
@@ -208,7 +209,7 @@ class CatalogController extends Controller
             $vendors = Product::where('status','=',1)->where('user_id','=',0)->take(8)->get();
         }
         
-        return view('front.product',compact('productt','curr','vendors','gs','store', 'product_quantity_in_bag'))->with('shareproduct', $shareproduct);
+        return view('front.product',compact('productt','curr','vendors','gs','store', 'product_quantity_in_bag', 'wholesale'))->with('shareproduct', $shareproduct);
 
     }
 
