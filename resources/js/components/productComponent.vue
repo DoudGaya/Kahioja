@@ -10,7 +10,7 @@
                 <div class="flex justify-between items-center">
                     <div class="flex items-center">
                         <span class="card-curr-price"><b>₦{{ parseFloat(productcurrprice).toLocaleString() }}</b></span>
-                        <span v-if="productpreprive != null" class="card-prev-price"><b>₦{{ parseFloat(productprevprice).toLocaleString() }}</b></span>
+                        <span v-if="productprevprice != 0 || productprevprice != ''" class="card-prev-price"><b>&nbsp;&nbsp;₦{{ parseFloat(productprevprice).toLocaleString() }}</b></span>
                     </div>
                     <div class="grid grid-cols-2 text-left md:flex md:flex-row card-reviews my-2">
                         <div>

@@ -10,6 +10,9 @@
                 <div class="flex justify-between items-center">
                     <div class="flex items-center">
                         <span class="card-curr-price"><b>₦{{ number_format((($product->price * 0.15) + $product->price), 2, '.', ',') }}</b></span>
+                        @if($product->previous_price != 0 || $product->previous_price != null)
+                            &nbsp;&nbsp;<span class="card-prev-price"><b>₦{{ number_format((($product->previous_price * 0.15) + $product->previous_price), 2, '.', ',') }}</b></span>
+                        @endif    
                     </div>
                     <div class="grid grid-cols-2 text-left md:flex md:flex-row card-reviews my-2">
                         <div>

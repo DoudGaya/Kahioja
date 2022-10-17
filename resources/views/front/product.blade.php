@@ -37,6 +37,7 @@
                 :productgallery="{{ json_encode($productt->galleries) }}" 
                 :productname="{{ json_encode($productt->name) }}" 
                 :productcurrprice="{{ round((json_encode($productt->price) * 0.15) + json_encode($productt->price), 2) }}" 
+                :productprevprice="{{ ($productt->previous_price != null) ? round((json_encode($productt->previous_price) * 0.15) + json_encode($productt->previous_price), 2) : $productt->previous_price }}" 
                 :productsku="{{ json_encode($productt->sku) }}" 
                 :productstock="{{ json_encode($productt->stock) }}" 
                 :deliverytime="{{ json_encode($productt->ship) }}" 

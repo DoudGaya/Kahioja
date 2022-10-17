@@ -40,7 +40,7 @@
                 <h1 class="product-details-title">{{ productname }}</h1>
                 <div class="flex items-center">
                     <span class="product-curr-price"><b>₦{{ parseFloat(productcurrprice).toLocaleString() }}</b></span>
-                    <span v-if="productpreprive != null" class="card-prev-price"><b>₦{{ parseInt(productprevprice).toLocaleString() }}</b></span>
+                    <span v-if="productprevprice != 0 || productprevprice != ''" class="card-prev-price"><b>&nbsp;&nbsp;₦{{ parseInt(productprevprice).toLocaleString() }}</b></span>
                 </div>
                 <div v-if="(productstock > 0) || (productstock == null)" class="flex items-center mb-4">
                     <h1 class="product-details-title"> </h1>
