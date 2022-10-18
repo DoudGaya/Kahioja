@@ -622,8 +622,8 @@ img {vertical-align: middle;}
 
 #cate-btn, #store-btn, #sort-btn{
     position: absolute;
-    top: 3%;
-    left: 5%;
+    top: 1.5%;
+    left: 12%;
     z-index: 320;
     max-height: 340px;
     min-width: 283px;
@@ -725,11 +725,11 @@ img {vertical-align: middle;}
     }
 
     .card-curr-price{
-        font-size: 10px;
+        font-size: 8px;
     }
     
     .card-prev-price{
-        font-size: 12px;
+        font-size: 7px;
     }
 
     #cate-content{
