@@ -40,6 +40,7 @@
                 :productprevprice="{{ ($productt->previous_price != null) ? round((json_encode($productt->previous_price) * 0.15) + json_encode($productt->previous_price), 2) : $productt->previous_price }}" 
                 :productsku="{{ json_encode($productt->sku) }}" 
                 :productstock="{{ json_encode($productt->stock) }}" 
+                :productminimumorderqty="{{ json_encode($productt->minimum_order_qty) }}" 
                 :deliverytime="{{ json_encode($productt->ship) }}" 
                 :store="{{ json_encode($store) }}" 
                 :productdeliveryfee="{{ ($productt->ship_fee != null) ? round((json_encode($productt->ship_fee) * 0.15) + json_encode($productt->ship_fee), 2) : $productt->ship_fee }}" 

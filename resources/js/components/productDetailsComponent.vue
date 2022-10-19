@@ -97,12 +97,17 @@
                         </div>
                     </div>
                 </div>
+                <div class="text-left text-gray-500" v-if="(productminimumorderqty != null)">
+                    <div>
+                        MOQ: {{productminimumorderqty}}
+                    </div>
+                </div>
+                
                 <div id="cart-body-product-add" class="flex justify-between w-full md:w-1/4 py-2 px-4 rounded-full my-2">
                     <div class="cursor-pointer">
                         <button @click="minusProduct()"> - </button>
                     </div>
-                    <!-- <input v-if="productquantityinbag != null" class="w-1/3 text-center bg-white" :value="productquantityinbag" disabled> -->
-                    <input type="number" class="w-1/3 text-center bg-white" v-model="quantity">
+                    <input type="number" class="w-2/3 text-center bg-white" v-model="quantity">
                     <div class="cursor-pointer">
                         <button @click="addProduct()">+</button>
                     </div>
@@ -317,6 +322,7 @@ export default {
         'productprevprice',
         'productsku',
         'productstock',
+        'productminimumorderqty',
         'deliverytime',
         'productdeliveryfee',
         'store',
